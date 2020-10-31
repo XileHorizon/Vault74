@@ -1,43 +1,36 @@
 @import "_variables.less";
-
 body {
-  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  ::selection {
+    background: #00d0a1; /* WebKit/Blink Browsers */
+    color: #fff;
+  }
+  ::-moz-selection {
+    background: #00d0a1; /* Gecko Browsers */
+    color: #fff;
+  }
+}
+.small {
+  font-size: 9pt;
 }
 
-a {
-  text-decoration: none;
+.divider {
+  border-bottom: 1px solid #e7ebee;
+  width: 50%;
+  margin: 0 auto;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  background: transparent;
 }
 
-#app {
-  font-family: @font-family-base;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: @font-color-base;
+.emoji-mart-search input {
+  border-radius: 2px !important;
 }
-
-main {
-  text-align: center;
-  margin-top: 40px;
+input:focus, input:focus{
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #00d0a1 !important;
+  caret-color: #00d0a1;
 }
-
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: @header-background-color;
-  color: @header-text-color;
-}
-
-header a {
-  color: @header-text-color;
-  display: inline-block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
-}
-
 @import "_animations.less";
