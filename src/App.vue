@@ -16,8 +16,21 @@
 </template>
 
 <script>
+import Web3 from 'web3';
+
 export default {
   name: 'app',
+  mounted() {
+    const ethEnabled = () => {
+      if (window.ethereum) {
+        window.web3 = new Web3(window.ethereum);
+        window.ethereum.enable();
+        return true;
+      }
+      return false;
+    };
+    ethEnabled();
+  },
 };
 </script>
 
@@ -30,6 +43,7 @@ export default {
   right: 0;
   left: 0;
   overflow: hidden;
+  min-width: 990px;
 }
 </style>
 

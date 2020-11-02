@@ -14,6 +14,12 @@
                 <div v-if="message.data && message.type === 'link'">
                     <Link :message="message"/>
                 </div>
+                <div v-if="message.data && message.type === 'youtube'">
+                    <YouTube :message="message"/>
+                </div>
+                <div v-if="message.data && message.type === 'payment'">
+                    <Payment :message="message" />
+                </div>
             </div>
         </div>
     </div>
@@ -22,6 +28,8 @@
 <script>
 import CircleIcon from '@/components/common/CircleIcon';
 import Link from '@/components/main/convorsation/message/embeds/Link';
+import YouTube from '@/components/main/convorsation/message/embeds/YouTube';
+import Payment from '@/components/main/convorsation/message/embeds/Payment';
 
 import * as dayjs from 'dayjs';
 import * as relativeTime from 'dayjs/plugin/relativeTime';
@@ -34,10 +42,12 @@ export default {
   components: {
     CircleIcon,
     Link,
+    YouTube,
+    Payment,
   },
   methods: {
     formattedDate(timestamp) {
-      return dayjs().from(timestamp);
+      return dayjs().to(timestamp);
     },
   },
 };
@@ -54,16 +64,18 @@ export default {
         transition: ease-in-out 0.1s background-color;
     }
     .c-message-body:hover {
-      background-color: #f0f1f2;
+      background-color: #f0f4f7;
     }
     .c-message-actions {
       position: absolute;
-      background: #f8f9fb;
+      background: #e7ebee;
       padding: 0.2rem 0.5rem 0.2rem 1rem;
       top: 0.5rem;
       right: 2rem;
       display: none;
       color: #666;
+      border-radius: 5px;
+      border: 1px solid #e6ebee;
     }
     .c-message-actions i {
       margin-right: 0.5rem;

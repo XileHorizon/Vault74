@@ -4,17 +4,13 @@
         <div class="modal-card">
             <header class="modal-card-head">
                 <CircleIcon image="https://randomuser.me/api/portraits/women/43.jpg" />
-                <p class="modal-card-title">Sophie Chain <br> <span class="address">0x0000000000000000000000000000000</span></p>
+                <p class="modal-card-title">{{person}} <br> <span class="address">0x0000000000000000000000000000000</span></p>
                 <button class="delete" aria-label="close" v-on:click="toggle"></button>
             </header>
             <section class="modal-card-body">
                 <p>
-                    <b>Account Age:</b><br />
-                    23 Days<br /><br>
-                    <b>Dweller ID Address:</b><br />
-                    0x0000000000000000000000000000000<br /><br /><br>
+                    <i class="fab fa-ethereum"></i> Pay {{person}}.
                 </p>
-                <button class="button is-normal">View Dweller ID Contract</button> <button class="button is-link">Copy Dweller Address</button>
             </section>
         </div>
     </div>
@@ -24,8 +20,8 @@
 import CircleIcon from '@/components/common/CircleIcon';
 
 export default {
-  name: 'ChatGroup',
-  props: ['active', 'toggle'],
+  name: 'Payment',
+  props: ['active', 'toggle', 'person'],
   components: {
     CircleIcon,
   },
@@ -34,10 +30,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    .modal-card-body {
-        font-weight: normal !important;
-        font-size: 12pt;
-    }
     .is-normal {
         background: #00d0a1;
         color: #fff;

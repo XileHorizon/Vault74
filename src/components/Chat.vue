@@ -16,11 +16,22 @@
       <p>
         <i class="fas fa-key"></i> Vault74
         <span class="spacer"> </span> 
-        <i class="fas fa-server"></i> Hosted from IPFS 
-        <span class="spacer"> </span> 
-        <i class="fas fa-hashtag"></i> 12D3Koo...
+        <i class="fas fa-server"></i> IPFS 
         <span class="spacer"> </span> 
         <i class="fas fa-code-branch"></i> v0.0.0 - Mockup
+        <span class="spacer"> </span> 
+        <i class="fab fa-ethereum"></i> 
+          <span v-if="account">
+            <span class="spacer"> </span> 
+            <b>Network:</b> {{network.toUpperCase()}} 
+            <span class="spacer"> </span> 
+            <b>Block Number:</b> {{blockNumber}} 
+            <span class="spacer"> </span> 
+            <b>Account:</b> {{account}}
+          </span>
+          <span v-else>
+            Connecting...
+          </span>
       </p>
     </div>
   </div>
@@ -40,12 +51,29 @@ export default {
     return {
       msg: 'Chat',
       settingsOpen: false,
+      network: '',
+      account: 0x0,
+      blockNumber: 0,
     };
   },
   methods: {
     toggleSettings() {
       this.settingsOpen = !this.settingsOpen;
     },
+  },
+  mounted() {
+    setInterval(() => {
+      this.defaultBlock = window.web3.eth.defaultBlock;
+      window.web3.eth.getAccounts((err, accounts) => {
+        [this.account] = accounts;
+      });
+      window.web3.eth.getBlockNumber((err, bn) => {
+        this.blockNumber = bn;
+      });
+      window.web3.eth.net.getNetworkType((err, nettype) => {
+        this.network = nettype;
+      });
+    }, 4000);
   },
 };
 </script>

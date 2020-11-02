@@ -1,5 +1,6 @@
 <template>
   <section class="infobar">
+    <DwellerID :active="idActive" :toggle="toggleFingerprint" />
     <div class="columns">
         <div class="column is-three-fifths">
             <div class="profile">
@@ -11,9 +12,10 @@
         </div>
         <div class="column is-two-fifths">
             <div class="profile-actions">
-                <i class="fa fa-phone"></i>
+                <i class="fa fa-phone-volume"></i>
                 <i class="fa fa-video"></i>
                 <input class="input is-small searchuser" type="text" placeholder="Search in convorsation...">
+                <i class="fas fa-address-card" v-on:click="toggleFingerprint"></i>
             </div>
         </div>
     </div>
@@ -21,13 +23,31 @@
 </template>
 
 <script>
+import DwellerID from '@/components/main/dwellerid/DwellerID';
+
 export default {
   name: 'InfoBar',
+  components: {
+    DwellerID,
+  },
+  data() {
+    return {
+      idActive: false,
+    };
+  },
+  methods: {
+    toggleFingerprint() {
+      this.idActive = !this.idActive;
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .is-two-fifths {
+      padding-right: 3rem;
+    }
     .profile-actions i {
         float: left;
         height: 100%;
@@ -50,7 +70,10 @@ export default {
         left: 5rem;
         top: 0.5rem;
         margin-right: 1rem;
-
+    }
+    .fa-address-card {
+      position: absolute;
+      right: -7.6rem;
     }
     .infobar {
         position: absolute;

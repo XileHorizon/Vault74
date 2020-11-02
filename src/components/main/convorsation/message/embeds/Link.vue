@@ -1,19 +1,21 @@
 <template>
   <div>
     <a :href="message.data.link" target="_blank">{{message.data.link}}</a>
-    <article class="media">
-      <div class="media-content">
-          <img :src="message.data.preview">
-          <div class="content">
-          <p>
-            <strong>{{message.data.title}}</strong><br />
-            <a :href="message.data.link" target="_blank">{{message.data.link}}</a>
-            <br>
-            {{message.data.text}}
-          </p>
+    <a :href="message.data.link" target="_blank">
+      <article class="media">
+        <div class="media-content">
+            <img :src="message.data.preview">
+            <div class="content">
+            <p>
+              <strong>{{message.data.title}}</strong><br />
+              <a :href="message.data.link" target="_blank">{{message.data.link}}</a>
+              <br>
+              {{message.data.text}}
+            </p>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </a>
   </div>
 </template>
 
@@ -35,6 +37,7 @@ export default {
     border: 1px solid #eee;
     padding: 1rem;
     max-width: 400px;
+    color: #666;
   }
   img {
     border-radius: 4px;
