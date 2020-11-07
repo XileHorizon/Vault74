@@ -135,6 +135,7 @@ export default {
         left: 0;
         height: 5rem;
         padding: 1rem;
+        background: #f8f9fb;
     }
     .input-collection {
         background: #e7ebee;
@@ -192,7 +193,7 @@ export default {
         border: none;
         box-shadow: none;
         font-size: 12pt !important;
-        width: calc(100% - 10.2rem);
+        width: calc(100% - 10.5rem);
     }
     input:focus, input:focus{
         outline: none !important;

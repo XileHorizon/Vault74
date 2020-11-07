@@ -1,6 +1,7 @@
 <template>
   <section :class="`user ${(active == 'true') ? 'user-active' : ''}`" >
     <CircleIcon :image="icon"/>
+    <p class="unreads" v-if="unread"></p>
     <p >{{name}}</p>
     <p class="address">{{status}}</p>
     <p :class="`online ${(online == 'true') ? 'true' : ''}`"><i class="fa fa-circle"></i></p>
@@ -27,6 +28,7 @@ export default {
     'icon',
     'active',
     'status',
+    'unread',
   ],
 };
 </script>
@@ -44,6 +46,15 @@ export default {
     .user:hover {
         cursor: pointer;
         background: #f6f6f6;
+    }
+    .unreads {
+      position: absolute;
+      top: calc(50% - 15px);
+      left: -8px;
+      width: 10px;
+      height: 30px;
+      border-radius: 2px;
+      background: #ccc;
     }
     .user-active {
         color: #00d0a1;

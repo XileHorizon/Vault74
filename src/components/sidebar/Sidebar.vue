@@ -13,10 +13,10 @@
         </ul>
     </div>
     <div class="usercontainer">
-        <User name="Samantha Version" status="Idly typing away!" online="true" icon="https://randomuser.me/api/portraits/women/56.jpg"/>
+        <User name="Samantha Version" unread="unread" status="Idly typing away!" online="true" icon="https://randomuser.me/api/portraits/women/56.jpg"/>
         <User name="Sophie Chain" status="Enjoying Vault74's piece of mind" online="true" icon="https://randomuser.me/api/portraits/women/43.jpg" active="true"/>
         <User name="Clark Kent" status="Guys, I'm not superman" online="false" icon="https://randomuser.me/api/portraits/men/56.jpg"/>
-        <User name="James Fault" status="I'm so excited for vacation" online="false" icon="https://randomuser.me/api/portraits/men/26.jpg"/>
+        <User name="James Fault" unread="unread" status="I'm so excited for vacation" online="false" icon="https://randomuser.me/api/portraits/men/26.jpg"/>
         <User name="Jessica Addy" status="Exploring Cyberpunk 2077" online="true" icon="https://randomuser.me/api/portraits/women/26.jpg"/>
         <User name="Scarlett Joblockchain" status="The moon is lame, I'm going to mars" online="true" icon="https://randomuser.me/api/portraits/women/27.jpg"/>
         <User name="Frank Semver" status="You're awesome." online="false" icon="https://randomuser.me/api/portraits/men/22.jpg"/>

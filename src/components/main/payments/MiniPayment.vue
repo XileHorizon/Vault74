@@ -8,14 +8,16 @@
         <small>0xD02248C262b3690CC6eE7...</small></p>
     </div>
     <hr class="break">
-    <p class="small"><i class="fab fa-ethereum"></i> Send {{amount}} ether (${{amount * 391.84}})</p>
+    <p>
+        <i class="fab fa-ethereum"></i> Send {{amount}} ether (${{amount * 391.84}})<br>
+        <small><b>Balance: </b>{{$store.state.balance}} ETH</small></p>
     <input 
-    class="input is-small" 
-    type="text" 
-    placeholder="0.1"
-    v-model="amount">
+        class="input" 
+        type="text" 
+        placeholder="0.1"
+        v-model="amount">
     <i class="fa fa-times close" v-on:click="toggle"></i>
-    <button class="button is-small is-primary">Send</button>
+    <button class="button is-primary">Send</button>
   </section>
 </template>
 
@@ -48,6 +50,9 @@ export default {
     .left-head {
         width: 50px;
         float: left;
+    }
+    .left-head b {
+        font-size: 16pt;
     }
     .right-head {
         width: cacl(100% - 50px);

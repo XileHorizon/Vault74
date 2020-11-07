@@ -7,12 +7,8 @@
 </template>
 
 <script>
-import Counter from '@/components/counter/Counter';
 
 export default {
   name: 'Store',
-  components: {
-    Counter,
-  },
 };
 </script>

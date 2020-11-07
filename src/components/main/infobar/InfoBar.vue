@@ -4,7 +4,7 @@
     <div class="columns">
         <div class="column is-three-fifths">
             <div class="profile">
-                <i class="fa fa-comments"></i>
+                <i class="fas fa-bars"></i>
             </div>
             <div class="profile-details">
                 <p>Sophie&nbsp;Chain&nbsp;<span class="address">0x0000000000000000000000...</span></p>
@@ -12,8 +12,8 @@
         </div>
         <div class="column is-two-fifths">
             <div class="profile-actions">
-                <i class="fa fa-phone-volume"></i>
-                <i class="fa fa-video"></i>
+                <i class="fa fa-phone-volume" v-on:click="toggleMedia(true)"></i>
+                <i class="fa fa-video" v-on:click="toggleMedia(false)"></i>
                 <input class="input is-small searchuser" type="text" placeholder="Search in convorsation...">
                 <i class="fas fa-address-card" v-on:click="toggleFingerprint"></i>
             </div>
@@ -27,6 +27,7 @@ import DwellerID from '@/components/main/dwellerid/DwellerID';
 
 export default {
   name: 'InfoBar',
+  props: ['toggleMedia'],
   components: {
     DwellerID,
   },
@@ -85,17 +86,24 @@ export default {
         border-bottom: 1px solid #e7ebee;
         font-weight: bold;
         font-size: 15pt;
+        /*box-shadow: 0 2px 3px -2px rgba(0,0,0,.25);*/
+        z-index: 4;
     }
     .profile {
         float: left;
         height: 100%;
         width: 50px;
         padding: 0.25rem;
+        margin-top: 0.125rem;
     }
-    .fa-comments {
+    .fa-bars {
         font-size: 18pt;
-        padding: 0.4rem 0.5rem;
+        padding: 0.45rem 0.6rem;
         color: #e7ebee;
+    }
+    .fa-bars:hover {
+      color: #e7ebee !important;
+      cursor: pointer;
     }
     .circle-icon {
         width: 36px;
@@ -110,5 +118,8 @@ export default {
     .address {
         font-size: 9pt;
         color: #ccc;
+    }
+    i:hover {
+      color: #000;
     }
 </style>

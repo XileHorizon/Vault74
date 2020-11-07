@@ -69,7 +69,7 @@ export default {
     .c-message-actions {
       position: absolute;
       background: #e7ebee;
-      padding: 0.2rem 0.5rem 0.2rem 1rem;
+      padding: 0.1rem 0.5rem 0.1rem 1rem;
       top: 0.5rem;
       right: 2rem;
       display: none;

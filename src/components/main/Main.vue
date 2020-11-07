@@ -1,14 +1,16 @@
 <template>
   <section class="bordered main-section">
-    <InfoBar />
-    <Convorsation :messages="messages"/>
-    <Chatbar :handleNewMessage="sendMessage"/>
+    <InfoBar :toggleMedia="toggleMedia" />
+    <Convorsation :messages="messages" :mediaOpen="mediaOpen" :voice="voice"/>
+    <Media :mediaOpen="mediaOpen" :voice="voice" :disconnect="toggleMedia" :switchTo="switchTo"/>
+    <Chatbar :handleNewMessage="sendMessage" />
   </section>
 </template>
 
 <script>
 import InfoBar from '@/components/main/infobar/InfoBar';
 import Chatbar from '@/components/main/chatbar/Chatbar';
+import Media from '@/components/main/media/Media';
 import Convorsation from '@/components/main/convorsation/Convorsation';
 
 export default {
@@ -17,8 +19,18 @@ export default {
     InfoBar,
     Chatbar,
     Convorsation,
+    Media,
   },
   methods: {
+    switchTo(voice = false) {
+      this.mediaOpen = true;
+      this.voice = voice;
+    },
+    toggleMedia(voice = false) {
+      this.voice = voice;
+      this.mediaOpen = !this.mediaOpen;
+      if (!this.mediaOpen) this.voice = false;
+    },
     sendMessage(text) {
       /* eslint-disable */
       this.messages.push({
@@ -42,6 +54,8 @@ export default {
   },
   data() {
     return {
+      mediaOpen: false,
+      voice: false,
       /* eslint-disable */
       messages: [
         {
@@ -240,7 +254,7 @@ export default {
               type: 'payment',
               data: {
                 amount: '0.035',
-                sender: 'Sophie Chan',
+                sender: 'Sophie Chain',
                 receiver: 'RetroPronghorn',
                 senderAddy: '0xD02248C262b3690CC6eE73D24F5f2F19095585Fb',
                 receiverAddy: '0x0a9a9080dfffff3ab3fbde9e2b7401b7a5d7ccac',

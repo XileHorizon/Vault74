@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="`${darkTheme ? 'dark' : ''}`">
     <!--
     <header>
       <router-link :to="{ name: 'home' }">Vue.js PWA</router-link>
@@ -7,7 +7,7 @@
       <router-link :to="{ name: 'store' }">Store</router-link>
     </header>
     -->
-    <main id="main">
+    <main id="main dark">
       <transition appear mode="out-in" name="slide-fade">
         <router-view></router-view>
       </transition>
@@ -16,25 +16,21 @@
 </template>
 
 <script>
-import Web3 from 'web3';
-
 export default {
   name: 'app',
-  mounted() {
-    const ethEnabled = () => {
-      if (window.ethereum) {
-        window.web3 = new Web3(window.ethereum);
-        window.ethereum.enable();
-        return true;
-      }
-      return false;
+  data() {
+    return {
+      darkTheme: false,
     };
-    ethEnabled();
+  },
+  mounted() {
+    this.darkTheme = this.$store.state.settings.darkMode;
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
+
 #app {
   height: 100%;
   position: absolute;
@@ -49,3 +45,8 @@ export default {
 
 <style lang="less" src="@/assets/styles/bulma.less"></style>
 <style lang="less" src="@/assets/styles/app.less"></style>
+<style lang="less">
+.dark {
+  @import "assets/styles/true_dark.less";
+}
+</style>

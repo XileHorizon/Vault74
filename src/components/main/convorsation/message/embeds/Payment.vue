@@ -44,12 +44,13 @@ export default {
   }
   .media-content {
     padding: 0.3rem;
+    font-size: 10pt;
   }
   .content {
     padding-left: 5rem;
   }
   .logo {
-    font-size: 43pt;
+    font-size: 38pt;
     position: absolute;
     left: 2rem;
     top: 1.15rem;

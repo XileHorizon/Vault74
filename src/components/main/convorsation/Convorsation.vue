@@ -1,5 +1,5 @@
 <template>
-    <div id="convorsation" ref="chat" v-on:scroll="onScroll">
+    <div id="convorsation" :class="`${(mediaOpen) ? 'media-open' : 'media-closed'} ${(voice) ? 'media-voice' : ''}`" ref="chat" v-on:scroll="onScroll">
         <div id="scrollBottom" v-if="showScrollToBottom" v-on:click="scrollToEnd">
           <i class="fas fa-chevron-down"></i>
         </div>
@@ -16,7 +16,12 @@ import Divider from '@/components/common/Divider';
 
 export default {
   name: 'Convorsation',
-  props: ['messages', 'sendMessage'],
+  props: [
+    'messages',
+    'sendMessage',
+    'mediaOpen',
+    'voice',
+  ],
   components: {
     MessageBody,
     Divider,
@@ -45,6 +50,7 @@ export default {
   },
   watch: {
     messages: 'scrollToEnd',
+    mediaOpen: 'scrollToEnd',
   },
   mounted() {
     setTimeout(() => {
@@ -57,13 +63,22 @@ export default {
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
     #convorsation {
-        position: absolute;
-        top: 3rem;
-        left: 0;
-        right: 0;
-        bottom: 7.5rem;
-        padding: 0.5rem 0.4rem;
-        overflow-y: scroll;
+      position: absolute;
+      top: 3rem;
+      left: 0;
+      right: 0;
+      bottom: 7.5rem;
+      padding: 0.5rem 0.4rem;
+      overflow-y: scroll;
+      transition: top ease-in-out 0.05s;
+      background: #f8f9fb;
+      scroll-behavior: smooth;
+    }
+    .media-open {
+      top: 23rem !important;
+    }
+    .media-voice {
+      top: 16rem !important;
     }
     #scrollBottom {
       position: fixed;

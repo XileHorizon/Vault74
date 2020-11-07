@@ -1,11 +1,11 @@
 <template>
   <section class="controls">
     <div class="profile">
-        <CircleIcon image="https://avatars3.githubusercontent.com/u/1770198?s=460&u=c2be9f3c1e9ce8ba336f29ed2f98c6eeeeab3f94&v=4" />
+        <CircleIcon :image="`https://ipfs.io/ipfs/${$store.state.profilePictureHash}`" />
         <p class="online"><i class="fa fa-circle"></i></p>
     </div>
     <div class="userinfo has-tooltip-arrow" data-tooltip="0x12ef831290...">
-        <p>RetroProng...</p>
+        <p>{{$store.state.username}}</p>
         <p class="address">Super awesome status...</p>
     </div>
     <div class="usercontrols">
@@ -18,6 +18,10 @@
 
 <script>
 import CircleIcon from '@/components/common/CircleIcon';
+
+const muteAudio = new Audio('https://raw.githubusercontent.com/RetroPronghorn/VoiceRTC/master/public/sounds/mute.ogg');
+// eslint-disable-next-line
+const unmuteAudio = new Audio('https://raw.githubusercontent.com/RetroPronghorn/VoiceRTC/master/public/sounds/unmute.ogg');
 
 export default {
   name: 'Controls',
@@ -34,9 +38,13 @@ export default {
   methods: {
     toggleMute() {
       this.muted = !this.muted;
+      if (this.muted) muteAudio.play();
+      if (!this.muted) unmuteAudio.play();
     },
     toggleDeafen() {
       this.deafened = !this.deafened;
+      if (this.deafened) muteAudio.play();
+      if (!this.deafened) unmuteAudio.play();
     },
   },
 };
@@ -81,7 +89,7 @@ export default {
     }
     .usercontrols i {
         font-size: 16pt;
-        padding: 0.2rem;
+        padding: 0.1rem 0.4rem;
     }
     .usercontrols i:hover {
         cursor: pointer;

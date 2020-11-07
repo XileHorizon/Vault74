@@ -1,5 +1,6 @@
 <template>
   <div id="wrapper">
+    <Web3 />
     <div :class="`columns wrapper ${settingsOpen ? 'settings-open' : ''}`">
       <div class="column is-one-third" style="max-width: 320px;">
         <Sidebar :toggleSettings="toggleSettings"/>
@@ -9,8 +10,7 @@
       </div>
     </div>
     <div :class="`settings ${settingsOpen ? 'settings-open-container' : ''}`">
-      <p>Hey there, I haven't finished this yet.</p>
-      <button class="button button-primary" v-on:click="toggleSettings">Close Settings</button>
+      <Settings :toggleSettings="toggleSettings" />
     </div>
     <div class="footer">
       <p>
@@ -20,18 +20,21 @@
         <span class="spacer"> </span> 
         <i class="fas fa-code-branch"></i> v0.0.0 - Mockup
         <span class="spacer"> </span> 
-        <i class="fab fa-ethereum"></i> 
-          <span v-if="account">
-            <span class="spacer"> </span> 
-            <b>Network:</b> {{network.toUpperCase()}} 
-            <span class="spacer"> </span> 
-            <b>Block Number:</b> {{blockNumber}} 
-            <span class="spacer"> </span> 
-            <b>Account:</b> {{account}}
-          </span>
-          <span v-else>
-            Connecting...
-          </span>
+        <span v-if="$store.state.accounts">
+          <i class="fab fa-ethereum"></i>
+          <b>Network:</b> {{$store.state.web3Stats.nettype.toUpperCase()}}
+          <span class="spacer"> </span> 
+          <i class="fas fa-hashtag"></i>
+          <b>Block Number:</b> {{$store.state.web3Stats.blockNumber}} 
+          <span class="spacer"> </span> 
+          <i class="fas fa-id-badge"></i>
+          <b>Account:</b> {{$store.state.accounts[0]}}
+        </span>
+        <span v-else>
+          Connecting...
+        </span>
+        <span class="spacer"> </span> 
+        <i :class="`fas fa-moon ${darkmode ? 'green' : ''}`" v-on:click="toggleDarkMode"></i>
       </p>
     </div>
   </div>
@@ -40,12 +43,16 @@
 <script>
 import Sidebar from '@/components/sidebar/Sidebar';
 import Main from '@/components/main/Main';
+import Settings from '@/components/main/settings/Settings';
+import Web3 from '@/components/web3/Web3';
 
 export default {
   name: 'chat',
   components: {
     Sidebar,
     Main,
+    Settings,
+    Web3,
   },
   data() {
     return {
@@ -54,26 +61,17 @@ export default {
       network: '',
       account: 0x0,
       blockNumber: 0,
+      darkmode: localStorage.getItem('dark-theme'),
     };
   },
   methods: {
     toggleSettings() {
       this.settingsOpen = !this.settingsOpen;
     },
-  },
-  mounted() {
-    setInterval(() => {
-      this.defaultBlock = window.web3.eth.defaultBlock;
-      window.web3.eth.getAccounts((err, accounts) => {
-        [this.account] = accounts;
-      });
-      window.web3.eth.getBlockNumber((err, bn) => {
-        this.blockNumber = bn;
-      });
-      window.web3.eth.net.getNetworkType((err, nettype) => {
-        this.network = nettype;
-      });
-    }, 4000);
+    toggleDarkMode() {
+      this.$store.commit('toggleDarkMode');
+      window.location.reload();
+    },
   },
 };
 </script>
@@ -90,6 +88,7 @@ export default {
   .settings {
     position: absolute;
     top: 0;
+    z-index: 3;
     right: -100vw;
     left: 100vw;
     bottom: 0;
@@ -125,7 +124,7 @@ export default {
     right: 0;
     left: 0;
     top: calc(100% - 2rem);
-    padding: 0.45rem 1.75rem;
+    padding: 0.3rem 1.75rem;
     border-top: 1px solid #e7ebee;
     background: #fff;
     font-size: 10pt;
@@ -139,5 +138,8 @@ export default {
     width: 15px;
     height: 100%;
     display: inline-block;
+  }
+  .fa-moon {
+    cursor: pointer;
   }
 </style>

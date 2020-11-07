@@ -14,7 +14,7 @@
       <div class="server">
         <CircleIcon image="https://i.imgur.com/GX0qzK1.jpg" />
       </div>
-      <CircleIcon color="#666" icon="fa fa-plus" />
+      <CircleIcon color="#1f2029" icon="fa fa-plus" />
   </div>
 </template>
 
