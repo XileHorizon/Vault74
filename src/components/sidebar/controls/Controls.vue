@@ -5,7 +5,7 @@
         <p class="online"><i class="fa fa-circle"></i></p>
     </div>
     <div class="userinfo has-tooltip-arrow" data-tooltip="0x12ef831290...">
-        <p>{{$store.state.username}}</p>
+        <p>{{$store.state.username || 'Anon'}}</p>
         <p class="address">Super awesome status...</p>
     </div>
     <div class="usercontrols">
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import Mousetrap from 'mousetrap';
 import CircleIcon from '@/components/common/CircleIcon';
 
 const muteAudio = new Audio('https://raw.githubusercontent.com/RetroPronghorn/VoiceRTC/master/public/sounds/mute.ogg');
@@ -47,6 +48,10 @@ export default {
       if (!this.deafened) unmuteAudio.play();
     },
   },
+  mounted() {
+    Mousetrap.bind('option+m', this.toggleMute);
+    Mousetrap.bind('option+d', this.toggleDeafen);
+  },
 };
 </script>
 
@@ -56,14 +61,15 @@ export default {
         color: #ee5253;
     }
     .controls {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 55px;
-        position: absolute;
-        border-top: 1px solid #e7ebee;
-        background: #fff;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      padding-top: 5px;
+      position: absolute;
+      border-top: 1px solid #e7ebee;
+      background: #fff;
     }
     .controls-active {
         color: #00d0a1;

@@ -1,6 +1,7 @@
 <template>
     <div>
-        <section class="chat-group">
+        <section class="chat-group" @paste="handlePaste">
+            <FileUpload v-if="showFileUpload" :file="file" :handleNewMessage="handleNewMessage" :close="closeFileUpload" />
             <MiniPayment person="Sophie Chain" v-if="payments" :toggle="togglePayments" />
             <p id="typing" class="loading" v-if="participantTalking"><b>Sophie Chain</b> is typing</p>
             <div :class="`input-collection ${messageText.length > limit ? 'input-collection-red' : ''}`">
@@ -24,6 +25,7 @@
                 <input 
                   class="input is-small messageuser" 
                   type="text" 
+                  autofocus
                   placeholder="Securley Message Sophie Chain..."
                   v-model="messageText"
                   v-on:keyup.enter="sendMessage">
@@ -40,6 +42,7 @@ import data from '@/components/main/chatbar/emojidata.json';
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast';
 import MiniPayment from '@/components/main/payments/MiniPayment';
 import 'emoji-mart-vue-fast/css/emoji-mart.css';
+import FileUpload from '@/components/main/chatbar/FileUpload';
 
 const emojiIndex = new EmojiIndex(data);
 
@@ -49,6 +52,7 @@ export default {
   components: {
     Picker,
     MiniPayment,
+    FileUpload,
   },
   data() {
     return {
@@ -59,6 +63,8 @@ export default {
       payments: false,
       characters: 0,
       limit: 250,
+      file: false,
+      showFileUpload: false,
     };
   },
   mounted() {
@@ -70,6 +76,21 @@ export default {
     isTypingFunc();
   },
   methods: {
+    handlePaste(e) {
+      for (let i = 0; i < e.clipboardData.items.length; i += 1) {
+        const item = e.clipboardData.items[i];
+        if (item.type.indexOf('image') !== -1) {
+          const file = item.getAsFile();
+          this.file = file;
+          this.showFileUpload = true;
+          // this.handleNewMessage(URL.createObjectURL(file), 'image');
+        }
+      }
+    },
+    closeFileUpload() {
+      this.showFileUpload = false;
+      this.file = false;
+    },
     togglePayments() {
       this.payments = !this.payments;
     },
@@ -78,10 +99,10 @@ export default {
     },
     sendMessage() {
       if (this.messageText.replace(' ', '') !== '') {
-        if (this.messageText > this.limit) {
+        if (this.messageText.length > this.limit) {
           return;
         }
-        this.handleNewMessage(this.messageText);
+        this.handleNewMessage(this.messageText, 'text');
         this.messageText = '';
       }
     },

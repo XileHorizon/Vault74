@@ -20,6 +20,9 @@
                 <div v-if="message.data && message.type === 'payment'">
                     <Payment :message="message" />
                 </div>
+                <div v-if="message.data && message.type === 'image'">
+                    <ImageViewer :image="message.data" />
+                </div>
             </div>
         </div>
     </div>
@@ -30,6 +33,7 @@ import CircleIcon from '@/components/common/CircleIcon';
 import Link from '@/components/main/convorsation/message/embeds/Link';
 import YouTube from '@/components/main/convorsation/message/embeds/YouTube';
 import Payment from '@/components/main/convorsation/message/embeds/Payment';
+import ImageViewer from '@/components/main/convorsation/message/embeds/ImageViewer';
 
 import * as dayjs from 'dayjs';
 import * as relativeTime from 'dayjs/plugin/relativeTime';
@@ -44,6 +48,7 @@ export default {
     Link,
     YouTube,
     Payment,
+    ImageViewer,
   },
   methods: {
     formattedDate(timestamp) {
@@ -109,5 +114,6 @@ export default {
         padding-left: 5rem;
         padding-right: 1rem;
         color: #666;
+        word-break: break-word;
     }
 </style>

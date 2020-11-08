@@ -15,7 +15,9 @@
             <a :class="`${route == 'profile' ? 'active' : ''}`">Profile</a>
           </li>
           <li><a>Audio &amp; Video</a></li>
-          <li><a>Keybinds</a></li>
+          <li v-on:click="setRoute('keybinds')">
+            <a :class="`${route == 'keybinds' ? 'active' : ''}`">Keybinds</a>
+          </li>
           <li v-on:click="setRoute('accounts-devices')">
             <a :class="`${route == 'accounts-devices' ? 'active' : ''}`">Accounts &amp; Devices</a>
           </li>
@@ -47,6 +49,10 @@
         v-if="route == 'personalize'" 
         :settings="settings"
         :setSetting="setSetting"/>
+      <Keybinds 
+        v-if="route == 'keybinds'" 
+        :settings="settings"
+        :setSetting="setSetting"/>
       <Profile 
         v-if="route == 'profile'" 
         :settings="settings"
@@ -71,6 +77,7 @@
 import { mapMutations, mapState } from 'vuex';
 import Personalize from '@/components/main/settings/personalize/Personalize';
 import Profile from '@/components/main/settings/profile/Profile';
+import Keybinds from '@/components/main/settings/keybinds/Keybinds';
 import Accounts from '@/components/main/settings/accounts/Accounts';
 import Network from '@/components/main/settings/network/Network';
 import Storage from '@/components/main/settings/storage/Storage';
@@ -83,6 +90,7 @@ export default {
   components: {
     Personalize,
     Profile,
+    Keybinds,
     Accounts,
     Network,
     Storage,

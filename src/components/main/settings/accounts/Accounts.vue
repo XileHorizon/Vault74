@@ -6,7 +6,7 @@
         <h2>Active Account</h2>
         <p>Select with Ethereum acccount you'd prefer to default transactions from.</p>
         <br>
-        <p><b>Balance: {{$store.state.balance}} ETH</b></p>
+        <p><b>Balance:</b> {{+(Math.round($store.state.balance + "e+3")  + "e-3")}} ETH</p>
         <div class="select" v-if="$store.state.accounts">
           <select v-model="$store.state.activeAccount">
             <option v-for="account in $store.state.accounts" :key="account">{{account}}</option>

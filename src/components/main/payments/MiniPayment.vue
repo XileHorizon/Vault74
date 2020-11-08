@@ -9,8 +9,12 @@
     </div>
     <hr class="break">
     <p>
-        <i class="fab fa-ethereum"></i> Send {{amount}} ether (${{amount * 391.84}})<br>
-        <small><b>Balance: </b>{{$store.state.balance}} ETH</small></p>
+        <i class="fab fa-ethereum"></i> Send {{amount}} ether (${{+(Math.round((amount * 391.84) + "e+2")  + "e-2")}})<br>
+        <small>
+            <b>Balance: </b>
+            {{+(Math.round($store.state.balance + "e+3")  + "e-3")}} ETH
+        </small>
+    </p>
     <input 
         class="input" 
         type="text" 

@@ -61,15 +61,31 @@
         <p>Browse your account info, and make changes.</p>
         <br>
         <img :src="`https://ipfs.io/ipfs/${$store.state.profilePictureHash}`" class="preview">
+        <br>
+        <br>
+        <p class="label">Display Name</p>
+        <input class="input" :value="$store.state.username" readonly />
+        <br>
+        <br>
         <p class="label">DwellerID Address</p>
         <input class="input" :value="$store.state.dwellerAddress" readonly />
+        
+        <hr>
+        <button class="button is-primary is-small" v-on:click="getDweller" v-if="!this.dweller">Advanced Details</button>
+        <div v-if="this.dweller">
+          <p class="label">Dweller Owner Address</p>
+          <input class="input" :value="this.dweller[0]" readonly />
+          <p class="label">Name</p>
+          <input class="input" :value="this.dweller[1]" readonly />
+          <p class="label">Photo Hash</p>
+          <input class="input" :value="this.onChainPhotoHash" readonly />
+        </div>
       </div>
     </article>
   </div>
 </template>
 
 <script>
-import IPFS from 'ipfs-core';
 import * as DwellerID from '@/contracts/DwellerID.json';
 
 export default {
@@ -83,6 +99,8 @@ export default {
       transactionHash: false,
       confirmation: false,
       finished: false,
+      dweller: false,
+      onChainPhotoHash: false,
     };
   },
   methods: {
@@ -115,8 +133,7 @@ export default {
     async onFileChange(e) {
       const file = e.target.files[0];
       this.profileFile = URL.createObjectURL(file);
-      const ipfs = await IPFS.create();
-      const ipfsResponse = await ipfs.add(file);
+      const ipfsResponse = await window.ipfs.add(file);
       this.ipfsHash = ipfsResponse;
     },
     finishProfile(receipt) {
@@ -126,8 +143,8 @@ export default {
       }
       const contract = new window.web3.eth.Contract(DwellerID.abi, receipt.contractAddress);
       contract.methods.setPhoto([
-        window.web3.utils.fromAscii(this.ipfsHash.path.substring(0, 32)),
-        window.web3.utils.fromAscii(this.ipfsHash.path.substring(32, this.ipfsHash.length - 1)),
+        window.web3.utils.fromAscii(this.ipfsHash.path.substring(0, 23)),
+        window.web3.utils.fromAscii(this.ipfsHash.path.substring(23)),
       ])
         .send({
           from: this.$store.state.activeAccount,
@@ -141,6 +158,13 @@ export default {
     commitEverything(receipt) {
       this.$store.commit('profilePictureHash', this.ipfsHash.path);
       this.$store.commit('dwellerAddress', receipt.contractAddress);
+    },
+    async getDweller() {
+      const contract = new window.web3.eth.Contract(DwellerID.abi, this.$store.state.dwellerAddress);
+      const dweller = await contract.methods.getDweller().call();
+      const onChainPhotoHash = await contract.methods.getPhoto().call();
+      this.dweller = dweller;
+      [this.onChainPhotoHash] = onChainPhotoHash;
     },
   },
 };

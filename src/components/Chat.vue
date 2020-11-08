@@ -41,10 +41,12 @@
 </template>
 
 <script>
+import Mousetrap from 'mousetrap';
 import Sidebar from '@/components/sidebar/Sidebar';
 import Main from '@/components/main/Main';
 import Settings from '@/components/main/settings/Settings';
 import Web3 from '@/components/web3/Web3';
+import IPFS from 'ipfs-core';
 
 export default {
   name: 'chat',
@@ -72,6 +74,13 @@ export default {
       this.$store.commit('toggleDarkMode');
       window.location.reload();
     },
+  },
+  async mounted() {
+    Mousetrap.bind('option+s', () => {
+      this.settingsOpen = !this.settingsOpen;
+    });
+    const ipfs = await IPFS.create();
+    window.ipfs = ipfs;
   },
 };
 </script>

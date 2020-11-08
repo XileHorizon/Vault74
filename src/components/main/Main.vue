@@ -31,8 +31,9 @@ export default {
       this.mediaOpen = !this.mediaOpen;
       if (!this.mediaOpen) this.voice = false;
     },
-    sendMessage(text) {
+    sendMessage(data, type) {
       /* eslint-disable */
+      console.log('data', data);
       this.messages.push({
           id: 1,
           type: 'message-group',
@@ -42,11 +43,11 @@ export default {
           },
           timestamp: Date.now(),
           content: [
-          {
+            {
               id: 1,
-              type: 'text',
-              data: text,
-          },
+              type: type || 'text',
+              data: data,
+            },
           ],
       });
       /* eslint-enable */
