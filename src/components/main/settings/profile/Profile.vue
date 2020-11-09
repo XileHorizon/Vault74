@@ -60,7 +60,7 @@
         <h2>Your Account</h2>
         <p>Browse your account info, and make changes.</p>
         <br>
-        <img :src="`https://ipfs.io/ipfs/${$store.state.profilePictureHash}`" class="preview">
+        <img :src="`${config.ipfs.browser}${$store.state.profilePictureHash}`" class="preview">
         <br>
         <br>
         <p class="label">Display Name</p>
@@ -86,7 +86,8 @@
 </template>
 
 <script>
-import * as DwellerID from '@/contracts/DwellerID.json';
+import config from '@/config/config';
+import DCUtils from '@/utils/DwellerContract';
 
 export default {
   name: 'Profile',
@@ -101,6 +102,7 @@ export default {
       finished: false,
       dweller: false,
       onChainPhotoHash: false,
+      config,
     };
   },
   methods: {
@@ -109,30 +111,27 @@ export default {
         this.error = 'Your username needs to be at least 5 characters.';
         return;
       }
-      const username = window.web3.utils.fromAscii(this.$store.state.username);
-      const contract = new window.web3.eth.Contract(DwellerID.abi);
-      contract.options.data = DwellerID.data.bytecode.object;
       this.created = true;
-      contract.deploy({
-        arguments: [username],
-      }).send({
-        from: this.$store.state.activeAccount,
-        gas: 4700000,
-      })
-        .once('error', (error) => {
-          console.log('error', error);
-        })
-        .once('transactionHash', (transactionHash) => {
+      DCUtils.deploy(
+        this.$store.state.username,
+        this.$store.state.activeAccount,
+        (transactionHash) => {
           this.transactionHash = transactionHash;
-        })
-        .once('confirmation', (confirmationNumber, receipt) => {
+        },
+        (confirmationNumber, receipt) => {
           this.confirmation = confirmationNumber;
           this.finishProfile(receipt);
-        });
+        },
+      );
     },
     async onFileChange(e) {
       const file = e.target.files[0];
       this.profileFile = URL.createObjectURL(file);
+      if (!file.type.includes('image')) {
+        this.error = 'Please use an image for your profile picture.';
+        return;
+      }
+      this.error = false;
       const ipfsResponse = await window.ipfs.add(file);
       this.ipfsHash = ipfsResponse;
     },
@@ -141,30 +140,29 @@ export default {
         this.commitEverything(receipt);
         return;
       }
-      const contract = new window.web3.eth.Contract(DwellerID.abi, receipt.contractAddress);
-      contract.methods.setPhoto([
-        window.web3.utils.fromAscii(this.ipfsHash.path.substring(0, 23)),
-        window.web3.utils.fromAscii(this.ipfsHash.path.substring(23)),
-      ])
-        .send({
-          from: this.$store.state.activeAccount,
-          gas: 4700000,
-        })
-        .once('transactionHash', () => {
+
+      DCUtils.setPhoto(
+        receipt.contractAddress,
+        this.$store.state.activeAccount,
+        this.ipfsHash,
+        () => {
           this.finished = true;
           this.commitEverything(receipt);
-        });
+        },
+      );
     },
     commitEverything(receipt) {
       this.$store.commit('profilePictureHash', this.ipfsHash.path);
       this.$store.commit('dwellerAddress', receipt.contractAddress);
     },
     async getDweller() {
-      const contract = new window.web3.eth.Contract(DwellerID.abi, this.$store.state.dwellerAddress);
-      const dweller = await contract.methods.getDweller().call();
-      const onChainPhotoHash = await contract.methods.getPhoto().call();
-      this.dweller = dweller;
-      [this.onChainPhotoHash] = onChainPhotoHash;
+      DCUtils.getDweller(
+        this.$store.state.dwellerAddress,
+        (dweller, onChainPhotoHash) => {
+          this.dweller = dweller;
+          this.onChainPhotoHash = onChainPhotoHash;
+        },
+      );
     },
   },
 };

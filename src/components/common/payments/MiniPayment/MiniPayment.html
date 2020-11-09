@@ -1,0 +1,24 @@
+<section class="make-payment">
+  <div class="left-head">
+      <CircleIcon image="https://randomuser.me/api/portraits/women/43.jpg" />
+  </div>
+  <div class="right-head">
+      <p><b>{{person}}</b><br>
+      <small>0xD02248C262b3690CC6eE7...</small></p>
+  </div>
+  <hr class="break">
+  <p>
+      <i class="fab fa-ethereum"></i> Send {{amount}} ether (${{+(Math.round((amount * 391.84) + "e+2")  + "e-2")}})<br>
+      <small>
+          <b>Balance: </b>
+          {{+(Math.round($store.state.balance + "e+3")  + "e-3")}} ETH
+      </small>
+  </p>
+  <input 
+      class="input" 
+      type="text" 
+      placeholder="0.1"
+      v-model="amount">
+  <i class="fa fa-times close" v-on:click="toggle"></i>
+  <button class="button is-primary">Send</button>
+</section>

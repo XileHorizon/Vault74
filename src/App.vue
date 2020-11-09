@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="`${darkTheme ? 'dark' : ''}`">
+  <div id="app" :class="`${this.$store.state.settings.darkMode ? 'dark' : ''}`">
     <!--
     <header>
       <router-link :to="{ name: 'home' }">Vue.js PWA</router-link>
@@ -7,7 +7,7 @@
       <router-link :to="{ name: 'store' }">Store</router-link>
     </header>
     -->
-    <main id="main dark">
+    <main id="main" class="theme">
       <transition appear mode="out-in" name="slide-fade">
         <router-view></router-view>
       </transition>
@@ -18,14 +18,6 @@
 <script>
 export default {
   name: 'app',
-  data() {
-    return {
-      darkTheme: false,
-    };
-  },
-  mounted() {
-    this.darkTheme = this.$store.state.settings.darkMode;
-  },
 };
 </script>
 

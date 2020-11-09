@@ -16,7 +16,8 @@ const defaultState = {
   dwellerAddress: false,
   username: '',
   profilePictureHash: false,
-  recentFiles: [],
+  recentFiles: 0,
+  mainRoute: 'main',
 };
 
 const createState = customState => Object.assign({}, defaultState, customState);

@@ -1,0 +1,19 @@
+<div :class="`modal ${active ? 'is-active' : ''}`">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+      <header class="modal-card-head">
+          <CircleIcon image="https://randomuser.me/api/portraits/women/43.jpg" />
+          <p class="modal-card-title">Sophie Chain <br> <span class="address">0x0000000000000000000000000000000</span></p>
+          <button class="delete" aria-label="close" v-on:click="toggle"></button>
+      </header>
+      <section class="modal-card-body">
+          <p>
+              <b>Account Age:</b><br />
+              23 Days<br /><br>
+              <b>Dweller ID Address:</b><br />
+              0x0000000000000000000000000000000<br /><br /><br>
+          </p>
+          <button class="button is-normal">View Dweller ID Contract</button> <button class="button is-link">Copy Dweller Address</button>
+      </section>
+  </div>
+</div>

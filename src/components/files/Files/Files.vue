@@ -1,0 +1,85 @@
+<template>
+  <div id="files">
+    <button class="modal-close is-large" aria-label="close" v-on:click="close"></button>
+    <h3>Browse files</h3>
+    <p>Browse files you've shared with other users, and upload new files to IPFS.</p>
+    <hr>
+    <h2 class="label">Upload Files</h2>
+    <article class="message is-dark">
+      <div class="message-body">
+        <FileUploadInline :relayResult="updateCache" :uploadDone="fetchRecentFiles" />
+      </div>
+    </article>
+    <h2 class="label">File History</h2>
+    <article class="message is-dark">
+      <div class="message-body">
+        <h2>Your Files</h2>
+        <p>Below is a list of all of the files you've uploaded.</p>
+        <br>
+        <p v-for="file in recentFiles" v-bind:key="file.name">
+          <File :file="file" :updateParent="updateParent"/>
+        </p>
+        <div style="clear:both"></div>
+      </div>
+    </article>
+    
+    <br>
+  </div>
+</template>
+
+<script>
+import File from '@/components/files/File/File';
+import IPFSUtils from '@/utils/IPFSUtils';
+import FileUploadInline from '@/components/common/FileUploadInline/FileUploadInline';
+
+export default {
+  name: 'Files',
+  components: {
+    FileUploadInline,
+    File,
+  },
+  data() {
+    return {
+      recentFiles: [],
+    };
+  },
+  methods: {
+    updateParent() {
+      this.fetchRecentFiles();
+    },
+    updateCache() {
+      this.fetchRecentFiles();
+    },
+    close() {
+      this.$store.commit('changeRoute', 'main');
+    },
+    fetchRecentFiles() {
+      this.recentFiles = IPFSUtils.getFileCache().reverse();
+    },
+  },
+  mounted() {
+    this.fetchRecentFiles();
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+  #files {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 2rem - 1px);
+    background: #f8f9fb;
+    z-index: 5;
+    padding: 1rem 1.5rem;
+    overflow-y: scroll;
+  }
+  h3 {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 20pt;
+  }
+  .modal-close {
+    z-index: 0 !important;
+    position: absolute;
+  }
+</style>

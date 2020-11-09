@@ -6,7 +6,8 @@
         <Sidebar :toggleSettings="toggleSettings"/>
       </div>
       <div class="column">
-        <Main />
+        <Main v-if="$store.state.mainRoute == 'main'"/>
+        <Files v-if="$store.state.mainRoute == 'files'"/>
       </div>
     </div>
     <div :class="`settings ${settingsOpen ? 'settings-open-container' : ''}`">
@@ -42,10 +43,11 @@
 
 <script>
 import Mousetrap from 'mousetrap';
-import Sidebar from '@/components/sidebar/Sidebar';
-import Main from '@/components/main/Main';
+import Sidebar from '@/components/sidebar/Sidebar/Sidebar';
+import Main from '@/components/main/Main/Main';
+import Files from '@/components/files/Files/Files';
 import Settings from '@/components/main/settings/Settings';
-import Web3 from '@/components/web3/Web3';
+import Web3 from '@/components/Web3/Web3';
 import IPFS from 'ipfs-core';
 
 export default {
@@ -53,6 +55,7 @@ export default {
   components: {
     Sidebar,
     Main,
+    Files,
     Settings,
     Web3,
   },
@@ -63,6 +66,7 @@ export default {
       network: '',
       account: 0x0,
       blockNumber: 0,
+      route: 'files',
       darkmode: localStorage.getItem('dark-theme'),
     };
   },
@@ -72,7 +76,6 @@ export default {
     },
     toggleDarkMode() {
       this.$store.commit('toggleDarkMode');
-      window.location.reload();
     },
   },
   async mounted() {

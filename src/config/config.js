@@ -3,4 +3,7 @@ module.exports = {
     explorer: 'https://goerli.etherscan.io',
     api: 'http://api-goerli.etherscan.io/api',
   },
+  ipfs: {
+    browser: 'https://ipfs.io/ipfs/',
+  },
 };

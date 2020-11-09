@@ -1,7 +1,7 @@
 <template>
   <div>
     <ImagePreview v-if="showImage" :src="image" :close="hideImage" />
-    <img :src="image" alt="" @load="loaded = true" :class="`${loaded ? 'loaded' : ''}`" @click="showImage = true"/>
+    <img :src="image" alt="" @load="doLoad" :class="`${loaded ? 'loaded' : ''}`" @click="showImage = true"/>
     <div class="not-loaded" v-if="!loaded">
       <i class="fas fa-circle-notch fa-spin"></i>
     </div>
@@ -18,6 +18,7 @@ export default {
   },
   props: [
     'image',
+    'scrollToEnd',
   ],
   data() {
     return {
@@ -26,6 +27,10 @@ export default {
     };
   },
   methods: {
+    doLoad() {
+      this.loaded = true;
+      this.scrollToEnd();
+    },
     hideImage() {
       this.showImage = false;
     },
@@ -44,7 +49,6 @@ export default {
     background: rgba(0,0,0,0.15);
   }
   img {
-    background: #fff;
     border-radius: 6px;
     max-width: 408px;
     max-height: 308px;

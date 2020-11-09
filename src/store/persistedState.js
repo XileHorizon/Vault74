@@ -1,11 +1,11 @@
 import createPersistedState from 'vuex-persistedstate';
-import * as Cookies from 'js-cookie';
 
 export const cookieStorage = {
-  getItem: key => Cookies.get(key),
-  // Please see https://github.com/js-cookie/js-cookie#json, on how to handle JSON.
-  setItem: (key, value) => Cookies.set(key, value, { expires: 30, secure: process.env.NODE_ENV === 'production' }),
-  removeItem: key => Cookies.remove(key),
+  getItem: key => localStorage.getItem(key),
+  setItem: (key, value) => {
+    localStorage[key] = value;
+  },
+  removeItem: key => delete localStorage[key],
 };
 
 export const persistedStateConfig = {

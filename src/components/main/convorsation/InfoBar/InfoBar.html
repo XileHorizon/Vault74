@@ -1,0 +1,21 @@
+<section class="infobar">
+  <DwellerID :active="idActive" :toggle="toggleFingerprint" />
+  <div class="columns">
+      <div class="column is-three-fifths">
+          <div class="profile">
+              <i class="fas fa-bars"></i>
+          </div>
+          <div class="profile-details">
+              <p>Sophie&nbsp;Chain&nbsp;<span class="address">0x0000000000000000000000...</span></p>
+          </div>
+      </div>
+      <div class="column is-two-fifths">
+          <div class="profile-actions">
+              <i class="fa fa-phone-volume" v-on:click="toggleMedia(true)"></i>
+              <i class="fa fa-video" v-on:click="toggleMedia(false)"></i>
+              <input class="input is-small searchuser" type="text" placeholder="Search in convorsation...">
+              <i class="fas fa-address-card" v-on:click="toggleFingerprint"></i>
+          </div>
+      </div>
+  </div>
+</section>

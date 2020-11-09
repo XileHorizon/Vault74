@@ -1,0 +1,70 @@
+.friends, .files{
+  float: left;
+  width: 50%;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+}
+.friends:hover, .files:hover {
+  background: #eee;
+  cursor: pointer;
+}
+.usersubcontrols {
+  width: 100%;
+  height: 2.2rem;
+  background: #fff;
+  border-top: 1px solid #e7ebee;
+  display: inline-block;
+}
+#logo {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 25pt;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+.navigator {
+  margin-bottom: 1rem;
+}
+.usercontainer {
+    position: absolute;
+    bottom: 3.5rem;
+    right: 1.5rem;
+    left: 1.5rem;
+    top: 14.2rem;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+-webkit-scrollbar {
+    display: none;
+}
+.main-section {
+    padding-top: 0;
+    height: calc(100% - 2rem);
+    position: relative;
+}
+.tabs li {
+    margin-right: 1rem;
+    font-size: 10pt;
+}
+.tabs {
+    margin-bottom: 1rem;
+}
+.tabs li a{
+    padding: 0.5rem 0.2rem;
+    font-weight: bold;
+    color: #666;
+}
+.tabs li.is-active a {
+    color: #00d0a1;
+    border-bottom: 2px solid;
+    font-weight: bold;
+}
+.user-search {
+    padding-bottom: 1rem;
+}
+.user-search input:focus, .user-search input:focus{
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #00d0a1;
+}

@@ -1,0 +1,30 @@
+<div class="c-message-body">
+  <h4 class="c-message-user">{{message.user.name}} <span class="timestamp">{{formattedDate(message.timestamp)}}</span></h4>
+  <CircleIcon :image="message.user.photo" />
+  <div class="c-message-actions" v-if="message.isEditable">
+    <i class="fas fa-pencil-alt"></i>
+    <i class="fa fa-trash"></i>
+  </div>
+  <div class="c-message-content">
+      <div class="c-message" v-for="message in message.content" :key="message.id">
+          <p v-if="message.data && message.type == 'text'">
+              {{message.data}}
+          </p>
+          <div v-if="message.data && message.type === 'link'">
+              <Link :message="message"/>
+          </div>
+          <div v-if="message.data && message.type === 'youtube'">
+              <YouTube :message="message"/>
+          </div>
+          <div v-if="message.data && message.type === 'payment'">
+              <Payment :message="message" />
+          </div>
+          <div v-if="message.data && message.type === 'image'">
+              <ImageViewer :image="message.data.url" :scrollToEnd="scrollToEnd" />
+          </div>
+          <div v-if="message.data && message.type === 'file'">
+              <File :message="message" />
+          </div>
+      </div>
+  </div>
+</div>

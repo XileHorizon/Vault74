@@ -1,0 +1,36 @@
+<div>
+  <section class="chat-group" @paste="handlePaste">
+      <FileUpload v-if="showFileUpload" :file="file" :relayResult="handleNewMessage" :close="closeFileUpload" />
+      <MiniPayment person="Sophie Chain" v-if="payments" :toggle="togglePayments" />
+      <p id="typing" class="loading" v-if="participantTalking"><b>Sophie Chain</b> is typing</p>
+      <div :class="`input-collection ${messageText.length > limit ? 'input-collection-red' : ''}`">
+          <p :class="`charlimit ${messageText.length > limit ? 'red' : ''}`">
+            {{(messageText.length > limit) ? limit - messageText.length : messageText.length}}/{{limit}}
+          </p>
+          <i class="fas fa-arrow-circle-right send" v-on:click="sendMessage"></i>
+          <i class="far fa-smile-wink emoji" v-on:click="toggleEmoji"></i>
+          <i class="fab fa-ethereum sendEther" v-on:click="togglePayments"></i>
+          <i class="fas fa-file-upload upload" v-on:click="openFileUpload"></i>
+          <!--<MiniPayment person="Sophie Chain" :toggle="togglePayments" v-if="payments" />-->
+          <picker
+            v-if="selectingEmoji"
+            native 
+            :data="emojiIndex"
+            title="Pick your emoji…" 
+            emoji="point_up" 
+            color="#00d0a1"
+            showPreview="false"
+            @select="this.selectEmoji" />
+          <input 
+            class="input is-small messageuser" 
+            type="text" 
+            autofocus
+            placeholder="Securley Message Sophie Chain..."
+            v-model="messageText"
+            v-on:keyup.enter="sendMessage">
+          <!--<div class="input is-small messageuser" contenteditable role="textbox">
+            Securley Message Sophie Chain...
+          </div>-->
+      </div>
+  </section>
+</div>

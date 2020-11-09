@@ -1,0 +1,18 @@
+<section :class="`media-container ${mediaOpen ? 'open' : 'closed'} ${(voice) ? 'media-voice' : 'media-video'}`">
+  <div :class="`media-content ${mediaOpen ? 'media-open' : 'media-closed'}`">
+    <div class="media-participants container">
+      <div class="media-participant">
+        <CircleIcon image="https://randomuser.me/api/portraits/women/43.jpg"/>
+      </div>
+      <div class="media-participant">
+        <CircleIcon image="https://avatars3.githubusercontent.com/u/1770198?s=460&u=c2be9f3c1e9ce8ba336f29ed2f98c6eeeeab3f94&v=4" />
+      </div>
+    </div>
+    <div class="media-controls">
+      <button v-if="voice" class="button is-dark is-small" v-on:click="switchTo(false)"><i class="fas fa-video"></i> Switch to Video</button>
+      <button v-else class="button is-dark is-small" v-on:click="switchTo(true)"><i class="fas fa-phone"></i> Switch to Voice</button>
+      <span class="spacer"></span>
+      <button class="button is-danger is-small" v-on:click="disconnect"><i class="fas fa-phone-slash"></i> Disconnect</button>
+    </div>
+  </div>
+</section>

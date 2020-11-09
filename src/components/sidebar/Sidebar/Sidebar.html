@@ -1,0 +1,40 @@
+<section class="section main-section">
+  <ServerList />
+  <h1 id="logo">Vault74</h1>
+  <div class="control user-search">
+      <input class="input is-small" type="text" placeholder="Find a vault dweller...">
+  </div>
+  <div class="usersubcontrols">
+    <div :class="`${$store.state.mainRoute == 'friends' ? 'active' : ''} friends`">
+      <i class="fa fa-user-friends"></i>  &nbsp; Friends
+    </div>
+    <div 
+      v-on:click="setMainRoute('files')"
+      :class="`${$store.state.mainRoute == 'files' ? 'active' : ''} files`">
+      <i class="fa fa-folder"></i> &nbsp; Files
+    </div>
+  </div>
+  <div class="tabs">
+      <ul>
+          <li 
+              :class="`${route === 'chats' ? 'is-active' : ''}`"
+              v-on:click="setRoute('chats')"><a>Chats</a></li>
+          <li><a>Groups</a></li>
+      </ul>
+  </div>
+  <div class="usercontainer">
+      <Friends v-if="route === 'friends'" />
+      <div v-if="route === 'chats'">
+        <User name="Samantha Version" unread="unread" status="Idly typing away!" online="true" icon="https://randomuser.me/api/portraits/women/56.jpg"/>
+        <User name="Sophie Chain" status="Enjoying Vault74's piece of mind" online="true" icon="https://randomuser.me/api/portraits/women/43.jpg" active="true"/>
+        <User name="Clark Kent" status="Guys, I'm not superman" online="false" icon="https://randomuser.me/api/portraits/men/56.jpg"/>
+        <User name="James Fault" unread="unread" status="I'm so excited for vacation" online="false" icon="https://randomuser.me/api/portraits/men/26.jpg"/>
+        <User name="Jessica Addy" status="Exploring Cyberpunk 2077" online="true" icon="https://randomuser.me/api/portraits/women/26.jpg"/>
+        <User name="Scarlett Joblockchain" status="The moon is lame, I'm going to mars" online="true" icon="https://randomuser.me/api/portraits/women/27.jpg"/>
+        <User name="Frank Semver" status="You're awesome." online="false" icon="https://randomuser.me/api/portraits/men/22.jpg"/>
+        <User name="Wally Whale" status="Candlesticks work for me" online="true" icon="https://randomuser.me/api/portraits/men/8.jpg"/>
+        <User name="James Man" status="10010101001100" online="false" icon="https://randomuser.me/api/portraits/men/20.jpg"/>
+      </div>
+  </div>
+  <Controls :toggleSettings="toggleSettings"/>
+</section>

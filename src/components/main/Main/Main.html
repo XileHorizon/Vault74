@@ -1,0 +1,6 @@
+<section class="bordered main-section">
+  <InfoBar :toggleMedia="toggleMedia" />
+  <Convorsation :messages="messages" :mediaOpen="mediaOpen" :voice="voice"/>
+  <VoiceVideo :mediaOpen="mediaOpen" :voice="voice" :disconnect="toggleMedia" :switchTo="switchTo"/>
+  <Chatbar :handleNewMessage="sendMessage" />
+</section>

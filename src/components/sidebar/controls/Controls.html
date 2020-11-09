@@ -1,0 +1,15 @@
+<section class="controls">
+  <div class="profile">
+      <CircleIcon :image="`${config.ipfs.browser}${$store.state.profilePictureHash}`" />
+      <p class="online"><i class="fa fa-circle"></i></p>
+  </div>
+  <div class="userinfo has-tooltip-arrow" data-tooltip="0x12ef831290...">
+      <p>{{$store.state.username || 'Anon'}}</p>
+      <p class="address">Super awesome status...</p>
+  </div>
+  <div class="usercontrols">
+      <i :class="`fas fa-microphone ${muted ? 'red' : ''}`" v-on:click="toggleMute" ></i>
+      <i :class="`fas fa-headphones-alt ${deafened ? 'red' : ''}`" v-on:click="toggleDeafen"></i>
+      <i class="fa fa-cog" v-on:click="toggleSettings"></i>
+  </div>
+</section>

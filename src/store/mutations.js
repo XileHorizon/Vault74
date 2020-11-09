@@ -36,8 +36,12 @@ export default {
     // eslint-disable-next-line no-plusplus,no-param-reassign
     state.profilePictureHash = hash;
   },
-  addRecentFile(state, file) {
+  addRecentFile(state) {
     // eslint-disable-next-line no-plusplus,no-param-reassign
-    state.recentFiles = [...state.recentFiles, file];
+    state.recentFiles += 1;
+  },
+  changeRoute(state, route) {
+    // eslint-disable-next-line no-plusplus,no-param-reassign
+    state.mainRoute = route;
   },
 };
