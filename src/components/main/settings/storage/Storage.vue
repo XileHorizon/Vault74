@@ -11,7 +11,10 @@
         </button>
         <hr>
         <h2>Clear Data</h2>
-        <p>Clear your local storage data, please note that if you did not back up your account you could lose access to it.</p>
+        <p class="heading">{{storageSize}}</p>
+        <p>Quickly clean up locally stored data, please be aware doing so will clear your stored files, message history, and more. <br>
+        <br>
+        Only do this if you know the repercussions.</p>
         <br>
         <button class="button is-danger is-small" v-on:click="clearData">
           <i class="fas fa-skull-crossbones"></i> &nbsp; Clear Local Data
@@ -24,7 +27,20 @@
 <script>
 export default {
   name: 'Storage',
+  data() {
+    return {
+      storageSize: this.bytesToSize(new Blob(Object.values(localStorage)).size),
+    };
+  },
   methods: {
+    bytesToSize(bytes) {
+      const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+      if (bytes === 0) return '0 Bytes';
+      // eslint-disable-next-line
+      const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+      // eslint-disable-next-line
+      return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    },
     requestUnlimitedStorage() {
       // eslint-disable-next-line
       window.browser.permissions.request('unlimitedStorage');

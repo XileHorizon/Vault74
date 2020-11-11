@@ -5,7 +5,9 @@
       <input class="input is-small" type="text" placeholder="Find a vault dweller...">
   </div>
   <div class="usersubcontrols">
-    <div :class="`${$store.state.mainRoute == 'friends' ? 'active' : ''} friends`">
+    <div 
+      v-on:click="setMainRoute('friends')"
+      :class="`${$store.state.mainRoute == 'friends' ? 'active' : ''} friends`">
       <i class="fa fa-user-friends"></i>  &nbsp; Friends
     </div>
     <div 
@@ -23,7 +25,6 @@
       </ul>
   </div>
   <div class="usercontainer">
-      <Friends v-if="route === 'friends'" />
       <div v-if="route === 'chats'">
         <User name="Samantha Version" unread="unread" status="Idly typing away!" online="true" icon="https://randomuser.me/api/portraits/women/56.jpg"/>
         <User name="Sophie Chain" status="Enjoying Vault74's piece of mind" online="true" icon="https://randomuser.me/api/portraits/women/43.jpg" active="true"/>

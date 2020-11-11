@@ -6,8 +6,9 @@
         <Sidebar :toggleSettings="toggleSettings"/>
       </div>
       <div class="column">
-        <Main v-if="$store.state.mainRoute == 'main'"/>
+        <Main :class="$store.state.mainRoute == 'main' ? 'show' : 'hidden'" />
         <Files v-if="$store.state.mainRoute == 'files'"/>
+        <Friends v-if="$store.state.mainRoute == 'friends'"/>
       </div>
     </div>
     <div :class="`settings ${settingsOpen ? 'settings-open-container' : ''}`">
@@ -46,6 +47,7 @@ import Mousetrap from 'mousetrap';
 import Sidebar from '@/components/sidebar/Sidebar/Sidebar';
 import Main from '@/components/main/Main/Main';
 import Files from '@/components/files/Files/Files';
+import Friends from '@/components/friends/Friends/Friends';
 import Settings from '@/components/main/settings/Settings';
 import Web3 from '@/components/Web3/Web3';
 import IPFS from 'ipfs-core';
@@ -56,6 +58,7 @@ export default {
     Sidebar,
     Main,
     Files,
+    Friends,
     Settings,
     Web3,
   },
@@ -66,7 +69,6 @@ export default {
       network: '',
       account: 0x0,
       blockNumber: 0,
-      route: 'files',
       darkmode: localStorage.getItem('dark-theme'),
     };
   },
@@ -82,6 +84,10 @@ export default {
     Mousetrap.bind('option+s', () => {
       this.settingsOpen = !this.settingsOpen;
     });
+    Mousetrap.bind('esc', () => {
+      this.settingsOpen = false;
+      this.$store.commit('changeRoute', 'main');
+    });
     const ipfs = await IPFS.create();
     window.ipfs = ipfs;
   },
@@ -90,6 +96,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .hidden {
+    display: none;
+  }
+  .show {
+    display: block;
+  }
   #wrapper {
     position: absolute;
     top: 0;

@@ -3,6 +3,7 @@
 <script>
 import config from '@/config/config';
 import IPFSUtils from '@/utils/IPFSUtils';
+import FileC from '@/classes/FileC';
 
 export default {
   name: 'FileUpload',
@@ -18,6 +19,7 @@ export default {
       selectedFile: false,
       progress: 0,
       config,
+      fileClass: false,
     };
   },
   mounted() {
@@ -28,28 +30,28 @@ export default {
     getURL() {
       return URL.createObjectURL(this.selectedFile);
     },
+    determineFileType(type) {
+      let ft = 'file';
+      if (type.includes('image')) ft = 'image';
+      if (type.includes('audio')) ft = 'audio';
+      if (type.includes('video')) ft = 'video';
+      console.log('ft', ft);
+      return ft;
+    },
     sendFileMessage() {
       if (this.ipfsHash) {
+        this.fileClass = new FileC(
+          `${config.ipfs.browser}${this.ipfsHash}`,
+          this.ipfsHash,
+          this.selectedFile,
+        );
         this.relayResult(
-          {
-            url: `${config.ipfs.browser}${this.ipfsHash}`,
-            hash: this.ipfsHash,
-            type: this.selectedFile.type,
-            size: this.selectedFile.size,
-            filename: this.selectedFile.name,
-          },
+          this.fileClass.getObject(),
           // TODO: Support MP4
-          this.selectedFile.type.includes('image') ? 'image' : 'file',
+          this.determineFileType(this.selectedFile.type),
         );
         // TODO: move this to it's own localStorage object or indexedDB
-        IPFSUtils.appendFileCache({
-          at: Date.now(),
-          url: `${config.ipfs.browser}${this.ipfsHash}`,
-          hash: this.ipfsHash,
-          type: this.selectedFile.type,
-          size: this.selectedFile.size,
-          filename: this.selectedFile.name,
-        });
+        IPFSUtils.appendFileCache(this.fileClass.getObject());
         this.$store.commit('addRecentFile');
         this.close();
       }

@@ -1,6 +1,6 @@
 <template>
   <div class="columns">
-    <button class="button close" v-on:click="toggleSettings">✕</button>
+    <button class="modal-close is-large" aria-label="close" v-on:click="toggleSettings"></button>
     <div class="column is-one-third settings-left" style="max-width: 300px;">
       <h1 id="logo">Settings</h1>
       <aside class="menu">

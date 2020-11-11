@@ -3,6 +3,7 @@
 <script>
 import config from '@/config/config';
 import IPFSUtils from '@/utils/IPFSUtils';
+import FileC from '@/classes/FileC';
 
 export default {
   name: 'FileUploadInline',
@@ -25,19 +26,14 @@ export default {
       this.ipfsHash = false;
       this.selectedFile = false;
       this.progress = 0;
+      this.fileClass = false;
     },
     getURL() {
       return URL.createObjectURL(this.selectedFile);
     },
     sendFileMessage() {
       if (this.ipfsHash) {
-        this.relayResult({
-          url: `${config.ipfs.browser}${this.ipfsHash}`,
-          hash: this.ipfsHash,
-          type: this.selectedFile.type,
-          size: this.selectedFile.size,
-          filename: this.selectedFile.name,
-        });
+        this.relayResult(this.fileClass.getObject());
         this.$store.commit('addRecentFile');
       }
     },
@@ -60,14 +56,13 @@ export default {
         },
       );
       this.ipfsHash = ipfsResponse.path;
-      IPFSUtils.appendFileCache({
-        at: Date.now(),
-        url: `${config.ipfs.browser}${this.ipfsHash}`,
-        hash: this.ipfsHash,
-        type: this.selectedFile.type,
-        size: this.selectedFile.size,
-        filename: this.selectedFile.name,
-      });
+      this.fileClass = new FileC(
+        `${config.ipfs.browser}${this.ipfsHash}`,
+        this.ipfsHash,
+        this.selectedFile,
+      );
+
+      IPFSUtils.appendFileCache(this.fileClass.getObject());
       this.uploadDone();
       this.$nextTick(() => {
         this.$refs.hidden.focus();

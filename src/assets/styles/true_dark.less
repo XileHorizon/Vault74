@@ -23,11 +23,24 @@
   .usersubcontrols i {
     color: #8183ad !important;
   }
+  .friend {
+    background: #292b38 !important;
+  }
+  #friends {
+    background: #16151c !important;
+  }
+  #friends p {
+    color: #8183ad;
+  }
   #files {
     background: #16151c !important;
   }
   #files p {
     color: #8183ad;
+  }
+  #file:hover .nothovered {
+    display: block;
+    color: #bfbfff;
   }
   .friends:hover, .files:hover {
     background: #292b38 !important;
@@ -41,12 +54,26 @@
     color: #c9cbf3 !important;
   }
   .close {
-    background-color: #292b38 !important;
-    color: #aeaee2 !important;
+    background-color:transparent !important;
+    color: #c9cbf3 !important;
   }
   .close:hover {
-    background-color: #3d4053 !important;
-    color: #d1d1f5 !important;
+    background-color: transparent !important;
+    color: #fff !important;
+  }
+  #file .close i:hover {
+    color: #292b38 !important;
+  }
+  #file .close {
+    background-color: #fc6161 !important;
+    color: #292b38 !important;
+  }
+  #file .close:hover {
+    background-color: #fc7e7e !important;
+    color: #292b38 !important;
+  }
+  #file .close i:hover {
+    color: #292b38 !important;
   }
   .menu-list a:hover {
     color: #dbddfa !important;
@@ -206,6 +233,12 @@
   #file {
     background-color: #292a36 !important;
   }
+  #file i:hover {
+    color: #cccdfc;
+  }
+  .filename {
+    color: #d9dafc !important;
+  }
   .message .message-body {
     color: #a3a4d6 !important;
     background-color: #1f2029 !important;
@@ -327,16 +360,16 @@
     color: #00d0a1;
   }
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #afb1d4 !important;
+    color: #626486 !important;
     opacity: 1; /* Firefox */
   }
 
   :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #afb1d4 !important;
+    color: #626486 !important;
   }
 
   ::-ms-input-placeholder { /* Microsoft Edge */
-    color: #afb1d4 !important;
+    color: #626486 !important;
   }
   .separator {
     color: #47495f !important;

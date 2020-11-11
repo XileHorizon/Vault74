@@ -30,7 +30,8 @@ export default {
         from: account,
         gas: 4700000,
       })
-      .once('transactionHash', done);
+      .once('transactionHash', done)
+      .once('confirmation', done);
   },
   // TODO: this is sloppy.
   async getDweller(address, done) {
@@ -54,5 +55,15 @@ export default {
         resolve(onChainPhotoHash);
       });
     });
+  },
+  async getDwellerAddress(address) {
+    const contract = this.getContract(address);
+    const dweller = await contract.methods.getDwellerAddress().call();
+    return dweller;
+  },
+  async getDwellerName(address) {
+    const contract = this.getContract(address);
+    const dwellerName = await contract.methods.getDwellerName().call();
+    return dwellerName;
   },
 };

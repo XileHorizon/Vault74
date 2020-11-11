@@ -7,6 +7,8 @@
   import Payment from '@/components/main/convorsation/message/embeds/Payment';
   import ImageViewer from '@/components/main/convorsation/message/embeds/ImageViewer';
   import File from '@/components/main/convorsation/message/embeds/File';
+  import Audio from '@/components/main/convorsation/message/embeds/Audio';
+  import Video from '@/components/main/convorsation/message/embeds/Video';
 
   import * as dayjs from 'dayjs';
   import * as relativeTime from 'dayjs/plugin/relativeTime';
@@ -23,6 +25,8 @@
       Payment,
       ImageViewer,
       File,
+      Audio,
+      Video,
     },
     methods: {
       formattedDate(timestamp) {

@@ -3,7 +3,7 @@
       <CircleIcon :image="`${config.ipfs.browser}${$store.state.profilePictureHash}`" />
       <p class="online"><i class="fa fa-circle"></i></p>
   </div>
-  <div class="userinfo has-tooltip-arrow" data-tooltip="0x12ef831290...">
+  <div class="userinfo has-tooltip-arrow" :data-tooltip="$store.state.activeAccount">
       <p>{{$store.state.username || 'Anon'}}</p>
       <p class="address">Super awesome status...</p>
   </div>

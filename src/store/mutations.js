@@ -32,6 +32,10 @@ export default {
     // eslint-disable-next-line no-plusplus,no-param-reassign
     state.dwellerAddress = address;
   },
+  username(state, username) {
+    // eslint-disable-next-line no-plusplus,no-param-reassign
+    state.username = username;
+  },
   profilePictureHash(state, hash) {
     // eslint-disable-next-line no-plusplus,no-param-reassign
     state.profilePictureHash = hash;

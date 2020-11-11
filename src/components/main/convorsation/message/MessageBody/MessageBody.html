@@ -8,22 +8,28 @@
   <div class="c-message-content">
       <div class="c-message" v-for="message in message.content" :key="message.id">
           <p v-if="message.data && message.type == 'text'">
-              {{message.data}}
+            {{message.data}}
           </p>
           <div v-if="message.data && message.type === 'link'">
-              <Link :message="message"/>
+            <Link :message="message"/>
           </div>
           <div v-if="message.data && message.type === 'youtube'">
-              <YouTube :message="message"/>
+            <YouTube :message="message"/>
           </div>
           <div v-if="message.data && message.type === 'payment'">
-              <Payment :message="message" />
+            <Payment :message="message" />
           </div>
           <div v-if="message.data && message.type === 'image'">
-              <ImageViewer :image="message.data.url" :scrollToEnd="scrollToEnd" />
+            <ImageViewer :image="message.data.url" :scrollToEnd="scrollToEnd" />
           </div>
           <div v-if="message.data && message.type === 'file'">
-              <File :message="message" />
+            <File :message="message" />
+          </div>
+          <div v-if="message.data && message.type === 'audio'">
+            <Audio :message="message" />
+          </div>
+          <div v-if="message.data && message.type === 'video'">
+            <Video :message="message" />
           </div>
       </div>
   </div>

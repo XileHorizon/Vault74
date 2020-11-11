@@ -15,6 +15,8 @@
 
 <script>
 import Web3 from 'web3';
+import Vault74Registry from '@/utils/Vault74Registry';
+import DwellerID from '@/utils/DwellerContract';
 
 export default {
   name: 'Web3',
@@ -24,6 +26,17 @@ export default {
     };
   },
   methods: {
+    async startupActions() {
+      const [account] = await window.web3.eth.getAccounts();
+      const dwellerContract = await Vault74Registry.getDwellerContract(account);
+      const dwellerPhoto = await DwellerID.getPhotoAsync(dwellerContract);
+      const dwellerName = await DwellerID.getDwellerName(dwellerContract);
+      if (dwellerContract !== '0x0000000000000000000000000000000000000000') {
+        this.$store.commit('dwellerAddress', dwellerContract);
+        this.$store.commit('profilePictureHash', dwellerPhoto);
+        this.$store.commit('username', window.web3.utils.hexToString(dwellerName));
+      }
+    },
     web3Polling() {
       Promise.all([
         window.web3.eth.getAccounts(),
@@ -49,6 +62,7 @@ export default {
         window.web3 = new Web3(window.ethereum);
         window.ethereum.enable();
         this.connected = true;
+        this.startupActions();
         this.web3Polling();
         setInterval(() => {
           this.web3Polling();

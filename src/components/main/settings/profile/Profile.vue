@@ -68,6 +68,7 @@
         <br>
         <br>
         <p class="label">DwellerID Address</p>
+        <p>This is like your ID card, share this with friends so they can add you.</p>
         <input class="input" :value="$store.state.dwellerAddress" readonly />
         
         <hr>
@@ -88,6 +89,7 @@
 <script>
 import config from '@/config/config';
 import DCUtils from '@/utils/DwellerContract';
+import Vault74Registry from '@/utils/Vault74Registry';
 
 export default {
   name: 'Profile',
@@ -105,6 +107,9 @@ export default {
       config,
     };
   },
+  mounted() {
+    Vault74Registry.getDwellerContract(this.$store.state.activeAccount);
+  },
   methods: {
     async submitProfileContract() {
       if (this.$store.state.username.length < 5) {
@@ -112,7 +117,7 @@ export default {
         return;
       }
       this.created = true;
-      DCUtils.deploy(
+      Vault74Registry.createDwellerId(
         this.$store.state.username,
         this.$store.state.activeAccount,
         (transactionHash) => {
@@ -135,27 +140,32 @@ export default {
       const ipfsResponse = await window.ipfs.add(file);
       this.ipfsHash = ipfsResponse;
     },
-    finishProfile(receipt) {
+    async finishProfile(receipt) {
       if (!this.ipfsHash) {
         this.commitEverything(receipt);
         return;
       }
 
+      const dwellerIDContract = await Vault74Registry
+        .getDwellerContract(this.$store.state.activeAccount);
+
       DCUtils.setPhoto(
-        receipt.contractAddress,
+        dwellerIDContract,
         this.$store.state.activeAccount,
         this.ipfsHash,
-        () => {
+        (data) => {
+          console.log('confirmed', data);
           this.finished = true;
-          this.commitEverything(receipt);
+          this.commitEverything(dwellerIDContract);
         },
       );
     },
-    commitEverything(receipt) {
+    commitEverything(dwellerIDContract) {
       this.$store.commit('profilePictureHash', this.ipfsHash.path);
-      this.$store.commit('dwellerAddress', receipt.contractAddress);
+      this.$store.commit('dwellerAddress', dwellerIDContract);
     },
     async getDweller() {
+      // TODO: get the deweller address from the registry instead.
       DCUtils.getDweller(
         this.$store.state.dwellerAddress,
         (dweller, onChainPhotoHash) => {

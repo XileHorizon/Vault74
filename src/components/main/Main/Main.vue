@@ -29,7 +29,7 @@ export default {
     sendMessage(data, type) {
       /* eslint-disable */
       this.messages.push({
-          id: 1,
+          id: Date.now(),
           type: 'message-group',
           user: {
           name: 'RetroPronghorn',

@@ -4,7 +4,6 @@
 import ServerList from '@/components/ServerList/ServerList';
 import User from '@/components/sidebar/User/User';
 import Controls from '@/components/sidebar/Controls/Controls';
-import Friends from '@/components/sidebar/Friends/Friends';
 
 export default {
   name: 'Sidebar',
@@ -13,7 +12,6 @@ export default {
     ServerList,
     User,
     Controls,
-    Friends,
   },
   data() {
     return {
@@ -26,7 +24,6 @@ export default {
     },
     setMainRoute(route) {
       this.$store.commit('changeRoute', route);
-      console.log('test');
     },
   },
 };
