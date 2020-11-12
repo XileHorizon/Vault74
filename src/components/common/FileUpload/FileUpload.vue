@@ -35,7 +35,6 @@ export default {
       if (type.includes('image')) ft = 'image';
       if (type.includes('audio')) ft = 'audio';
       if (type.includes('video')) ft = 'video';
-      console.log('ft', ft);
       return ft;
     },
     sendFileMessage() {

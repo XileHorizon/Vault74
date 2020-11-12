@@ -1,3 +1,4 @@
+// Useful methods to translate filenames into classes
 export default {
   mappings: {
     default: 'fas fa-file',
@@ -12,6 +13,12 @@ export default {
     'application/java-archive': 'fab fa-java',
     'text/css': 'fab fa-css3-alt',
   },
+  /** @function
+   * @name translateFiletype
+   * @argument filetype string filetype provided from the <File>
+   * @argument mappings mapping to check through for translation
+   * @returns classname to be used for fontawesome icons describing the filetype
+   */
   translateFiletype(filetype, mappings) {
     let classname = mappings.default;
     // eslint-disable-next-line

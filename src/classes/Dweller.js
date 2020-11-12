@@ -1,4 +1,4 @@
-import DwellerContract from "../utils/DwellerContract";
+import DwellerContract from '../utils/DwellerContract';
 
 export default class Dweller {
   constructor(contractAddress) {
@@ -6,23 +6,17 @@ export default class Dweller {
   }
 
   async getPhoto() {
-    this.photoHash = await DwellerContract.getPhotoAsync(
-      this.contractAddress
-    );
-    return photoHash;
+    this.photoHash = await DwellerContract.getPhotoAsync(this.contractAddress);
+    return this.photoHash;
   }
 
   async getOwner() {
-    this.owner = await DwellerContract.getDwellerAddress(
-      this.contractAddress
-    );
+    this.owner = await DwellerContract.getDwellerAddress(this.contractAddress);
     return this.owner;
   }
 
   async getName() {
-    this.name = await DwellerContract.getDwellerName(
-      this.contractAddress
-    );
+    this.name = await DwellerContract.getDwellerName(this.contractAddress);
     return this.name;
   }
 
@@ -36,5 +30,4 @@ export default class Dweller {
       name,
     };
   }
-
 }

@@ -67,13 +67,14 @@
         <input class="input" :value="$store.state.username" readonly />
         <br>
         <br>
-        <p class="label">DwellerID Address</p>
+        <p class="label">Account Address</p>
         <p>This is like your ID card, share this with friends so they can add you.</p>
-        <input class="input" :value="$store.state.dwellerAddress" readonly />
-        
+        <input class="input" :value="$store.state.activeAccount" readonly />
         <hr>
         <button class="button is-primary is-small" v-on:click="getDweller" v-if="!this.dweller">Advanced Details</button>
         <div v-if="this.dweller">
+          <p class="label">Dweller Address</p>
+          <input class="input" :value="$store.state.dwellerAddress" readonly />
           <p class="label">Dweller Owner Address</p>
           <input class="input" :value="this.dweller[0]" readonly />
           <p class="label">Name</p>
@@ -153,8 +154,7 @@ export default {
         dwellerIDContract,
         this.$store.state.activeAccount,
         this.ipfsHash,
-        (data) => {
-          console.log('confirmed', data);
+        () => {
           this.finished = true;
           this.commitEverything(dwellerIDContract);
         },

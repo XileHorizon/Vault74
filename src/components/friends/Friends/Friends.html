@@ -1,0 +1,44 @@
+<div id="friends">
+  <button class="modal-close is-large" aria-label="close" v-on:click="close"></button>
+  <h3>Friends</h3>
+  <p>Get connected with other people on the Vault74 platform.</p>
+  <h2 class="label">Find Someone</h2>
+  <article class="message is-dark">
+    <div class="message-body">
+      <h2>Add a Friend</h2>
+      <p>Enter a friends Ethereum address below to find them...</p>
+      <br>
+      <div class="field has-addons" >
+        <div class="control" style="width: 100%;">
+          <input class="input" type="text" placeholder="0x00000000000000000000000000..." v-model="friendAddress">
+        </div>
+        <div class="control">
+          <a class="button is-primary" v-on:click="addFriend">
+            Add Friend
+          </a>
+        </div>
+      </div>
+      <div style="clear:both"></div>
+      <div v-if="error">
+        <h2 class="label red">{{error}}</h2>
+      </div>
+      <div v-if="success">
+        <h2 class="label green">{{success}}</h2>
+      </div>
+      <div v-if="friend">
+        <h2 class="label">We Found Someone</h2>
+        <Friend :action="commitFriend" :friend="friend" text="Add" />
+        <div style="clear:both"></div>
+      </div>
+    </div>
+  </article>
+  <h2 class="label">Find Someone</h2>
+  <article class="message is-dark">
+    <div class="message-body">
+      <h2>Your Friends</h2>
+      <p>Start a chat with your friends below, be kind, or don't. We don't judge.</p>
+      <Friend v-for="fr in $store.state.friends" :key="fr.address" :friend="fr" text="Chat" />
+      <div style="clear:both"></div>
+    </div>
+  </article>
+</div>

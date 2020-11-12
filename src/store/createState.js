@@ -1,7 +1,7 @@
 const defaultState = {
   // Settings
   settings: {
-    darkMode: false,
+    darkMode: true,
   },
   // Web3
   web3Stats: false,
@@ -18,6 +18,8 @@ const defaultState = {
   profilePictureHash: false,
   recentFiles: 0,
   mainRoute: 'main',
+  // Friends
+  friends: [],
 };
 
 const createState = customState => Object.assign({}, defaultState, customState);

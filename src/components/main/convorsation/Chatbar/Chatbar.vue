@@ -63,7 +63,7 @@ export default {
       this.selectingEmoji = !this.selectingEmoji;
     },
     sendMessage() {
-      if (this.messageText.replace(' ', '') !== '') {
+      if (this.messageText.replace(/\s+/g, '').length >= 1) {
         if (this.messageText.length > this.limit) {
           return;
         }
