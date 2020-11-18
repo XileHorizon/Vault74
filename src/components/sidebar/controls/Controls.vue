@@ -5,9 +5,9 @@ import Mousetrap from 'mousetrap';
 import CircleIcon from '@/components/common/CircleIcon';
 import config from '@/config/config';
 
-const muteAudio = new Audio('https://raw.githubusercontent.com/RetroPronghorn/VoiceRTC/master/public/sounds/mute.ogg');
+const muteAudio = new Audio('https://ipfs.io/ipfs/QmVk362FGmwfsXBj5zMv4x1Hp7Mp9RbYDMxsDXRAx5vyUo');
 // eslint-disable-next-line
-const unmuteAudio = new Audio('https://raw.githubusercontent.com/RetroPronghorn/VoiceRTC/master/public/sounds/unmute.ogg');
+const unmuteAudio = new Audio('https://ipfs.io/ipfs/QmWxv18LqpcaMhXVd1BLm9z9k1MfWDNexJ22dC6vLkdyro');
 
 export default {
   name: 'Controls',
@@ -23,11 +23,13 @@ export default {
     };
   },
   methods: {
+    // Non functional placeholder mute function
     toggleMute() {
       this.muted = !this.muted;
       if (this.muted) muteAudio.play();
       if (!this.muted) unmuteAudio.play();
     },
+    // Non functional placeholder deafen function
     toggleDeafen() {
       this.deafened = !this.deafened;
       if (this.deafened) muteAudio.play();

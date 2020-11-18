@@ -8,7 +8,7 @@ Vue.config.productionTip = false;
 
 sync(store, router);
 
-/* eslint-disable no-new */
+/* eslint-disable */
 new Vue({
   el: '#app',
   functional: true,
@@ -18,3 +18,4 @@ new Vue({
     return h(App);
   },
 });
+/* eslint-enable */

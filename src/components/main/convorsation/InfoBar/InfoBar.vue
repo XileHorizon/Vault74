@@ -15,6 +15,7 @@ export default {
     };
   },
   methods: {
+    // Toggles the ID card modal
     toggleFingerprint() {
       this.idActive = !this.idActive;
     },

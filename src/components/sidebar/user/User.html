@@ -1,4 +1,4 @@
-<section :class="`user ${(active == 'true') ? 'user-active' : ''}`" >
+<section :class="`user ${(active == 'true') ? 'user-active' : ''}`" v-on:click="navigateToUser">
   <CircleIcon :image="icon"/>
   <p class="unreads" v-if="unread"></p>
   <p >{{name}}</p>

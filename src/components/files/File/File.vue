@@ -16,6 +16,7 @@ export default {
     };
   },
   methods: {
+    // Converts the bytes to a readable string
     bytesToSize(bytes) {
       const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
       if (bytes === 0) return '0 Bytes';
@@ -24,10 +25,12 @@ export default {
       // eslint-disable-next-line
       return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
     },
+    // Remove the file from the local cache, not IPFS
     deleteFile() {
       IPFSUtils.removeFileFromCache(this.file);
       this.updateParent();
     },
+    // Traanslates the filetype to a fontawesome icon class
     translateFiletype(filetype) {
       return FileIconMapper.translateFiletype(filetype, FileIconMapper.mappings);
     },

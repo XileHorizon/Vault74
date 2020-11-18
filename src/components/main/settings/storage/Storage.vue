@@ -9,7 +9,7 @@
         <button class="button is-primary is-small" v-on:click="requestUnlimitedStorage">
           Request Storage Permissions
         </button>
-        <hr>
+        <hr class="spacer">
         <h2>Clear Data</h2>
         <p class="heading">{{storageSize}}</p>
         <p>Quickly clean up locally stored data, please be aware doing so will clear your stored files, message history, and more. <br>

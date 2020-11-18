@@ -5,7 +5,7 @@
         <CircleIcon image="https://randomuser.me/api/portraits/women/43.jpg"/>
       </div>
       <div class="media-participant">
-        <CircleIcon image="https://avatars3.githubusercontent.com/u/1770198?s=460&u=c2be9f3c1e9ce8ba336f29ed2f98c6eeeeab3f94&v=4" />
+        <CircleIcon :image="`${config.ipfs.browser}${$store.state.profilePictureHash}`" />
       </div>
     </div>
     <div class="media-controls">

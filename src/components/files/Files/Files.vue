@@ -1,22 +1,22 @@
 <template>
-  <div id="files">
+  <div id="files" class="noselect">
     <button class="modal-close is-large" aria-label="close" v-on:click="close"></button>
     <h3>Browse files</h3>
     <p>Browse files you've shared with other users, and upload new files to IPFS.</p>
     <hr>
     <h2 class="label">Upload Files</h2>
     <article class="message is-dark">
-      <div class="message-body">
+      <div class="message-body ">
         <FileUploadInline :relayResult="updateCache" :uploadDone="fetchRecentFiles" />
       </div>
     </article>
     <h2 class="label">File History</h2>
     <article class="message is-dark">
-      <div class="message-body">
+      <div class="message-body noselect">
         <h2>Your Files</h2>
         <p>Below is a list of all of the files you've uploaded.</p>
         <br>
-        <p v-for="file in recentFiles" v-bind:key="file.name">
+        <p v-for="file in recentFiles" v-bind:key="file.hash">
           <File :file="file" :updateParent="updateParent"/>
         </p>
         <div style="clear:both"></div>
@@ -44,15 +44,19 @@ export default {
     };
   },
   methods: {
+    // Updates the parent with new files
     updateParent() {
       this.fetchRecentFiles();
     },
+    // Updates the local cache with the new files
     updateCache() {
       this.fetchRecentFiles();
     },
+    // Close out the file manager by changing the main route
     close() {
       this.$store.commit('changeRoute', 'main');
     },
+    // Fetch files from the IPFS local file cache
     fetchRecentFiles() {
       this.recentFiles = IPFSUtils.getFileCache().reverse();
     },

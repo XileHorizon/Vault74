@@ -12,7 +12,7 @@
             <option v-for="account in $store.state.accounts" :key="account">{{account}}</option>
           </select>
         </div>
-        <hr>
+        <hr class="spacer">
         <h2>Gas Price (Gwei)</h2>
         <p>Higher gas prices will transact faster.</p>
         <br>

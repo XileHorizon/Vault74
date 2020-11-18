@@ -21,6 +21,12 @@ export default {
     'status',
     'unread',
   ],
+  methods: {
+    // Navigate to the main route
+    navigateToUser() {
+      this.$store.commit('changeRoute', 'main');
+    },
+  },
 };
 </script>
 

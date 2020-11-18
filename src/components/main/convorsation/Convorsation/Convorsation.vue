@@ -32,6 +32,8 @@ export default {
     };
   },
   methods: {
+    // Rudementary scrolling to the bottom of the
+    // div when a message comes in, or on other events
     scrollToEnd() {
       const { chat } = this.$refs;
       setTimeout(() => {
@@ -39,6 +41,8 @@ export default {
         this.showScrollToBottom = false;
       }, 100);
     },
+    // If we've scrolled past a certain point we will
+    // display the scroll to bottom button
     onScroll() {
       const { chat } = this.$refs;
       if (chat.scrollTop - chat.scrollHeight < -750) {

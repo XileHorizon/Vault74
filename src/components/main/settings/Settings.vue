@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <button class="modal-close is-large" aria-label="close" v-on:click="toggleSettings"></button>
-    <div class="column is-one-third settings-left" style="max-width: 300px;">
+    <div class="column is-one-third settings-left noselect" style="max-width: 300px;">
       <h1 id="logo">Settings</h1>
       <aside class="menu">
         <p class="menu-label">
@@ -14,7 +14,9 @@
           <li v-on:click="setRoute('profile')">
             <a :class="`${route == 'profile' ? 'active' : ''}`">Profile</a>
           </li>
-          <li><a>Audio &amp; Video</a></li>
+          <li v-on:click="setRoute('audiovideo')">
+            <a :class="`${route == 'audiovideo' ? 'active' : ''}`">Audio &amp; Video</a>
+          </li>
           <li v-on:click="setRoute('keybinds')">
             <a :class="`${route == 'keybinds' ? 'active' : ''}`">Keybinds</a>
           </li>
@@ -57,6 +59,10 @@
         v-if="route == 'profile'" 
         :settings="settings"
         :setSetting="setSetting"/>
+      <AudioVideo 
+        v-if="route == 'audiovideo'" 
+        :settings="settings"
+        :setSetting="setSetting"/>
       <Accounts 
         v-if="route == 'accounts-devices'" 
         :settings="settings"
@@ -81,6 +87,7 @@ import Keybinds from '@/components/main/settings/keybinds/Keybinds';
 import Accounts from '@/components/main/settings/accounts/Accounts';
 import Network from '@/components/main/settings/network/Network';
 import Storage from '@/components/main/settings/storage/Storage';
+import AudioVideo from '@/components/main/settings/audiovideo/AudioVideo';
 
 export default {
   name: 'Settings',
@@ -94,6 +101,7 @@ export default {
     Accounts,
     Network,
     Storage,
+    AudioVideo,
   },
   props: ['toggleSettings'],
   data() {

@@ -18,10 +18,9 @@
       <p>
         <i class="fas fa-key"></i> Vault74
         <span class="spacer"> </span> 
-        <i class="fas fa-server"></i> IPFS 
-        <span class="spacer"> </span> 
-        <i class="fas fa-code-branch"></i> v0.0.0 - Mockup
-        <span class="spacer"> </span> 
+        <i class="fas fa-info-circle"></i>
+        {{$store.state.status}}
+        <span class="spacer"></span>
         <span v-if="$store.state.accounts">
           <i class="fab fa-ethereum"></i>
           <b>Network:</b> {{$store.state.web3Stats.nettype.toUpperCase()}}
@@ -75,6 +74,7 @@ export default {
   methods: {
     toggleSettings() {
       this.settingsOpen = !this.settingsOpen;
+      if (this.settingsOpen) this.$store.commit('changeRoute', 'main');
     },
     toggleDarkMode() {
       this.$store.commit('toggleDarkMode');

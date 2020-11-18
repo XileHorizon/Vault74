@@ -55,10 +55,26 @@ export default {
       .once('confirmation', done);
   },
   /** @function
+   * @name setUsername
+   * @argument address Address of the DwellerID contract
+   * @argument account account to use for the transaction
+   * @argument username username to set
+   * @argument done callback which will be called on the first TX & confirm.
+   */
+  setUsername(address, account, username, done) {
+    const contract = this.getContract(address);
+    contract.methods.setDwellerName(window.web3.utils.fromAscii(username))
+      .send({
+        from: account,
+        gas: 4700000,
+      })
+      .once('transactionHash', done)
+      .once('confirmation', done);
+  },
+  /** @function
    * @name getDwellerAsync
    * @argument address Address of the DwellerID contract
    * @argument done callback which will return the dweller info
-   * @returns dweller payload which contains all information about the dweller
    */
   async getDweller(address, done) {
     const contract = this.getContract(address);

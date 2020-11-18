@@ -31,6 +31,7 @@ export default {
     };
   },
   mounted() {
+    // TODO: remove this in the final version
     const isTypingFunc = () => {
       this.participantTalking = !this.participantTalking;
       const int = Math.floor(Math.random() * Math.floor(15000));
@@ -39,6 +40,7 @@ export default {
     isTypingFunc();
   },
   methods: {
+    // Handle the pasting of image files and start the upload of the file
     handlePaste(e) {
       for (let i = 0; i < e.clipboardData.items.length; i += 1) {
         const item = e.clipboardData.items[i];
@@ -49,19 +51,24 @@ export default {
         }
       }
     },
+    // When a file has been succesfully uploaded, show the uploader
     openFileUpload() {
       this.showFileUpload = true;
     },
+    // Self explanatory, close the file uploader modal
     closeFileUpload() {
       this.showFileUpload = false;
       this.file = false;
     },
+    // Toggles the visibility of the mini payment window
     togglePayments() {
       this.payments = !this.payments;
     },
+    // Toggles visibility of the emoji picker
     toggleEmoji() {
       this.selectingEmoji = !this.selectingEmoji;
     },
+    // Send a plain text message from the chatbar to the parent component
     sendMessage() {
       if (this.messageText.replace(/\s+/g, '').length >= 1) {
         if (this.messageText.length > this.limit) {
@@ -71,6 +78,7 @@ export default {
         this.messageText = '';
       }
     },
+    // Select an emoji from the emoji picker and append it to our message
     selectEmoji(emoji) {
       this.messageText += emoji.native;
       this.selectingEmoji = false;

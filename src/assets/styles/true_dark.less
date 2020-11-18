@@ -1,89 +1,112 @@
+@dark-blue-gray: #1f2029;
+@less-dark-blue-gray: #16151c;
+@super-dark-boi: #1c1a24;
+@ohh-so-dark: #292b38;
+@not-as-light-blue-gray: #8287cc;
+@light-blue-gray: #8183ad;
+@lighter-blue-gray: #afb2e2;
+@nearly-white: #c9cbf3;
+@basically-white: #f0f1fc;
+@minty-green: #00d0a1;
+@is-this-black: #121218;
 .theme {
   #wrapper {
-    background: #1f2029;
-    color: #e8eafc !important;
+    background: @dark-blue-gray;
+    color: @nearly-white !important;
   }
   .settings-left {
-    background: #1f2029 !important;
+    background: @dark-blue-gray !important;
   }
   .menu-label {
-    color: #8183ad !important;
+    color: @light-blue-gray !important;
     font-weight: bold;
   }
   .label {
-    color: #8183ad !important;
+    padding: 0;
+    color: @not-as-light-blue-gray !important;
     font-weight: bold;
     font-variant-caps: all-petite-caps;
   }
+  .context .label {
+    color: @not-as-light-blue-gray !important;
+  }
+  .context ul li:hover {
+    color: @lighter-blue-gray !important;
+  }
   .usersubcontrols {
-    background: #1f2029 !important;
-    color: #8183ad !important;
+    background: @dark-blue-gray !important;
+    color: @nearly-white!important;
     border: none !important;
   }
   .usersubcontrols i {
-    color: #8183ad !important;
+    color: @nearly-white !important;
   }
   .friend {
-    background: #292b38 !important;
+    background: @ohh-so-dark !important;
   }
   #friends {
-    background: #16151c !important;
+    background: @less-dark-blue-gray !important;
   }
   #friends p {
-    color: #8183ad;
+    color: @nearly-white !important;
   }
   #files {
-    background: #16151c !important;
+    background: @less-dark-blue-gray !important;
   }
   #files p {
-    color: #8183ad;
+    color: @nearly-white !important;
   }
   #file:hover .nothovered {
     display: block;
-    color: #bfbfff;
+    color: @nearly-white;
+  }
+  #action-selector {
+    background-color: @is-this-black !important;
+    border-radius: 1px solid @super-dark-boi !important;
+    color: @light-blue-gray !important;
   }
   .modal-close {
     background: transparent !important;
   }
   .friends:hover, .files:hover {
-    background: #292b38 !important;
-    color: #c9cbf3 !important;
+    background: @ohh-so-dark !important;
+    color: @nearly-white !important;
   }
   .friends.active, .files.active {
-    background: #292b38 !important;
-    color: #c9cbf3 !important;
+    background: @ohh-so-dark !important;
+    color: @nearly-white !important;
   }
   .menu-list a {
-    color: #c9cbf3 !important;
+    color: @nearly-white !important;
   }
   .close {
     background-color:transparent !important;
-    color: #c9cbf3 !important;
+    color: @nearly-white !important;
   }
   .close:hover {
     background-color: transparent !important;
-    color: #fff !important;
+    color: @basically-white !important;
   }
   #file .close i:hover {
-    color: #292b38 !important;
+    color: @ohh-so-dark !important;
   }
   #file .close {
     background-color: #fc6161 !important;
-    color: #292b38 !important;
+    color: @ohh-so-dark !important;
   }
   #file .close:hover {
     background-color: #fc7e7e !important;
-    color: #292b38 !important;
+    color: @ohh-so-dark !important;
   }
   #file .close i:hover {
-    color: #292b38 !important;
+    color: @ohh-so-dark !important;
   }
   .menu-list a:hover {
-    color: #dbddfa !important;
+    color: @basically-white !important;
     background-color: #2e303d !important;
   }
   .menu-list .active {
-    color: #f0f1fc !important;
+    color: @basically-white !important;
     background-color: #444658 !important;
   }
   .emoji-mart {
@@ -92,68 +115,93 @@
   }
   .emoji-mart-category-label span {
     background-color: transparent !important;
-    color: #fff !important;
+    color: @basically-white !important;
   }
   .emoji-mart-bar {
     border-bottom: none !important;
-    background-color: #1f2029 !important;
+    background-color: @dark-blue-gray !important;
   }
   .emoji-mart-bar-preview {
     border: none !important;
   }
   .modal-card-head {
-    background: #1f2029 !important;
+    background: @dark-blue-gray !important;
     border-bottom: none;
   }
   .modal-card-title {
-    color: #ccc;
+    color: @basically-white;
   }
   .modal-card-body {
-    background: #16151c !important;
+    background: @less-dark-blue-gray !important;
+  }
+  .vicp-wrap {
+    background: @less-dark-blue-gray !important;
+    color: @not-as-light-blue-gray !important;
+  }
+  .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item img {
+    background-color: @is-this-black !important;
+  }
+  .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container {
+    background-color: @is-this-black !important;
+  }
+  .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
+  .vicp-drop-area {
+    background: @is-this-black !important;
+  }
+  .vicp-hint {
+    color: @not-as-light-blue-gray !important;
+  }
+  .vicp-icon1-arrow {
+    color: @not-as-light-blue-gray !important;
   }
   .media-container {
     background: #000 !important;
   }
   .media-container .media-controls i {
-    color: #fff !important;
+    color: @basically-white !important;
   }
   .media-content i {
-    color: #00d0a1 !important;
+    color: @minty-green !important;
   }
   .media {
     background: #1d1e27 !important;
-    color: #eee !important;
+    color: @nearly-white !important;
     border: none !important;
-    border-left: 3px solid #00d0a1 !important;
+    border-left: 3px solid @minty-green !important;
   }
   .media strong {
-    color: #fff !important;
+    color: @basically-white !important;
   }
   .servers {
-    background-color: #16151c !important;
+    background-color: @less-dark-blue-gray !important;
     width: 4rem !important;
     top: 0;
     bottom: 0;
     left: -4rem !important;
   }
+  #logo {
+    color: @basically-white !important;
+  }
   #typing {
-    color: #8d90b9 !important;
+    color: @nearly-white !important;
   }
   .address {
-    color: #a9acdd !important;
+    color: @lighter-blue-gray !important;
   }
   .footer {
-    background: #1f2029 !important;
-    color: #afb1d4 !important;
-    border-top: 1px solid #1c1a24 !important; 
+    background: @dark-blue-gray !important;
+    color: @light-blue-gray !important;
+    border-top: 1px solid @super-dark-boi !important; 
   }
   .controls {
     background: #242530 !important;
-    border-top: 1px solid #1c1a24 !important; 
+    border-top: 1px solid @super-dark-boi !important; 
   }
   .infobar {
-    background: #1f2029 !important;
-    border-bottom: 1px solid #1c1a24 !important; 
+    background: @dark-blue-gray !important;
+    border-bottom: 1px solid @super-dark-boi !important; 
     box-shadow: 0 2px 3px -2px rgba(0,0,0,.25);
   }
   .infobar .profile i {
@@ -161,32 +209,29 @@
     font-size: 16pt;
   }
   a {
-    color: #00d0a1;
+    color: @minty-green;
   }
   .infobar .profile i:hover {
-    color: #00d0a1 !important;
+    color: @minty-green !important;
   }
   .infobar .address {
     color: #545870 !important;
   }
 
   #convorsation {
-    background: #16151c !important;
+    background: @less-dark-blue-gray !important;
   }
   .c-message-content {
-    color: #d4d6f0 !important;
+    color: @lighter-blue-gray !important;
   }
   .charlimit {
-    color: #8d90b9 !important;
-  }
-  .red {
-    color: #ee5253 !important;
+    color: @nearly-white !important;
   }
   .input-collection-red {
     border: 1px solid #ee5253 !important;
   }
   .c-message-actions {
-    background: #1f2029 !important;
+    background: @dark-blue-gray !important;
     border: none !important;
     color: #545670 !important;
   }
@@ -197,31 +242,37 @@
     color: #8d90b9 !important;
   }
   .c-message-body:hover {
-    background-color: #121218 !important;
+    background-color: @is-this-black !important;
   }
   .divider {
-    border-bottom: 1px solid #1c1a24 !important; 
+    border-bottom: 1px solid @super-dark-boi !important; 
   }
   .wrapper {
-    border-left: 1px solid #1c1a24 !important; 
+    border-left: 1px solid @super-dark-boi !important; 
   }
   input {
-    background-color: #16151c !important; 
+    background-color: @less-dark-blue-gray !important; 
     border: none !important; 
     color: #ccc !important;
   }
   hr {
     border:none !important;
     background: none !important;
-    border-bottom: 1px solid #16151c !important;
+    border-bottom: 1px solid @less-dark-blue-gray !important;
+  }
+  .select {
+    margin-top: 0.5rem !important;
+  }
+  .spacer {
+    border-bottom: 1px solid @super-dark-boi !important;
   }
   .select select {
-    background: #16151c !important;
+    background: @less-dark-blue-gray !important;
     border: 1px solid transparent !important;
     color: #a4a7d1 !important;
   }
   .select::after {
-    border-color: #8183ad !important;
+    border-color: @light-blue-gray !important;
   }
   .message {
     border: none !important;
@@ -244,19 +295,25 @@
   }
   .message .message-body {
     color: #a3a4d6 !important;
-    background-color: #1f2029 !important;
+    background-color: @dark-blue-gray !important;
   }
   .message .message-body h2 {
     font-weight: bold;
     color: #cccdfc !important;
-    background-color: #1f2029 !important;
+    background-color: @dark-blue-gray !important;
   }
   .modal-card-body input {
-    background: #121218 !important;
+    background: @ohh-so-dark !important;
   }
   .message button {
     background: #6e6eb3 !important;
     color: #e0e2fc !important;
+  }
+  .vicp-operate a {
+    background: #6e6eb3 !important;
+    color: #e0e2fc !important;
+    padding: 0 1rem !important;
+    text-decoration: none !important;
   }
   .message button:hover {
     background: #8d8de2 !important;
@@ -271,96 +328,100 @@
     color: #e0e2fc !important;
   }
   .input-collection {
-    background-color: #1f2029 !important; 
+    background-color: @dark-blue-gray !important; 
   }
   .input-collection input {
-    background-color: #1f2029 !important; 
+    background-color: @dark-blue-gray !important; 
   }
   .chat-group {
-    background-color: #16151c !important; 
+    background-color: @less-dark-blue-gray !important; 
   }
   .settings-right {
-    background-color: #16151c !important;
+    background-color: @less-dark-blue-gray !important;
   }
   .bordered {
-    border-left: 1px solid #1c1a24 !important; 
-    background: #16151c !important;
+    border-left: 1px solid @super-dark-boi !important; 
+    background: @less-dark-blue-gray !important;
   }
   .user-active {
-    background-color: #292b38 !important;
+    background-color: @ohh-so-dark !important;
   }
   .user:hover { 
-    background-color: #292b38 !important;
+    background-color: @ohh-so-dark !important;
   }
   .tabs ul {
-    border-bottom-color: #1c1a24 !important;
+    border-bottom-color: @super-dark-boi !important;
   }
   .tabs ul li a {
-    border-bottom-color: #1c1a24 !important;
-    color: #cfd2fc !important;
+    border-bottom-color: @super-dark-boi !important;
+    color: @nearly-white !important;
   }
   .tabs li.is-active a {
-    border-bottom-color: #00d0a1 !important; 
-    color: #00d0a1 !important;
+    border-bottom-color: @minty-green !important; 
+    color: @minty-green !important;
   }
   .chat-group i:hover {
-    color: #e0e2fd !important;
+    color: @basically-white !important;
   }
   .chat-group i {
-    color: #afb1d4 !important;
+    color: @nearly-white !important;
   }
   .infobar i {
-    color: #afb1d4;
+    color: @nearly-white;
   }
   .infobar i:hover {
-    color: #e0e2fd !important;
+    color: @basically-white !important;
   }
   .emoji-mart-anchor svg {
-    fill: #afb1d4;
+    fill: @nearly-white;
   }
   .emoji-mart-anchor svg:hover {
-    fill: #e0e1fa;
+    fill: @nearly-white;
     cursor: pointer;
   }
   .controls i {
-    color: #afb1d4;
+    color: @nearly-white;
   }
   .controls i:hover {
-    color: #e0e2fd;
+    color: @basically-white;
   }
   .is-dark {
-    background: #292a36 !important;
+    background: @super-dark-boi !important;
   }
   .is-dark:hover {
-    background: #383a4b !important;
+    background: @ohh-so-dark !important;
   }
   .make-payment {
-    background: #1f2029 !important;
+    background: @dark-blue-gray !important;
     border: none !important;
   }
   .true i {
-    color: #00d0a1 !important;
+    color: @minty-green !important;
   }
   .controls .online i {
-    color: #00d0a1 !important;
+    color: @minty-green !important;
+  }
+  .head strong {
+    color: @basically-white !important;
   }
   input {
+    color: @lighter-blue-gray !important; 
     border: 1px solid transparent !important;
   }
   input:focus, input:focus{
-    border: 1px solid #00d0a1 !important;
+    border: 1px solid @minty-green !important;
   }
   select {
     border: 1px solid transparent !important;
   }
   select:focus, select:focus{
-    border: 1px solid #00d0a1 !important;
+    border: 1px solid @minty-green !important;
   }
   .chat-group input:focus, input:focus{
     border: 1px solid transparent !important;
   }
   .green {
-    color: #00d0a1;
+    color: @minty-green;
   }
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #626486 !important;
@@ -391,5 +452,11 @@
   }
   .head {
     color: #c7caf1 !important;
+  }
+  .username {
+    color: #dadcff !important;
+  }
+  .red {
+    color: #ee5253 !important;
   }
 }

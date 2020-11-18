@@ -1,99 +1,24 @@
-<template>
-  <div>
-    <h3 class="label">Profile</h3>
-    <article class="message is-dark">
-      <div class="message-body" v-if="!this.$store.state.dwellerAddress">
-        <h2>Setup Account</h2>
-        <p>Your account is not setup yet, let's get that going! It only takes a moment.</p>
-        <br>
-        <div v-if="!this.created">
-          <div class="columns">
-            <div class="column is-one-fifth">
-              <img :src="profileFile" class="preview">
-            </div>
-            <div class="column is-four-fifths">
-              <p class="label">Profile Picture (Optional)</p>
-              <input class="input" type="file" @change="onFileChange" />
-              <span v-if="profileFile && !ipfsHash">Uploading to IPFS...</span>
-              <small class="address">{{ipfsHash.path}}</small>
-            </div>
-          </div>
-          <div class="columns">
-            <div class="column is-one-fifth">
-            </div>
-            <div class="column is-four-fifths">
-              <p class="label">Username</p>
-              <input v-model="$store.state.username" class="input" placeholder="Username" />     
-            </div>
-            <p v-if="error">{{error}}</p>
-          </div>
-          <p style="text-align: right;">
-            <button 
-              class="button is-primary" 
-              :disabled="profileFile && !ipfsHash"
-              v-on:click="submitProfileContract">Create Account</button>
-          </p>
-        </div>
-        <div v-else>
-          <p>
-            <span class="heading">Creating Transaction</span>
-            <span :class="`${created ? 'light' : 'dark'}`">Please approve the transaction on your wallet or MetaMask.</span>
-          </p>
-          <br>
-          <p>
-            <span :class="`${transactionHash ? 'light' : 'dark'} heading`">Sending Transaction</span>
-            <span :class="`${transactionHash ? 'light' : 'dark'}`">Please wait while your transaction is sent...</span>
-          </p>
-          <br>
-          <p>
-            <span :class="`${confirmation ? 'light' : 'dark'} heading`">Confirming Transaction</span>
-            <span :class="`${confirmation ? 'light' : 'dark'}`">Don't Leave! we're waiting for a confirmation...</span>
-          </p>
-          <br>
-          <p>
-            <span :class="`${finished ? 'light' : 'dark'} heading`">Last Steps!</span>
-            <span :class="`${finished ? 'light' : 'dark'}`">We're just taking care of some last minute things...</span>
-          </p>
-        </div>
-      </div>
-      <div class="message-body" v-else>
-        <h2>Your Account</h2>
-        <p>Browse your account info, and make changes.</p>
-        <br>
-        <img :src="`${config.ipfs.browser}${$store.state.profilePictureHash}`" class="preview">
-        <br>
-        <br>
-        <p class="label">Display Name</p>
-        <input class="input" :value="$store.state.username" readonly />
-        <br>
-        <br>
-        <p class="label">Account Address</p>
-        <p>This is like your ID card, share this with friends so they can add you.</p>
-        <input class="input" :value="$store.state.activeAccount" readonly />
-        <hr>
-        <button class="button is-primary is-small" v-on:click="getDweller" v-if="!this.dweller">Advanced Details</button>
-        <div v-if="this.dweller">
-          <p class="label">Dweller Address</p>
-          <input class="input" :value="$store.state.dwellerAddress" readonly />
-          <p class="label">Dweller Owner Address</p>
-          <input class="input" :value="this.dweller[0]" readonly />
-          <p class="label">Name</p>
-          <input class="input" :value="this.dweller[1]" readonly />
-          <p class="label">Photo Hash</p>
-          <input class="input" :value="this.onChainPhotoHash" readonly />
-        </div>
-      </div>
-    </article>
-  </div>
-</template>
+<template src="./Profile.html"></template>
 
 <script>
+import Mousetrap from 'mousetrap';
+
 import config from '@/config/config';
 import DCUtils from '@/utils/DwellerContract';
+import PhotoCropper from 'vue-image-crop-upload';
 import Vault74Registry from '@/utils/Vault74Registry';
+import ActionSelector from './editprofile/ActionSeletor';
+import ChangePhoto from './editprofile/ChangePhoto';
+import ChangeUsername from './editprofile/ChangeUsername';
 
 export default {
   name: 'Profile',
+  components: {
+    ActionSelector,
+    ChangePhoto,
+    ChangeUsername,
+    PhotoCropper,
+  },
   data() {
     return {
       profileFile: false,
@@ -105,13 +30,69 @@ export default {
       finished: false,
       dweller: false,
       onChainPhotoHash: false,
+      actionsOpen: false,
+      showChangePhoto: false,
+      showChangeUsername: false,
+      showCropper: false,
       config,
     };
   },
   mounted() {
     Vault74Registry.getDwellerContract(this.$store.state.activeAccount);
+    Mousetrap.bind('esc', () => {
+      this.showCropper = false;
+    });
   },
   methods: {
+    dataURItoBlob(dataURI) {
+      // convert base64 to raw binary data held in a string
+      // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+      const byteString = atob(dataURI.split(',')[1]);
+      // separate out the mime component
+      const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      // write the bytes of the string to an ArrayBuffer
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i += 1) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([ab], { type: mimeString });
+    },
+    toggleCropper() {
+      this.showCropper = !this.showCropper;
+    },
+    hideActionSelector() {
+      this.actionsOpen = false;
+    },
+    hideChangePhoto() {
+      this.showChangePhoto = false;
+    },
+    hideChangeUsername() {
+      this.showChangeUsername = false;
+    },
+    cropSuccess(imgDataUrl) {
+      const blob = this.dataURItoBlob(imgDataUrl);
+      const resultFile = new File(
+        [blob],
+        'profile_pic',
+        {
+          type: blob.type,
+        },
+      );
+      this.uploadProfilePic(resultFile);
+      this.showCropper = false;
+    },
+    changePhoto() {
+      this.hideActionSelector();
+      this.hideChangeUsername();
+      this.showChangePhoto = true;
+    },
+    changeUsername() {
+      this.hideActionSelector();
+      this.hideChangePhoto();
+      this.showChangeUsername = true;
+    },
+    // Create a new profile via the Vault74Registry for this user
     async submitProfileContract() {
       if (this.$store.state.username.length < 5) {
         this.error = 'Your username needs to be at least 5 characters.';
@@ -130,8 +111,9 @@ export default {
         },
       );
     },
-    async onFileChange(e) {
-      const file = e.target.files[0];
+    // When the file upload changes, we upload the profile picture to IPFS
+    // for use in the dweller id card
+    async uploadProfilePic(file) {
       this.profileFile = URL.createObjectURL(file);
       if (!file.type.includes('image')) {
         this.error = 'Please use an image for your profile picture.';
@@ -141,6 +123,8 @@ export default {
       const ipfsResponse = await window.ipfs.add(file);
       this.ipfsHash = ipfsResponse;
     },
+    // Set the dweller id profile picture hash on contract
+    // after do any final tasks we need to do on chain
     async finishProfile(receipt) {
       if (!this.ipfsHash) {
         this.commitEverything(receipt);
@@ -150,22 +134,27 @@ export default {
       const dwellerIDContract = await Vault74Registry
         .getDwellerContract(this.$store.state.activeAccount);
 
+      this.$store.commit('setStatus', 'Transaction created, waiting for confirm');
       DCUtils.setPhoto(
         dwellerIDContract,
         this.$store.state.activeAccount,
         this.ipfsHash,
         () => {
           this.finished = true;
+          this.$store.commit('setStatus', 'Transaction confirmed');
           this.commitEverything(dwellerIDContract);
         },
       );
     },
+    // Note the changes to the profile locally in the store
     commitEverything(dwellerIDContract) {
       this.$store.commit('profilePictureHash', this.ipfsHash.path);
       this.$store.commit('dwellerAddress', dwellerIDContract);
     },
+    // Get a dweler from the registry
     async getDweller() {
       // TODO: get the deweller address from the registry instead.
+      this.$store.commit('setStatus', 'Fetching dweller from chain');
       DCUtils.getDweller(
         this.$store.state.dwellerAddress,
         (dweller, onChainPhotoHash) => {
@@ -179,24 +168,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .is-one-fifth {
-    text-align: center;
-  }
-  .light {
-    opacity: 1;
-  }
-  .dark {
-    opacity: 0.3;
-  }
-  .preview {
-    width: 75px;
-    height: 75px;
-    border-radius: 37.5px;
-    background:aquamarine;
-    margin-top: 0.5rem;
-  }
-  .address {
-    font-size: 9pt;
-  }
-</style>
+<style scoped lang="less" src="./Profile.less"></style>

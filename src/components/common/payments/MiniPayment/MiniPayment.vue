@@ -11,7 +11,7 @@ export default {
   },
   data() {
     return {
-      amount: 0,
+      amount: null,
     };
   },
 };

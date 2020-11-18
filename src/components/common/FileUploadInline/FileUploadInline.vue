@@ -5,6 +5,8 @@ import config from '@/config/config';
 import IPFSUtils from '@/utils/IPFSUtils';
 import FileC from '@/classes/FileC';
 
+const uploadAudio = new Audio('https://ipfs.io/ipfs/QmSHtz5kSvX8JNZKMfkm6PjqScxoC864bmGd2g3ycwRqK1');
+
 export default {
   name: 'FileUploadInline',
   props: [
@@ -21,6 +23,7 @@ export default {
     };
   },
   methods: {
+    // Clear all data and get ready for another file upload
     reset() {
       this.link = false;
       this.ipfsHash = false;
@@ -28,20 +31,25 @@ export default {
       this.progress = 0;
       this.fileClass = false;
     },
+    // Returns the url to the file on the local machine for preview
     getURL() {
       return URL.createObjectURL(this.selectedFile);
     },
+    // Sends the file out for messaging or handling in parent
     sendFileMessage() {
       if (this.ipfsHash) {
         this.relayResult(this.fileClass.getObject());
         this.$store.commit('addRecentFile');
       }
     },
+    // Set the file from the input ready for processing
     setFile(event) {
       [this.selectedFile] = event.target.files;
       this.sendToIpfs(this.selectedFile);
     },
+    // Uploads the file to the connected IPFS node
     async sendToIpfs(file) {
+      this.$store.commit('setStatus', 'Uploading file to IPFS');
       const ipfsResponse = await window.ipfs.add(
         file,
         {
@@ -55,6 +63,7 @@ export default {
           },
         },
       );
+      this.$store.commit('setStatus', 'File uploaded to IPFS');
       this.ipfsHash = ipfsResponse.path;
       this.fileClass = new FileC(
         `${config.ipfs.browser}${this.ipfsHash}`,
@@ -64,6 +73,7 @@ export default {
 
       IPFSUtils.appendFileCache(this.fileClass.getObject());
       this.uploadDone();
+      uploadAudio.play();
       this.$nextTick(() => {
         this.$refs.hidden.focus();
       });

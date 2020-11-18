@@ -1,0 +1,108 @@
+<div>
+  <h3 class="label">Profile</h3>
+  <article class="message is-dark" id="profile">
+    <div class="message-body" v-if="!this.$store.state.dwellerAddress">
+      <h2>Setup Account</h2>
+      <p>Your account is not setup yet, let's get that going! It only takes a moment.</p>
+      <br>
+      <div v-if="!this.created">
+        <div class="columns">
+          <div class="column is-one-fifth">
+            <img :src="profileFile" class="preview">
+          </div>
+          <div class="column is-four-fifths">
+            <p class="label">Profile Picture (Optional)</p>
+            <PhotoCropper 
+              field="img"
+              langType="en"
+              @crop-success="cropSuccess"
+              v-model="showCropper"
+              :value="showCropper"/>
+            <button class="button is-primary is-small" v-on:click="toggleCropper">Upload Profile Picture</button>
+            <!--<input class="input" type="file" @change="onFileChange" />-->
+            <span v-if="profileFile && !ipfsHash">Uploading to IPFS...</span>
+            <small class="address">{{ipfsHash.path}}</small>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-one-fifth">
+          </div>
+          <div class="column is-four-fifths">
+            <p class="label">Username</p>
+            <input v-model="$store.state.username" class="input" placeholder="Username" />     
+          </div>
+          <p v-if="error">{{error}}</p>
+        </div>
+        <p style="text-align: right;">
+          <button 
+            class="button is-primary" 
+            :disabled="profileFile && !ipfsHash"
+            v-on:click="submitProfileContract">Create Account</button>
+        </p>
+      </div>
+      <div v-else>
+        <p>
+          <span class="heading">Creating Transaction</span>
+          <span :class="`${created ? 'light' : 'dark'}`">Please approve the transaction on your wallet or MetaMask.</span>
+        </p>
+        <br>
+        <p>
+          <span :class="`${transactionHash ? 'light' : 'dark'} heading`">Sending Transaction</span>
+          <span :class="`${transactionHash ? 'light' : 'dark'}`">Please wait while your transaction is sent...</span>
+        </p>
+        <br>
+        <p>
+          <span :class="`${confirmation ? 'light' : 'dark'} heading`">Confirming Transaction</span>
+          <span :class="`${confirmation ? 'light' : 'dark'}`">Don't Leave! we're waiting for a confirmation...</span>
+        </p>
+        <br>
+        <p>
+          <span :class="`${finished ? 'light' : 'dark'} heading`">Last Steps!</span>
+          <span :class="`${finished ? 'light' : 'dark'}`">We're just taking care of some last minute things...</span>
+        </p>
+      </div>
+    </div>
+    <div class="message-body" v-else>
+      <div class="profileToggler" v-on:click="actionsOpen = true">
+        <i class="fas fa-ellipsis-v"></i>
+      </div>
+      <ActionSelector
+        v-if="actionsOpen"
+        :close="hideActionSelector"
+        :changePhoto="changePhoto"
+        :changeUsername="changeUsername"/>
+      <div class="editing" v-if="showChangePhoto || showChangeUsername">
+        <h2>Edit Account</h2>
+        <p>Browse your account info, and make changes.</p>
+        <ChangePhoto v-if="showChangePhoto" :close="hideChangePhoto" :refresh="getDweller" />
+        <ChangeUsername v-if="showChangeUsername" :close="hideChangeUsername" :refresh="getDweller" />
+        <hr class="spacer">
+      </div>
+      <h2>Your Account</h2>
+      <p>Browse your account info, and make changes.</p>
+      <br>
+      <img :src="`${config.ipfs.browser}${$store.state.profilePictureHash}`" class="preview">
+      <div class="inputs">
+        <p class="label">Display Name</p>
+        <input class="input" :value="$store.state.username" readonly />
+      </div>
+      <div style="clear:both;"></div>
+      <br>
+      <p class="label">Account Address</p>
+      <p>This is like your ID card, share this with friends so they can add you.</p>
+      <input class="input" :value="$store.state.activeAccount" readonly />
+      <hr class="spacer">
+      <button class="button is-primary is-small" v-on:click="getDweller" v-if="!this.dweller">Advanced Details</button>
+      <div v-if="this.dweller">
+        <p class="label">Dweller Address</p>
+        <input class="input" :value="$store.state.dwellerAddress" readonly />
+        <p class="label">Dweller Owner Address</p>
+        <input class="input" :value="this.dweller[0]" readonly />
+        <p class="label">Name</p>
+        <input class="input" :value="this.dweller[1]" readonly />
+        <p class="label">Photo Hash</p>
+        <input class="input" :value="this.onChainPhotoHash" readonly />
+      </div>
+    </div>
+  </article>
+</div>

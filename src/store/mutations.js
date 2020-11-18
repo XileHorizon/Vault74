@@ -70,4 +70,19 @@ export default {
     state.friends = friends;
     // TODO make sure we don't already have this friend added.
   },
+  // Set the audio device
+  setAudioDevice(state, device) {
+    // eslint-disable-next-line no-plusplus,no-param-reassign
+    state.audioDevice = device;
+  },
+  // Set the audio device
+  setVideoDevice(state, device) {
+    // eslint-disable-next-line no-plusplus,no-param-reassign
+    state.videoDevice = device;
+  },
+  // Update the application status
+  setStatus(state, status) {
+    // eslint-disable-next-line no-plusplus,no-param-reassign
+    state.status = status;
+  },
 };

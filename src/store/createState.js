@@ -20,6 +20,11 @@ const defaultState = {
   mainRoute: 'main',
   // Friends
   friends: [],
+  // Audio Video
+  audioDevice: 'Default Microphone',
+  videoDevice: 'Default Webcam',
+  // Internal
+  status: 'Alive',
 };
 
 const createState = customState => Object.assign({}, defaultState, customState);

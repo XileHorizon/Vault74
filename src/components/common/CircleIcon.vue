@@ -30,5 +30,8 @@ export default {
         margin: 0 auto;
         color: #fff;
     }
+    .circle-icon img {
+        object-fit: cover;
+    }
 
 </style>

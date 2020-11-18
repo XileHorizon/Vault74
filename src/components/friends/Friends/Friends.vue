@@ -22,17 +22,30 @@ export default {
     };
   },
   methods: {
+    // Cleanup after adding a friend
     reset() {
       this.error = false;
       this.friendAddress = '';
       this.friend = false;
     },
+    // Close the component and reroute to main
     close() {
       this.$store.commit('changeRoute', 'main');
     },
+    // Do some checks to make sure the friend is valid
+    // and then display them if they are found so they
+    // can be confirmed and added
     async addFriend() {
       if (!window.web3.utils.isAddress(this.friendAddress)) {
         this.error = 'Whoops, that\'s not a valid address';
+        return;
+      }
+      if (this.friendAddress === this.$store.state.activeAccount) {
+        this.error = 'You can\'t add yourself you silly goose.';
+        return;
+      }
+      if (this.$store.state.friends.filter(f => f.address === this.friendAddress).length === 1) {
+        this.error = 'You\'re already friends with this dweller.';
         return;
       }
       const friend = await this.dwellerCachingHelper.getDweller(this.friendAddress);
@@ -43,6 +56,7 @@ export default {
       this.error = false;
       this.friend = friend;
     },
+    // Confirms and adds a found friend
     commitFriend() {
       this.$store.commit('addFriend', this.friend);
       this.success = `${this.friend.name} has been added to your friendslist.`;

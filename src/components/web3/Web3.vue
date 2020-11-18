@@ -26,6 +26,7 @@ export default {
     };
   },
   methods: {
+    // Tasks we need to run for Web3 when the application starts
     async startupActions() {
       const [account] = await window.web3.eth.getAccounts();
       const dwellerContract = await Vault74Registry.getDwellerContract(account);
@@ -37,6 +38,7 @@ export default {
         this.$store.commit('username', window.web3.utils.hexToString(dwellerName));
       }
     },
+    // Repeating polling tasks for Web3 stats gathering
     web3Polling() {
       Promise.all([
         window.web3.eth.getAccounts(),
@@ -57,6 +59,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.commit('setStatus', 'Connecting to Web3');
     const ethEnabled = () => {
       if (window.ethereum) {
         window.web3 = new Web3(window.ethereum);
@@ -64,6 +67,7 @@ export default {
         this.connected = true;
         this.startupActions();
         this.web3Polling();
+        this.$store.commit('setStatus', 'Web3 is connected');
         setInterval(() => {
           this.web3Polling();
         }, 4000);

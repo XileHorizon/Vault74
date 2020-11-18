@@ -32,11 +32,12 @@
       </div>
     </div>
   </article>
-  <h2 class="label">Find Someone</h2>
+  <h2 class="label">Get Chatting</h2>
   <article class="message is-dark">
     <div class="message-body">
       <h2>Your Friends</h2>
-      <p>Start a chat with your friends below, be kind, or don't. We don't judge.</p>
+      <p v-if="$store.state.friends.length > 0">Start a chat with your friends below, be kind, or don't. We don't judge.</p>
+      <p v-else>Oops, you don't have any friends yet. We'll be your friend, but you can also add more above.</p>
       <Friend v-for="fr in $store.state.friends" :key="fr.address" :friend="fr" text="Chat" />
       <div style="clear:both"></div>
     </div>

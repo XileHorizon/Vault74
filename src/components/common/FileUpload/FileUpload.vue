@@ -5,6 +5,8 @@ import config from '@/config/config';
 import IPFSUtils from '@/utils/IPFSUtils';
 import FileC from '@/classes/FileC';
 
+const uploadAudio = new Audio('https://ipfs.io/ipfs/QmSHtz5kSvX8JNZKMfkm6PjqScxoC864bmGd2g3ycwRqK1');
+
 export default {
   name: 'FileUpload',
   props: [
@@ -27,9 +29,11 @@ export default {
     if (this.file) this.sendToIpfs(this.selectedFile);
   },
   methods: {
+    // Returns a local url for the file preview
     getURL() {
       return URL.createObjectURL(this.selectedFile);
     },
+    // Determines which type of file we're sending out in the message
     determineFileType(type) {
       let ft = 'file';
       if (type.includes('image')) ft = 'image';
@@ -37,6 +41,7 @@ export default {
       if (type.includes('video')) ft = 'video';
       return ft;
     },
+    // Sends the file info out ready for messaging to the parent component
     sendFileMessage() {
       if (this.ipfsHash) {
         this.fileClass = new FileC(
@@ -51,15 +56,19 @@ export default {
         );
         // TODO: move this to it's own localStorage object or indexedDB
         IPFSUtils.appendFileCache(this.fileClass.getObject());
+        uploadAudio.play();
         this.$store.commit('addRecentFile');
         this.close();
       }
     },
+    // Sets the active file ready for processing
     setFile(event) {
       [this.selectedFile] = event.target.files;
       this.sendToIpfs(this.selectedFile);
     },
+    // Uploads the file to IPFS
     async sendToIpfs(file) {
+      this.$store.commit('setStatus', 'Uploading file to IPFS');
       const ipfsResponse = await window.ipfs.add(
         file,
         {
@@ -73,6 +82,7 @@ export default {
           },
         },
       );
+      this.$store.commit('setStatus', 'File uploaded to IPFS');
       this.ipfsHash = ipfsResponse.path;
       this.$nextTick(() => {
         this.$refs.hidden.focus();
