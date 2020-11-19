@@ -16,8 +16,36 @@
 </template>
 
 <script>
+import config from '@/config/config';
+import Peer2Peer from '@/classes/Peer2Peer';
+
 export default {
   name: 'app',
+  mounted() {
+    window.Vault74 = {};
+    // If we have an account, go ahead and mount to the account
+    // else wait a bit and try again.
+    const checkAccount = () => {
+      if (this.$store.state.activeAccount) {
+        // Attach to peers
+        window.Vault74.Peer2Peer = window.Vault74.Peer2Peer || new Peer2Peer(this.$store.state.activeAccount);
+        window.Vault74.Peer2Peer.createChannels(this.$store.state.friends);
+        return;
+      }
+      setTimeout(checkAccount, config.peer.timeout);
+    };
+    checkAccount();
+    // Connect when a new friend is added
+    // TODO: In the future we'll only want to ping friends
+    // we have active chats with.
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'addFriend') {
+        // Connect to new peer.
+        console.log('add friend', state);
+        window.Vault74.Peer2Peer.createChannels(state.friends);
+      }
+    });
+  },
 };
 </script>
 
