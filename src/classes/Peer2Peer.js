@@ -6,15 +6,28 @@ const messageFormatter = (type, data) => JSON.stringify({ type, data });
 
 export default class Peer2Peer {
   constructor(peerId, watcher = () => {}) {
+    const settings = {
+      host: config.peer.network[config.env].host,
+      port: config.peer.network[config.env].port,
+      path: config.peer.network[config.env].path,
+      key: config.peer.network[config.env].key,
+      secure: config.peer.network[config.env].secure,
+      debug: config.debug ? 0 : 2,
+      config: {
+        iceServers: config.peer.network[config.env].iceServers,
+      },
+    };
+
     this.peerId = peerId;
     this.channels = {};
     this.ICEEstablished = false;
     this.watcher = watcher;
-    this.peer = new Peer(this.peerId);
+    this.peer = new Peer(this.peerId, settings);
     // We've connected to the ICE service
     this.peer.on('open', () => {
       this.ICEEstablished = true;
-      if (config.debug) console.log('Connected to ICE service');
+      this.watcher(peerId, 'alive', true);
+      window.Vault74.debug('Connected to ICE service');
       // Connect to peers and retry connections every 3 seconds.
       this.connectToPeers();
     });
@@ -29,13 +42,25 @@ export default class Peer2Peer {
     });
   }
 
+  /** @function
+   * @name peerTracker
+   * Checks and provides the status of a peer
+   * @argument peerId the id of the peer to update
+   */
   peerTracker(peerId) {
     this.ping(peerId);
     setInterval(() => {
+      window.Vault74.debug('Registered Peers');
+      if (config.debug) console.table(this.channels);
       this.ping(peerId);
     }, config.peer.ping_interval);
   }
 
+  /** @function
+   * @name createChannels
+   * Create a peer connection for each peer provided
+   * @argument peers array of peer ids to create connections for
+   */
   createChannels(peers) {
     peers.forEach((peer) => {
       if (!this.channels[`${this.peerId}::${peer.address}`]) {
@@ -45,6 +70,10 @@ export default class Peer2Peer {
     });
   }
 
+  /** @function
+   * @name connectToPeers
+   * Establish a connection to all registered PeerConnections
+   */
   connectToPeers() {
     // Establish connection to all new peers
     Object.keys(this.channels).forEach((ch) => {
@@ -55,21 +84,26 @@ export default class Peer2Peer {
     });
   }
 
-  createDataChannel(client) {
-    this.channels[`${this.peerId}::${client}`] = new PeerConnection(
+  /** @function
+   * @name createDataChannel
+   * Create a new data channel for a given peerid
+   * @argument peerId peer ID to create the channel for
+   */
+  createDataChannel(peerId) {
+    this.channels[`${this.peerId}::${peerId}`] = new PeerConnection(
       this.peer,
-      client,
+      peerId,
       (type, data) => {
-        this.internalWatcher(client, type, data);
+        this.internalWatcher(peerId, type, data);
       },
     );
-    return this.channels[`${this.peerId}::${client}`];
+    return this.channels[`${this.peerId}::${peerId}`];
   }
 
   internalWatcher(peer, type, data) {
     // Hoist watcher methods
-    this.watcher(type, data);
-    if (config.debug) console.log(`${peer}:`, type, data);
+    this.watcher(peer, type, data);
+    window.Vault74.debug(`${peer} -> `, type, data);
   }
 
   ping(peerId) {

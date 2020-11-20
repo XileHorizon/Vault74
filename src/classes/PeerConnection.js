@@ -17,6 +17,8 @@ export default class PeerConnection {
     // Remote connection proxy
     this.gateway = false;
     this.lastHeartbeat = Date.now();
+    this.lastPulse = 0;
+    this.latency = 0;
   }
 
   connect() {
@@ -48,7 +50,8 @@ export default class PeerConnection {
 
   checkHeartbeat() {
     if (Date.now() - this.lastHeartbeat > config.peer.heartbeat_timeout) {
-      if (config.debug) console.log('Not seeing a heartbeat, lets reconnect.');
+      window.Vault74.warn(`Not seeing a heartbeat from ${this.remoteId}, attempting to reconnect.`);
+      this.watcher('dead', this.lastHeartbeat);
       this.reconnect();
     }
     setTimeout(() => {
@@ -67,7 +70,7 @@ export default class PeerConnection {
   }
 
   send(data) {
-    this.gateway.send(data);
+    if (this.gateway) this.gateway.send(data);
   }
 
   /* eslint-disable */
@@ -75,10 +78,13 @@ export default class PeerConnection {
     const message = messageParser(data);
     switch (message.type) {
       case 'ping':
-        this.send(messageFormatter('pong', Date.now()));
+        this.lastPulse = Date.now();
+        this.send(messageFormatter('pong', this.lastPulse));
         break;
       case 'pong':
         this.lastHeartbeat = Date.now();
+        this.latency = this.lastHeartbeat - this.lastPulse;
+        this.watcher('heartbeat', this.latency);
         break;
       default:
         this.watcher('data', data);

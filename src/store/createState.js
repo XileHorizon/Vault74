@@ -20,11 +20,13 @@ const defaultState = {
   mainRoute: 'main',
   // Friends
   friends: [],
+  peerHealth: {},
   // Audio Video
   audioDevice: 'Default Microphone',
   videoDevice: 'Default Webcam',
   // Internal
   status: 'Alive',
+  p2pOnline: false,
 };
 
 const createState = customState => Object.assign({}, defaultState, customState);

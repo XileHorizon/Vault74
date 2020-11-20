@@ -22,13 +22,32 @@ import Peer2Peer from '@/classes/Peer2Peer';
 export default {
   name: 'app',
   mounted() {
-    window.Vault74 = {};
+    this.$store.commit('ICEConnected', false);
     // If we have an account, go ahead and mount to the account
     // else wait a bit and try again.
     const checkAccount = () => {
       if (this.$store.state.activeAccount) {
+        window.Vault74.warn('No account found yet, rechecking soon.');
         // Attach to peers
-        window.Vault74.Peer2Peer = window.Vault74.Peer2Peer || new Peer2Peer(this.$store.state.activeAccount);
+        window.Vault74.Peer2Peer = window.Vault74.Peer2Peer ||
+          new Peer2Peer(
+            this.$store.state.activeAccount,
+            (peer, type, data) => {
+              switch (type) {
+                case 'heartbeat':
+                  this.$store.commit('peerHealth', [peer, 'alive']);
+                  break;
+                case 'dead':
+                  this.$store.commit('peerHealth', [peer, 'dead']);
+                  break;
+                case 'alive':
+                  this.$store.commit('ICEConnected', data);
+                  break;
+                default:
+                  break;
+              }
+            },
+          );
         window.Vault74.Peer2Peer.createChannels(this.$store.state.friends);
         return;
       }
@@ -41,7 +60,6 @@ export default {
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'addFriend') {
         // Connect to new peer.
-        console.log('add friend', state);
         window.Vault74.Peer2Peer.createChannels(state.friends);
       }
     });

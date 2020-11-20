@@ -66,6 +66,8 @@ export default {
     if (friends.filter(f => f.address === friend.address).length === 0) {
       friends.push(friend);
     }
+    // eslint-disable-next-line
+    friends.sort((a, b) => a.address > b.address ? 1 : -1);
     // eslint-disable-next-line no-plusplus,no-param-reassign
     state.friends = friends;
     // TODO make sure we don't already have this friend added.
@@ -84,5 +86,22 @@ export default {
   setStatus(state, status) {
     // eslint-disable-next-line no-plusplus,no-param-reassign
     state.status = status;
+  },
+  // Update a peers status
+  peerHealth(state, data) {
+    const [id, status] = data;
+    const friend = state.friends.filter(f => f.address === id)[0];
+    const withoutFriend = state.friends.filter(f => f.address !== id);
+    friend.status = status;
+    withoutFriend.push(friend);
+    // eslint-disable-next-line
+    withoutFriend.sort((a, b) => a.address > b.address ? 1 : -1);
+    // eslint-disable-next-line no-plusplus,no-param-reassign
+    state.friends = withoutFriend;
+  },
+  // Update p2p handshake server status
+  ICEConnected(state, status) {
+    // eslint-disable-next-line no-plusplus,no-param-reassign
+    state.p2pOnline = status;
   },
 };

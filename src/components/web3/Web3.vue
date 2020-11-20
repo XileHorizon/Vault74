@@ -55,6 +55,10 @@ export default {
         window.web3.eth.getBalance(this.$store.state.activeAccount).then((bal) => {
           this.$store.commit('balance', window.web3.utils.fromWei(bal));
         });
+        window.Vault74.debug(
+          'Fetched Web3 Stats ->',
+          this.$store.state.web3Stats,
+        );
       });
     },
   },
@@ -73,6 +77,7 @@ export default {
         }, 4000);
         return true;
       }
+      window.Vault74.warn('No Web3 provider found.');
       return false;
     };
     ethEnabled();

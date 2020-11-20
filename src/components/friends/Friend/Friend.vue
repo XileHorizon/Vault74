@@ -1,6 +1,9 @@
 <template>
   <div class="friend">
     <CircleIcon :image="friend.photo" />
+    <span v-if="friend.status">
+      <p :class="`online ${(friend.status == 'alive') ? 'true' : ''}`"><i class="fa fa-circle"></i></p>
+    </span>
     <div class="name-address">
       <p class="username">{{friend.name}}</p>
       <p class="address">{{friend.address}}</p>

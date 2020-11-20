@@ -16,7 +16,7 @@
     </div>
     <div class="footer">
       <p>
-        <i class="fas fa-key"></i> Vault74
+        <i :class="`fas fa-heartbeat ${($store.state.p2pOnline) ? 'green' : 'red'}`"></i> P2P
         <span class="spacer"> </span> 
         <i class="fas fa-info-circle"></i>
         {{$store.state.status}}
@@ -165,5 +165,11 @@ export default {
   }
   .fa-moon {
     cursor: pointer;
+  }
+  .red {
+    color: #e74c3c;
+  }
+  .green {
+    color: #00d0a1;
   }
 </style>

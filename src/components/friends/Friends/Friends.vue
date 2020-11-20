@@ -22,6 +22,9 @@ export default {
     };
   },
   methods: {
+    chatFriend(friend) {
+      console.log('chat friend', friend);
+    },
     // Cleanup after adding a friend
     reset() {
       this.error = false;

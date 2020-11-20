@@ -10,6 +10,14 @@
 @minty-green: #00d0a1;
 @is-this-black: #121218;
 .theme {
+  .online {
+    -webkit-text-fill-color: #666 !important;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: @super-dark-boi;
+  }
+  .true {
+    -webkit-text-fill-color: #00d0a1 !important;
+  }
   #wrapper {
     background: @dark-blue-gray;
     color: @nearly-white !important;
@@ -43,6 +51,9 @@
   }
   .friend {
     background: @ohh-so-dark !important;
+  }
+  .friend .online {
+    -webkit-text-stroke-color: @ohh-so-dark;
   }
   #friends {
     background: @less-dark-blue-gray !important;
