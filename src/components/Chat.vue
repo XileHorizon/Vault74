@@ -1,42 +1,45 @@
 <template>
   <div id="wrapper">
     <Web3 />
-    <div :class="`columns wrapper ${settingsOpen ? 'settings-open' : ''}`">
-      <div class="column is-one-third" style="max-width: 320px;">
-        <Sidebar :toggleSettings="toggleSettings"/>
+    <Loading v-if="!$store.state.p2pOnline || $store.state.dwellerAddress === '0x0000000000000000000000000000000000000000' || !$store.state.dwellerAddress" />
+    <div v-else>
+      <div :class="`columns wrapper ${$store.state.sidebarOpen ? '' : 'wrapper-closed'} ${settingsOpen ? 'settings-open' : ''}`">
+        <div class="column is-one-third" style="max-width: 320px;" v-if="$store.state.sidebarOpen">
+          <Sidebar :toggleSettings="toggleSettings" />
+        </div>
+        <div class="column">
+          <Main :class="$store.state.mainRoute == 'main' ? 'show' : 'hidden'" />
+          <Files v-if="$store.state.mainRoute == 'files'"/>
+          <Friends v-if="$store.state.mainRoute == 'friends'"/>
+        </div>
       </div>
-      <div class="column">
-        <Main :class="$store.state.mainRoute == 'main' ? 'show' : 'hidden'" />
-        <Files v-if="$store.state.mainRoute == 'files'"/>
-        <Friends v-if="$store.state.mainRoute == 'friends'"/>
+      <div :class="`settings ${settingsOpen ? 'settings-open-container' : ''}`">
+        <Settings :toggleSettings="toggleSettings" />
       </div>
-    </div>
-    <div :class="`settings ${settingsOpen ? 'settings-open-container' : ''}`">
-      <Settings :toggleSettings="toggleSettings" />
-    </div>
-    <div class="footer">
-      <p>
-        <i :class="`fas fa-heartbeat ${($store.state.p2pOnline) ? 'green' : 'red'}`"></i> P2P
-        <span class="spacer"> </span> 
-        <i class="fas fa-info-circle"></i>
-        {{$store.state.status}}
-        <span class="spacer"></span>
-        <span v-if="$store.state.accounts">
-          <i class="fab fa-ethereum"></i>
-          <b>Network:</b> {{$store.state.web3Stats.nettype.toUpperCase()}}
+      <div class="footer">
+        <p>
+          <i :class="`fas fa-heartbeat ${($store.state.p2pOnline) ? 'green' : 'red'}`"></i> P2P
           <span class="spacer"> </span> 
-          <i class="fas fa-hashtag"></i>
-          <b>Block Number:</b> {{$store.state.web3Stats.blockNumber}} 
+          <i class="fas fa-info-circle"></i>
+          {{$store.state.status}}
+          <span class="spacer"></span>
+          <span v-if="$store.state.accounts">
+            <i class="fab fa-ethereum"></i>
+            <b>Network:</b> {{$store.state.web3Stats.nettype.toUpperCase()}}
+            <span class="spacer"> </span> 
+            <i class="fas fa-hashtag"></i>
+            <b>Block Number:</b> {{$store.state.web3Stats.blockNumber}} 
+            <span class="spacer"> </span> 
+            <i class="fas fa-id-badge"></i>
+            <b>Account:</b> {{$store.state.accounts[0]}}
+          </span>
+          <span v-else>
+            Connecting...
+          </span>
           <span class="spacer"> </span> 
-          <i class="fas fa-id-badge"></i>
-          <b>Account:</b> {{$store.state.accounts[0]}}
-        </span>
-        <span v-else>
-          Connecting...
-        </span>
-        <span class="spacer"> </span> 
-        <i :class="`fas fa-moon ${darkmode ? 'green' : ''}`" v-on:click="toggleDarkMode"></i>
-      </p>
+          <i :class="`fas fa-moon ${darkmode ? 'green' : ''}`" v-on:click="toggleDarkMode"></i>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -49,6 +52,8 @@ import Files from '@/components/files/Files/Files';
 import Friends from '@/components/friends/Friends/Friends';
 import Settings from '@/components/main/settings/Settings';
 import Web3 from '@/components/Web3/Web3';
+import Loading from '@/components/common/Loading';
+
 import IPFS from 'ipfs-core';
 
 export default {
@@ -60,6 +65,7 @@ export default {
     Friends,
     Settings,
     Web3,
+    Loading,
   },
   data() {
     return {
@@ -117,7 +123,6 @@ export default {
     left: 100vw;
     bottom: 0;
     background: #e7ebee;
-    transition: left 0.1s linear, right 0.1s linear;
   }
   .settings-open-container {
     right: 0;
@@ -135,7 +140,9 @@ export default {
     left: 3.8rem;
     margin: 0;
     border-left: 1px solid #e7ebee;
-    transition: left 0.1s linear, right 0.1s linear;
+  }
+  .wrapper-closed {
+    left: 0;
   }
   .settings-open {
     left: -100vw;

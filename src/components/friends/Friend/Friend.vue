@@ -5,15 +5,16 @@
       <p :class="`online ${(friend.status == 'alive') ? 'true' : ''}`"><i class="fa fa-circle"></i></p>
     </span>
     <div class="name-address">
-      <p class="username">{{friend.name}}</p>
+      <p class="username">{{friend.name}} <Badge :address="friend.address" /></p>
       <p class="address">{{friend.address}}</p>
     </div>
-    <button class="button is-primary add-friend" v-on:click="action">{{text}}</button>
+    <button class="button is-primary add-friend" v-on:click="action(friend.address)">{{text}}</button>
   </div>
 </template>
 
 <script>
 import CircleIcon from '@/components/common/CircleIcon';
+import Badge from '@/components/common/Badge';
 
 export default {
   name: 'Friend',
@@ -24,6 +25,7 @@ export default {
   ],
   components: {
     CircleIcon,
+    Badge,
   },
 };
 </script>

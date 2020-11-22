@@ -1,14 +1,14 @@
 <template>
   <div id="payment">
-    <a :href="message.data.url" :download="message.data.filename" target="_blank">
+    <a :href="message.payload.data.url" :download="message.payload.data.filename" target="_blank">
       <article class="media">
         <div class="media-content">
           <div class="content">
             <p>
               <i class="fas fa-file-download logo"></i>
-              <strong class="filename">{{message.data.filename}}</strong>
+              <strong class="filename">{{message.payload.data.filename}}</strong>
               <br>
-              <span class="label">{{bytesToSize(message.data.size)}}</span>
+              <span class="label">{{bytesToSize(message.payload.data.size)}}</span>
             </p>
           </div>
         </div>

@@ -1,31 +1,43 @@
 <template src="./User.html"></template>
 
 <script>
+import config from '@/config/config';
 import CircleIcon from '@/components/common/CircleIcon';
+import DwellerCachingHelper from '@/utils/DwellerCachingHelper';
+import Badge from '@/components/common/Badge';
 
 export default {
   name: 'User',
   components: {
     CircleIcon,
+    Badge,
   },
   data() {
     return {
       hovered: false,
+      user: false,
+      name: '',
+      icon: '',
     };
   },
   props: [
-    'name',
-    'online',
-    'icon',
-    'active',
-    'status',
+    'friend',
     'unread',
+    'active',
+    'clientId',
   ],
   methods: {
     // Navigate to the main route
-    navigateToUser() {
+    navigateToUser(address) {
       this.$store.commit('changeRoute', 'main');
+      this.$store.commit('activeChat', address);
     },
+  },
+  async mounted() {
+    const dwellerCachingHelper = new DwellerCachingHelper(config.registryAddress);
+    const dweller = await dwellerCachingHelper.getDweller(this.clientId);
+    this.name = dweller.name;
+    this.icon = dweller.photo;
   },
 };
 </script>

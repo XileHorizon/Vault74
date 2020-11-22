@@ -9,6 +9,9 @@ const muteAudio = new Audio('https://ipfs.io/ipfs/QmVk362FGmwfsXBj5zMv4x1Hp7Mp9R
 // eslint-disable-next-line
 const unmuteAudio = new Audio('https://ipfs.io/ipfs/QmWxv18LqpcaMhXVd1BLm9z9k1MfWDNexJ22dC6vLkdyro');
 
+const deafenAudio = new Audio('https://ipfs.io/ipfs/Qmf4QinBSDk9AgvqsiaaZ2ZmhCfTwcSRpAgSCTxLGyZkyg');
+const unDeafenAudio = new Audio('https://ipfs.io/ipfs/QmSHtz5kSvX8JNZKMfkm6PjqScxoC864bmGd2g3ycwRqK1');
+
 export default {
   name: 'Controls',
   props: ['toggleSettings'],
@@ -32,8 +35,8 @@ export default {
     // Non functional placeholder deafen function
     toggleDeafen() {
       this.deafened = !this.deafened;
-      if (this.deafened) muteAudio.play();
-      if (!this.deafened) unmuteAudio.play();
+      if (this.deafened) deafenAudio.play();
+      if (!this.deafened) unDeafenAudio.play();
     },
   },
   mounted() {

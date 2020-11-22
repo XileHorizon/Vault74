@@ -36,6 +36,8 @@ export default {
         this.$store.commit('dwellerAddress', dwellerContract);
         this.$store.commit('profilePictureHash', dwellerPhoto);
         this.$store.commit('username', window.web3.utils.hexToString(dwellerName));
+      } else {
+        this.$store.commit('dwellerAddress', '0x0000000000000000000000000000000000000000');
       }
     },
     // Repeating polling tasks for Web3 stats gathering

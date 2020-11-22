@@ -14,6 +14,7 @@ window.Vault74 = {
   /* eslint-disable */
   debug: (...args) => {
     if (window.Vault74.debugEnabled) {
+      // eslint-disable-next-line no-console
       console.log(
         `%c [Vault74 Debug]: ${args[0]}`,
         'color: #9b59b6; font-weight: bold; font-family: \'Major Mono Display\', monospace;',
@@ -23,6 +24,7 @@ window.Vault74 = {
   },
   warn: (...args) => {
     if (window.Vault74.debugEnabled) {
+      // eslint-disable-next-line no-console
       console.log(
         `%c [Vault74 Warn]: ${args[0]}`,
         'color: #e67e22; font-weight: bold; font-family: \'Major Mono Display\', monospace;',
@@ -31,6 +33,7 @@ window.Vault74 = {
     }
   },
   error: (...args) => {
+    // eslint-disable-next-line no-console
     console.log(
       `%c [Vault74 Error]: ${args[0]}`,
       'color: #e74c3c; font-weight: bold; font-family: \'Major Mono Display\', monospace;',
@@ -38,6 +41,9 @@ window.Vault74 = {
     );
   },
   /* eslint-enable */
+};
+window.onerror = function error(e) {
+  window.Vault74.error(e);
 };
 
 /* eslint-disable */

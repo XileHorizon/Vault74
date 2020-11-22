@@ -86,6 +86,9 @@ export default class PeerConnection {
         this.latency = this.lastHeartbeat - this.lastPulse;
         this.watcher('heartbeat', this.latency);
         break;
+      case 'message':
+        this.watcher('message', data);
+        break;
       default:
         this.watcher('data', data);
         break;

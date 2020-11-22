@@ -1,6 +1,16 @@
 <section class="bordered main-section">
-  <InfoBar :toggleMedia="toggleMedia" />
-  <Convorsation :messages="messages" :mediaOpen="mediaOpen" :voice="voice"/>
-  <VoiceVideo :mediaOpen="mediaOpen" :voice="voice" :disconnect="toggleMedia" :switchTo="switchTo"/>
-  <Chatbar :handleNewMessage="sendMessage" />
+  <div v-if="$store.state.activeChat">
+    <InfoBar :toggleMedia="toggleMedia" />
+    <Convorsation :messages="messages" :mediaOpen="mediaOpen" :voice="voice" v-if="$store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]"/>
+    <NoConvorsation v-else />
+    <VoiceVideo :mediaOpen="mediaOpen" :voice="voice" :disconnect="toggleMedia" :switchTo="switchTo"/>
+    <Chatbar :handleNewMessage="sendMessage" />
+  </div>
+  <div v-else class="no-friends">
+    <img src="https://ipfs.io/ipfs/QmXotK18AvUwheDfBTELo94J5FShUrP61VmfyEx633yCSn" alt="" width="50%" />
+    <h2 class="heading">Better with Friends</h2>
+    <p>You don't have to be alone. <br /> Add some friends and get chatting, sharing and streaming!</p>
+    <br>
+    <button class="button is-primary" v-on:click="$store.commit('changeRoute', 'friends')">Add Friends to Chat</button>
+  </div>
 </section>

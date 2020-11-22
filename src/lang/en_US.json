@@ -1,0 +1,182 @@
+{
+  "global": {
+    "address": "Address"
+  },
+  "dwellerid": {
+    "account_age": "Account Age",
+    "address": "Dweller ID Address",
+    "view_contract": "View Dweller ID Contract",
+    "view_address": "Copy Dweller Address"
+  },
+  "fileupload": {
+    "heading": "Upload File",
+    "description": "Uploading a file will store your file on the IPFS blockchain and automatically send the file in chat.",
+    "select": "Select File",
+    "chosefile": "Choose a file",
+    "file": "File",
+    "link": "IPFS Link",
+    "uploading": "Uploading to IPFS...",
+    "send": "Send File"
+  },
+  "loading": {
+    "connecting_blockchain": "Connecting to the blockchain...",
+    "connecting_broker": "Connecting to 0.vault74.io...",
+    "long_load": "This is taking a bit, do you have {{vaule}} installed?",
+    "other_tab": "Still loading? Vault74 may already be open in another tab.",
+    "something_wrong": "Something may have gone wrong,",
+    "alpha": "This is an alpha product, Please use Goerli Testnet!"
+  },
+  "files": {
+    "heading": "Browse files",
+    "subtext": "Browse files you've shared with other users, and upload new files to IPFS.",
+    "upload": "Upload Files",
+    "your_files": "Your Files",
+    "your_files_subtext": "Below is a list of all of the files you've uploaded."
+  },
+  "friends": {
+    "heading": "Friends",
+    "subtext": "Get connected with other people on the Vault74 platform.",
+    "find_someone": "Find Someone",
+    "add_a_friend": "Add a Friend",
+    "enter_address": "Enter a friends Ethereum address below to find them...",
+    "add_friend": "Add Friend",
+    "found_someone": "We Found Someone",
+    "chat": "Get Chatting",
+    "your_friends": "Your Friends",
+    "start_chat": "Start a chat with your friends below, be kind, or don't. We don't judge.",
+    "no_friends": "Oops, you don't have any friends yet. We'll be your friend, but you can also add more above."
+  },
+  "chatbar": {
+    "typing": "is typing"
+  },
+  "voice_video": {
+    "switch_video": "Switch to Video",
+    "switch_voice": "Switch to Voice",
+    "disconnect": "Disconnect"
+  },
+  "main": {
+    "heading": "Better with Friends",
+    "subtext_one": "You don't have to be alone.",
+    "subtext_two": "Add some friends and get chatting, sharing and streaming!",
+    "button": "Add Friends to Chat"
+  },
+  "settings": {
+    "logo": "Settings",
+    "h_general": "General",
+    "h_personalize": "Personalize",
+    "h_profile": "Profile",
+    "h_audiovideo": "Audio & Video",
+    "h_keybinds": "Keybinds",
+    "h_accounts": "Accounts & Devices",
+    "h_networks": "Networks & Services",
+    "h_encryption": "Encryption",
+    "h_storage": "Storage & History",
+    "h_network": "Network",
+    "h_transactions": "Transactions",
+    "h_payments": "Payments",
+    "h_transfers": "Transfers",
+    "h_balance": "Balance",
+    "accounts": {
+      "label": "Accounts",
+      "heading": "Active Account",
+      "subtext": "Select with Ethereum acccount you'd prefer to default transactions from.",
+      "balance": "Balance",
+      "gas_price": "Gas Price",
+      "gas_price_desc": "Higher gas prices will transact faster.",
+      "devices": "Devices",
+      "connected_devices": "Connected Devices",
+      "none": "No external wallets connected."
+    },
+    "audio_video": {
+      "label": "Audio",
+      "input_heading": "Audio Input Device",
+      "input_subtext": "Select which input device you'd like people to hear your silky smooth voice from.",
+      "audio_output": "Audio Output Device",
+      "audio_output_subtext": "Select the device that you'd like to deliver sound to your ear holes with.",
+      "video": "Video",
+      "video_heading": "Video Input Device",
+      "video_subtext": "Select which video device you'd like to share your beautiful smile from."
+    },
+    "keybinds": {
+      "label": "Keybinds",
+      "heading": "Default Keybinds",
+      "subtext": "Below are a list of the current keybinds, right now they are not configurable.",
+      "toggle_mute": "Toggle Mute",
+      "toggle_deafen": "Toggle Deafen",
+      "toggle_settings": "Open Settings",
+      "call": "Call Active Window"
+    },
+    "network": {
+      "label": "Network",
+      "heading": "Web3 Provider",
+      "subtext": "A Web3 provider is simply the way you chose to interact with the blockchain. For most people MetaMask is fine."
+    },
+    "personalize": {
+      "appearance": "Appearance",
+      "darktheme_heading": "Dark Theme",
+      "darktheme_subtext": "Enable dark theme for an easy on the eyes version of Vault74.",
+      "permissions": "Permissions",
+      "notifications": "Notifications",
+      "notifiactions_subtext": "Click to enable notifications with Vault74 for a better experience."
+    },
+    "storage": {
+      "label": "Storage",
+      "lfs_heading": "Large File Storage",
+      "lfs_subtext": "Click to enable large file storage, this will allow you to upload very large files and keep more message history cached.",
+      "lfs_request": "Request Storage Permissions",
+      "data_heading": "Clear Data",
+      "data_subtext": "Quickly clean up locally stored data, please be aware doing so will clear your stored files, message history, and more.",
+      "data_subtext_two": "Only do this if you know the repercussions.",
+      "clear_data": "Clear Local Data"
+    },
+    "profile": {
+      "label": "Profile",
+      "heading": "Setup Account",
+      "subtext": "Your account is not setup yet, let's get that going! It only takes a moment.",
+      "profile_pic": "Profile Picture (Optional)",
+      "uploading_ipfs": "Uploading to IPFS...",
+      "username": "Username",
+      "create_account": "Create Account",
+      "creating_transaction": "Creating Transaction",
+      "step1": "Please approve the transaction on your wallet or MetaMask.",
+      "sending_transaction": "Sending Transaction",
+      "step2": "Please wait while your transaction is sent...",
+      "confirming_transactoin": "Confirming Transaction",
+      "step3": "Don't Leave! we're waiting for a confirmation...",
+      "last_step": "Last Steps!",
+      "step4": "We're just taking care of some last minute things...",
+      "edit_account": "Edit Account",
+      "edit_account_subtext": "Browse your account info, and make changes.",
+      "your_account": "Your Account",
+      "your_account_subtext": "Browse your account info, and make changes.",
+      "display_name": "Display Name",
+      "account_address": "Account Address",
+      "id_card": "This is like your ID card, share this with friends so they can add you.",
+      "dweller_address": "Dweller Address",
+      "dweller_owner_address": "Dweller Owner Address",
+      "name": "Name",
+      "photo_hash": "Photo Hash"
+    }
+  },
+  "payments": {
+    "send": "Send {{amount}} ether",
+    "balance": "Balance",
+    "button": "Send"
+  },
+  "sidebar": {
+    "find": "Find a vault dweller...",
+    "friends": "Friends",
+    "files": "Files",
+    "chats": "Chats",
+    "groups": "Groups",
+    "add_friends": "Hey! Add some more friends to chat",
+    "button": "Add Friends"
+  },
+  "footer": {
+    "p2p": "P2P",
+    "network": "Network",
+    "block_number": "Block Number",
+    "account": "Account",
+    "connecting": "Connecting"
+  }
+}

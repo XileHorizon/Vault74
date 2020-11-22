@@ -1,10 +1,15 @@
 <template>
-    <div id="convorsation" :class="`${(mediaOpen) ? 'media-open' : 'media-closed'} ${(voice) ? 'media-voice' : ''}`" ref="chat" v-on:scroll="onScroll">
+    <div 
+      id="convorsation"
+      :class="`${(mediaOpen) ? 'media-open' : 'media-closed'} ${(voice) ? 'media-voice' : ''}`"
+      ref="chat"
+      :key="`${$store.state.activeAccount}::${$store.state.activeChat}`"
+      v-on:scroll="onScroll">
         <div id="scrollBottom" v-if="showScrollToBottom" v-on:click="scrollToEnd">
           <i class="fas fa-chevron-down"></i>
         </div>
-        <div v-for="message in messages" v-bind:key="message.id">
-          <MessageBody :message="message" v-if="message.type == 'message-group'" :scrollToEnd="scrollToEnd"/>
+        <div v-for="message in $store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]" v-bind:key="message.id">
+          <MessageBody :message="message" v-if="message.type == 'message'" :scrollToEnd="scrollToEnd"/>
           <Divider :text="message.text" v-if="message.type =='message-group-divider'" />
         </div>
     </div>
@@ -29,6 +34,7 @@ export default {
   data() {
     return {
       showScrollToBottom: false,
+      scrollTimeout: false,
     };
   },
   methods: {
@@ -36,7 +42,8 @@ export default {
     // div when a message comes in, or on other events
     scrollToEnd() {
       const { chat } = this.$refs;
-      setTimeout(() => {
+      if (!chat) return;
+      this.scrollTimeout = setTimeout(() => {
         chat.scrollTop = chat.scrollHeight;
         this.showScrollToBottom = false;
       }, 100);
@@ -45,6 +52,7 @@ export default {
     // display the scroll to bottom button
     onScroll() {
       const { chat } = this.$refs;
+      if (!chat) return;
       if (chat.scrollTop - chat.scrollHeight < -750) {
         this.showScrollToBottom = true;
       } else {
@@ -56,10 +64,18 @@ export default {
     messages: 'scrollToEnd',
     mediaOpen: 'scrollToEnd',
   },
+  beforeDestroyed() {
+    clearTimeout(this.scrollTimeout);
+  },
   mounted() {
     setTimeout(() => {
       this.scrollToEnd();
     }, 500);
+    this.$store.subscribe((mutation) => {
+      if (mutation.type === 'updateMessages') {
+        this.scrollToEnd();
+      }
+    });
   },
 };
 </script>
@@ -76,7 +92,7 @@ export default {
       overflow-y: scroll;
       transition: top ease-in-out 0.05s;
       background: #f8f9fb;
-      scroll-behavior: smooth;
+      scrollbar-width: thin;
     }
     .media-open {
       top: 23rem !important;

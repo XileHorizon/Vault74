@@ -18,12 +18,17 @@ export default {
       success: false,
       friend: false,
       friendAddress: '',
-      dwellerCachingHelper: new DwellerCachingHelper(config.registryAddress),
+      dwellerCachingHelper: new DwellerCachingHelper(
+        config.registryAddress,
+        config.cacher.dwellerLifespan,
+      ),
     };
   },
   methods: {
-    chatFriend(friend) {
-      console.log('chat friend', friend);
+    chatFriend(clientId) {
+      this.$store.commit('newChat', clientId);
+      this.$store.commit('activeChat', clientId);
+      this.$store.commit('changeRoute', 'main');
     },
     // Cleanup after adding a friend
     reset() {
@@ -57,7 +62,7 @@ export default {
         return;
       }
       this.error = false;
-      this.friend = friend;
+      this.friend = { ...friend, status: 'unchecked' };
     },
     // Confirms and adds a found friend
     commitFriend() {

@@ -1,18 +1,18 @@
 <template>
   <div id="payment">
-    <a :href="message.data.url" :download="message.data.filename" target="_blank">
+    <a :href="message.payload.data.url" :download="message.payload.data.filename" target="_blank">
       <article class="media">
         <div class="media-content">
           <div class="content">
-            <video controls :src="message.data.url">
+            <video controls :src="message.payload.data.url">
               Your browser does not support the
               <code>video</code> element.
             </video>
             <p>
               <i class="fas fa-file-download logo"></i>
-              <strong class="filename">{{message.data.filename}}</strong>
+              <strong class="filename">{{message.payload.data.filename}}</strong>
               <br>
-              <span class="label">{{bytesToSize(message.data.size)}}</span>
+              <span class="label">{{bytesToSize(message.payload.data.size)}}</span>
             </p>
           </div>
         </div>

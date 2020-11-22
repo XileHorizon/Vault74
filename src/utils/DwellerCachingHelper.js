@@ -14,7 +14,7 @@ export default class DwellerCachingHelper {
    * @augments registryAddress Address to the on chain contract of the registry
    * @augments expiry how long should dwellers last in the cache
    */
-  constructor(registryAddress, expiry = 86400) {
+  constructor(registryAddress, expiry = 86000) {
     this.expiry = expiry;
     this.cache = JSON.parse(localStorage.getItem('vault74.dwellerCache')) || {};
     this.registryAddress = registryAddress;

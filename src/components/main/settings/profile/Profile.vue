@@ -13,6 +13,7 @@ import ChangeUsername from './editprofile/ChangeUsername';
 
 export default {
   name: 'Profile',
+  props: ['customFinalAction', 'embeded'],
   components: {
     ActionSelector,
     ChangePhoto,
@@ -134,15 +135,19 @@ export default {
       const dwellerIDContract = await Vault74Registry
         .getDwellerContract(this.$store.state.activeAccount);
 
+      let confirms = 0;
       this.$store.commit('setStatus', 'Transaction created, waiting for confirm');
       DCUtils.setPhoto(
         dwellerIDContract,
         this.$store.state.activeAccount,
         this.ipfsHash,
         () => {
+          confirms += 1;
           this.finished = true;
           this.$store.commit('setStatus', 'Transaction confirmed');
-          this.commitEverything(dwellerIDContract);
+          if (confirms >= 2 || !this.customFinalAction) {
+            this.commitEverything(dwellerIDContract);
+          }
         },
       );
     },
@@ -150,6 +155,7 @@ export default {
     commitEverything(dwellerIDContract) {
       this.$store.commit('profilePictureHash', this.ipfsHash.path);
       this.$store.commit('dwellerAddress', dwellerIDContract);
+      if (this.customFinalAction) this.customFinalAction();
     },
     // Get a dweler from the registry
     async getDweller() {

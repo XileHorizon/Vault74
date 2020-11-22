@@ -18,15 +18,23 @@
 <script>
 import config from '@/config/config';
 import Peer2Peer from '@/classes/Peer2Peer';
+import MessageBroker from '@/classes/MessageBroker';
 
 export default {
   name: 'app',
   mounted() {
     this.$store.commit('ICEConnected', false);
+    this.$store.commit('dwellerAddress', false);
     // If we have an account, go ahead and mount to the account
     // else wait a bit and try again.
     const checkAccount = () => {
       if (this.$store.state.activeAccount) {
+        window.Vault74.messageBroker = new MessageBroker(
+          this.$store.state.activeAccount,
+          (data) => {
+            this.$store.commit('updateMessages', data);
+          },
+        );
         window.Vault74.warn('No account found yet, rechecking soon.');
         // Attach to peers
         window.Vault74.Peer2Peer = window.Vault74.Peer2Peer ||
@@ -42,6 +50,14 @@ export default {
                   break;
                 case 'alive':
                   this.$store.commit('ICEConnected', data);
+                  break;
+                case 'message':
+                  window.Vault74.messageBroker.recievedMessage(
+                    peer,
+                    Date.now(),
+                    type,
+                    JSON.parse(data),
+                  );
                   break;
                 default:
                   break;

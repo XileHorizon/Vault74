@@ -25,7 +25,7 @@
             class="input is-small messageuser" 
             type="text" 
             autofocus
-            placeholder="Securley Message Sophie Chain..."
+            :placeholder="`Securley Message ${$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].name}...`"
             v-model="messageText"
             v-on:keyup.enter="sendMessage">
           <!--<div class="input is-small messageuser" contenteditable role="textbox">

@@ -9,6 +9,8 @@
   import File from '@/components/main/convorsation/message/embeds/File';
   import Audio from '@/components/main/convorsation/message/embeds/Audio';
   import Video from '@/components/main/convorsation/message/embeds/Video';
+  import DwellerCachingHelper from '@/utils/DwellerCachingHelper';
+  import config from '@/config/config';
 
   import * as dayjs from 'dayjs';
   import * as relativeTime from 'dayjs/plugin/relativeTime';
@@ -28,10 +30,25 @@
       Audio,
       Video,
     },
+    data() {
+      return {
+        dwellerCachingHelper: new DwellerCachingHelper(
+          config.registryAddress,
+          config.cacher.dwellerLifespan,
+        ),
+        dweller: false,
+      };
+    },
     methods: {
       formattedDate(timestamp) {
         return dayjs().to(timestamp);
       },
+      async getDweller(address) {
+        this.dweller = await this.dwellerCachingHelper.getDweller(address);
+      },
+    },
+    mounted() {
+      this.getDweller(this.message.sender);
     },
   };
 </script>

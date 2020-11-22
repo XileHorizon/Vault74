@@ -26,15 +26,28 @@
   </div>
   <div class="usercontainer">
       <div v-if="route === 'chats'">
-        <User name="Samantha Version" unread="unread" status="Idly typing away!" online="true" icon="https://randomuser.me/api/portraits/women/56.jpg"/>
-        <User name="Sophie Chain" status="Enjoying Vault74's piece of mind" online="true" icon="https://randomuser.me/api/portraits/women/43.jpg" active="true"/>
-        <User name="Clark Kent" status="Guys, I'm not superman" online="false" icon="https://randomuser.me/api/portraits/men/56.jpg"/>
-        <User name="James Fault" unread="unread" status="I'm so excited for vacation" online="false" icon="https://randomuser.me/api/portraits/men/26.jpg"/>
-        <User name="Jessica Addy" status="Exploring Cyberpunk 2077" online="true" icon="https://randomuser.me/api/portraits/women/26.jpg"/>
-        <User name="Scarlett Joblockchain" status="The moon is lame, I'm going to mars" online="true" icon="https://randomuser.me/api/portraits/women/27.jpg"/>
-        <User name="Frank Semver" status="You're awesome." online="false" icon="https://randomuser.me/api/portraits/men/22.jpg"/>
-        <User name="Wally Whale" status="Candlesticks work for me" online="true" icon="https://randomuser.me/api/portraits/men/8.jpg"/>
-        <User name="James Man" status="10010101001100" online="false" icon="https://randomuser.me/api/portraits/men/20.jpg"/>
+        <!--
+        <UserDemo name="Samantha Version" unread="unread" status="Idly typing away!" online="true" icon="https://randomuser.me/api/portraits/women/56.jpg"/>
+        <UserDemo name="Sophie Chain" status="Enjoying Vault74's piece of mind" online="true" icon="https://randomuser.me/api/portraits/women/43.jpg" active="true"/>
+        -->
+        <User
+          v-for="chat in $store.state.activeChats"
+          :friend="$store.state.friends.filter(f => f.address === chat)[0]"
+          :active="$store.state.activeChat === chat"
+          :key="chat"
+          :clientId="chat" />
+        
+        <div v-if="$store.state.activeChats.length < 4">
+          <hr class="divider">
+          <span class="label" style="text-align: center;">Hey! Add some more friends to chat</span>
+          <button
+            class="button is-primary is-small" 
+            v-on:click="setMainRoute('friends')"
+            active="false"
+            style="width: 100%;">Add Friends</button>
+            <br>
+            <br>
+        </div>
       </div>
   </div>
   <Controls :toggleSettings="toggleSettings"/>

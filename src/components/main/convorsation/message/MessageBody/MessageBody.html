@@ -1,34 +1,34 @@
-<div class="c-message-body">
-  <h4 class="c-message-user">{{message.user.name}} <span class="timestamp">{{formattedDate(message.timestamp)}}</span></h4>
-  <CircleIcon :image="message.user.photo" />
+<div class="c-message-body" v-if="dweller">
+  <h4 class="c-message-user">{{dweller.name}} <span class="timestamp">{{formattedDate(message.at)}}</span></h4>
+  <CircleIcon :image="dweller.photo" />
   <div class="c-message-actions" v-if="message.isEditable">
     <i class="fas fa-pencil-alt"></i>
     <i class="fa fa-trash"></i>
   </div>
   <div class="c-message-content">
-      <div class="c-message" v-for="message in message.content" :key="message.id">
-          <p v-if="message.data && message.type == 'text'">
-            {{message.data}}
+      <div class="c-message">
+          <p v-if="message.payload && message.payload.type == 'text'">
+            {{message.payload.data}}
           </p>
-          <div v-if="message.data && message.type === 'link'">
+          <div v-if="message.payload && message.payload.type === 'link'">
             <Link :message="message"/>
           </div>
-          <div v-if="message.data && message.type === 'youtube'">
+          <div v-if="message.dpayloadata && message.payload.type === 'youtube'">
             <YouTube :message="message"/>
           </div>
-          <div v-if="message.data && message.type === 'payment'">
+          <div v-if="message.payload && message.payload.type === 'payment'">
             <Payment :message="message" />
           </div>
-          <div v-if="message.data && message.type === 'image'">
-            <ImageViewer :image="message.data.url" :scrollToEnd="scrollToEnd" />
+          <div v-if="message.payload && message.payload.type === 'image'">
+            <ImageViewer :image="message.data.payload.url" :scrollToEnd="scrollToEnd" />
           </div>
-          <div v-if="message.data && message.type === 'file'">
+          <div v-if="message.payload && message.payload.type === 'file'">
             <File :message="message" />
           </div>
-          <div v-if="message.data && message.type === 'audio'">
+          <div v-if="message.payload && message.payload.type === 'audio'">
             <Audio :message="message" />
           </div>
-          <div v-if="message.data && message.type === 'video'">
+          <div v-if="message.payload && message.payload.type === 'video'">
             <Video :message="message" />
           </div>
       </div>

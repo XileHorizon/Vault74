@@ -22,22 +22,29 @@ export default class Peer2Peer {
     this.channels = {};
     this.ICEEstablished = false;
     this.watcher = watcher;
-    this.peer = new Peer(this.peerId, settings);
+
+    const peer = new Peer(this.peerId, settings);
+
+    this.peer = peer;
     // We've connected to the ICE service
-    this.peer.on('open', () => {
+    peer.on('open', () => {
       this.ICEEstablished = true;
       this.watcher(peerId, 'alive', true);
       window.Vault74.debug('Connected to ICE service');
       // Connect to peers and retry connections every 3 seconds.
       this.connectToPeers();
-    });
-    // A new client has made a connection to us
-    this.peer.on('connection', (conn) => {
-      const remotePeerId = conn.peer;
-      const peerConntion = this.channels[`${this.peerId}::${remotePeerId}`];
-      conn.on('open', () => {
-        peerConntion.bindGateway(conn);
-        this.peerTracker(remotePeerId);
+      // A new client has made a connection to us
+      peer.on('connection', (conn) => {
+        const remotePeerId = conn.peer;
+        const peerConntion = this.channels[`${this.peerId}::${remotePeerId}`];
+        conn.on('open', () => {
+          setTimeout(() => {
+            if (peerConntion) {
+              peerConntion.bindGateway(conn);
+              this.peerTracker(remotePeerId);
+            }
+          }, 500);
+        });
       });
     });
   }
@@ -51,7 +58,6 @@ export default class Peer2Peer {
     this.ping(peerId);
     setInterval(() => {
       window.Vault74.debug('Registered Peers');
-      if (config.debug) console.table(this.channels);
       this.ping(peerId);
     }, config.peer.ping_interval);
   }
@@ -82,6 +88,8 @@ export default class Peer2Peer {
         channel.connect();
       }
     });
+    // eslint-disable-next-line no-console
+    if (config.debug) console.table(this.channels);
   }
 
   /** @function
@@ -109,5 +117,10 @@ export default class Peer2Peer {
   ping(peerId) {
     const peerConntion = this.channels[`${this.peerId}::${peerId}`];
     peerConntion.send(messageFormatter('ping', Date.now()));
+  }
+
+  send(peerId, type, data) {
+    const peerConntion = this.channels[`${this.peerId}::${peerId}`];
+    peerConntion.send(messageFormatter(type, data));
   }
 }

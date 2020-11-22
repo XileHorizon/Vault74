@@ -5,7 +5,7 @@ import InfoBar from '@/components/main/convorsation/InfoBar/InfoBar';
 import Chatbar from '@/components/main/convorsation/Chatbar/Chatbar';
 import VoiceVideo from '@/components/main/convorsation/VoiceVideo/VoiceVideo';
 import Convorsation from '@/components/main/convorsation/Convorsation/Convorsation';
-
+import NoConvorsation from '@/components/main/convorsation/Convorsation/NoConvorsation';
 import sampleMessages from './sampleMessages';
 
 const callSound = new Audio('https://ipfs.io/ipfs/QmRdxeQF53abUesaFC8qmoNJ5FLS8LBuSyCmcXT5VhuKSm');
@@ -20,6 +20,7 @@ export default {
     Chatbar,
     Convorsation,
     VoiceVideo,
+    NoConvorsation,
   },
   methods: {
     // Switch from one media stream to another
@@ -52,14 +53,32 @@ export default {
     // Send a message in the chat, this will probably
     // be rewritten when the chat is functional
     sendMessage(data, type, sender = 'RetroPronghorn', photo) {
-      newMessageSound.play();
+      if (window.Vault74.messageBroker) {
+        window.Vault74.messageBroker.sentMessage(
+          this.$store.state.activeChat,
+          Date.now(),
+          'message',
+          {
+            type: type || 'text',
+            data,
+          },
+        );
+      }
+      window.Vault74.Peer2Peer.send(
+        this.$store.state.activeChat,
+        'message',
+        {
+          type: type || 'text',
+          data,
+        },
+      );
       /* eslint-disable */
       this.messages.push({
           id: Date.now(),
           type: 'message-group',
           user: {
-          name: sender,
-          photo: photo || 'https://avatars3.githubusercontent.com/u/1770198?s=460&u=c2be9f3c1e9ce8ba336f29ed2f98c6eeeeab3f94&v=4',
+            name: sender,
+            photo: photo || 'https://avatars3.githubusercontent.com/u/1770198?s=460&u=c2be9f3c1e9ce8ba336f29ed2f98c6eeeeab3f94&v=4',
           },
           timestamp: Date.now(),
           content: [
@@ -73,40 +92,6 @@ export default {
       /* eslint-enable */
     },
   },
-  mounted() {
-    setTimeout(() => {
-      this.sendMessage(
-        'Don\'t worry, I\'m just a robot sending example messages for testing.',
-        'text',
-        'Sophie Chain',
-        'https://randomuser.me/api/portraits/women/43.jpg',
-      );
-    }, 18000);
-    setTimeout(() => {
-      this.sendMessage(
-        'Make sure you poke around the app, a lot of work is being done.',
-        'text',
-        'Sophie Chain',
-        'https://randomuser.me/api/portraits/women/43.jpg',
-      );
-    }, 28000);
-    setTimeout(() => {
-      this.sendMessage(
-        'You can upload files and stuff right now!',
-        'text',
-        'Sophie Chain',
-        'https://randomuser.me/api/portraits/women/43.jpg',
-      );
-    }, 32000);
-    setTimeout(() => {
-      this.sendMessage(
-        'One more thing, take a look through the settings.',
-        'text',
-        'Sophie Chain',
-        'https://randomuser.me/api/portraits/women/43.jpg',
-      );
-    }, 35000);
-  },
   data() {
     return {
       mediaOpen: false,
@@ -116,6 +101,13 @@ export default {
       messages: sampleMessages,
     };
     /* eslint-enable */
+  },
+  mounted() {
+    this.$store.subscribe((mutation) => {
+      if (mutation.type === 'updateMessages') {
+        newMessageSound.play();
+      }
+    });
   },
 };
 </script>

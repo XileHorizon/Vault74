@@ -27,6 +27,11 @@ const defaultState = {
   // Internal
   status: 'Alive',
   p2pOnline: false,
+  sidebarOpen: true,
+  // Chat
+  activeChats: [],
+  activeChat: false,
+  messages: {},
 };
 
 const createState = customState => Object.assign({}, defaultState, customState);

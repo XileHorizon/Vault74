@@ -1,7 +1,7 @@
 <div>
-  <h3 class="label">Profile</h3>
-  <article class="message is-dark" id="profile">
-    <div class="message-body" v-if="!this.$store.state.dwellerAddress">
+  <h3 class="label" v-if="!embeded">Profile</h3>
+  <article :class="`${(!embeded) ? 'message is-dark' : ''}`" id="profile">
+    <div :class="`${(!embeded) ? 'message-body' : ''}`" v-if="this.$store.state.dwellerAddress == '0x0000000000000000000000000000000000000000'">
       <h2>Setup Account</h2>
       <p>Your account is not setup yet, let's get that going! It only takes a moment.</p>
       <br>

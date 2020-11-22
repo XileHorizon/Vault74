@@ -3,6 +3,7 @@
 <script>
 import ServerList from '@/components/ServerList/ServerList';
 import User from '@/components/sidebar/User/User';
+import UserDemo from '@/components/sidebar/User/UserDemo';
 import Controls from '@/components/sidebar/Controls/Controls';
 
 export default {
@@ -11,6 +12,7 @@ export default {
   components: {
     ServerList,
     User,
+    UserDemo,
     Controls,
   },
   data() {

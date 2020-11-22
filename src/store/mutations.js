@@ -10,6 +10,14 @@ export default {
     // eslint-disable-next-line no-plusplus,no-param-reassign
     state.settings.darkMode = !state.settings.darkMode;
   },
+  toggleSidebar(state) {
+    // eslint-disable-next-line no-plusplus,no-param-reassign
+    state.sidebarOpen = !state.sidebarOpen;
+  },
+  activeChat(state, address) {
+    // eslint-disable-next-line no-plusplus,no-param-reassign
+    state.activeChat = address;
+  },
   // Called when web3 updates
   web3Stats(state, stats) {
     // eslint-disable-next-line no-plusplus,no-param-reassign
@@ -67,7 +75,7 @@ export default {
       friends.push(friend);
     }
     // eslint-disable-next-line
-    friends.sort((a, b) => a.address > b.address ? 1 : -1);
+    friends.sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1);
     // eslint-disable-next-line no-plusplus,no-param-reassign
     state.friends = friends;
     // TODO make sure we don't already have this friend added.
@@ -95,7 +103,7 @@ export default {
     friend.status = status;
     withoutFriend.push(friend);
     // eslint-disable-next-line
-    withoutFriend.sort((a, b) => a.address > b.address ? 1 : -1);
+    withoutFriend.sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1);
     // eslint-disable-next-line no-plusplus,no-param-reassign
     state.friends = withoutFriend;
   },
@@ -103,5 +111,18 @@ export default {
   ICEConnected(state, status) {
     // eslint-disable-next-line no-plusplus,no-param-reassign
     state.p2pOnline = status;
+  },
+  // Create a new active chat
+  newChat(state, clientId) {
+    const { activeChats } = state;
+    if (!activeChats.includes(clientId)) {
+      activeChats.push(clientId);
+    }
+    // eslint-disable-next-line no-plusplus,no-param-reassign
+    state.activeChats = activeChats.reverse();
+  },
+  updateMessages(state, messages) {
+    // eslint-disable-next-line no-plusplus,no-param-reassign
+    state.messages = messages;
   },
 };
