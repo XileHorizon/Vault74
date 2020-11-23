@@ -1,5 +1,5 @@
 <section class="infobar noselect">
-  <DwellerID :active="idActive" :toggle="toggleFingerprint" />
+  <DwellerID :active="idActive" :toggle="toggleFingerprint" :address="$store.state.activeChat" :key="$store.state.activeChat"/>
   <div class="columns">
       <div class="column is-three-fifths">
           <div class="profile">

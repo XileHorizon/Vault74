@@ -76,12 +76,12 @@ export default {
       font-size: 8pt;
     }
     .fa-heart {
-      color: #ff7675;
+      color: #ff7675 !important; 
     }
     .fa-hat-wizard {
-      color: #a29bfe;
+      color: #a29bfe !important;
     }
     .fa-flask {
-      color: #00cec9;
+      color: #00cec9 !important;
     }
 </style>
