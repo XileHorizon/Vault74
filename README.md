@@ -1,11 +1,6 @@
-[![Dependency Status][deps-image]][deps-url]
-[![Development Dependency Status][deps-dev-image]][deps-dev-url]
-[![Build Status][ci-image]][ci-url]
-[![Code Coverage status][codecov-image]][codecov-url]
+# Vault74
 
-# vuejs-starterkit
-
-An opionated Vue.js PWA starter-kit project integrating `vue-router`, `vuex`, `vue-loader` and `webpack3` for non-trivial projects.
+Decentralized chat & sharing platform
 
 ## Contributing Rules
 
