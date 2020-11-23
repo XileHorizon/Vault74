@@ -10,7 +10,6 @@ import sampleMessages from './sampleMessages';
 
 const callSound = new Audio('https://ipfs.io/ipfs/QmRdxeQF53abUesaFC8qmoNJ5FLS8LBuSyCmcXT5VhuKSm');
 const hangupSound = new Audio('https://ipfs.io/ipfs/QmWrRi5tdKZy3iqcR8mum9hFBbZ8qgvekhEM3Y4PD1TK28');
-const newMessageSound = new Audio('https://ipfs.io/ipfs/QmV7bZ3RSppXePC299kfUjpdLBsAptmSDrtvvSmBJh1cmB');
 // const connectedSound = new Audio('https://ipfs.io/ipfs/QmSHtz5kSvX8JNZKMfkm6PjqScxoC864bmGd2g3ycwRqK1');
 
 export default {
@@ -101,13 +100,6 @@ export default {
       messages: sampleMessages,
     };
     /* eslint-enable */
-  },
-  mounted() {
-    this.$store.subscribe((mutation) => {
-      if (mutation.type === 'updateMessages') {
-        newMessageSound.play();
-      }
-    });
   },
 };
 </script>

@@ -121,8 +121,30 @@ export default {
     // eslint-disable-next-line no-plusplus,no-param-reassign
     state.activeChats = activeChats.reverse();
   },
+  // Group messages by sender for cleanliness.
   updateMessages(state, messages) {
+    const groupedMessages = {};
+    Object.keys(messages).forEach((messageGroup) => {
+      const currentGrouping = messages[messageGroup];
+      const newGrouping = [];
+      let lastMessageFrom = false;
+      let tempGroup = [];
+      currentGrouping.forEach((message, i) => {
+        if (!lastMessageFrom || lastMessageFrom === message.sender) {
+          lastMessageFrom = message.sender;
+          tempGroup.push(message);
+        } else {
+          newGrouping.push(tempGroup);
+          tempGroup = [message];
+          lastMessageFrom = message.sender;
+        }
+        if (i === currentGrouping.length - 1) {
+          newGrouping.push(tempGroup);
+        }
+      });
+      groupedMessages[messageGroup] = newGrouping;
+    });
     // eslint-disable-next-line no-plusplus,no-param-reassign
-    state.messages = messages;
+    state.messages = groupedMessages;
   },
 };

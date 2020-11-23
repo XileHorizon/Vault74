@@ -91,6 +91,11 @@
       <p class="label">Account Address</p>
       <p>This is like your ID card, share this with friends so they can add you.</p>
       <input class="input" :value="$store.state.activeAccount" readonly />
+      <br>
+      <p class="label">Your Badges</p>
+      <div class="badges">
+        <Badge :address="$store.state.activeAccount" />
+      </div>
       <hr class="spacer">
       <button class="button is-primary is-small" v-on:click="getDweller" v-if="!this.dweller">Advanced Details</button>
       <div v-if="this.dweller">

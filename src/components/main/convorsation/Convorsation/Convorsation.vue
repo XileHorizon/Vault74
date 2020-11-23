@@ -8,9 +8,11 @@
         <div id="scrollBottom" v-if="showScrollToBottom" v-on:click="scrollToEnd">
           <i class="fas fa-chevron-down"></i>
         </div>
-        <div v-for="message in $store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]" v-bind:key="message.id">
-          <MessageBody :message="message" v-if="message.type == 'message'" :scrollToEnd="scrollToEnd"/>
-          <Divider :text="message.text" v-if="message.type =='message-group-divider'" />
+        <div 
+          v-for="messageGroup in $store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]" 
+          v-bind:key="messageGroup[0].id">
+          <MessageBody :messages="messageGroup" :scrollToEnd="scrollToEnd"/>
+          <!--<Divider :text="message.text" v-if="message.type =='message-group-divider'" />-->
         </div>
     </div>
 </template>

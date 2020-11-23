@@ -56,6 +56,7 @@ export default {
     color: #666;
     position: relative;
     border-left: 4px solid #00d0a1;
+    margin: 0.5rem 0;
   }
   .media:hover .logo {
     color: #000;

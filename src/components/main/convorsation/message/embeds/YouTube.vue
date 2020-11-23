@@ -1,14 +1,11 @@
 <template>
   <div>
-    <a :href="'https://youtube.com/watch?v=' + message.data.videoId" target="_blank">https://youtube.com/watch?v={{message.data.videoId}}</a>
     <article class="media">
       <div class="media-content">
         <div class="content">
           <p>
-            <strong>{{message.data.title}}</strong><br />
-            {{message.data.author}}
             <br>
-            <iframe width="373" height="210" :src="`https://www.youtube.com/embed/${message.data.videoId}`" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="373" height="210" :src="`https://www.youtube.com/embed/${link[5]}`" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </p>
         </div>
       </div>
@@ -21,7 +18,7 @@
 export default {
   name: 'YouTube',
   props: [
-    'message',
+    'link',
   ],
 };
 </script>
@@ -32,7 +29,7 @@ export default {
     background: #fff;
     border-radius: 6px;
     border: 1px solid #eee;
-    padding: 1rem;
+    padding: 0 1rem 0.5rem 1rem;
     max-width: 408px;
   }
   img {

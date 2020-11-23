@@ -5,6 +5,7 @@ import Mousetrap from 'mousetrap';
 
 import config from '@/config/config';
 import DCUtils from '@/utils/DwellerContract';
+import Badge from '@/components/common/Badge';
 import PhotoCropper from 'vue-image-crop-upload';
 import Vault74Registry from '@/utils/Vault74Registry';
 import ActionSelector from './editprofile/ActionSeletor';
@@ -19,6 +20,7 @@ export default {
     ChangePhoto,
     ChangeUsername,
     PhotoCropper,
+    Badge,
   },
   data() {
     return {

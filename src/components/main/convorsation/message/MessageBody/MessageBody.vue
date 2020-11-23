@@ -19,7 +19,7 @@
 
   export default {
     name: 'MessageBody',
-    props: ['message', 'scrollToEnd'],
+    props: ['messages', 'scrollToEnd'],
     components: {
       CircleIcon,
       Link,
@@ -37,6 +37,7 @@
           config.cacher.dwellerLifespan,
         ),
         dweller: false,
+        isEditable: false,
       };
     },
     methods: {
@@ -46,9 +47,21 @@
       async getDweller(address) {
         this.dweller = await this.dwellerCachingHelper.getDweller(address);
       },
+      parseYoutubeLink(message) {
+        // eslint-disable-next-line
+        const YTRegex = /((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?/;
+        console.log('YTRegex', message.match(YTRegex));
+        return message.match(YTRegex);
+      },
+      wrapLinks(message) {
+        return message.replace(/(?:(https?:\/\/[^\s]+))/m, '<a href="$1" target="_blank">$1</a>');
+      },
     },
     mounted() {
-      this.getDweller(this.message.sender);
+      this.getDweller(this.messages[0].sender);
+      if (this.messages[0].sender === this.$store.state.activeAccount) {
+        this.isEditable = true;
+      }
     },
   };
 </script>

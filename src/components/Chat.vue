@@ -14,7 +14,7 @@
         </div>
       </div>
       <div :class="`settings ${settingsOpen ? 'settings-open-container' : ''}`">
-        <Settings :toggleSettings="toggleSettings" />
+        <Settings :toggleSettings="toggleSettings" :open="settingsOpen" />
       </div>
       <div class="footer">
         <p>
@@ -114,6 +114,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
+    min-width: 1200px;
   }
   .settings {
     position: absolute;

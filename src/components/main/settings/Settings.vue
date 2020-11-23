@@ -1,6 +1,6 @@
 <template>
   <div class="columns">
-    <button class="modal-close is-large" aria-label="close" v-on:click="toggleSettings"></button>
+    <button v-if="open" class="modal-close is-large" aria-label="close" v-on:click="toggleSettings"></button>
     <div class="column is-one-third settings-left noselect" style="max-width: 300px;">
       <h1 id="logo">Settings</h1>
       <aside class="menu">
@@ -103,7 +103,7 @@ export default {
     Storage,
     AudioVideo,
   },
-  props: ['toggleSettings'],
+  props: ['toggleSettings', 'open'],
   data() {
     return {
       route: 'personalize',
