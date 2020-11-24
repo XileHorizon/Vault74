@@ -1,6 +1,8 @@
 <template src="./Chatbar.html"></template>
 
 <script>
+import debounce from 'debounce';
+
 import data from '@/components/main/convorsation/Chatbar/emojidata.json';
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast';
 import MiniPayment from '@/components/common/payments/MiniPayment/MiniPayment';
@@ -22,22 +24,13 @@ export default {
       messageText: '',
       selectingEmoji: false,
       emojiIndex,
-      participantTalking: false,
+      typing: false,
       payments: false,
       characters: 0,
       limit: 250,
       file: false,
       showFileUpload: false,
     };
-  },
-  mounted() {
-    // TODO: remove this in the final version
-    const isTypingFunc = () => {
-      this.participantTalking = !this.participantTalking;
-      const int = Math.floor(Math.random() * Math.floor(15000));
-      setTimeout(isTypingFunc, int);
-    };
-    isTypingFunc();
   },
   methods: {
     // Handle the pasting of image files and start the upload of the file
@@ -78,6 +71,25 @@ export default {
         this.messageText = '';
       }
     },
+    startTyping() {
+      if (!this.typing) {
+        this.typing = true;
+        window.Vault74.Peer2Peer.send(
+          this.$store.state.activeChat,
+          'typing-notice',
+          true,
+        );
+      }
+    },
+    // eslint-disable-next-line
+    isTyping: debounce(function(e) {
+      this.typing = false;
+      window.Vault74.Peer2Peer.send(
+        this.$store.state.activeChat,
+        'typing-notice',
+        false,
+      );
+    }, 2000),
     // Select an emoji from the emoji picker and append it to our message
     selectEmoji(emoji) {
       this.messageText += emoji.native;

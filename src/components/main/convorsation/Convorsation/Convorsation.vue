@@ -11,7 +11,7 @@
         <div 
           v-for="messageGroup in $store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]" 
           v-bind:key="messageGroup[0].id">
-          <MessageBody :messages="messageGroup" :scrollToEnd="scrollToEnd"/>
+          <MessageBody :messages="messageGroup" :scrollToEnd="scrollToEndConditionally"/>
           <!--<Divider :text="message.text" v-if="message.type =='message-group-divider'" />-->
         </div>
     </div>
@@ -50,6 +50,13 @@ export default {
         this.showScrollToBottom = false;
       }, 100);
     },
+    scrollToEndConditionally() {
+      const { chat } = this.$refs;
+      if (!chat) return;
+      if (chat.scrollTop - chat.scrollHeight > -750) {
+        this.scrollToEnd();
+      }
+    },
     // If we've scrolled past a certain point we will
     // display the scroll to bottom button
     onScroll() {
@@ -63,7 +70,6 @@ export default {
     },
   },
   watch: {
-    messages: 'scrollToEnd',
     mediaOpen: 'scrollToEnd',
   },
   beforeDestroyed() {
@@ -75,7 +81,7 @@ export default {
     }, 500);
     this.$store.subscribe((mutation) => {
       if (mutation.type === 'updateMessages') {
-        this.scrollToEnd();
+        this.scrollToEndConditionally();
       }
     });
   },

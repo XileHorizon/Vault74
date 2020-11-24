@@ -3,12 +3,10 @@
       id="convorsation"
       :class="`${(mediaOpen) ? 'media-open' : 'media-closed'} ${(voice) ? 'media-voice' : ''}`"
       ref="chat">
-      <p>
         <img src="https://ipfs.io/ipfs/QmSfJ9jyyFH54oHsJmVLRzfcZzXVjngSBVA3uXoEiWzkmx" width="300px" alt="">
-        <hr class="divider" />
+        <hr class="divider">
         <h2 class="heading">It's awefully quiet</h2>
         <span>Say something and get the convorsation started.</span>
-      </p>
     </div>
 </template>
 
@@ -26,7 +24,7 @@ export default {
       left: 0;
       right: 0;
       bottom: 7.5rem;
-      padding: 0.5rem 0.4rem;
+      padding: 2.5rem 0.4rem;
       padding-top: 2rem;
       overflow-y: scroll;
       transition: top ease-in-out 0.05s;

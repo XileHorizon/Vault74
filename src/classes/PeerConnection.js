@@ -89,6 +89,9 @@ export default class PeerConnection {
       case 'message':
         this.watcher('message', data);
         break;
+      case 'typing-notice':
+        this.watcher('typing-notice', data);
+        break;
       default:
         this.watcher('data', data);
         break;

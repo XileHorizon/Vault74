@@ -2,7 +2,12 @@
   <section class="chat-group" @paste="handlePaste">
       <FileUpload v-if="showFileUpload" :file="file" :relayResult="handleNewMessage" :close="closeFileUpload" />
       <MiniPayment person="Sophie Chain" v-if="payments" :toggle="togglePayments" />
-      <p id="typing" class="loading" v-if="participantTalking"><b>Sophie Chain</b> is typing</p>
+      <p id="typing" class="loading" v-if="$store.state.typingUsers[$store.state.activeChat]">
+        <b>
+          {{$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].name}}
+        </b> 
+        is typing
+      </p>
       <div :class="`input-collection ${messageText.length > limit ? 'input-collection-red' : ''}`">
           <p :class="`charlimit ${messageText.length > limit ? 'red' : ''}`">
             {{(messageText.length > limit) ? limit - messageText.length : messageText.length}}/{{limit}}
@@ -25,6 +30,8 @@
             class="input is-small messageuser" 
             type="text" 
             autofocus
+            @input="isTyping"
+            v-on:keyup="startTyping"
             :placeholder="`Securley Message ${$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].name}...`"
             v-model="messageText"
             v-on:keyup.enter="sendMessage">

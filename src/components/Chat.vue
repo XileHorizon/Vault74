@@ -114,7 +114,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    min-width: 1200px;
+    min-width: 900px;
   }
   .settings {
     position: absolute;

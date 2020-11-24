@@ -62,6 +62,9 @@ export default {
                   );
                   newMessageSound.play();
                   break;
+                case 'typing-notice':
+                  this.$store.commit('userTyping', [peer, JSON.parse(data).data]);
+                  break;
                 default:
                   break;
               }

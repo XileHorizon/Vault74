@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
+import VueClipboard from 'vue-clipboard2';
 import config from '@/config/config';
 import App from './App';
 import router from './router';
 import store from './store';
 
 Vue.config.productionTip = false;
+Vue.use(VueClipboard);
 
 sync(store, router);
 

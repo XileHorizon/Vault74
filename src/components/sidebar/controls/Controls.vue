@@ -22,10 +22,18 @@ export default {
     return {
       muted: false,
       deafened: false,
+      tooltip: 'Copy Account',
       config,
     };
   },
   methods: {
+    copied() {
+      const original = this.tooltip;
+      this.tooltip = 'Copied!';
+      setTimeout(() => {
+        this.tooltip = original;
+      }, 1000);
+    },
     // Non functional placeholder mute function
     toggleMute() {
       this.muted = !this.muted;

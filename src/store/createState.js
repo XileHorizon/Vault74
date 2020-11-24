@@ -32,6 +32,7 @@ const defaultState = {
   activeChats: [],
   activeChat: false,
   messages: {},
+  typingUsers: {},
 };
 
 const createState = customState => Object.assign({}, defaultState, customState);

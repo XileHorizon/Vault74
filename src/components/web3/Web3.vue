@@ -71,15 +71,23 @@ export default {
         window.web3 = new Web3(window.ethereum);
         window.ethereum.enable();
         this.connected = true;
-        this.startupActions();
-        this.web3Polling();
-        this.$store.commit('setStatus', 'Web3 is connected');
-        setInterval(() => {
-          this.web3Polling();
-        }, 4000);
-        return true;
+        window.web3.eth.getAccounts().then((acc) => {
+          if (acc.length) {
+            this.startupActions();
+            this.web3Polling();
+            this.$store.commit('setStatus', 'Web3 is connected');
+            setInterval(() => {
+              this.web3Polling();
+            }, 4000);
+            return true;
+          }
+          setTimeout(() => {
+            ethEnabled();
+          }, 4000);
+          return true;
+        });
       }
-      window.Vault74.warn('No Web3 provider found.');
+      window.Vault74.warn('No Web3 provider found. Looking again soon.');
       return false;
     };
     ethEnabled();

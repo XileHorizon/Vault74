@@ -48,9 +48,9 @@
         this.dweller = await this.dwellerCachingHelper.getDweller(address);
       },
       parseYoutubeLink(message) {
+        if (typeof message !== 'string') return false;
         // eslint-disable-next-line
         const YTRegex = /((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?/;
-        console.log('YTRegex', message.match(YTRegex));
         return message.match(YTRegex);
       },
       wrapLinks(message) {
