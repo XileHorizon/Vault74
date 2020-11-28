@@ -5,7 +5,7 @@ import DwellerID from '@/components/common/DwellerID/DwellerID';
 
 export default {
   name: 'InfoBar',
-  props: ['toggleMedia'],
+  props: ['toggleMedia', 'makeCall'],
   components: {
     DwellerID,
   },

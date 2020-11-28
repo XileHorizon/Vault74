@@ -8,7 +8,7 @@
         <div id="scrollBottom" v-if="showScrollToBottom" v-on:click="scrollToEnd">
           <i class="fas fa-chevron-down"></i>
         </div>
-        <div 
+        <div
           v-for="messageGroup in $store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]" 
           v-bind:key="messageGroup[0].id">
           <MessageBody :messages="messageGroup" :scrollToEnd="scrollToEndConditionally"/>

@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <button v-if="open" class="modal-close is-large" aria-label="close" v-on:click="toggleSettings"></button>
-    <div class="column is-one-third settings-left noselect" style="max-width: 300px;">
+    <div class="column is-one-third settings-left noselect" style="max-width: 300px;" v-if="open">
       <h1 id="logo">Settings</h1>
       <aside class="menu">
         <p class="menu-label">

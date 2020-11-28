@@ -1,9 +1,20 @@
 <section class="bordered main-section">
   <div v-if="$store.state.activeChat">
-    <InfoBar :toggleMedia="toggleMedia" />
-    <Convorsation :messages="messages" :mediaOpen="mediaOpen" :voice="voice" v-if="$store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]"/>
+    <InfoBar
+      :toggleMedia="toggleMedia"
+      :makeCall="makeCall"/>
+    <Convorsation 
+      :messages="messages"
+      :mediaOpen="$store.state.activeMediaStreamPeer && $store.state.activeChat === $store.state.activeMediaStreamPeer"
+      :voice="$store.state.activeMediaStreamPeer && voice"
+      v-if="$store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]"/>
     <NoConvorsation v-else />
-    <VoiceVideo :mediaOpen="mediaOpen" :voice="voice" :disconnect="toggleMedia" :switchTo="switchTo"/>
+    <VoiceVideo 
+      v-if="$store.state.activeMediaStreamPeer && $store.state.activeChat === $store.state.activeMediaStreamPeer"
+      :mediaOpen="$store.state.activeMediaStreamPeer"
+      :voice="voice"
+      :disconnect="hangup"
+      :switchTo="switchTo"/>
     <Chatbar :handleNewMessage="sendMessage" />
   </div>
   <div v-else class="no-friends">

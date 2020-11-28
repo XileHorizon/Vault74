@@ -13,6 +13,10 @@
 <script>
 export default {
   name: 'NoConvorsation',
+  props: [
+    'mediaOpen',
+    'voice',
+  ],
 };
 </script>
 

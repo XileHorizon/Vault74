@@ -22,6 +22,10 @@ export default class Peer2Peer {
     this.channels = {};
     this.ICEEstablished = false;
     this.watcher = watcher;
+    // Calling
+    this.call = () => {};
+    this.hangup = () => {};
+    this.answer = () => {};
 
     const peer = new Peer(this.peerId, settings);
 
@@ -47,6 +51,22 @@ export default class Peer2Peer {
         });
       });
     });
+    peer.on('error', (err) => {
+      window.Vault74.debug('The peer sent us an error:', err);
+      console.debug(err);
+    });
+  }
+
+  bindCall(fn) {
+    this.call = fn;
+  }
+
+  bindHangup(fn) {
+    this.hangup = fn;
+  }
+
+  bindAnswer(fn) {
+    this.answer = fn;
   }
 
   /** @function
@@ -106,6 +126,14 @@ export default class Peer2Peer {
       },
     );
     return this.channels[`${this.peerId}::${peerId}`];
+  }
+
+  getDataChannel(peerId) {
+    return this.channels[`${this.peerId}::${peerId}`];
+  }
+
+  getPeer() {
+    return this.peer;
   }
 
   internalWatcher(peer, type, data) {

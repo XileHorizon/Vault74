@@ -27,6 +27,19 @@ export default {
       this.mediaOpen = true;
       this.voice = voice;
     },
+    makeCall() {
+      this.$store.commit('connectMediaStream', this.$store.state.activeChat);
+      // TODO: Start calling sound
+      window.Vault74.Peer2Peer.call(this.$store.state.activeChat);
+      this.voice = true;
+      this.mediaOpen = true;
+    },
+    hangup() {
+      window.Vault74.Peer2Peer.hangup();
+      window.Vault74.Peer2Peer.send(this.$store.state.activeChat, 'call-status', 'ended');
+      this.voice = false;
+      this.mediaOpen = false;
+    },
     // Enter a voice or video call
     toggleMedia(voice = false) {
       this.voice = voice;
@@ -100,6 +113,16 @@ export default {
       messages: sampleMessages,
     };
     /* eslint-enable */
+  },
+  mounted() {
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'connectMediaStream') {
+        // Connect to new peer.
+        if (state.activeMediaStreamPeer) {
+          this.voice = true;
+        }
+      }
+    });
   },
 };
 </script>

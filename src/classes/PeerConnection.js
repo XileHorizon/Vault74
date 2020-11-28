@@ -40,11 +40,14 @@ export default class PeerConnection {
         this.handleIncomingData(data);
       });
     });
+    this.remotePeerConnection.on('error', () => {
+      window.Vault74.warn(`Failed to connect to ${this.remoteId}. They are probably offline.`);
+    });
     this.checkHeartbeat();
   }
 
   reconnect() {
-    this.remotePeerConnection.close();
+    if (this.remotePeerConnection) this.remotePeerConnection.close();
     this.connect();
   }
 
@@ -91,6 +94,9 @@ export default class PeerConnection {
         break;
       case 'typing-notice':
         this.watcher('typing-notice', data);
+        break;
+      case 'call-status':
+        this.watcher('call-status', data);
         break;
       default:
         this.watcher('data', data);

@@ -1,5 +1,11 @@
 <template>
+
   <div id="app" :class="`${this.$store.state.settings.darkMode ? 'dark' : ''}`">
+    <div class="notification is-warning" v-if="showWarning">
+      <button class="delete" v-on:click="hideWarning"></button>
+      Heads up, this is an alpha release. <strong>Messages are not yet encrypted</strong>. This is not a finished product and serval exploits may exist.
+      Features are rapidly being added and changed. For this reason please only use this on a <strong>Testnet</strong> until the beta.
+    </div>
     <!--
     <header>
       <router-link :to="{ name: 'home' }">Vue.js PWA</router-link>
@@ -24,9 +30,24 @@ const newMessageSound = new Audio('https://ipfs.io/ipfs/QmV7bZ3RSppXePC299kfUjpd
 
 export default {
   name: 'app',
+  data() {
+    return {
+      showWarning: !(localStorage.getItem('alpha-warning') === 'false'),
+    };
+  },
+  methods: {
+    hideWarning() {
+      localStorage.setItem('alpha-warning', false);
+      this.showWarning = false;
+    },
+  },
   mounted() {
     this.$store.commit('ICEConnected', false);
     this.$store.commit('dwellerAddress', false);
+    this.$store.commit('activeCaller', false);
+    // Reset media call data
+    this.$store.commit('connectMediaStream', false);
+
     // If we have an account, go ahead and mount to the account
     // else wait a bit and try again.
     const checkAccount = () => {
@@ -65,12 +86,18 @@ export default {
                 case 'typing-notice':
                   this.$store.commit('userTyping', [peer, JSON.parse(data).data]);
                   break;
+                case 'call-status':
+                  if (JSON.parse(data).data === 'ended') {
+                    window.Vault74.Peer2Peer.hangup();
+                  }
+                  break;
                 default:
                   break;
               }
             },
           );
         window.Vault74.Peer2Peer.createChannels(this.$store.state.friends);
+        this.peerInit = true;
         return;
       }
       setTimeout(checkAccount, config.peer.timeout);
@@ -108,5 +135,9 @@ export default {
 <style lang="less">
 .dark {
   @import "assets/styles/true_dark.less";
+}
+.notification {
+  z-index: 10;
+  margin: 1rem;
 }
 </style>

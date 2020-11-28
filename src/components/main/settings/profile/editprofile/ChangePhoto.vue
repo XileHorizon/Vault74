@@ -10,7 +10,7 @@
     <button class="button is-primary is-small" v-on:click="toggleCropper">Upload Profile Picture</button>
     <br>
     <br>
-    <button class="button is-primary is-small change-photo" :disabled="!ipfsHash" v-on:click="changePhoto">Change Photo</button>
+    <button class="button is-primary is-small change-photo" :disabled="!ipfsHash" v-on:click="changePhoto">Save Changes</button>
     <div style="clear: both;"></div>
     <br>
     <p v-if="error" class="red">{{error}}</p>

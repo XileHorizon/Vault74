@@ -33,6 +33,11 @@ const defaultState = {
   activeChat: false,
   messages: {},
   typingUsers: {},
+  // Direct Calling Media Streams
+  pendingMediaStream: false,
+  mediaStreamConnected: false,
+  activeMediaStreamPeer: false,
+  activeCaller: false,
 };
 
 const createState = customState => Object.assign({}, defaultState, customState);

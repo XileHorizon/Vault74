@@ -1,8 +1,11 @@
 <template>
   <div id="wrapper">
     <Web3 />
+    <MediaManager v-if="windowBound && $store.state.p2pOnline && $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000'" />
     <Loading v-if="!$store.state.p2pOnline || $store.state.dwellerAddress === '0x0000000000000000000000000000000000000000' || !$store.state.dwellerAddress" />
     <div v-else>
+      <Calling :active="$store.state.activeCaller" :callerId="$store.state.activeCaller" />
+
       <div :class="`columns wrapper ${$store.state.sidebarOpen ? '' : 'wrapper-closed'} ${settingsOpen ? 'settings-open' : ''}`">
         <div class="column is-one-third" style="max-width: 320px;" v-if="$store.state.sidebarOpen">
           <Sidebar :toggleSettings="toggleSettings" />
@@ -46,6 +49,7 @@
 
 <script>
 import Mousetrap from 'mousetrap';
+import MediaManager from '@/components/media/MediaManager';
 import Sidebar from '@/components/sidebar/Sidebar/Sidebar';
 import Main from '@/components/main/Main/Main';
 import Files from '@/components/files/Files/Files';
@@ -53,6 +57,7 @@ import Friends from '@/components/friends/Friends/Friends';
 import Settings from '@/components/main/settings/Settings';
 import Web3 from '@/components/Web3/Web3';
 import Loading from '@/components/common/Loading';
+import Calling from '@/components/main/Popups/Calling/Calling';
 
 import IPFS from 'ipfs-core';
 
@@ -66,10 +71,13 @@ export default {
     Settings,
     Web3,
     Loading,
+    MediaManager,
+    Calling,
   },
   data() {
     return {
       msg: 'Chat',
+      windowBound: false,
       settingsOpen: false,
       network: '',
       account: 0x0,
@@ -96,6 +104,16 @@ export default {
     });
     const ipfs = await IPFS.create();
     window.ipfs = ipfs;
+    const checkPeer = () => {
+      if (window.Vault74.Peer2Peer) {
+        this.windowBound = true;
+      } else {
+        setTimeout(() => {
+          checkPeer();
+        }, 500);
+      }
+    };
+    checkPeer();
   },
 };
 </script>
