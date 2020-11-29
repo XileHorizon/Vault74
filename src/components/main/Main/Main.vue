@@ -8,10 +8,6 @@ import Convorsation from '@/components/main/convorsation/Convorsation/Convorsati
 import NoConvorsation from '@/components/main/convorsation/Convorsation/NoConvorsation';
 import sampleMessages from './sampleMessages';
 
-const callSound = new Audio('https://ipfs.io/ipfs/QmRdxeQF53abUesaFC8qmoNJ5FLS8LBuSyCmcXT5VhuKSm');
-const hangupSound = new Audio('https://ipfs.io/ipfs/QmWrRi5tdKZy3iqcR8mum9hFBbZ8qgvekhEM3Y4PD1TK28');
-// const connectedSound = new Audio('https://ipfs.io/ipfs/QmSHtz5kSvX8JNZKMfkm6PjqScxoC864bmGd2g3ycwRqK1');
-
 export default {
   name: 'Main',
   components: {
@@ -29,7 +25,6 @@ export default {
     },
     makeCall() {
       this.$store.commit('connectMediaStream', this.$store.state.activeChat);
-      // TODO: Start calling sound
       window.Vault74.Peer2Peer.call(this.$store.state.activeChat);
       this.voice = true;
       this.mediaOpen = true;
@@ -46,20 +41,6 @@ export default {
       this.mediaOpen = !this.mediaOpen;
       if (!this.mediaOpen) {
         this.voice = false;
-        clearTimeout(this.playCallSoundTimer);
-        callSound.pause();
-        hangupSound.play();
-      }
-      if (this.mediaOpen) {
-        const playCallSound = (iteration, max) => {
-          callSound.play();
-          if (iteration <= max) {
-            this.playCallSoundTimer = setTimeout(() => {
-              playCallSound(iteration + 1, max);
-            }, 4600);
-          }
-        };
-        playCallSound(0, 1);
       }
     },
     // Send a message in the chat, this will probably

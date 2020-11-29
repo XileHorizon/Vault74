@@ -26,7 +26,7 @@ import config from '@/config/config';
 import Peer2Peer from '@/classes/Peer2Peer';
 import MessageBroker from '@/classes/MessageBroker';
 
-const newMessageSound = new Audio('https://ipfs.io/ipfs/QmV7bZ3RSppXePC299kfUjpdLBsAptmSDrtvvSmBJh1cmB');
+const newMessageSound = new Audio(`${config.ipfs.browser}${config.sounds.newMessage}`);
 
 export default {
   name: 'app',

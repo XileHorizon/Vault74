@@ -5,7 +5,7 @@ import config from '@/config/config';
 import IPFSUtils from '@/utils/IPFSUtils';
 import FileC from '@/classes/FileC';
 
-const uploadAudio = new Audio('https://ipfs.io/ipfs/QmSHtz5kSvX8JNZKMfkm6PjqScxoC864bmGd2g3ycwRqK1');
+const uploadAudio = new Audio(`${config.ipfs.browser}${config.sounds.upload}`);
 
 export default {
   name: 'FileUploadInline',

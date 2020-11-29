@@ -1,3 +1,5 @@
+import MessageUtils from '@/utils/MessageUtils';
+
 export default {
   // Used to set a specific setting in key vaule storage
   // only do this from the settings page components
@@ -127,29 +129,8 @@ export default {
   },
   // Group messages by sender for cleanliness.
   updateMessages(state, messages) {
-    const groupedMessages = {};
-    Object.keys(messages).forEach((messageGroup) => {
-      const currentGrouping = messages[messageGroup];
-      const newGrouping = [];
-      let lastMessageFrom = false;
-      let tempGroup = [];
-      currentGrouping.forEach((message, i) => {
-        if (!lastMessageFrom || lastMessageFrom === message.sender) {
-          lastMessageFrom = message.sender;
-          tempGroup.push(message);
-        } else {
-          newGrouping.push(tempGroup);
-          tempGroup = [message];
-          lastMessageFrom = message.sender;
-        }
-        if (i === currentGrouping.length - 1) {
-          newGrouping.push(tempGroup);
-        }
-      });
-      groupedMessages[messageGroup] = newGrouping;
-    });
     // eslint-disable-next-line no-param-reassign
-    state.messages = groupedMessages;
+    state.messages = MessageUtils.group(messages);
   },
   connectMediaStream(state, peer) {
     // eslint-disable-next-line no-param-reassign

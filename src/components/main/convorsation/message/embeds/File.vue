@@ -39,6 +39,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  #payment {
+    margin-top: 0.5rem;
+    max-width: 400px;
+  }
   .media {
     background: #fff;
     border-radius: 6px;

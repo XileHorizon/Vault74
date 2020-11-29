@@ -5,12 +5,12 @@ import Mousetrap from 'mousetrap';
 import CircleIcon from '@/components/common/CircleIcon';
 import config from '@/config/config';
 
-const muteAudio = new Audio('https://ipfs.io/ipfs/QmVk362FGmwfsXBj5zMv4x1Hp7Mp9RbYDMxsDXRAx5vyUo');
+const muteAudio = new Audio(`${config.ipfs.browser}${config.sounds.mute}`);
 // eslint-disable-next-line
-const unmuteAudio = new Audio('https://ipfs.io/ipfs/QmWxv18LqpcaMhXVd1BLm9z9k1MfWDNexJ22dC6vLkdyro');
+const unmuteAudio = new Audio(`${config.ipfs.browser}${config.sounds.unmute}`);
 
-const deafenAudio = new Audio('https://ipfs.io/ipfs/Qmf4QinBSDk9AgvqsiaaZ2ZmhCfTwcSRpAgSCTxLGyZkyg');
-const unDeafenAudio = new Audio('https://ipfs.io/ipfs/QmSHtz5kSvX8JNZKMfkm6PjqScxoC864bmGd2g3ycwRqK1');
+const deafenAudio = new Audio(`${config.ipfs.browser}${config.sounds.deafen}`);
+const unDeafenAudio = new Audio(`${config.ipfs.browser}${config.sounds.undeafen}`);
 
 export default {
   name: 'Controls',

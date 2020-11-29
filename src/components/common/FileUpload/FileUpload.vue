@@ -5,7 +5,7 @@ import config from '@/config/config';
 import IPFSUtils from '@/utils/IPFSUtils';
 import FileC from '@/classes/FileC';
 
-const uploadAudio = new Audio('https://ipfs.io/ipfs/QmSHtz5kSvX8JNZKMfkm6PjqScxoC864bmGd2g3ycwRqK1');
+const uploadAudio = new Audio(`${config.ipfs.browser}${config.sounds.upload}`);
 
 export default {
   name: 'FileUpload',
@@ -51,7 +51,6 @@ export default {
         );
         this.relayResult(
           this.fileClass.getObject(),
-          // TODO: Support MP4
           this.determineFileType(this.selectedFile.type),
         );
         // TODO: move this to it's own localStorage object or indexedDB

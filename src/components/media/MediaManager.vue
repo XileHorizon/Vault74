@@ -1,26 +1,21 @@
-<template>
-  <div>
-   
-  </div>
-</template>
+<template></template>
 
 <script>
+import config from '@/config/config';
 import { Howl } from 'howler';
 
 const callingSound = new Howl({
-  src: ['https://ipfs.io/ipfs/QmRdxeQF53abUesaFC8qmoNJ5FLS8LBuSyCmcXT5VhuKSm'],
+  src: [`${config.ipfs.browser}${config.sounds.call}`],
   loop: true,
   volume: 1.0,
   html5: true,
 });
 
 const hangupSound = new Howl({
-  src: ['https://ipfs.io/ipfs/QmWrRi5tdKZy3iqcR8mum9hFBbZ8qgvekhEM3Y4PD1TK28'],
+  src: [`${config.ipfs.browser}${config.sounds.hangup}`],
   volume: 1.0,
   html5: true,
 });
-
-console.log('calling', callingSound);
 
 export default {
   name: 'MediaManager',
@@ -31,11 +26,23 @@ export default {
   audioStream: null,
   answer: () => {},
   methods: {
+    // Stream the audio to the DOM
     playRemoteStream(e) {
       this.audioStream = new Audio();
       this.audioStream.muted = false;
       this.audioStream.srcObject = e;
       this.audioStream.play();
+    },
+    // Clear the usage of the audio devices
+    stopStream() {
+      if (!this.mediaStream) return;
+      this.mediaStream.getAudioTracks().forEach((track) => {
+        track.stop();
+      });
+      this.mediaStream.getVideoTracks().forEach((track) => {
+        track.stop();
+      });
+      this.mediaStream = null;
     },
     // Create a new media stream (audio)
     // if one has not yet been created
@@ -59,14 +66,15 @@ export default {
       callingSound.play();
       this.activeCall = this.peer.call(peerId, this.mediaStream);
       this.activeCall.on('stream', (remoteStream) => {
+        // Play calling sound
         callingSound.stop();
-        console.log('they picked up', remoteStream);
         this.remoteStream = remoteStream;
         this.playRemoteStream(this.remoteStream);
       });
     },
     denyCall() {
-      callingSound.pause();
+      // Stop calling sound
+      callingSound.stop();
       window.Vault74.Peer2Peer.hangup();
     },
   },
@@ -77,8 +85,11 @@ export default {
       this.call(id);
     });
     window.Vault74.Peer2Peer.bindHangup(async () => {
+      // Stop calling & play hangup
       callingSound.stop();
       hangupSound.play();
+
+      this.stopStream();
       if (this.remoteStream) {
         this.remoteStream = null;
       }
@@ -97,6 +108,7 @@ export default {
         this.peer = window.Vault74.Peer2Peer.getPeer();
         // When a peer calls us, we will answer the call if we have approved.
         this.peer.on('call', async (call) => {
+          // Play calling sound
           callingSound.play();
           call.on('close', () => {
             window.Vault74.Peer2Peer.send(call.peer, 'call-status', 'ended');
@@ -105,14 +117,13 @@ export default {
           this.$store.commit('activeCaller', call.peer);
           this.activeCall = call;
 
-          await this.createMediaStream();
 
-          this.answer = () => {
-            console.log('answered call');
+          this.answer = async () => {
+            await this.createMediaStream();
             this.$store.commit('connectMediaStream', call.peer);
             call.answer(this.mediaStream);
             call.on('stream', (remoteStream) => {
-              console.log('we answered answered, upstream stream', remoteStream);
+              // Play Sound
               callingSound.stop();
               this.remoteStream = remoteStream;
               this.playRemoteStream(this.remoteStream);
@@ -133,6 +144,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="less">
-</style>

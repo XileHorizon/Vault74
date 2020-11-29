@@ -45,10 +45,10 @@ export default {
     scrollToEnd() {
       const { chat } = this.$refs;
       if (!chat) return;
-      this.scrollTimeout = setTimeout(() => {
+      setTimeout(() => {
         chat.scrollTop = chat.scrollHeight;
         this.showScrollToBottom = false;
-      }, 100);
+      }, 10);
     },
     scrollToEndConditionally() {
       const { chat } = this.$refs;
@@ -76,10 +76,11 @@ export default {
     clearTimeout(this.scrollTimeout);
   },
   mounted() {
-    setTimeout(() => {
-      this.scrollToEnd();
-    }, 500);
+    this.$nextTick(() => this.scrollToEnd());
     this.$store.subscribe((mutation) => {
+      if (mutation.type === 'activeChat') {
+        this.$nextTick(() => this.scrollToEnd());
+      }
       if (mutation.type === 'updateMessages') {
         this.scrollToEndConditionally();
       }
