@@ -14,6 +14,7 @@ export default class MessageBroker {
   }
 
   recievedMessage(sender, at, type, data) {
+    console.log('adding message of type', data.type);
     const message = new Message(sender, at, data.type, data.data);
     this.addToConvo(`${this.peerId}::${sender}`, message);
   }

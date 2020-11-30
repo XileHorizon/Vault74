@@ -89,6 +89,16 @@ export default {
                 case 'call-status':
                   if (JSON.parse(data).data === 'ended') {
                     window.Vault74.Peer2Peer.hangup();
+                  } else if (JSON.parse(data).data === 'started') {
+                    window.Vault74.messageBroker.recievedMessage(
+                      peer,
+                      Date.now(),
+                      'call-status',
+                      {
+                        type: 'call-status',
+                        data: 'call-started',
+                      },
+                    );
                   }
                   break;
                 default:

@@ -3,6 +3,12 @@ const defaultState = {
   settings: {
     darkMode: true,
   },
+  audioQuality: 96,
+  audioSamples: 24,
+  noiseSuppression: false,
+  echoCancellation: false,
+  muted: false,
+  deafened: false,
   // Web3
   web3Stats: false,
   accounts: false,

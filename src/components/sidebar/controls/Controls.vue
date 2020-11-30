@@ -39,12 +39,14 @@ export default {
       this.muted = !this.muted;
       if (this.muted) muteAudio.play();
       if (!this.muted) unmuteAudio.play();
+      this.$store.commit('muted', this.muted);
     },
     // Non functional placeholder deafen function
     toggleDeafen() {
       this.deafened = !this.deafened;
       if (this.deafened) deafenAudio.play();
       if (!this.deafened) unDeafenAudio.play();
+      this.$store.commit('deafened', this.deafened);
     },
   },
   mounted() {

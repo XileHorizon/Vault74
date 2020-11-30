@@ -17,6 +17,13 @@ const hangupSound = new Howl({
   html5: true,
 });
 
+const connectedSound = new Howl({
+  src: [`${config.ipfs.browser}${config.sounds.connected}`],
+  volume: 1.0,
+  html5: true,
+});
+
+
 export default {
   name: 'MediaManager',
   mediaStream: null,
@@ -44,13 +51,41 @@ export default {
       });
       this.mediaStream = null;
     },
+    toggleMute(muted) {
+      this.mediaStream.getTracks().forEach((track) => {
+        // eslint-disable-next-line
+        track.enabled = !muted;
+      });
+    },
+    toggleDeafen(deafened) {
+      this.mediaStream.getTracks().forEach((track) => {
+        // eslint-disable-next-line
+        track.enabled = !deafened;
+      });
+      this.remoteStream.getTracks().forEach((track) => {
+        // eslint-disable-next-line
+        track.enabled = !deafened;
+      });
+    },
     // Create a new media stream (audio)
     // if one has not yet been created
     createMediaStream() {
       if (this.mediaStream) return this.mediaStream;
       const getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       return new Promise((resolve) => {
-        getUserMedia({ audio: true }, (stream) => {
+        const constraints = {
+          audio: {
+            autoGainControl: false,
+            channelCount: 2,
+            echoCancellation: this.$store.state.echoCancellation,
+            latency: 0,
+            noiseSuppression: this.$store.state.noiseSuppression,
+            sampleRate: this.$store.state.audioQuality * 1000,
+            sampleSize: this.$store.state.audioSamples,
+            volume: 1.0,
+          },
+        };
+        getUserMedia(constraints, (stream) => {
           this.mediaStream = stream;
           resolve(this.mediaStream);
         }, (err) => {
@@ -65,6 +100,7 @@ export default {
       }
       callingSound.play();
       this.activeCall = this.peer.call(peerId, this.mediaStream);
+      window.Vault74.Peer2Peer.send(peerId, 'call-status', 'started');
       this.activeCall.on('stream', (remoteStream) => {
         // Play calling sound
         callingSound.stop();
@@ -79,11 +115,20 @@ export default {
     },
   },
   mounted() {
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'muted') {
+        this.toggleMute(state.muted);
+      } else if (mutation.type === 'deafened') {
+        this.toggleDeafen(state.deafened);
+      }
+    });
+
     // Watch for triggers to initiate calls.
     window.Vault74.Peer2Peer.bindCall(async (id) => {
       await this.createMediaStream();
       this.call(id);
     });
+    // Watch for triggers to end a call.
     window.Vault74.Peer2Peer.bindHangup(async () => {
       // Stop calling & play hangup
       callingSound.stop();
@@ -101,6 +146,7 @@ export default {
       this.$store.commit('connectMediaStream', false);
     });
 
+    // Connect to the Peer2Peer handler
     const conn = () => {
       if (window.Vault74.Peer2Peer) {
         // Get the connected peer object.
@@ -117,7 +163,7 @@ export default {
           this.$store.commit('activeCaller', call.peer);
           this.activeCall = call;
 
-
+          // Remote user answered
           this.answer = async () => {
             await this.createMediaStream();
             this.$store.commit('connectMediaStream', call.peer);
@@ -125,6 +171,7 @@ export default {
             call.on('stream', (remoteStream) => {
               // Play Sound
               callingSound.stop();
+              connectedSound.play();
               this.remoteStream = remoteStream;
               this.playRemoteStream(this.remoteStream);
             });

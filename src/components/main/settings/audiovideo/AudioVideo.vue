@@ -18,6 +18,46 @@
             <option>Default Audio Output</option>
           </select>
         </div>
+        <hr class="spacer">
+        <h2>Audio Bitrate</h2>
+        <p>Higher bitrates will transmit better quality audio, lowering the bitrate can help with slower connection speeds.</p>
+        <div class="select">
+          <select v-model="$store.state.audioQuality">
+            <option value="8">8kbps</option>
+            <option value="64">64kbps</option>
+            <option value="96">96kbps</option>
+            <option value="256">256kbps</option>
+            <option value="320">320kbps (MP3)</option>
+            <option value="700">700kbps (Why?)</option>
+            <option value="1411">1411kbps (FLAC)</option>
+          </select>
+        </div>
+        <hr class="spacer">
+        <h2>Sample Size</h2>
+        <p>A higher sample size will give you a broader dynamic range of audio. Higher samples will require better connection speeds.</p>
+        <div class="select">
+          <select v-model="$store.state.audioSamples">
+            <option value="2">2bits</option>
+            <option value="8">8bits</option>
+            <option value="24">24bits</option>
+            <option value="32">32bits</option>
+          </select>
+        </div>
+        <hr class="spacer">
+        <h2>Echo Cancellation</h2>
+        <p>Enable to help cancel out some slight echo &amp; feedback from your mic.</p>
+        <label class="checkbox">
+          <input type="checkbox" v-model="$store.state.echoCancellation">
+          Echo Cancellation Enabled
+        </label>
+        <hr class="spacer">
+        <h2>Noise Supression</h2>
+        <p>Enable to help hide background noise in your environment.</p>
+        <label class="checkbox">
+          <input type="checkbox" v-model="$store.state.noiseSuppression">
+          Supression Enabled
+        </label>
+        
       </div>
     </article>
     <h3 class="label">Video</h3>
@@ -41,12 +81,14 @@ export default {
   data() {
     return {
       devices: false,
+      audioQuality: 320,
       audioDevices: [],
       videoDevices: [],
     };
   },
   async mounted() {
     const devices = await navigator.mediaDevices.enumerateDevices({ audio: true, video: true });
+    this.audioQuality = this.$store.state.audioQuality;
     this.devices = devices;
     devices.forEach((device) => {
       if (device.kind === 'videoinput') this.videoDevices.push(device);

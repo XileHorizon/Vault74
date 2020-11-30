@@ -7,6 +7,9 @@
   </div>
   <div class="c-message-content">
       <div class="c-message" v-for="message in messages">
+          <p v-if="message.type == 'call-status'">
+            <i class="fas fa-phone"></i> {{dweller.name}} started a call...
+          </p>
           <p v-if="message.payload && message.payload.type == 'text'">
             <span v-html="wrapLinks(message.payload.data)"></span>
           </p>

@@ -8,7 +8,7 @@
       <p class="username">{{friend.name}} <Badge :address="friend.address" /></p>
       <p class="address">{{friend.address}}</p>
     </div>
-    <button class="button is-primary add-friend" v-on:click="action(friend.address)">{{text}}</button>
+    <button class="button add-friend is-primary" v-on:click="action(friend.address)">{{text}}</button>
   </div>
 </template>
 

@@ -1,6 +1,14 @@
 import MessageUtils from '@/utils/MessageUtils';
 
 export default {
+  muted(state, muted) {
+    // eslint-disable-next-line no-param-reassign
+    state.muted = muted;
+  },
+  deafened(state, deafened) {
+    // eslint-disable-next-line no-param-reassign
+    state.deafened = deafened;
+  },
   // Used to set a specific setting in key vaule storage
   // only do this from the settings page components
   setSetting(state, key, value) {

@@ -1,22 +1,39 @@
-@dark-blue-gray: #1f2029;
+// Servers & Convorsation & Inputs
 @less-dark-blue-gray: #16151c;
+// Infobar & Sidebar
+@dark-blue-gray: #1f2029;
+// Borders
 @super-dark-boi: #1c1a24;
+// Friends & Containers
 @ohh-so-dark: #292b38;
+// Buttons
+@really-blue: #878de7;
+// Lables & Accents
 @not-as-light-blue-gray: #8287cc;
+@not-as-light-blue-gray-alt: @not-as-light-blue-gray;
+// General Text Colors
 @light-blue-gray: #8183ad;
+// Hovered Text Colors
 @lighter-blue-gray: #afb2e2;
+// Messages & Icons
 @nearly-white: #c9cbf3;
+// Usernames
 @basically-white: #f0f1fc;
+// Message Hovering
+@is-this-black: #0e0e13;
+// Highlights
 @minty-green: #00d0a1;
-@is-this-black: #121218;
+// Errors
+@red: #ee5253;
+
 .theme {
   .online {
-    -webkit-text-fill-color: #666 !important;
+    -webkit-text-fill-color: @light-blue-gray !important;
     -webkit-text-stroke-width: 3px;
     -webkit-text-stroke-color: @super-dark-boi;
   }
   .true {
-    -webkit-text-fill-color: #00d0a1 !important;
+    -webkit-text-fill-color: @minty-green !important;
   }
   .metamask {
     color: @not-as-light-blue-gray !important;
@@ -105,11 +122,11 @@
     color: @ohh-so-dark !important;
   }
   #file .close {
-    background-color: #fc6161 !important;
+    background-color: @red !important;
     color: @ohh-so-dark !important;
   }
   #file .close:hover {
-    background-color: #fc7e7e !important;
+    background-color: @red !important;
     color: @ohh-so-dark !important;
   }
   #file .close i:hover {
@@ -124,7 +141,7 @@
     background-color: #444658 !important;
   }
   .emoji-mart {
-    background: #2e303d !important;
+    background: @ohh-so-dark !important;
     border: none !important;
   }
   .emoji-mart-category-label span {
@@ -171,7 +188,7 @@
     color: @not-as-light-blue-gray !important;
   }
   .media-container {
-    background: #000 !important;
+    background: @is-this-black !important;
   }
   .media-container .media-controls i {
     color: @basically-white !important;
@@ -210,7 +227,7 @@
     border-top: 1px solid @super-dark-boi !important; 
   }
   .controls {
-    background: #242530 !important;
+    background: @dark-blue-gray !important;
     border-top: 1px solid @super-dark-boi !important; 
   }
   .infobar {
@@ -242,18 +259,18 @@
     color: @nearly-white !important;
   }
   .input-collection-red {
-    border: 1px solid #ee5253 !important;
+    border: 1px solid@red !important;
   }
   .c-message-actions {
     background: @dark-blue-gray !important;
     border: none !important;
-    color: #545670 !important;
+    color: #545870 !important;
   }
   .c-message-actions i:hover {
-    color: #8d90b9 !important;
+    color: @light-blue-gray !important;
   }
   .timestamp {
-    color: #8d90b9 !important;
+    color: @light-blue-gray !important;
   }
   .c-message-body:hover {
     background-color: @is-this-black !important;
@@ -283,63 +300,55 @@
   .select select {
     background: @less-dark-blue-gray !important;
     border: 1px solid transparent !important;
-    color: #a4a7d1 !important;
+    color: @lighter-blue-gray !important;
   }
   .select::after {
     border-color: @light-blue-gray !important;
   }
   .message {
     border: none !important;
-    border-left-color: #6e6eb3 !important;
+    border-left-color: @not-as-light-blue-gray-alt !important;
   }
   .unreads {
-    background: #6e6eb3 !important;
+    background: @not-as-light-blue-gray-alt !important;
   }
   .message.is-dark .message-body {
-    border-left-color: #6e6eb3 !important;
+    border-left-color: @not-as-light-blue-gray-alt !important;
   }
   #file {
     background-color: #292a36 !important;
   }
   #file i:hover {
-    color: #cccdfc;
+    color: @nearly-white;
   }
   .filename {
-    color: #d9dafc !important;
+    color: @nearly-white !important;
   }
   .message .message-body {
-    color: #a3a4d6 !important;
+    color: @lighter-blue-gray !important;
     background-color: @dark-blue-gray !important;
   }
   .message .message-body h2 {
     font-weight: bold;
-    color: #cccdfc !important;
+    color: @nearly-white !important;
     background-color: @dark-blue-gray !important;
   }
   .modal-card-body input {
     background: @ohh-so-dark !important;
   }
   .message button {
-    background: #6e6eb3 !important;
-    color: #e0e2fc !important;
+    background: @not-as-light-blue-gray-alt !important;
+    color: @nearly-white !important;
   }
   .vicp-operate a {
-    background: #6e6eb3 !important;
-    color: #e0e2fc !important;
+    background: @not-as-light-blue-gray-alt !important;
+    color: @nearly-white !important;
     padding: 0 1rem !important;
     text-decoration: none !important;
   }
   .message button:hover {
-    background: #8d8de2 !important;
-    color: #e0e2fc !important;
-  }
-  .is-primary {
-    background: #6e6eb3 !important;
-    color: #e0e2fc !important;
-  }
-  .is-primary button:hover {
-    background: #8d8de2 !important;
-    color: #e0e2fc !important;
+    background: @not-as-light-blue-gray !important;
+    color: @nearly-white !important;
   }
   .input-collection {
     background-color: @dark-blue-gray !important; 
@@ -438,16 +447,16 @@
     color: @minty-green;
   }
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #626486 !important;
+    color: @light-blue-gray !important;
     opacity: 1; /* Firefox */
   }
 
   :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #626486 !important;
+    color: @light-blue-gray !important;
   }
 
   ::-ms-input-placeholder { /* Microsoft Edge */
-    color: #626486 !important;
+    color: @light-blue-gray !important;
   }
   .separator {
     color: #47495f !important;
@@ -457,20 +466,46 @@
   }
 
   button.is-danger {
-    background-color: #ee5253 !important;
-    color: #fff !important;
+    background-color:@red !important;
+    color: @basically-white !important;
   }
 
   button.is-danger:hover {
-    background-color: #ff6b6b !important;
+    background-color: @red !important;
+  }
+
+  button.is-primary {
+    background: @really-blue !important;
+    color: @basically-white !important;
+  }
+  button.is-primary:hover {
+    background: @really-blue !important;
+    color: @basically-white !important;
+  }
+  .is-primary {
+    background: @really-blue !important;
+    color: @basically-white !important;
+  }
+  .is-primary button:hover {
+    background: @really-blue !important;
+    color: @basically-white !important;
+  }
+
+  button.is-dark {
+    background: @really-blue !important;
+    color: @basically-white !important;
+  }
+  button.is-dark:hover {
+    background: @really-blue !important;
+    color: @basically-white !important;
   }
   .head {
-    color: #c7caf1 !important;
+    color: @nearly-white !important;
   }
   .username {
-    color: #dadcff !important;
+    color: @basically-white !important;
   }
   .red {
-    color: #ee5253 !important;
+    color: @red !important;
   }
 }
