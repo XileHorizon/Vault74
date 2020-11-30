@@ -11,7 +11,7 @@
   ],
   "author": "Matthias Adler",
   "private": true,
-  "license": "MIT",
+  "license": "CC-BY-NC",
   "scripts": {
     "prepush": "npm run eslint",
     "dev": "node build/dev-server.js",

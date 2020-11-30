@@ -16,7 +16,7 @@
           <Friends v-if="$store.state.mainRoute == 'friends'"/>
         </div>
       </div>
-      <div :class="`settings ${settingsOpen ? 'settings-open-container' : ''}`">
+      <div :class="`settings ${settingsOpen ? 'settings-open-container' : ''}`" v-if="settingsOpen">
         <Settings :toggleSettings="toggleSettings" :open="settingsOpen" />
       </div>
       <div class="footer">

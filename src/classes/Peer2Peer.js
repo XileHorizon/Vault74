@@ -5,6 +5,11 @@ import PeerConnection from './PeerConnection';
 const messageFormatter = (type, data) => JSON.stringify({ type, data });
 
 export default class Peer2Peer {
+  /** @constructor
+   * Construct a new Peer 2 Peer handler
+   * @argument peerId the ID we'd like to use for this peer
+   * @argument watcher function to be called when we recive peer data
+   */
   constructor(peerId, watcher = () => {}) {
     const settings = {
       host: config.peer.network[config.env].host,
@@ -58,14 +63,29 @@ export default class Peer2Peer {
     });
   }
 
+  /** @function
+   * @name bindCall
+   * Binds the function that should be used to request a call
+   * @argument fn the function to be called
+   */
   bindCall(fn) {
     this.call = fn;
   }
 
+  /** @function
+   * @name bindHangup
+   * Binds the function that should be used to leave calls
+   * @argument fn the function to be called
+   */
   bindHangup(fn) {
     this.hangup = fn;
   }
 
+  /** @function
+   * @name bindAnswer
+   * Binds the function that should be used to answer calls
+   * @argument fn the function to be called
+   */
   bindAnswer(fn) {
     this.answer = fn;
   }
@@ -129,25 +149,54 @@ export default class Peer2Peer {
     return this.channels[`${this.peerId}::${peerId}`];
   }
 
+  /** @function
+   * @name getDataChannel
+   * Get a datachannel class by a specific peerId
+   * @argument peerId the identifying peer to get the channel of
+   * @returns returns the remote peer data channel
+   */
   getDataChannel(peerId) {
     return this.channels[`${this.peerId}::${peerId}`];
   }
 
+  /** @function
+   * @name getPeer
+   * @returns the local peer object
+   */
   getPeer() {
     return this.peer;
   }
 
+  /** @function
+   * @name internalWatcher
+   * Take action when peer data comes in
+   * @argument peer the peer id sending the data
+   * @argument type the type of data we recieved
+   * @data the data we recieved
+   */
   internalWatcher(peer, type, data) {
     // Hoist watcher methods
     this.watcher(peer, type, data);
     window.Vault74.debug(`${peer} -> `, type, data);
   }
 
+  /** @function
+   * @name ping
+   * Sends a ping request to a peer
+   * @argument peerId the if of the peer to ping.
+   */
   ping(peerId) {
     const peerConntion = this.channels[`${this.peerId}::${peerId}`];
     peerConntion.send(messageFormatter('ping', Date.now()));
   }
 
+  /** @function
+   * @name send
+   * Send data of a specified type to a specified peer
+   * @argument peerId peer to send data to
+   * @argument type type of data we're sending
+   * @argument data the payload to send
+   */
   send(peerId, type, data) {
     const peerConntion = this.channels[`${this.peerId}::${peerId}`];
     peerConntion.send(messageFormatter(type, data));

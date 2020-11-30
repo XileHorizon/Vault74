@@ -51,12 +51,14 @@ export default {
       });
       this.mediaStream = null;
     },
+    // Mute all local audio tracks
     toggleMute(muted) {
       this.mediaStream.getTracks().forEach((track) => {
         // eslint-disable-next-line
         track.enabled = !muted;
       });
     },
+    // Mute local AND remote audio tracks
     toggleDeafen(deafened) {
       this.mediaStream.getTracks().forEach((track) => {
         // eslint-disable-next-line
@@ -115,6 +117,7 @@ export default {
     },
   },
   mounted() {
+    // Watch for mute and unmute mutations
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'muted') {
         this.toggleMute(state.muted);
@@ -176,6 +179,7 @@ export default {
               this.playRemoteStream(this.remoteStream);
             });
           };
+          // Bind the global answer functionality
           window.Vault74.Peer2Peer.bindAnswer(async () => {
             this.answer();
           });

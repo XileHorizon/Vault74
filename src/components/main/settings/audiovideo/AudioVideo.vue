@@ -28,7 +28,7 @@
             <option value="96">96kbps</option>
             <option value="256">256kbps</option>
             <option value="320">320kbps (MP3)</option>
-            <option value="700">700kbps (Why?)</option>
+            <option value="700">510kbps (Opus Peak)</option>
             <option value="1411">1411kbps (FLAC)</option>
           </select>
         </div>
