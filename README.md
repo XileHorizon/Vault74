@@ -1,6 +1,6 @@
 # Vault74
 
-![](QmW2Kbkx2APq8rmGDnGaMPZy4amTk4fzhrMiDq257h745J)
+![](https://ipfs.io/ipfs/QmW2Kbkx2APq8rmGDnGaMPZy4amTk4fzhrMiDq257h745J)
 
 Decentralized chat & sharing platform
 
