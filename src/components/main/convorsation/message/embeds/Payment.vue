@@ -16,7 +16,7 @@
             <i class="fas fa-arrow-down"></i>
             <small>{{message.data.to}}</small>
             <br>
-            <a :href="`https://etherscan.io/tx/${message.data.tx}`" target="_blank">
+            <a :href="`${config.explorer}/tx/${message.data.tx}`" target="_blank">
               <b class="yellow">Click to review transaction on Etherscan.</b>
             </a>
           </p>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import config from '@/config/config';
 
 export default {
   name: 'Payment',
@@ -36,6 +37,7 @@ export default {
   data() {
     return {
       name: false,
+      config,
     };
   },
   mounted() {
