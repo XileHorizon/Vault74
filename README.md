@@ -1,5 +1,7 @@
 # Vault74
 
+![](https://ipfs.io/ipfs/QmW2Kbkx2APq8rmGDnGaMPZy4amTk4fzhrMiDq257h745J)
+
 Decentralized chat & sharing platform
 
 ## Contributing Rules
