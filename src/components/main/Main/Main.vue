@@ -45,7 +45,7 @@ export default {
     },
     // Send a message in the chat, this will probably
     // be rewritten when the chat is functional
-    sendMessage(data, type, sender = 'RetroPronghorn', photo) {
+    sendMessage(data, type) {
       if (window.Vault74.messageBroker) {
         window.Vault74.messageBroker.sentMessage(
           this.$store.state.activeChat,
@@ -65,24 +65,6 @@ export default {
           data,
         },
       );
-      /* eslint-disable */
-      this.messages.push({
-          id: Date.now(),
-          type: 'message-group',
-          user: {
-            name: sender,
-            photo: photo || 'https://avatars3.githubusercontent.com/u/1770198?s=460&u=c2be9f3c1e9ce8ba336f29ed2f98c6eeeeab3f94&v=4',
-          },
-          timestamp: Date.now(),
-          content: [
-            {
-              id: 1,
-              type: type || 'text',
-              data: data,
-            },
-          ],
-      });
-      /* eslint-enable */
     },
   },
   data() {

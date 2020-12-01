@@ -4,21 +4,9 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <i class="fab fa-ethereum logo"></i>
-            <strong class="amount">{{message.data.amount}} Ether</strong><br />
-            <small>{{message.data.from}}</small><br>
-            <i class="fas fa-arrow-down"></i>
-            <i class="fas fa-arrow-down"></i>
-            <i class="fas fa-arrow-down"></i>
-            <b>{{message.data.amount}} ETH</b>
-            <i class="fas fa-arrow-down"></i>
-            <i class="fas fa-arrow-down"></i>
-            <i class="fas fa-arrow-down"></i>
-            <small>{{message.data.to}}</small>
-            <br>
-            <a :href="`https://etherscan.io/tx/${message.data.tx}`" target="_blank">
-              <b class="yellow">Click to review transaction on Etherscan.</b>
-            </a>
+            <i class="fas fa-phone-volume logo"></i>
+            <strong class="amount">Call Started</strong><br />
+            <small>Call incoming, get ready!</small><br>
           </p>
         </div>
       </div>
@@ -29,7 +17,7 @@
 <script>
 
 export default {
-  name: 'Payment',
+  name: 'Call',
   props: [
     'message',
   ],
@@ -51,7 +39,7 @@ export default {
     border-radius: 6px;
     border: 1px solid #eee;
     padding: 0 1rem 0.5rem 1rem;
-    max-width: 450px;
+    max-width: 300px;
     color: #666;
     position: relative;
     border-left: 4px solid #00d0a1;
@@ -68,10 +56,10 @@ export default {
     padding-left: 5rem;
   }
   .logo {
-    font-size: 38pt;
+    font-size: 26pt;
     position: absolute;
     left: 2rem;
-    top: 1.15rem;
+    top: 0.9rem;
   }
   .amount {
     color: #00d0a1;

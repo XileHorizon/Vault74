@@ -19,8 +19,11 @@
           <div v-if="parseYoutubeLink(message.payload.data)">
             <YouTube :link="parseYoutubeLink(message.payload.data)"/>
           </div>
-          <div v-if="message.payload && message.payload.type === 'payment'">
-            <Payment :message="message" />
+          <div v-if="message.payload.type === 'payment'">
+            <Payment :message="message.payload" />
+          </div>
+          <div v-if="message.payload.type === 'call'">
+            <Call :message="message.payload" />
           </div>
           <div v-if="message.payload && message.payload.type === 'image'">
             <ImageViewer :image="message.payload.data.url" :scrollToEnd="scrollToEnd" />

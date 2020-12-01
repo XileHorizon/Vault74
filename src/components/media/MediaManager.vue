@@ -1,6 +1,7 @@
 <template></template>
 
 <script>
+import MessageBroker from '@/classes/MessageBroker';
 import config from '@/config/config';
 import { Howl } from 'howler';
 
@@ -26,13 +27,45 @@ const connectedSound = new Howl({
 
 export default {
   name: 'MediaManager',
-  mediaStream: null,
-  peer: null,
-  activeCall: null,
-  remoteStream: null,
-  audioStream: null,
-  answer: () => {},
+  data() {
+    return {
+      messageBroker: new MessageBroker(
+        this.$store.state.activeAccount,
+        (data) => {
+          this.$store.commit('updateMessages', data);
+        },
+      ),
+      mediaStream: null,
+      peer: null,
+      activeCall: null,
+      remoteStream: null,
+      audioStream: null,
+      answer: () => {},
+    };
+  },
   methods: {
+    // Sends messages to remote peer and the message broker.
+    sendMessage(data, type) {
+      if (window.Vault74.messageBroker) {
+        window.Vault74.messageBroker.sentMessage(
+          this.$store.state.activeChat,
+          Date.now(),
+          'message',
+          {
+            type: type || 'text',
+            data,
+          },
+        );
+      }
+      window.Vault74.Peer2Peer.send(
+        this.$store.state.activeChat,
+        'message',
+        {
+          type: type || 'text',
+          data,
+        },
+      );
+    },
     // Stream the audio to the DOM
     playRemoteStream(e) {
       this.audioStream = new Audio();
@@ -75,6 +108,7 @@ export default {
       if (this.mediaStream) return this.mediaStream;
       const getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       return new Promise((resolve) => {
+        // Constraints for configurable audio
         const constraints = {
           audio: {
             autoGainControl: false,
@@ -102,7 +136,14 @@ export default {
       }
       callingSound.play();
       this.activeCall = this.peer.call(peerId, this.mediaStream);
-      window.Vault74.Peer2Peer.send(peerId, 'call-status', 'started');
+      this.sendMessage(
+        {
+          state: 'staretd',
+          to: peerId,
+          from: this.$store.state.activeAccount,
+        },
+        'call',
+      );
       this.activeCall.on('stream', (remoteStream) => {
         // Play calling sound
         callingSound.stop();

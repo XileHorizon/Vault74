@@ -1,18 +1,23 @@
 <section class="make-payment">
   <div class="left-head">
-      <CircleIcon image="https://randomuser.me/api/portraits/women/43.jpg" />
+      <CircleIcon :image="icon" />
   </div>
   <div class="right-head">
-      <p><b>{{person}}</b><br>
-      <small>0xD02248C262b3690CC6eE7...</small></p>
+      <p><b>{{name}}</b><br>
+      <small>{{address}}</small></p>
   </div>
   <hr class="divider">
   <div style="clear:both;"></div>
   <p>
-      <i class="fab fa-ethereum"></i> Send {{amount}} ether (${{+(Math.round((amount * 391.84) + "e+2")  + "e-2")}})<br>
+      <i class="fab fa-ethereum"></i> Send {{amount}} ether (${{+(Math.round((amount * priceUsd) + "e+2")  + "e-2")}})<br>
       <small>
           <b>Balance: </b>
           {{+(Math.round($store.state.balance + "e+3")  + "e-3")}} ETH
+          <span v-if="error">
+            <br>
+            <b class="red">{{error}}</b>
+          </span>
+          <b class="yellow"> - Prices from CoinCap.io</b>
       </small>
   </p>
   <input 
@@ -21,5 +26,5 @@
       placeholder="0.1"
       v-model="amount">
   <i class="fa fa-times close" v-on:click="toggle"></i>
-  <button class="button is-primary">Send</button>
+  <button class="button is-primary" v-on:click="sendTransaction">Send</button>
 </section>

@@ -6,7 +6,7 @@
     <Convorsation 
       :messages="messages"
       :mediaOpen="$store.state.activeMediaStreamPeer && $store.state.activeChat === $store.state.activeMediaStreamPeer"
-      :voice="$store.state.activeMediaStreamPeer && voice"
+      :voice="$store.state.activeMediaStreamPeer && $store.state.activeChat === $store.state.activeMediaStreamPeer && voice"
       v-if="$store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]"/>
     <NoConvorsation v-else />
     <VoiceVideo 

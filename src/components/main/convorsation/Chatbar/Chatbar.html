@@ -1,7 +1,12 @@
 <div>
   <section class="chat-group" @paste="handlePaste">
       <FileUpload v-if="showFileUpload" :file="file" :relayResult="handleNewMessage" :close="closeFileUpload" />
-      <MiniPayment person="Sophie Chain" v-if="payments" :toggle="togglePayments" />
+      <MiniPayment 
+        :person="$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].name" 
+        :address="$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].address"
+        :photo="$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].photo"
+        v-if="payments" 
+        :toggle="togglePayments" />
       <p id="typing" class="loading" v-if="$store.state.typingUsers[$store.state.activeChat]">
         <b>
           {{$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].name}}

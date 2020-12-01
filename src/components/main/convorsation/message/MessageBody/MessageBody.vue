@@ -5,6 +5,7 @@
   import Link from '@/components/main/convorsation/message/embeds/Link';
   import YouTube from '@/components/main/convorsation/message/embeds/YouTube';
   import Payment from '@/components/main/convorsation/message/embeds/Payment';
+  import Call from '@/components/main/convorsation/message/embeds/Call';
   import ImageViewer from '@/components/main/convorsation/message/embeds/ImageViewer';
   import File from '@/components/main/convorsation/message/embeds/File';
   import Audio from '@/components/main/convorsation/message/embeds/Audio';
@@ -25,6 +26,7 @@
       Link,
       YouTube,
       Payment,
+      Call,
       ImageViewer,
       File,
       Audio,
