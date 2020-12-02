@@ -1,5 +1,6 @@
 {
   "name": "vuejs-starterkit",
+  "main": "main.js",
   "version": "1.0.0",
   "description": "Vault74 Secure Communications",
   "keywords": [
@@ -15,6 +16,7 @@
   "scripts": {
     "prepush": "npm run eslint",
     "dev": "node build/dev-server.js",
+    "standalone": "electron .",
     "start": "npm run dev",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
@@ -42,6 +44,7 @@
     "web3": "2.0.0-alpha.1"
   },
   "devDependencies": {
+    "electron": "^11.0.3",
     "autoprefixer": "^8.5.0",
     "avoriaz": "^6.3.0",
     "babel-core": "^6.26.3",

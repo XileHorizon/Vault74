@@ -1,16 +1,16 @@
 // Servers & Convorsation & Inputs
-@less-dark-blue-gray: #16151c;
+@less-dark-blue-gray: #23252f;
 // Infobar & Sidebar
-@dark-blue-gray: #1f2029;
-@darker-blue-gray: #181920;
+@dark-blue-gray: #282a36;
+@darker-blue-gray: #282a36;
 // Borders
-@super-dark-boi: #1c1a24;
+@super-dark-boi: transparent;
 // Friends & Containers
-@ohh-so-dark: #292b38;
+@ohh-so-dark: #1f222b;
 // Buttons
-@really-blue: #878de7;
+@really-blue: #7293d0;
 // Lables & Accents
-@not-as-light-blue-gray: #8287cc;
+@not-as-light-blue-gray: #7293d0;
 @not-as-light-blue-gray-alt: @not-as-light-blue-gray;
 // General Text Colors
 @light-blue-gray: #8183ad;
@@ -21,9 +21,9 @@
 // Usernames
 @basically-white: #f0f1fc;
 // Message Hovering
-@is-this-black: #14141a;
+@is-this-black: #2b2f3b;
 // Highlights
-@minty-green: #00d0a1;
+@minty-green: #7293d0;
 // Errors
 @red: #ee5253;
 @yellow: #f1c40f;
@@ -372,6 +372,7 @@
     background: @less-dark-blue-gray !important;
   }
   .user-active {
+    color: @minty-green !important;
     background-color: @ohh-so-dark !important;
   }
   .user:hover { 
@@ -512,5 +513,8 @@
   }
   .red {
     color: @red !important;
+  }
+  #scrollBottom {
+    background: @minty-green !important;
   }
 }

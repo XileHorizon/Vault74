@@ -1,6 +1,6 @@
 <template>
 
-  <div id="app" :class="`${this.$store.state.settings.darkMode ? 'dark' : ''}`">
+  <div id="app" :class="this.$store.state.theme">
     <div class="notification is-warning" v-if="showWarning">
       <button class="delete" v-on:click="hideWarning"></button>
       Heads up, this is an alpha release. <strong>Messages are not yet encrypted</strong>. This is not a finished product and serval exploits may exist.
@@ -135,6 +135,12 @@ export default {
 <style lang="less">
 .dark {
   @import "assets/styles/true_dark.less";
+}
+.ice {
+  @import "assets/styles/ice.less";
+}
+.tokyo {
+  @import "assets/styles/tokyo.less";
 }
 .notification {
   z-index: 10;

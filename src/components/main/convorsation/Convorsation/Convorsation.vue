@@ -45,8 +45,10 @@ export default {
     scrollToEnd() {
       const { chat } = this.$refs;
       if (!chat) return;
-      chat.scrollTop = chat.scrollHeight;
-      this.showScrollToBottom = false;
+      setTimeout(() => {
+        chat.scrollTop = chat.scrollHeight;
+        this.showScrollToBottom = false;
+      }, 50);
     },
     scrollToEndConditionally() {
       const { chat } = this.$refs;

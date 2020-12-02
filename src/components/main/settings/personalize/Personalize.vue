@@ -3,12 +3,17 @@
     <h3 class="label">Appearance</h3>
     <article class="message is-dark">
       <div class="message-body">
-        <h2>Dark Theme</h2>
-        <p>Enable dark theme for an easy on the eyes version of Vault74.</p>
+        <h2>Theme</h2>
+        <p>Change up the theam and stay easy on the eyes with Vault74.</p>
         <br>
-        <button class="button is-dark is-small" v-on:click="toggleDarkMode">
-          {{settings.darkMode ? 'Disable Dark Mode' : 'Enable Dark Mode'}}
-        </button>
+        <div class="select">
+          <select v-model="$store.state.theme">
+            <option value="dark">Simply Dark</option>
+            <option value="light">Eye Strain</option>
+            <option value="ice">Ice Cold</option>
+            <option value="tokyo">Tokyo Night</option>
+          </select>
+        </div>
       </div>
     </article>
     <h3 class="label">Permissions</h3>

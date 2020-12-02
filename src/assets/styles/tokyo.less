@@ -1,34 +1,59 @@
 // Servers & Convorsation & Inputs
-@less-dark-blue-gray: #16151c;
+@less-dark-blue-gray: #101016;
 // Infobar & Sidebar
-@dark-blue-gray: #1f2029;
-@darker-blue-gray: #181920;
+@dark-blue-gray: #16161e;
+@darker-blue-gray: #16161e;
 // Borders
-@super-dark-boi: #1c1a24;
+@super-dark-boi: #131319;
 // Friends & Containers
-@ohh-so-dark: #292b38;
+@ohh-so-dark: #1a1b26;
 // Buttons
-@really-blue: #878de7;
+@really-blue: #6183bb;
 // Lables & Accents
-@not-as-light-blue-gray: #8287cc;
+@not-as-light-blue-gray: #b2bae1;
 @not-as-light-blue-gray-alt: @not-as-light-blue-gray;
 // General Text Colors
-@light-blue-gray: #8183ad;
+@light-blue-gray: #545974;
 // Hovered Text Colors
-@lighter-blue-gray: #afb2e2;
+@lighter-blue-gray: #939bbd;
 // Messages & Icons
-@nearly-white: #c9cbf3;
+@nearly-white: #a0a8cc;
 // Usernames
-@basically-white: #f0f1fc;
+@basically-white: #faf2f8;
 // Message Hovering
-@is-this-black: #14141a;
+@is-this-black: #0c0c11;
 // Highlights
-@minty-green: #00d0a1;
+@minty-green: #b2bae1;
 // Errors
-@red: #ee5253;
-@yellow: #f1c40f;
+@green: #49aebc;
+@red: #df7070;
+@yellow: #fbc02d;
 
 .theme {
+  #scrollBottom {
+    background: @really-blue !important;
+  }
+  .media-voice .media-participant {
+    background: @really-blue !important;
+  }
+  ::selection {
+    background: @minty-green; /* WebKit/Blink Browsers */
+    color: #fff;
+  }
+  ::-moz-selection {
+    background: #00d0a1; /* Gecko Browsers */
+    color: #fff;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  input:focus, input:focus{
+    outline: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid @minty-green !important;
+    caret-color: @minty-green;
+  }
   .yellow {
     color: @yellow !important;
   }
@@ -38,7 +63,7 @@
     -webkit-text-stroke-color: @super-dark-boi;
   }
   .true {
-    -webkit-text-fill-color: @minty-green !important;
+    -webkit-text-fill-color: @green !important;
   }
   .metamask {
     color: @not-as-light-blue-gray !important;
@@ -202,7 +227,7 @@
     color: @minty-green !important;
   }
   .media {
-    background: #1d1e27 !important;
+    background: @dark-blue-gray !important;
     color: @nearly-white !important;
     border: none !important;
     border-left: 3px solid @minty-green !important;
@@ -211,7 +236,7 @@
     color: @basically-white !important;
   }
   .servers {
-    background-color: @less-dark-blue-gray !important;
+    background-color: @dark-blue-gray !important;
     width: 4rem !important;
     top: 0;
     bottom: 0;
@@ -372,6 +397,7 @@
     background: @less-dark-blue-gray !important;
   }
   .user-active {
+    color: @minty-green !important;
     background-color: @ohh-so-dark !important;
   }
   .user:hover { 
@@ -424,9 +450,6 @@
     border: none !important;
   }
   .true i {
-    color: @minty-green !important;
-  }
-  .controls .online i {
     color: @minty-green !important;
   }
   .head strong {
@@ -512,5 +535,10 @@
   }
   .red {
     color: @red !important;
+  }
+  
+  .user-active i {
+    color: @green !important;
+    -webkit-text-fill-color: @green !important;
   }
 }

@@ -16,7 +16,7 @@
             <i class="fas fa-arrow-down"></i>
             <small>{{message.data.to}}</small>
             <br>
-            <a :href="`${config.explorer}/tx/${message.data.tx}`" target="_blank">
+            <a :href="`${config.network.explorer}/tx/${message.data.tx}`" target="_blank">
               <b class="yellow">Click to review transaction on Etherscan.</b>
             </a>
           </p>

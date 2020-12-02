@@ -3,6 +3,9 @@ const defaultState = {
   settings: {
     darkMode: true,
   },
+  // Theme
+  theme: 'dark',
+  // Audio
   audioQuality: 96,
   audioSamples: 24,
   noiseSuppression: false,
