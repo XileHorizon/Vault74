@@ -86,21 +86,25 @@ export default {
     },
     // Mute all local audio tracks
     toggleMute(muted) {
-      this.mediaStream.getTracks().forEach((track) => {
-        // eslint-disable-next-line
-        track.enabled = !muted;
-      });
+      if (this.mediaStream) {
+        this.mediaStream.getTracks().forEach((track) => {
+          // eslint-disable-next-line
+          track.enabled = !muted;
+        });
+      }
     },
     // Mute local AND remote audio tracks
     toggleDeafen(deafened) {
-      this.mediaStream.getTracks().forEach((track) => {
-        // eslint-disable-next-line
-        track.enabled = !deafened;
-      });
-      this.remoteStream.getTracks().forEach((track) => {
-        // eslint-disable-next-line
-        track.enabled = !deafened;
-      });
+      if (this.mediaStream) {
+        this.mediaStream.getTracks().forEach((track) => {
+          // eslint-disable-next-line
+          track.enabled = !deafened;
+        });
+        this.remoteStream.getTracks().forEach((track) => {
+          // eslint-disable-next-line
+          track.enabled = !deafened;
+        });
+      }
     },
     // Create a new media stream (audio)
     // if one has not yet been created

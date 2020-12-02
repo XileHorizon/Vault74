@@ -23,7 +23,9 @@
               v-on:click="setRoute('chats')"><a>Chats</a></li>
           <li><a>Groups</a></li>
       </ul>
+      <i class="fa fa-plus add-friend-chat" v-on:click="toggleQuickFriends"></i>
   </div>
+  <QuickFriends v-if="showQuickFriends" :close="toggleQuickFriends"/>
   <div class="usercontainer">
       <div v-if="route === 'chats'">
         <!--

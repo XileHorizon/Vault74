@@ -1,7 +1,7 @@
 <section class="infobar noselect">
   <DwellerID :active="idActive" :toggle="toggleFingerprint" :address="$store.state.activeChat" :key="$store.state.activeChat"/>
   <div class="columns">
-      <div class="column is-three-fifths">
+      <div class="column is-half">
           <div class="profile">
               <i class="fas fa-bars" v-on:click="$store.commit('toggleSidebar')"></i>
           </div>
@@ -11,10 +11,11 @@
             </p>
           </div>
       </div>
-      <div class="column is-two-fifths">
+      <div class="column is-half">
           <div class="profile-actions">
               <i class="fa fa-phone-volume" v-on:click="makeCall"></i>
               <i class="fa fa-video disabled-icon"></i>
+              <i class="fas fa-desktop" v-on:click="requestScreenShare"></i>
               <input class="input is-small searchuser" type="text" placeholder="Search in convorsation...">
               <i class="fas fa-address-card" v-on:click="toggleFingerprint"></i>
           </div>

@@ -5,6 +5,9 @@ const defaultState = {
   },
   // Theme
   theme: 'dark',
+  // Screen Share
+  screenShareRequest: null,
+  captureMouse: 'always',
   // Audio
   audioQuality: 96,
   audioSamples: 24,

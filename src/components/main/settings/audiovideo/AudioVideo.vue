@@ -81,6 +81,20 @@
         </div>
       </div>
     </article>
+    <h3 class="label">Screen Share</h3>
+    <article class="message is-dark">
+      <div class="message-body">
+        <h2>Capture Mouse</h2>
+        <p>Would you like to share your mouse in screen shares?</p>
+        <div class="select">
+          <select v-model="$store.state.captureMouse">
+            <option value="always">Always Capture</option>
+            <option value="motion">On Movement</option>
+            <option value="never">Never Show Mouse</option>
+          </select>
+        </div>
+      </div>
+    </article>
   </div>
 </template>
 

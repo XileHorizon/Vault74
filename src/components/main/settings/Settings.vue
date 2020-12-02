@@ -159,6 +159,11 @@ export default {
       height: 100%;
       overflow-y: scroll;
     }
+    .menu {
+      height: 90%;
+      overflow-y: scroll;
+      scrollbar-width: thin;
+    }
     .menu a:hover {
       color: #00d0a1;
     }

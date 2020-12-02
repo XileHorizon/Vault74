@@ -15,6 +15,9 @@ export default {
     };
   },
   methods: {
+    requestScreenShare() {
+      this.$store.commit('screenShareRequest');
+    },
     // Toggles the ID card modal
     toggleFingerprint() {
       this.idActive = !this.idActive;

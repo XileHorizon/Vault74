@@ -2,6 +2,7 @@
 
 <script>
 import ServerList from '@/components/ServerList/ServerList';
+import QuickFriends from '@/components/sidebar/QuickFriends/QuickFriends';
 import User from '@/components/sidebar/User/User';
 import UserDemo from '@/components/sidebar/User/UserDemo';
 import Controls from '@/components/sidebar/Controls/Controls';
@@ -14,13 +15,18 @@ export default {
     User,
     UserDemo,
     Controls,
+    QuickFriends,
   },
   data() {
     return {
       route: 'chats',
+      showQuickFriends: false,
     };
   },
   methods: {
+    toggleQuickFriends() {
+      this.showQuickFriends = !this.showQuickFriends;
+    },
     setRoute(route) {
       this.route = route;
     },
