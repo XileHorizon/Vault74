@@ -12,6 +12,7 @@
             <option value="light">Eye Strain</option>
             <option value="ice">Ice Cold</option>
             <option value="tokyo">Tokyo Night</option>
+            <option value="tokyo-lights">Tokyo Lights</option>
           </select>
         </div>
       </div>

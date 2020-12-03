@@ -1,6 +1,10 @@
 import MessageUtils from '@/utils/MessageUtils';
 
 export default {
+  clearTypingUsers(state) {
+    // eslint-disable-next-line
+    state.typingUsers = {};
+  },
   muted(state, muted) {
     // eslint-disable-next-line no-param-reassign
     state.muted = muted;
@@ -149,18 +153,6 @@ export default {
     state.activeMediaStreamPeer = peer;
     // eslint-disable-next-line no-param-reassign
     state.pendingMediaStream = true;
-  },
-  mediaStreamConnected(state) {
-    // eslint-disable-next-line no-param-reassign
-    state.pendingMediaStream = false;
-    // eslint-disable-next-line no-param-reassign
-    state.mediaStreamConnected = true;
-  },
-  mediaStreamDestroyed(state) {
-    // eslint-disable-next-line no-param-reassign
-    state.mediaStreamConnected = false;
-    // eslint-disable-next-line no-param-reassign
-    state.activeMediaStreamPeer = null;
   },
   activeCaller(state, caller) {
     // eslint-disable-next-line no-param-reassign

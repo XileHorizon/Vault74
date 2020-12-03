@@ -6,6 +6,7 @@ import Chatbar from '@/components/main/convorsation/Chatbar/Chatbar';
 import VoiceVideo from '@/components/main/convorsation/VoiceVideo/VoiceVideo';
 import Convorsation from '@/components/main/convorsation/Convorsation/Convorsation';
 import NoConvorsation from '@/components/main/convorsation/Convorsation/NoConvorsation';
+import UserInfo from '@/components/main/convorsation/UserInfo/UserInfo';
 import sampleMessages from './sampleMessages';
 
 export default {
@@ -16,6 +17,7 @@ export default {
     Convorsation,
     VoiceVideo,
     NoConvorsation,
+    UserInfo,
   },
   methods: {
     // Switch from one media stream to another

@@ -27,6 +27,33 @@
   height: 100%;
   float: left;
 }
+.user-status {
+  position: absolute;
+  top: -3rem;
+  width: 100%;
+}
+.left-side {
+  width: calc(100% - 5rem);
+  float: left;
+  i {
+    float: left;
+    padding-right: 0.5rem;
+  }
+  padding: 0.5rem;
+  line-height: 110%;
+  .label {
+    opacity: 0.8;
+    padding: 0 !important;
+  }
+  .yellow {
+    cursor: pointer;
+  }
+}
+.right-side {
+  width: 5rem;
+  float: right;
+  padding: 0.9rem 0.8rem 0 0;
+}
 .usercontrols {
   width: calc(50% - 25px);
   float: left;
@@ -34,11 +61,11 @@
   text-align: right;
   padding: 1rem 0.75rem 0 0;
 }
-.usercontrols i {
+.user-status .right-side i, .usercontrols i {
   font-size: 16pt;
   padding: 0.1rem 0.4rem;
 }
-.usercontrols i:hover {
+.user-status i:hover, .usercontrols i:hover {
   cursor: pointer;
 }
 .profile {

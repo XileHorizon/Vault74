@@ -47,7 +47,6 @@ const defaultState = {
   typingUsers: {},
   // Direct Calling Media Streams
   pendingMediaStream: false,
-  mediaStreamConnected: false,
   activeMediaStreamPeer: false,
   activeCaller: false,
 };

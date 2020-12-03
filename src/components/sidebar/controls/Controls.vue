@@ -27,6 +27,20 @@ export default {
     };
   },
   methods: {
+    getNetwork() {
+      switch (this.$store.state.web3Stats.nettype) {
+        case 'private':
+          return 'Testnet';
+        case 'main':
+          return 'Mainnet';
+        default:
+          return 'Unknown';
+      }
+    },
+    jumpTo() {
+      this.$store.commit('changeRoute', 'main');
+      this.$store.commit('activeChat', this.$store.state.activeMediaStreamPeer);
+    },
     copied() {
       const original = this.tooltip;
       this.tooltip = 'Copied!';

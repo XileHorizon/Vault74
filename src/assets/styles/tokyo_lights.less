@@ -242,9 +242,6 @@
     bottom: 0;
     left: -4rem !important;
   }
-  #user-info {
-    background: @dark-blue-gray !important;
-  }
   #logo {
     color: @basically-white !important;
   }
@@ -259,7 +256,7 @@
     color: @light-blue-gray !important;
     border-top: 1px solid @super-dark-boi !important; 
   }
-  .controls, .user-status {
+  .controls {
     background: @darker-blue-gray !important;
     border-top: 1px solid @super-dark-boi !important; 
   }
@@ -499,36 +496,60 @@
   button.is-danger {
     background-color:@red !important;
     color: @basically-white !important;
+    background: #f12711; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f12711, #f5af19) !important; /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f12711, #f5af19) !important; 
   }
 
   button.is-danger:hover {
     background-color: @red !important;
+    background: #f12711; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f12711, #f5af19) !important; /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f12711, #f5af19) !important; 
   }
 
   button.is-primary {
     background: @really-blue !important;
     color: @basically-white !important;
+    background: #00f260; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #00f260, #0575e6) !important; /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #00f260, #0575e6) !important;
   }
   button.is-primary:hover {
     background: @really-blue !important;
     color: @basically-white !important;
+    background: #00f260; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #00f260, #0575e6) !important; /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #00f260, #0575e6) !important
   }
   .is-primary {
     background: @really-blue !important;
     color: @basically-white !important;
+    background: #00f260; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #00f260, #0575e6) !important; /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #00f260, #0575e6) !important;
   }
   .is-primary button:hover {
     background: @really-blue !important;
     color: @basically-white !important;
+    background: #00f260; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #00f260, #0575e6) !important; /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #00f260, #0575e6) !important;
   }
 
   button.is-dark {
     background: @really-blue !important;
     color: @basically-white !important;
+    background: #00f260; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #00f260, #0575e6) !important; /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #00f260, #0575e6) !important;
   }
   button.is-dark:hover {
     background: @really-blue !important;
     color: @basically-white !important;
+    background: #00f260; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #00f260, #0575e6) !important; /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #00f260, #0575e6) !important;
   }
   .head {
     color: @nearly-white !important;
@@ -542,9 +563,7 @@
   .green {
     color: @green !important;
   }
-  .yellow {
-    color: @yellow !important;
-  }
+  
   .controls .user-active i {
     color: @green !important;
     -webkit-text-fill-color: @green !important;

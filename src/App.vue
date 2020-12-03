@@ -47,6 +47,7 @@ export default {
     this.$store.commit('activeCaller', false);
     // Reset media call data
     this.$store.commit('connectMediaStream', false);
+    this.$store.commit('clearTypingUsers');
 
     // If we have an account, go ahead and mount to the account
     // else wait a bit and try again.
@@ -141,6 +142,9 @@ export default {
 }
 .tokyo {
   @import "assets/styles/tokyo.less";
+}
+.tokyo-lights {
+  @import "assets/styles/tokyo_lights.less";
 }
 .notification {
   z-index: 10;
