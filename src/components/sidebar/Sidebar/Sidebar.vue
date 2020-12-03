@@ -1,11 +1,10 @@
 <template src="./Sidebar.html"></template>
 
 <script>
-import ServerList from '@/components/ServerList/ServerList';
-import QuickFriends from '@/components/sidebar/QuickFriends/QuickFriends';
-import User from '@/components/sidebar/User/User';
-import UserDemo from '@/components/sidebar/User/UserDemo';
-import Controls from '@/components/sidebar/Controls/Controls';
+import ServerList from '@/components/serverlist/ServerList';
+import QuickFriends from '@/components/sidebar/quickfriends/QuickFriends';
+import User from '@/components/sidebar/user/User';
+import Controls from '@/components/sidebar/controls/Controls';
 
 export default {
   name: 'Sidebar',
@@ -13,7 +12,6 @@ export default {
   components: {
     ServerList,
     User,
-    UserDemo,
     Controls,
     QuickFriends,
   },

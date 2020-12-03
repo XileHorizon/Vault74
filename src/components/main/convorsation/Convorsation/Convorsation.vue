@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import MessageBody from '@/components/main/convorsation/message/MessageBody/MessageBody';
+import MessageBody from '@/components/main/convorsation/message/messagebody/MessageBody';
 import Divider from '@/components/common/Divider';
 
 export default {

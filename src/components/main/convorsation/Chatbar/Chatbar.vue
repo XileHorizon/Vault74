@@ -3,11 +3,11 @@
 <script>
 import debounce from 'debounce';
 
-import data from '@/components/main/convorsation/Chatbar/emojidata.json';
+import data from '@/components/main/convorsation/chatbar/emojidata.json';
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast';
-import MiniPayment from '@/components/common/payments/MiniPayment/MiniPayment';
+import MiniPayment from '@/components/common/payments/minipayment/MiniPayment';
 import 'emoji-mart-vue-fast/css/emoji-mart.css';
-import FileUpload from '@/components/common/FileUpload/FileUpload';
+import FileUpload from '@/components/common/fileupload/FileUpload';
 
 const emojiIndex = new EmojiIndex(data);
 

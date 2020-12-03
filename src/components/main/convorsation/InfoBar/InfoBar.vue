@@ -1,7 +1,7 @@
 <template src="./InfoBar.html"></template>
 
 <script>
-import DwellerID from '@/components/common/DwellerID/DwellerID';
+import DwellerID from '@/components/common/dwellerid/DwellerID';
 
 export default {
   name: 'InfoBar',

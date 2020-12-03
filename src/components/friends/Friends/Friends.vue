@@ -4,7 +4,7 @@
 import config from '@/config/config';
 import CircleIcon from '@/components/common/CircleIcon';
 import DwellerCachingHelper from '@/utils/DwellerCachingHelper';
-import Friend from '@/components/friends/Friend/Friend';
+import Friend from '@/components/friends/friend/Friend';
 
 export default {
   name: 'Friends',

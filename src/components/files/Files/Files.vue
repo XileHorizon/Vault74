@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import File from '@/components/files/File/File';
+import File from '@/components/files/file/File';
 import IPFSUtils from '@/utils/IPFSUtils';
-import FileUploadInline from '@/components/common/FileUploadInline/FileUploadInline';
+import FileUploadInline from '@/components/common/fileuploadinline/FileUploadInline';
 
 export default {
   name: 'Files',

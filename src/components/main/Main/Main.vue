@@ -1,13 +1,12 @@
 <template src="./Main.html"></template>
 
 <script>
-import InfoBar from '@/components/main/convorsation/InfoBar/InfoBar';
-import Chatbar from '@/components/main/convorsation/Chatbar/Chatbar';
-import VoiceVideo from '@/components/main/convorsation/VoiceVideo/VoiceVideo';
-import Convorsation from '@/components/main/convorsation/Convorsation/Convorsation';
-import NoConvorsation from '@/components/main/convorsation/Convorsation/NoConvorsation';
-import UserInfo from '@/components/main/convorsation/UserInfo/UserInfo';
-import sampleMessages from './sampleMessages';
+import InfoBar from '@/components/main/convorsation/infobar/InfoBar';
+import Chatbar from '@/components/main/convorsation/chatbar/Chatbar';
+import VoiceVideo from '@/components/main/convorsation/voicevideo/VoiceVideo';
+import Convorsation from '@/components/main/convorsation/convorsation/Convorsation';
+import NoConvorsation from '@/components/main/convorsation/convorsation/NoConvorsation';
+import UserInfo from '@/components/main/convorsation/userinfo/UserInfo';
 
 export default {
   name: 'Main',
@@ -74,10 +73,7 @@ export default {
       mediaOpen: false,
       voice: false,
       playCallSoundTimer: null,
-      /* eslint-disable */
-      messages: sampleMessages,
     };
-    /* eslint-enable */
   },
   mounted() {
     this.$store.subscribe((mutation, state) => {

@@ -52,14 +52,14 @@
 import Mousetrap from 'mousetrap';
 import MediaManager from '@/components/media/MediaManager';
 import ScreenCapture from '@/components/media/ScreenCapture';
-import Sidebar from '@/components/sidebar/Sidebar/Sidebar';
-import Main from '@/components/main/Main/Main';
-import Files from '@/components/files/Files/Files';
-import Friends from '@/components/friends/Friends/Friends';
+import Sidebar from '@/components/sidebar/sidebar/Sidebar';
+import Main from '@/components/main/main/Main';
+import Files from '@/components/files/files/Files';
+import Friends from '@/components/friends/friends/Friends';
 import Settings from '@/components/main/settings/Settings';
-import Web3 from '@/components/Web3/Web3';
+import Web3 from '@/components/web3/Web3';
 import Loading from '@/components/common/Loading';
-import Calling from '@/components/main/Popups/Calling/Calling';
+import Calling from '@/components/main/popups/calling/Calling';
 
 import IPFS from 'ipfs-core';
 
