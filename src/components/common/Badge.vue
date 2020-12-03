@@ -1,5 +1,5 @@
 <template>
-    <span>
+    <span class="badge-container">
       <span class="has-tooltip-arrow"
         data-tooltip="Developer">
         <i 
@@ -35,10 +35,12 @@ export default {
         '0xD02248C262b3690CC6eE73D24F5f2F19095585Fb',
       ],
       supporters: [
+        '0xD02248C262b3690CC6eE73D24F5f2F19095585Fb',
         '0x61E0E9ADe660551cd78B584Fb54d492CaEAAaD55',
         '0xA0eAf1961243E3708bAe85927D2645D8f8e8cC67',
       ],
       testers: [
+        '0xD02248C262b3690CC6eE73D24F5f2F19095585Fb',
         '0x31BaEc09bb1628A17A9A99dABA11e9Ca75493Fd1',
         '0x61E0E9ADe660551cd78B584Fb54d492CaEAAaD55',
         '0x8AE982dFE0A0B725A4e385d8FA22BaDd69Eb3e1F',
