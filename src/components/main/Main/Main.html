@@ -3,9 +3,8 @@
     <InfoBar
       :toggleMedia="toggleMedia"
       :makeCall="makeCall"/>
-    <div class="main-user-info main-user-info-open">
+    <div :class="`${($store.state.showUser) ? 'main-user-info main-user-info-open' : 'main-user-info'}`">
       <Convorsation 
-        :messages="messages"
         :mediaOpen="$store.state.activeMediaStreamPeer && $store.state.activeChat === $store.state.activeMediaStreamPeer"
         :voice="$store.state.activeMediaStreamPeer && $store.state.activeChat === $store.state.activeMediaStreamPeer && voice"
         v-if="$store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]"/>
@@ -18,7 +17,7 @@
         :switchTo="switchTo"/>
       <Chatbar :handleNewMessage="sendMessage" />
     </div>
-    <UserInfo />
+    <UserInfo v-if="$store.state.showUser" :makeCall="makeCall"/>
   </div>
   <div v-else class="no-friends">
     <img src="https://ipfs.io/ipfs/QmXotK18AvUwheDfBTELo94J5FShUrP61VmfyEx633yCSn" alt="" width="50%" />

@@ -1,6 +1,8 @@
 <template src="./Friends.html"></template>
 
 <script>
+import Fuse from 'fuse.js';
+
 import config from '@/config/config';
 import CircleIcon from '@/components/common/CircleIcon';
 import DwellerCachingHelper from '@/utils/DwellerCachingHelper';
@@ -14,6 +16,8 @@ export default {
   },
   data() {
     return {
+      keyword: '',
+      friends: this.$store.state.friends,
       error: false,
       success: false,
       friend: false,
@@ -24,7 +28,27 @@ export default {
       ),
     };
   },
+  mounted() {
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'addFriend') {
+        this.friends = state.friends;
+      }
+    });
+  },
   methods: {
+    filterFriends() {
+      if (this.keyword) {
+        const options = {
+          includeScore: false,
+          keys: ['name'],
+        };
+        const fuse = new Fuse(this.$store.state.friends, options);
+        const result = fuse.search(this.keyword);
+        this.friends = result.map(i => i.item);
+      } else {
+        this.friends = this.$store.state.friends;
+      }
+    },
     chatFriend(clientId) {
       this.$store.commit('newChat', clientId);
       this.$store.commit('activeChat', clientId);

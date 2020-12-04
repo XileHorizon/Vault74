@@ -57,9 +57,7 @@ export default class Peer2Peer {
       });
     });
     peer.on('error', (err) => {
-      window.Vault74.debug('The peer sent us an error:', err);
-      // eslint-disable-next-line
-      console.debug(err);
+      window.Vault74.warn('The peer sent us an error:', err);
     });
   }
 

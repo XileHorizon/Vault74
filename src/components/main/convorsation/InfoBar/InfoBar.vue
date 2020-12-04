@@ -20,7 +20,7 @@ export default {
     },
     // Toggles the ID card modal
     toggleFingerprint() {
-      this.idActive = !this.idActive;
+      this.$store.commit('toggleUserInfo');
     },
   },
 };

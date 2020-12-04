@@ -1,5 +1,5 @@
 <template>
-  <div v-click-outside="close">
+  <div>
     <PhotoCropper 
       field="img"
       langType="en"

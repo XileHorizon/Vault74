@@ -1,13 +1,14 @@
 <template>
+  <div>
+    <div id="scrollBottom" v-if="showScrollToBottom" v-on:click="scrollToEnd">
+      <i class="fas fa-chevron-down"></i>
+    </div>
     <div 
       id="convorsation"
       :class="`${(mediaOpen) ? 'media-open' : 'media-closed'} ${(voice) ? 'media-voice' : ''}`"
       ref="chat"
       :key="`${$store.state.activeAccount}::${$store.state.activeChat}`"
       v-on:scroll="onScroll">
-        <div id="scrollBottom" v-if="showScrollToBottom" v-on:click="scrollToEnd">
-          <i class="fas fa-chevron-down"></i>
-        </div>
         <div
           v-for="messageGroup in $store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]" 
           v-bind:key="messageGroup[0].id">
@@ -15,6 +16,7 @@
           <!--<Divider :text="message.text" v-if="message.type =='message-group-divider'" />-->
         </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -110,7 +112,7 @@ export default {
       top: 16rem !important;
     }
     #scrollBottom {
-      position: fixed;
+      position: absolute;
       right: 2rem;
       bottom: 8rem;
       z-index: 2;

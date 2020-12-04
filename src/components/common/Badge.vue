@@ -12,10 +12,20 @@
           v-if="isRank('supporters')"
           class="fas fa-heart"></i>
       </span>
-      <span class="has-tooltip-arrow" data-tooltip="Tester">
+      <span class="has-tooltip-arrow" data-tooltip="Alpha">
         <i
-          v-if="isRank('testers')"
-          class="fas fa-flask"></i>
+          v-if="isRank('alpha')"
+          class="fas fa-ghost"></i>
+      </span>
+      <span class="has-tooltip-arrow" data-tooltip="Contributor">
+        <i
+          v-if="isRank('contributors')"
+          class="fas fa-code"></i>
+      </span>
+      <span v-if="showNoBadges" class="has-tooltip-arrow" data-tooltip="No Badges">
+        <i
+          v-if="hasNoRank()"
+          class="fas fa-ban"></i>
       </span>
     </span>
 </template>
@@ -23,23 +33,33 @@
 <script>
 export default {
   name: 'Badges',
-  props: ['address'],
+  props: ['address', 'showNoBadges'],
   methods: {
     isRank(rank) {
       return this[rank].includes(this.address);
+    },
+    hasNoRank() {
+      const hasDevelopers = this.isRank('developers');
+      const hasSupporters = this.isRank('supporters');
+      const hasAlpha = this.isRank('alpha');
+      const hasContributors = this.isRank('contributors');
+      return !hasDevelopers && !hasSupporters && !hasAlpha && !hasContributors;
     },
   },
   data() {
     return {
       developers: [
         '0xD02248C262b3690CC6eE73D24F5f2F19095585Fb',
+        '0xaf77cf319CB4f0597e5bB0974E8981fAe49Ea4A9',
       ],
       supporters: [
+        '0xaf77cf319CB4f0597e5bB0974E8981fAe49Ea4A9',
         '0xD02248C262b3690CC6eE73D24F5f2F19095585Fb',
         '0x61E0E9ADe660551cd78B584Fb54d492CaEAAaD55',
         '0xA0eAf1961243E3708bAe85927D2645D8f8e8cC67',
       ],
-      testers: [
+      alpha: [
+        '0xaf77cf319CB4f0597e5bB0974E8981fAe49Ea4A9',
         '0xD02248C262b3690CC6eE73D24F5f2F19095585Fb',
         '0x31BaEc09bb1628A17A9A99dABA11e9Ca75493Fd1',
         '0x61E0E9ADe660551cd78B584Fb54d492CaEAAaD55',
@@ -59,8 +79,16 @@ export default {
         '0xBD4c98E51872172E5dE259E48B1f74a115AbF45B',
         '0xD4cA48706CAf708cB6BA463Ae8e8B030140fa01b',
         '0x43E2b23C1199a29bF2781DeAdA0aAc608419B430',
+        '0x1aDe7295759574ecC7887A9B76844939B38eE315',
+        '0xb4140b42710029B35d6D6C0987ca1Ca2c8cFA1FA',
+        '0x89edFCDB7A1A34DF43A129b239020701d25E8A10',
+        '0xB94952AF176401365d85096F8d463E32b39e9EC8',
+        '0x7ccaEBA528A581b34954D72087b611883F58Cf20',
+        '0x47130b1937f8E68A674C00C618cb5743f74404b3',
+        '0x0Ab2787797eF974DF6F739A2195E463D2f17763E',
       ],
       contributors: [
+        '0xaf77cf319CB4f0597e5bB0974E8981fAe49Ea4A9',
         '0x1aDe7295759574ecC7887A9B76844939B38eE315',
         '0x7Ec83F5A35848E5337380253f03dfCca6Fba7B73',
       ],
@@ -83,7 +111,10 @@ export default {
     .fa-hat-wizard {
       color: #a29bfe !important;
     }
-    .fa-flask {
-      color: #00cec9 !important;
+    .fa-ghost {
+      color: #f368e0 !important;
+    }
+    .fa-code {
+      color: #feca57 !important;
     }
 </style>

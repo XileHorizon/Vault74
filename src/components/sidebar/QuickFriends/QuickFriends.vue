@@ -4,26 +4,35 @@
       <p class="header">
         <span class="label">Chat With Friends</span>
         <span class="close" v-on:click="close">×</span>
-        <input class="input is-small searchuser" type="text" placeholder="Find Friend...">
+        <input
+          class="input is-small searchuser"
+          type="text"
+          v-model="keyword"
+          v-on:keyup="filterFriends"
+          placeholder="Find Friend...">
       </p>
     </div>
     <div class="modal-card-body">
       <div class="friends-list">
-        <div v-for="fr in $store.state.friends" class="friend" :key="fr.address">
+        <div v-if="!friends.length" style="text-align: center">
+          <span class="label">You haven't added any friends yet.</span>
+          <span>Add some friends to chat.</span>
+        </div>
+        <div v-for="friend in friends" class="friend" :key="friend.address">
           <div class="columns">
             <div class="column is-one-quarter">
-              <CircleIcon :image="fr.photo" />
+              <CircleIcon :image="friend.photo" :address="friend.address"/>
             </div>
             <div class="column is-half nameholder">
               <p>
-                {{fr.name}}<br />
-                <span class="address">{{fr.address}}</span>
+                {{friend.name}}<br />
+                <span class="address">{{friend.address}}</span>
               </p>
             </div>
             <div class="column is-one-quarter">
               <button
                 class="button is-small is-primary"
-                v-on:click="handleChat(fr)">
+                v-on:click="handleChat(friend)">
                 <i class="fas fa-comment-alt"></i>
               </button>
             </div>
@@ -35,6 +44,8 @@
 </template>
 
 <script>
+import Fuse from 'fuse.js';
+
 import CircleIcon from '@/components/common/CircleIcon';
 
 export default {
@@ -43,10 +54,31 @@ export default {
   components: {
     CircleIcon,
   },
+  data() {
+    return {
+      keyword: '',
+      friends: this.$store.state.friends,
+    };
+  },
   methods: {
     handleChat(fr) {
+      this.$store.commit('newChat', fr.address);
       this.$store.commit('activeChat', fr.address);
+      this.$store.commit('changeRoute', 'main');
       this.close();
+    },
+    filterFriends() {
+      if (this.keyword) {
+        const options = {
+          includeScore: false,
+          keys: ['name'],
+        };
+        const fuse = new Fuse(this.$store.state.friends, options);
+        const result = fuse.search(this.keyword);
+        this.friends = result.map(i => i.item);
+      } else {
+        this.friends = this.$store.state.friends;
+      }
     },
   },
   /* eslint-disable */

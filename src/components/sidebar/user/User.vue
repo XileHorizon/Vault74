@@ -4,13 +4,11 @@
 import config from '@/config/config';
 import CircleIcon from '@/components/common/CircleIcon';
 import DwellerCachingHelper from '@/utils/DwellerCachingHelper';
-import Badge from '@/components/common/Badge';
 
 export default {
   name: 'User',
   components: {
     CircleIcon,
-    Badge,
   },
   data() {
     return {

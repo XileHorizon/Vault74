@@ -29,7 +29,9 @@
     </div>
   </div>
   <div class="profile">
-      <CircleIcon :image="`${config.ipfs.browser}${$store.state.profilePictureHash}`" />
+      <CircleIcon
+        :image="`${config.ipfs.browser}${$store.state.profilePictureHash}`"
+        :address="$store.state.activeAccount" />
       <p class="online true"><i class="fa fa-circle"></i></p>
   </div>
   <div 

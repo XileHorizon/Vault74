@@ -67,6 +67,7 @@ export default {
         if (this.messageText.length > this.limit) {
           return;
         }
+        this.$store.commit('chatWith', this.$store.state.activeChat);
         this.handleNewMessage(this.messageText, 'text');
         this.messageText = '';
       }

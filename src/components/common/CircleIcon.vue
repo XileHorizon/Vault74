@@ -1,37 +1,66 @@
 <template>
-    <div class="circle-icon" :style="`background-image:url('${image}'); background-size: contain; background-color: ${(color) ? color : '#00d0a1'};`">
+    <div class="circle-icon" >
         <span v-if="icon">
             <i :class="icon"></i>
         </span>
+        <div v-else>
+          <jazzicon class="jazzicon" :address="address" :diameter="diameter || 45" />
+          <img v-if="image !== 'https://ipfs.io/ipfs/'" :src="image" :key="image">
+        </div>
     </div>
 </template>
 
 <script>
+import Jazzicon from 'vue-jazzicon';
+
 export default {
   name: 'CircleIcon',
+  components: {
+    [Jazzicon.name]: Jazzicon,
+  },
   props: [
     'image',
     'color',
     'icon',
+    'diameter',
+    'address',
   ],
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="less">
     .circle-icon {
-        width: 45px;
-        height: 45px;
-        padding: 0.40rem;
-        font-size: 16pt;
-        text-align: center;
-        border-radius: 50%;
-        background: #00d0a1;
-        margin: 0 auto;
-        color: #fff;
+      width: 45px;
+      height: 45px;
+      font-size: 16pt;
+      text-align: center;
+      border-radius: 50%;
+      background: #00d0a1;
+      margin: 0 auto;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
     }
     .circle-icon img {
-        object-fit: cover;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .jazzicon {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+    }
+    i {
+      margin-top: 13px;
+    }
+    #user-info > div.user-details > div > div > div {
+      width: 100% !important;
+      height: 100% !important;
     }
 
 </style>

@@ -106,6 +106,22 @@ export default {
         });
       }
     },
+    hangup() {
+      // Stop calling & play hangup
+      callingSound.stop();
+      hangupSound.play();
+
+      this.stopStream();
+      if (this.remoteStream) {
+        this.remoteStream = null;
+      }
+      if (this.activeCall) {
+        this.activeCall.close();
+        this.activeCall = null;
+      }
+      this.$store.commit('activeCaller', false);
+      this.$store.commit('connectMediaStream', false);
+    },
     // Create a new media stream (audio)
     // if one has not yet been created
     createMediaStream() {
@@ -135,8 +151,13 @@ export default {
     },
     // Call a peer and send the media stream
     async call(peerId) {
+      callingSound.stop();
       if (!this.mediaStream) {
         await this.createMediaStream();
+      }
+      if (this.activeCall) {
+        // TODO: end previous call
+        this.activeCall.close();
       }
       callingSound.play();
       this.activeCall = this.peer.call(peerId, this.mediaStream);
@@ -178,20 +199,7 @@ export default {
     });
     // Watch for triggers to end a call.
     window.Vault74.Peer2Peer.bindHangup(async () => {
-      // Stop calling & play hangup
-      callingSound.stop();
-      hangupSound.play();
-
-      this.stopStream();
-      if (this.remoteStream) {
-        this.remoteStream = null;
-      }
-      if (this.activeCall) {
-        this.activeCall.close();
-        this.activeCall = null;
-      }
-      this.$store.commit('activeCaller', false);
-      this.$store.commit('connectMediaStream', false);
+      this.hangup();
     });
 
     // Connect to the Peer2Peer handler
@@ -213,13 +221,13 @@ export default {
 
           // Remote user answered
           this.answer = async () => {
+            callingSound.stop();
+            connectedSound.play();
             await this.createMediaStream();
             this.$store.commit('connectMediaStream', call.peer);
             call.answer(this.mediaStream);
             call.on('stream', (remoteStream) => {
               // Play Sound
-              callingSound.stop();
-              connectedSound.play();
               this.remoteStream = remoteStream;
               this.playRemoteStream(this.remoteStream);
             });

@@ -45,6 +45,8 @@ const defaultState = {
   activeChat: false,
   messages: {},
   typingUsers: {},
+  userNotes: {},
+  showUser: false,
   // Direct Calling Media Streams
   pendingMediaStream: false,
   activeMediaStreamPeer: false,

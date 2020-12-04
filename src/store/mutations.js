@@ -29,7 +29,7 @@ export default {
     state.settings.darkMode = !state.settings.darkMode;
   },
   toggleSidebar(state) {
-    // eslint-disable-next-line no-param-reassign
+    // eslint-disable-next-line
     state.sidebarOpen = !state.sidebarOpen;
   },
   activeChat(state, address) {
@@ -134,10 +134,18 @@ export default {
   newChat(state, clientId) {
     const { activeChats } = state;
     if (!activeChats.includes(clientId)) {
-      activeChats.push(clientId);
+      activeChats.unshift(clientId);
     }
     // eslint-disable-next-line no-param-reassign
-    state.activeChats = activeChats.reverse();
+    state.activeChats = activeChats;
+  },
+  // eslint-disable-next-line
+  chatWith(state, address) {
+    const { activeChats } = state;
+    const filteredOutAddy = activeChats.filter(a => a !== address);
+    filteredOutAddy.unshift(address);
+    // eslint-disable-next-line
+    state.activeChats = filteredOutAddy;
   },
   userTyping(state, payload) {
     // eslint-disable-next-line
@@ -157,5 +165,9 @@ export default {
   activeCaller(state, caller) {
     // eslint-disable-next-line no-param-reassign
     state.activeCaller = caller;
+  },
+  toggleUserInfo(state) {
+    // eslint-disable-next-line
+    state.showUser = !state.showUser;
   },
 };

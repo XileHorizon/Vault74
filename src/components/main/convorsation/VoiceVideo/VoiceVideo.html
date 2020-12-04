@@ -2,10 +2,14 @@
   <div :class="`media-content ${mediaOpen ? 'media-open' : 'media-closed'}`">
     <div class="media-participants container">
       <div class="media-participant">
-        <CircleIcon :image="$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].photo"/>
+        <CircleIcon 
+          :image="$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].photo"
+          :address="$store.state.activeChat" />
       </div>
       <div class="media-participant">
-        <CircleIcon :image="`${config.ipfs.browser}${$store.state.profilePictureHash}`" />
+        <CircleIcon 
+        :image="`${config.ipfs.browser}${$store.state.profilePictureHash}`"
+        :address="$store.state.activeChat" />
       </div>
     </div>
     <div class="media-controls">

@@ -1,5 +1,5 @@
 <template>
-  <div v-click-outside="close">
+  <div>
     <p class="label">Change Username</p>
     <input type="text" class="input" v-model="username" />
     <br>
