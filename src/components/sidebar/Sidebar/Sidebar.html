@@ -37,6 +37,7 @@
           :friend="$store.state.friends.filter(f => f.address === chat)[0]"
           :active="$store.state.activeChat === chat"
           :key="chat"
+          :typing="$store.state.typingUsers[chat]"
           :clientId="chat" />
         
         <div v-if="$store.state.activeChats.length < 4">

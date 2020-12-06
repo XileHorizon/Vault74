@@ -21,6 +21,7 @@ export default {
   props: [
     'friend',
     'unread',
+    'typing',
     'active',
     'clientId',
   ],

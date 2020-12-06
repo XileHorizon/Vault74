@@ -3,9 +3,9 @@
   <p class="unreads" v-if="unread"></p>
   <p >{{friend.name}}</p>
   <p class="address">{{friend.address}}</p>
-  <p  id="typing" :class="`online ${(friend.status === 'alive') ? 'true' : ''}`">
+  <p id="typing" :class="`online ${(friend.status === 'alive') ? 'true' : ''}`">
+    <i v-if="typing && friend.status === 'alive'" class="fas fa-circle-notch fa-pulse"></i>
     <i class="fa fa-circle"></i>
-    <i v-if="$store.state.typingUsers[friend.address]" class="fas fa-circle-notch fa-pulse"></i>
   </p>
   <i v-if="hovered" class="fa fa-times"></i>
 </section>

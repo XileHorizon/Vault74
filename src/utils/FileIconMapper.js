@@ -10,6 +10,7 @@ export default {
     'application/json': 'fas fa-file-code',
     'application/zip': 'fas fa-file-archive',
     'application/x-javascript': 'fab fa-js-square',
+    'text/javascript': 'fab fa-js-square',
     'application/java-archive': 'fab fa-java',
     'text/css': 'fab fa-css3-alt',
   },

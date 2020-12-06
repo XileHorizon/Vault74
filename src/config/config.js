@@ -19,7 +19,7 @@ module.exports = {
     connected: 'QmUJMTmCdnzjcUT5nT2eGzXVDYbwDq3CanjKabYQ3Vu3Dt',
   },
   registry: '0x7d867225d2927da8c98f5110b6589b53895e09df',
-  debug: false,
+  debug: true,
   cacher: {
     dwellerLifespan: 900000,
   },
@@ -46,7 +46,7 @@ module.exports = {
         ],
       },
     },
-    heartbeat_timeout: 15000,
+    heartbeat_timeout: 5000,
     check_heartbeat: 500,
     timeout: 500,
     reconnect: 3000,

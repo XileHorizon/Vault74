@@ -70,6 +70,7 @@ export default {
         this.$store.commit('chatWith', this.$store.state.activeChat);
         this.handleNewMessage(this.messageText, 'text');
         this.messageText = '';
+        this.stopTyping();
       }
     },
     startTyping() {
@@ -82,14 +83,17 @@ export default {
         );
       }
     },
-    // eslint-disable-next-line
-    isTyping: debounce(function(e) {
+    stopTyping() {
       this.typing = false;
       window.Vault74.Peer2Peer.send(
         this.$store.state.activeChat,
         'typing-notice',
         false,
       );
+    },
+    // eslint-disable-next-line
+    isTyping: debounce(function(e) {
+      this.stopTyping();
     }, 2000),
     // Select an emoji from the emoji picker and append it to our message
     selectEmoji(emoji) {

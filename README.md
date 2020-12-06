@@ -39,6 +39,9 @@ Example. if your theme is named `cyan.less` you'd add the following to Personali
     </select>
 </div>
 ```
+
+In `App.vue` make sure to add your class to the bottom of the file with the same name as the vaule of your `<select>` option.
+
 Save your changes and select your theme under settings. Please do not set your theme to default before submitting a PR. Please be sure to check all aspects of the app for concistancy before uploading your theme. Please make sure to use the variables at the top of the theme as opposed to manually editing everything.
 
 ## Contributing Rules

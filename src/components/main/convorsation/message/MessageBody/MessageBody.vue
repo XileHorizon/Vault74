@@ -10,6 +10,7 @@
   import File from '@/components/main/convorsation/message/embeds/File';
   import Audio from '@/components/main/convorsation/message/embeds/Audio';
   import Video from '@/components/main/convorsation/message/embeds/Video';
+  import Address from '@/components/main/convorsation/message/embeds/Address';
   import DwellerCachingHelper from '@/utils/DwellerCachingHelper';
   import config from '@/config/config';
 
@@ -28,6 +29,7 @@
       Payment,
       Call,
       ImageViewer,
+      Address,
       File,
       Audio,
       Video,
@@ -54,6 +56,12 @@
         // eslint-disable-next-line
         const YTRegex = /((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?/;
         return message.match(YTRegex);
+      },
+      parseEthAddress(message) {
+        if (typeof message !== 'string') return false;
+        // eslint-disable-next-line
+        const ETHRegex = /^0x[a-fA-F0-9]{40}$/;
+        return message.match(ETHRegex);
       },
       wrapLinks(message) {
         return message.replace(/(?:(https?:\/\/[^\s]+))/m, '<a href="$1" target="_blank">$1</a>');

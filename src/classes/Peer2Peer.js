@@ -47,6 +47,9 @@ export default class Peer2Peer {
         const remotePeerId = conn.peer;
         const peerConntion = this.channels[`${this.peerId}::${remotePeerId}`];
         conn.on('open', () => {
+          // We got a message from a peer, let's make sure we're
+          // connected to them, this way we can return messages
+          peerConntion.ensureAlive();
           setTimeout(() => {
             if (peerConntion) {
               peerConntion.bindGateway(conn);
@@ -57,7 +60,11 @@ export default class Peer2Peer {
       });
     });
     peer.on('error', (err) => {
-      window.Vault74.warn('The peer sent us an error:', err);
+      if (err.type === 'peer-unavailable') {
+        window.Vault74.debug(err);
+      } else {
+        window.Vault74.error('The peer sent us an error:', err);
+      }
     });
   }
 

@@ -19,6 +19,9 @@
           <div v-if="parseYoutubeLink(message.payload.data)">
             <YouTube :link="parseYoutubeLink(message.payload.data)"/>
           </div>
+          <div v-if="parseEthAddress(message.payload.data)">
+            <Address :address="parseEthAddress(message.payload.data)"/>
+          </div>
           <div v-if="message.payload.type === 'payment'">
             <Payment :message="message.payload" />
           </div>
