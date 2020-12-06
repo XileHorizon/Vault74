@@ -42,8 +42,16 @@ export default class DwellerCachingHelper {
    */
   async getDweller(address) {
     let dweller = this.getDwellerFromCache(address);
-    if (dweller) return dweller;
+    if (dweller) {
+      this.updateDweller(address);
+      return dweller;
+    }
+    dweller = await this.updateDweller(address);
+    return dweller;
+  }
 
+  async updateDweller(address) {
+    let dweller;
     const dwellerIDAddress = await Vault74Registry.getDwellerContract(address);
     if (dwellerIDAddress === '0x0000000000000000000000000000000000000000') return false;
     dweller = {

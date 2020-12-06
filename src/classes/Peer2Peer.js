@@ -58,6 +58,10 @@ export default class Peer2Peer {
           }, 500);
         });
       });
+      peer.on('disconnected', () => {
+        peer.reconnect();
+        this.connectToPeers();
+      });
     });
     peer.on('error', (err) => {
       if (err.type === 'peer-unavailable') {
