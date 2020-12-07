@@ -23,7 +23,7 @@
             </div>
             <div v-else>
               <span class="heading">File</span>
-              <input readonly :value="selectedFile.name" class="input is-small" type="text" />
+              <div readonly :value="selectedFile.name" class="input is-small" type="text" />
               <span class="heading padtop">IPFS Link</span>
               <input 
                 v-if="ipfsHash"

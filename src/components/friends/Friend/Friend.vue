@@ -5,7 +5,7 @@
       <p :class="`online ${(friend.status == 'alive') ? 'true' : ''}`"><i class="fa fa-circle"></i></p>
     </span>
     <div class="name-address">
-      <p class="username">{{friend.name}} <Badge :address="friend.address" /></p>
+      <p class="username">{{friend.name}}</p>
       <p class="address">{{friend.address}}</p>
     </div>
     <button class="button add-friend is-primary" v-on:click="action(friend.address)">{{text}}</button>

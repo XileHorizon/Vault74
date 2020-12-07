@@ -10,6 +10,13 @@
           Request Storage Permissions
         </button>
         <hr class="spacer">
+        <h2>Export Local Storage</h2>
+        <p>Export your Local Storage to move to another browser.</p>
+        <br>
+        <button class="button is-primary is-small" v-on:click="exportStorage">
+          Export Storage
+        </button>
+        <hr class="spacer">
         <h2>Clear Data</h2>
         <p class="heading">{{storageSize}}</p>
         <p>Quickly clean up locally stored data, please be aware doing so will clear your stored files, message history, and more. <br>
@@ -48,6 +55,21 @@ export default {
     clearData() {
       localStorage.clear();
       window.location.reload();
+    },
+    downloadToFile(content, filename, contentType) {
+      const a = document.createElement('a');
+      const file = new Blob([content], { type: contentType });
+      a.href = URL.createObjectURL(file);
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    },
+    exportStorage() {
+      this.downloadToFile(
+        JSON.stringify(localStorage),
+        'storage.json',
+        'application/json',
+      );
     },
   },
 };

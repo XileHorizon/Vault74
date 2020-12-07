@@ -28,7 +28,9 @@
           Networks &amp; Services
         </p>
         <ul class="menu-list">
-          <li><a>Encryption</a></li>
+          <li v-on:click="setRoute('encryption')">
+            <a :class="`${route == 'encryption' ? 'active' : ''}`">Encryption &amp; Keys</a>
+          </li>
           <li v-on:click="setRoute('storage')">
             <a :class="`${route == 'storage' ? 'active' : ''}`">Storage &amp; History</a>
           </li>
@@ -71,6 +73,10 @@
         v-if="route == 'network'" 
         :settings="settings"
         :setSetting="setSetting"/>
+      <Encryption 
+        v-if="route == 'encryption'" 
+        :settings="settings"
+        :setSetting="setSetting"/>
       <Storage 
         v-if="route == 'storage'" 
         :settings="settings"
@@ -87,6 +93,7 @@ import Keybinds from '@/components/main/settings/keybinds/Keybinds';
 import Accounts from '@/components/main/settings/accounts/Accounts';
 import Network from '@/components/main/settings/network/Network';
 import Storage from '@/components/main/settings/storage/Storage';
+import Encryption from '@/components/main/settings/encryption/Encryption';
 import AudioVideo from '@/components/main/settings/audiovideo/AudioVideo';
 
 export default {
@@ -100,6 +107,7 @@ export default {
     Keybinds,
     Accounts,
     Network,
+    Encryption,
     Storage,
     AudioVideo,
   },

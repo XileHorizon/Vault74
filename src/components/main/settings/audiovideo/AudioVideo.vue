@@ -53,18 +53,14 @@
           <div class="column">
             <h2>Echo Cancellation</h2>
             <p>Enable to help cancel out some slight echo &amp; feedback from your mic.</p>
-            <label class="checkbox">
-              <input type="checkbox" v-model="$store.state.echoCancellation">
-              Echo Cancellation Enabled
-            </label>
+            <br>
+            <ToggleSwitch v-model="$store.state.echoCancellation"/>
           </div>
           <div class="column">
             <h2>Noise Supression</h2>
             <p>Enable to help hide background noise in your environment.</p>
-            <label class="checkbox">
-              <input type="checkbox" v-model="$store.state.noiseSuppression">
-              Supression Enabled
-            </label>
+            <br>
+            <ToggleSwitch v-model="$store.state.noiseSuppression"/>
           </div>
         </div>
       </div>
@@ -99,14 +95,21 @@
 </template>
 
 <script>
+import ToggleSwitch from '@/components/common/ToggleSwitch';
+
 export default {
   name: 'AudioVideo',
+  components: {
+    ToggleSwitch,
+  },
   data() {
     return {
       devices: false,
       audioQuality: 320,
       audioDevices: [],
       videoDevices: [],
+      echoCancellation: false,
+      noiseSuppression: false,
     };
   },
   async mounted() {
