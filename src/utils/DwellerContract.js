@@ -1,4 +1,4 @@
-import * as DwellerID from '@/contracts/DwellerID.json';
+import * as DwellerID from '@/contracts/interfaces/DwellerID.json';
 
 // useful methods to interact with the DwellerID contract
 export default {

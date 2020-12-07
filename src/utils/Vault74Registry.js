@@ -1,4 +1,4 @@
-import * as Vault74Registry from '@/contracts/Vault74Registry.json';
+import * as Vault74Registry from '@/contracts/interfaces/Vault74Registry.json';
 import config from '@/config/config';
 
 const address = config.registry;
