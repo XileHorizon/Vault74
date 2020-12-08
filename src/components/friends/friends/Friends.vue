@@ -1,5 +1,9 @@
 <template src="./Friends.html"></template>
 
+<!--
+  Friends.vue
+  List all friends a user has. Allows for searching and chatting
+-->
 <script>
 import Fuse from 'fuse.js';
 
@@ -39,6 +43,11 @@ export default {
     });
   },
   methods: {
+    /** @method
+     * Filter friends by stored keyword and
+     * rebind the friends data
+     * @name filterFriends
+     */
     filterFriends() {
       if (this.keyword) {
         const options = {
@@ -52,24 +61,38 @@ export default {
         this.friends = this.$store.state.friends;
       }
     },
+    /** @method
+     * Update all store values so to chat with the given client
+     * @name chatFriend
+     * @argument clientId client to chat with referenced by address
+     */
     chatFriend(clientId) {
       this.$store.commit('newChat', clientId);
       this.$store.commit('activeChat', clientId);
       this.$store.commit('changeRoute', 'main');
     },
-    // Cleanup after adding a friend
+    /** @method
+     * Cleanup after adding a friend
+     * @name reset
+     */
     reset() {
       this.error = false;
       this.friendAddress = '';
       this.friend = false;
     },
-    // Close the component and reroute to main
+    /** @method
+     * Close the component and reroute to main
+     * @name close
+     */
     close() {
       this.$store.commit('changeRoute', 'main');
     },
-    // Do some checks to make sure the friend is valid
-    // and then display them if they are found so they
-    // can be confirmed and added
+    /** @method
+     * Do some checks to make sure the friend is valid
+     * and then display them if they are found so they
+     * can be confirmed and added
+     * @name addFriend
+     */
     async addFriend() {
       if (!ethereum.utils.isAddress(this.friendAddress)) {
         this.error = 'Whoops, that\'s not a valid address';
@@ -91,7 +114,10 @@ export default {
       this.error = false;
       this.friend = { ...friend, status: 'unchecked' };
     },
-    // Confirms and adds a found friend
+    /** @method
+     * Confirms and adds a found friend
+     * @name commitFriend
+     */
     commitFriend() {
       this.$store.commit('addFriend', this.friend);
       this.success = `${this.friend.name} has been added to your friendslist.`;

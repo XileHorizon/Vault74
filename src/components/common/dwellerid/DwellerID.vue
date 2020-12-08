@@ -23,9 +23,19 @@ export default {
     };
   },
   methods: {
+    /** @method
+     * Setter
+     * @name getDweller
+     * @argument address address of the dweller to get from the cache
+     */
     async getDweller(address) {
       this.dweller = await this.dwellerCachingHelper.getDweller(address);
     },
+    /** @method
+     * Setter
+     * Sets the active chat to the current address and toggles the ID
+     * @name message
+     */
     message() {
       this.$store.commit('activeChat', this.address);
       this.toggle();

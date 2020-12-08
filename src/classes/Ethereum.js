@@ -67,7 +67,6 @@ export default class Ethereum {
         .once('transactionHash', tx)
         .once('confirmation', done);
     } else {
-      console.log('remoteAccount', method);
       method
         .send({
           from: account,

@@ -35,6 +35,14 @@ export default {
     };
   },
   methods: {
+    /** @method
+     * Setter
+     * Send a message to the message broker for storage and
+     * Peer communication. Also send straight to the Peer2Peer handler
+     * @name sendMessage
+     * @argument data the data to send
+     * @argument type the type of message we're broadcasting
+     */
     sendMessage(data, type) {
       if (window.Vault74.messageBroker) {
         window.Vault74.messageBroker.sentMessage(
@@ -56,13 +64,23 @@ export default {
         },
       );
     },
+    /** @method
+     * Setter
+     * Reach out to the CoinCap.io API for current market
+     * prices of Ethereum to USD
+     * @name getMarketPrice
+     */
     async getMarketPrice() {
       // pull prices from https://api.coincap.io/v2/assets/ethereum
       const response = await fetch('https://api.coincap.io/v2/assets/ethereum');
       const json = await response.json();
       this.priceUsd = json.data.priceUsd;
     },
-    // Issue the transactoin on chain if everything checks out.
+    /** @method
+     * Setter
+     * Issue the transactoin on chain if everything checks out.
+     * @name sendTransaction
+     */
     async sendTransaction() {
       if (this.amount <= 0) {
         this.error = 'Please enter > 0 ETH.';

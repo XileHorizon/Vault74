@@ -64,11 +64,22 @@ export default {
     Badge,
   },
   methods: {
+    /** @method
+     * Wrap links in <a> tags
+     * @name wrapLinks
+     * @argument message string to wrap links in
+     * @returns string value of formatted message
+     */
     messageUser(user) {
       this.$store.commit('activeChat', user);
     },
-    etherscan(user) {
-      window.open(`${config.network.explorer}/address/${user}`);
+    /** @method
+     * Opens an etherscan link to the given address
+     * @name etherscan
+     * @argument address address to open to
+     */
+    etherscan(address) {
+      window.open(`${config.network.explorer}/address/${address}`);
     },
   },
 };

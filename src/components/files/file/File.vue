@@ -16,7 +16,12 @@ export default {
     };
   },
   methods: {
-    // Converts the bytes to a readable string
+    /** @method
+     * Converts the bytes to a readable string
+     * @name bytesToSize
+     * @argument bytes value to convert to human readable string
+     * @returns human readable filesize
+     */
     bytesToSize(bytes) {
       const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
       if (bytes === 0) return '0 Bytes';
@@ -25,12 +30,22 @@ export default {
       // eslint-disable-next-line
       return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
     },
-    // Remove the file from the local cache, not IPFS
+    /** @method
+     * Setter
+     * Remove the file from the local cache, not IPFS
+     * @name deleteFile
+     */
     deleteFile() {
       IPFSUtils.removeFileFromCache(this.file);
       this.updateParent();
     },
-    // Traanslates the filetype to a fontawesome icon class
+    /** @method
+     * Setter
+     * Traanslates the filetype to a fontawesome icon class
+     * @name translateFiletype
+     * @argument filetype the filetype to map to
+     * @returns fontawesome class identifying the given filetype
+     */
     translateFiletype(filetype) {
       return FileIconMapper.translateFiletype(filetype, FileIconMapper.mappings);
     },

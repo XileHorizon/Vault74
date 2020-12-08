@@ -27,6 +27,10 @@ export default {
     };
   },
   methods: {
+    /** @method
+     * parse the stored nettype to readable string
+     * @name getNetwork
+     */
     getNetwork() {
       switch (this.$store.state.web3Stats.nettype) {
         case 'private':
@@ -37,10 +41,19 @@ export default {
           return 'Unknown';
       }
     },
+    /** @method
+     * Jump to the active media stream location
+     * @name jumpTo
+     */
     jumpTo() {
       this.$store.commit('changeRoute', 'main');
       this.$store.commit('activeChat', this.$store.state.activeMediaStreamPeer);
     },
+    /** @method
+     * Set tooltip text to represent the fact
+     * that we copied the addreass of the client
+     * @name copied
+     */
     copied() {
       const original = this.tooltip;
       this.tooltip = 'Copied!';
@@ -48,14 +61,21 @@ export default {
         this.tooltip = original;
       }, 1000);
     },
-    // Non functional placeholder mute function
+    /** @method
+     * Mute the active stream
+     * @name copied
+     */
     toggleMute() {
       this.muted = !this.muted;
       if (this.muted) muteAudio.play();
       if (!this.muted) unmuteAudio.play();
       this.$store.commit('muted', this.muted);
     },
-    // Non functional placeholder deafen function
+    /** @method
+     * Mute the active stream &
+     * mute remote audio
+     * @name toggleDeafen
+     */
     toggleDeafen() {
       this.deafened = !this.deafened;
       if (this.deafened) deafenAudio.play();

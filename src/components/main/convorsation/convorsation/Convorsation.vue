@@ -19,6 +19,10 @@
   </div>
 </template>
 
+<!--
+  Convorsation.vue
+  This component houses the current active convorsation
+-->
 <script>
 import MessageBody from '@/components/main/convorsation/message/messagebody/MessageBody';
 import Divider from '@/components/common/Divider';
@@ -42,8 +46,11 @@ export default {
     };
   },
   methods: {
-    // Rudementary scrolling to the bottom of the
-    // div when a message comes in, or on other events
+    /** @method
+     * Rudementary scrolling to the bottom of the
+     * div when a message comes in, or on other events
+     * @name scrollToEnd
+     */
     scrollToEnd() {
       const { chat } = this.$refs;
       if (!chat) return;
@@ -52,6 +59,11 @@ export default {
         this.showScrollToBottom = false;
       }, 50);
     },
+    /** @method
+     * Scrolls to the end if the user isn't looking through message
+     * history to prevent annoying jumping
+     * @name scrollToEndConditionally
+     */
     scrollToEndConditionally() {
       const { chat } = this.$refs;
       if (!chat) return;
@@ -59,8 +71,11 @@ export default {
         this.scrollToEnd();
       }
     },
-    // If we've scrolled past a certain point we will
-    // display the scroll to bottom button
+    /** @method
+     * If we've scrolled past a certain point we will
+     * display the scroll to bottom button
+     * @name onScroll
+     */
     onScroll() {
       const { chat } = this.$refs;
       if (!chat) return;

@@ -15,10 +15,19 @@ export default {
     };
   },
   methods: {
+    /** @method
+     * Triggers a screenshare request event to the store
+     * subscribers will be notified to start a share
+     * @name requestScreenShare
+     */
     requestScreenShare() {
       this.$store.commit('screenShareRequest');
     },
-    // Toggles the ID card modal
+    /** @method
+     * @depricated
+     * Toggles the ID card modal
+     * @name requestScreenShare
+     */
     toggleFingerprint() {
       this.$store.commit('toggleUserInfo');
     },

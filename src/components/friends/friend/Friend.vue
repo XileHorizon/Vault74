@@ -12,6 +12,10 @@
   </div>
 </template>
 
+<!--
+  Friend.vue
+  Represents a singular friend
+-->
 <script>
 import CircleIcon from '@/components/common/CircleIcon';
 import Badge from '@/components/common/Badge';

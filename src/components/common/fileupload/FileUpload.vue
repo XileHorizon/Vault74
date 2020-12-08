@@ -29,11 +29,22 @@ export default {
     if (this.file) this.sendToIpfs(this.selectedFile);
   },
   methods: {
-    // Returns a local url for the file preview
+    /** @method
+     * Get a URL object from the selected file
+     * @name getURL
+     * @returns created Object URL
+     */
     getURL() {
       return URL.createObjectURL(this.selectedFile);
     },
-    // Determines which type of file we're sending out in the message
+    /** @method
+     * Setter
+     * Determines which type of file we're sending out in the message
+     * this should be used to generalized files for parsing later
+     * @name determineFileType
+     * @argument type string value of the type of file to check
+     * @returns simple file type name for checking later
+     */
     determineFileType(type) {
       let ft = 'file';
       if (type.includes('image')) ft = 'image';
@@ -41,7 +52,13 @@ export default {
       if (type.includes('video')) ft = 'video';
       return ft;
     },
-    // Sends the file info out ready for messaging to the parent component
+    /** @method
+     * Setter
+     * Sends the file info out ready for messaging to the parent component
+     * This will create a new file class and add the file to the recent
+     * files cache stored in Localhost
+     * @name sendFileMessage
+     */
     sendFileMessage() {
       if (this.ipfsHash) {
         this.fileClass = new FileC(
@@ -60,12 +77,24 @@ export default {
         this.close();
       }
     },
-    // Sets the active file ready for processing
+    /** @method
+     * Setter
+     * Sets the active file ready for processing
+     * this will also trigger an upload to IPFS
+     * @name setFile
+     * @argument event DOM event for selecting file
+     */
     setFile(event) {
       [this.selectedFile] = event.target.files;
       this.sendToIpfs(this.selectedFile);
     },
-    // Uploads the file to IPFS
+    /** @method
+     * Setter
+     * Uploads the file to IPFS. Progress will be updated on the
+     * component for tracking in progress bars and watching
+     * @name sendToIpfs
+     * @argument file the file to be uploaded to IPFS
+     */
     async sendToIpfs(file) {
       this.$store.commit('setStatus', 'Uploading file to IPFS');
       const ipfsResponse = await window.ipfs.add(

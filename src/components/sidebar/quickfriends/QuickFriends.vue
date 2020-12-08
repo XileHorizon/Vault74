@@ -61,12 +61,22 @@ export default {
     };
   },
   methods: {
+    /** @method
+     * Create chat with given friend
+     * @name handleChat
+     * @argument fr friend to chat with
+     */
     handleChat(fr) {
       this.$store.commit('newChat', fr.address);
       this.$store.commit('activeChat', fr.address);
       this.$store.commit('changeRoute', 'main');
       this.close();
     },
+    /** @method
+     * Search through friends and update
+     * local friends object with filtered friends
+     * @name filterFriends
+     */
     filterFriends() {
       if (this.keyword) {
         const options = {

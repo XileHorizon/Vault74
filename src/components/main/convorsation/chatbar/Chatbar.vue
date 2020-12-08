@@ -1,5 +1,10 @@
 <template src="./Chatbar.html"></template>
 
+<!--
+  Chatbar.vue
+  The input box and clickable icons to manage emojis
+  send Ether, upload files and send messages to users
+-->
 <script>
 import debounce from 'debounce';
 
@@ -33,7 +38,11 @@ export default {
     };
   },
   methods: {
-    // Handle the pasting of image files and start the upload of the file
+    /** @method
+     * Handle the pasting of image files and start the upload of the file
+     * @name handlePaste
+     * @argument e paste DOM event
+     */
     handlePaste(e) {
       for (let i = 0; i < e.clipboardData.items.length; i += 1) {
         const item = e.clipboardData.items[i];
@@ -44,11 +53,17 @@ export default {
         }
       }
     },
-    // When a file has been succesfully uploaded, show the uploader
+    /** @method
+     * When a file has been succesfully uploaded, show the uploader
+     * @name openFileUpload
+     */
     openFileUpload() {
       this.showFileUpload = true;
     },
-    // Self explanatory, close the file uploader modal
+    /** @method
+     * Self explanatory, close the file uploader modal
+     * @name closeFileUpload
+     */
     closeFileUpload() {
       this.showFileUpload = false;
       this.file = false;

@@ -35,9 +35,18 @@ export default {
   name: 'Badges',
   props: ['address', 'showNoBadges'],
   methods: {
+    /** @method
+     * @name isRank
+     * @argument rank string rang to check for
+     * @returns boolean of wether or not the user had the specified rank
+     */
     isRank(rank) {
       return this[rank].includes(this.address);
     },
+    /** @method
+     * @name hasNoRank
+     * @returns boolean of wether or not the user has a rank
+     */
     hasNoRank() {
       const hasDevelopers = this.isRank('developers');
       const hasSupporters = this.isRank('supporters');

@@ -44,7 +44,12 @@ export default {
     };
   },
   methods: {
-    // Sends messages to remote peer and the message broker.
+    /** @method
+     * Sends messages to remote peer and the message broker.
+     * @name sendMessage
+     * @argument data data to send to message brokern & peers
+     * @argument type type of message
+     */
     sendMessage(data, type) {
       if (window.Vault74.messageBroker) {
         window.Vault74.messageBroker.sentMessage(
@@ -66,14 +71,21 @@ export default {
         },
       );
     },
-    // Stream the audio to the DOM
+    /** @method
+     * Stream the audio to the DOM
+     * @name playRemoteStream
+     * @argument e source object to play audio to
+     */
     playRemoteStream(e) {
       this.audioStream = new Audio();
       this.audioStream.muted = false;
       this.audioStream.srcObject = e;
       this.audioStream.play();
     },
-    // Clear the usage of the audio devices
+    /** @method
+     * Clear the usage of the audio devices
+     * @name stopStream
+     */
     stopStream() {
       if (!this.mediaStream) return;
       this.mediaStream.getAudioTracks().forEach((track) => {
@@ -84,7 +96,11 @@ export default {
       });
       this.mediaStream = null;
     },
-    // Mute all local audio tracks
+    /** @method
+     * Mute all local audio tracks
+     * @name stopStream
+     * @argument muted boolean value of wether or not the user is muted
+     */
     toggleMute(muted) {
       if (this.mediaStream) {
         this.mediaStream.getTracks().forEach((track) => {
@@ -93,7 +109,11 @@ export default {
         });
       }
     },
-    // Mute local AND remote audio tracks
+    /** @method
+     * Mute local AND remote audio tracks
+     * @name toggleDeafen
+     * @argument deafened boolean value of wether or not the user is deafened
+     */
     toggleDeafen(deafened) {
       if (this.mediaStream) {
         this.mediaStream.getTracks().forEach((track) => {
@@ -106,6 +126,11 @@ export default {
         });
       }
     },
+    /** @method
+     * End mediastreams and clean up calls. Notify the remote
+     * peer that we've ended the call.
+     * @name hangup
+     */
     hangup() {
       // Stop calling & play hangup
       callingSound.stop();
@@ -122,8 +147,11 @@ export default {
       this.$store.commit('activeCaller', false);
       this.$store.commit('connectMediaStream', false);
     },
-    // Create a new media stream (audio)
-    // if one has not yet been created
+    /** @method
+     * Create a new media stream (audio)
+     * if one has not yet been created
+     * @name createMediaStream
+     */
     createMediaStream() {
       if (this.mediaStream) return this.mediaStream;
       const getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;

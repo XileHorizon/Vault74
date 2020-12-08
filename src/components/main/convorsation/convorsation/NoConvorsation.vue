@@ -10,6 +10,10 @@
     </div>
 </template>
 
+<!--
+  NoConvorsation.vue
+  This component is shown if users haven't chatted yet.
+-->
 <script>
 export default {
   name: 'NoConvorsation',

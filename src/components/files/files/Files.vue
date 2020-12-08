@@ -44,19 +44,31 @@ export default {
     };
   },
   methods: {
-    // Updates the parent with new files
+    /** @method
+     * Updates the parent with new files
+     * @name updateParent
+     */
     updateParent() {
       this.fetchRecentFiles();
     },
-    // Updates the local cache with the new files
+    /** @method
+     * Updates the local cache with the new files
+     * @name updateCache
+     */
     updateCache() {
       this.fetchRecentFiles();
     },
-    // Close out the file manager by changing the main route
+    /** @method
+     * Close out the file manager by changing the main route
+     * @name close
+     */
     close() {
       this.$store.commit('changeRoute', 'main');
     },
-    // Fetch files from the IPFS local file cache
+    /** @method
+     * Fetch files from the IPFS local file cache
+     * @name fetchRecentFiles
+     */
     fetchRecentFiles() {
       this.recentFiles = IPFSUtils.getFileCache().reverse();
     },
