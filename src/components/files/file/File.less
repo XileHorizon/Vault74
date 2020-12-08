@@ -1,0 +1,76 @@
+.close {
+  display: none;
+}
+#file:hover .close {
+  display: block;
+}
+#file .nothovered {
+  display: none;
+}
+#file .hovered {
+  display: block;
+}
+#file:hover .hovered {
+  display: none;
+}
+#file:hover .nothovered {
+  display: block;
+}
+.icon {
+  width: 45px;
+  float: left;
+  font-size: 20pt;
+  cursor: pointer;
+  padding-top: 1.2rem;
+  text-decoration: none !important;
+}
+.close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  cursor: pointer;
+  background-color: red;
+  font-size: 9pt;
+  width: 19px;
+  height: 19px;
+  text-align: center;
+  border-radius: 50%;
+}
+.fileInfo {
+  width: calc(80% - 65px);
+  float: left;
+}
+.preview {
+  max-width: 60px;
+  height: 100%;
+  float: right;
+}
+.preview img {
+  max-width: 80px;
+  max-height: 100%;
+  float: right;
+  border-radius: 6px;
+  padding: 0.25rem;
+}
+.filename {
+  width: 90%;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#file {
+  position: relative;
+  width: calc(50% - 1rem);
+  height: calc(45px + 1rem);
+  float: left;
+  margin: 0.5rem;
+  border-radius: 3px;
+  background-color: #eee;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+h3 {
+  font-family: 'Major Mono Display', monospace;
+  font-size: 20pt;
+}

@@ -1,0 +1,144 @@
+import * as DwellerID from '@/contracts/interfaces/DwellerID.json';
+import Ethereum from '@/classes/Ethereum';
+
+const ethereum = new Ethereum('user-provided');
+// useful methods to interact with the DwellerID contract
+export default {
+  /** @function
+   * @name getContract
+   * @argument address Address of the DwellerID contract
+   * @returns contract instance ready for method execution
+   */
+  getContract(address = false) {
+    let contract = null;
+    if (address) {
+      contract = window.web3 ?
+        new window.web3.eth.Contract(DwellerID.abi, address) :
+        ethereum.getContract(DwellerID.abi, address);
+    } else {
+      contract = window.web3 ?
+        new window.web3.eth.Contract(DwellerID.abi) :
+        ethereum.getContract(DwellerID.abi);
+    }
+    contract.options.data = DwellerID.data.bytecode.object;
+    return contract;
+  },
+  /** @function
+   * @name deploy
+   * @argument _username inital username to deploy the contract with
+   * @argument account to deploy the contract from, this will be the owner
+   * @argument tx callback which will be called when the transaction is made
+   * @argument done callback to be called when the first confirmation comes through
+   */
+  deploy(_username, account, tx, done) {
+    const username = ethereum.utils.fromAscii(_username);
+    const contract = this.getContract();
+    contract.deploy({
+      arguments: [username],
+    }).send({
+      from: account,
+      gas: 4700000,
+    })
+      .once('transactionHash', tx)
+      .once('confirmation', done);
+  },
+  /** @function
+   * @name setPhoto
+   * @argument address Address of the DwellerID contract
+   * @argument account account to use for the transaction
+   * @argument ipfsHash hash referencing the inital profile picture
+   * @argument done callback which will be called on the first TX & confirm.
+   * @returns dweller payload which contains all information about the dweller
+   */
+  setPhoto(address, account, ipfsHash, done) {
+    const contract = this.getContract(address);
+    contract.methods.setPhoto([
+      ethereum.utils.fromAscii(ipfsHash.path.substring(0, 23)),
+      ethereum.utils.fromAscii(ipfsHash.path.substring(23)),
+    ])
+      .send({
+        from: account,
+        gas: 4700000,
+      })
+      .once('transactionHash', done)
+      .once('confirmation', done);
+  },
+  /** @function
+   * @name setUsername
+   * @argument address Address of the DwellerID contract
+   * @argument account account to use for the transaction
+   * @argument username username to set
+   * @argument done callback which will be called on the first TX & confirm.
+   */
+  setUsername(address, account, username, done) {
+    const contract = this.getContract(address);
+    contract.methods.setDwellerName(ethereum.utils.fromAscii(username))
+      .send({
+        from: account,
+        gas: 4700000,
+      })
+      .once('transactionHash', done)
+      .once('confirmation', done);
+  },
+  /** @function
+   * @name getDwellerAsync
+   * @argument address Address of the DwellerID contract
+   * @argument done callback which will return the dweller info
+   */
+  async getDweller(address, done) {
+    const contract = this.getContract(address);
+    const dweller = await contract.methods.getDweller().call();
+    if (!dweller) {
+      done(false, false);
+      return;
+    }
+    let onChainPhotoHash = await contract.methods.getPhoto().call();
+    onChainPhotoHash = onChainPhotoHash.substr(0, 48) + onChainPhotoHash.substr(66, 46);
+    onChainPhotoHash = ethereum.utils.hexToString(onChainPhotoHash);
+    done(dweller, onChainPhotoHash);
+  },
+  /** @function
+   * @name getDwellerAsync
+   * @argument address Address of the DwellerID contract
+   * @returns dweller payload which contains all information about the dweller
+   */
+  async getDwellerAsync(address) {
+    return new Promise((resolve) => {
+      this.getDweller(address, (dweller, onChainPhotoHash) => {
+        resolve(dweller, onChainPhotoHash);
+      });
+    });
+  },
+  /** @function
+   * @name getPhotoAsync
+   * @argument address Address of the DwellerID contract
+   * @returns ipfs photo hash assigned to the dweller contract
+   */
+  async getPhotoAsync(address) {
+    return new Promise((resolve) => {
+      this.getDweller(address, (_, onChainPhotoHash) => {
+        resolve(onChainPhotoHash);
+      });
+    });
+  },
+  /** @function
+   * @name getDwellerAddress
+   * @argument address Address of the DwellerID contract
+   * @returns owner address of the dweller contract
+   */
+  async getDwellerAddress(address) {
+    const contract = this.getContract(address);
+    const dweller = await contract.methods.getDwellerAddress().call();
+    return dweller;
+  },
+  /** @function
+   * @name getDwellerName
+   * @argument address Address of the DwellerID contract
+   * @returns name of the dweller who owns this contract
+   */
+  async getDwellerName(address) {
+    const contract = this.getContract(address);
+    const dwellerName = await contract.methods.getDwellerName().call();
+    return dwellerName;
+  },
+};

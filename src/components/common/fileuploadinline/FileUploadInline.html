@@ -1,0 +1,58 @@
+<section>
+  <div class="columns">
+    <div class="column center" v-if="selectedFile && selectedFile.type.includes('image')">
+      <img :src="getURL()" />
+    </div>
+    <div class="column">
+        <h3 class="heading">Upload File</h3>
+        Uploading a file will store your file on the IPFS blockchain and automatically send the file in chat.
+        <br>
+        <br>
+        <div v-if="!selectedFile">
+          <span class="heading">Select File</span>
+          <input
+            name="file"
+            id="file"
+            class="input inputfile"
+            @change="setFile"
+            type="file" />
+          <label for="file" class="button is-small is-primary">Choose a file</label>
+        </div>
+        <div v-else>
+          <span class="heading">File</span>
+          <input readonly :value="selectedFile.name" class="input is-small" type="text" />
+          <span class="heading padtop">IPFS Link</span>
+          <input 
+            v-if="ipfsHash"
+            autofocus
+            readonly
+            :value="`${config.ipfs.browser}${ipfsHash}`"
+            class="input is-small hash"
+            type="text" />
+          <div class="heading" v-else>
+            Uploading to IPFS...
+          </div>
+          <progress 
+            v-if="progress != 100"
+            class="progress is-primary is-small"
+            :value="progress"
+            max="100">{{progress}}%</progress>
+        </div>
+        <input 
+          autofocus
+          value=" "
+          class="hidden"
+          ref="hidden"
+          type="text" 
+          v-on:keyup.enter="sendFileMessage"/>
+        <button 
+          v-if="ipfsHash"
+          :disabled="!ipfsHash"
+          class="button is-primary is-small"
+          autofocus 
+          v-on:click="reset">
+          {{ipfsHash ? 'Upload Another File' : 'Uploading...'}}
+        </button>
+    </div>
+  </div>
+</section>

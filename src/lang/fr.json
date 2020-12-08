@@ -1,0 +1,182 @@
+{
+  "global": {
+    "address": "Adresse"
+  },
+  "dwellerid": {
+    "account_age": "Âge du Compte",
+    "address": "Adresse de l'Identifiant Dweller",
+    "view_contract": "Voir le contrat de l'Identifiant Dweller",
+    "view_address": "Copier l'Addresse Dweller"
+  },
+  "fileupload": {
+    "heading": "Télécharger Fichier",
+    "description": "Télécharger un fichier va le sauvegarder sur le blockchain IPFS et va automatiquement l'envoyer dans la conversation.",
+    "select": "Selectionner un Fichier",
+    "chosefile": "Choisir un Fichier",
+    "file": "Fichier",
+    "link": "Lien IPFS",
+    "uploading": "En train de télécharger à l'IPFS...",
+    "send": "Envoyer Fichier"
+  },
+  "loading": {
+    "connecting_blockchain": "En train de connecter au blockchain...",
+    "connecting_broker": "En train de connecter à 0.vault74.io...",
+    "long_load": "Ça fait longtemps, est-ce que vous avez installé {{vaule}}?",
+    "other_tab": "Encore en train de charger? Vault74 pourrait être ouvert dans un autre onglet.",
+    "something_wrong": "Quelque chose est peut-être allé male,",
+    "alpha": "Ceci est un produit en état alpha, veuillez utiliser Goerli Testnet!"
+  },
+  "files": {
+    "heading": "Parcourir les fichiers",
+    "subtext": "Parcourir vos fichiers envoyés à d'autres utilisateurs et envoyez en des nouvelles à l'IPFS.",
+    "upload": "Télécharger des Fichiers",
+    "your_files": "Vos Fichiers",
+    "your_files_subtext": "Voici une liste de tous les fichiers que vous avez téléchargés."
+  },
+  "friends": {
+    "heading": "Amis",
+    "subtext": "Connectez-vous à d'autres personnes sur la plateforme Vault74.",
+    "find_someone": "Trouvez Quelqu'un",
+    "add_a_friend": "Ajoutez un ami",
+    "enter_address": "Entrez l'addresse Ethereum d'un ami pour les trouver.",
+    "add_friend": "Ajouter un Ami",
+    "found_someone": "On a Trouvé Quelqu'un!",
+    "chat": "Commencez à bavarder",
+    "your_friends": "Vos Amis",
+    "start_chat": "Commencez à parler avec vos amis ci-dessous. Soyez gentils, ou pas. Nous ne vous jugerons pas.",
+    "no_friends": "Oups, vous n'avez pas encore d'amis. Nous le serons, mais vous pouvez aussi en ajouter plus au-dessus."
+  },
+  "chatbar": {
+    "typing": "est en train d'écrire"
+  },
+  "voice_video": {
+    "switch_video": "Changer à Vidéo",
+    "switch_voice": "Changer à Voix",
+    "disconnect": "Déconnecter"
+  },
+  "main": {
+    "heading": "Mieux avec des Amis",
+    "subtext_one": "Vous n'avez pas besoin d'être seul.",
+    "subtext_two": "Ajoutez des amis pour commencer à bavarder, partager et diffuser en direct.",
+    "button": "Ajouter des amis dans la conversation"
+  },
+  "settings": {
+    "logo": "Paramètres",
+    "h_general": "Général",
+    "h_personalize": "Personnaliser",
+    "h_profile": "Compte",
+    "h_audiovideo": "Audio & Vidéo",
+    "h_keybinds": "Raccourcis clavier",
+    "h_accounts": "Comptes & Appareils",
+    "h_networks": "Résaux et Services",
+    "h_encryption": "Crypter",
+    "h_storage": "Stockage et historique",
+    "h_network": "Résau",
+    "h_transactions": "Transactions",
+    "h_payments": "Paiements",
+    "h_transfers": "Transferts",
+    "h_balance": "Solde",
+    "accounts": {
+      "label": "Comptes",
+      "heading": "Compte Actif",
+      "subtext": "Sélectionnez de quel compte Ethereum faire des transactions par défaut.",
+      "balance": "Solde",
+      "gas_price": "Prix de l'essence",
+      "gas_price_desc": "Un prix de l'essence plus haut permet de faire des transactions plus rapidement.",
+      "devices": "Appareils",
+      "connected_devices": "Appareils Connectés",
+      "none": "Aucun portefeuille externe connecté."
+    },
+    "audio_video": {
+      "label": "Audio",
+      "input_heading": "Périphérique d'entrée d'audio",
+      "input_subtext": "Sélectionnez le périphérique que les gens vont utiliser pour entendre votre voix douce comme de la soie.",
+      "audio_output": "Périphérique de sortie d'audio",
+      "audio_output_subtext": "Sélectionnez le périphérique par laquelle on vous transmet du son.",
+      "video": "Vidéo",
+      "video_heading": "Caméra",
+      "video_subtext": "Sélectionnez la caméra par laquelle vous partagerez votre beau sourire."
+    },
+    "keybinds": {
+      "label": "Raccourcis Clavier",
+      "heading": "Raccourcis Défauts",
+      "subtext": "Voici une liste de raccourcis qu'on a par défaut. Pour l'instant, vous ne pouvez pas les modifier.",
+      "toggle_mute": "Basculer option Muet",
+      "toggle_deafen": "Basculer option Sourdine",
+      "toggle_settings": "Ouvrir Paramètres",
+      "call": "Appeler la Fenêtre Active"
+    },
+    "network": {
+      "label": "Réseau",
+      "heading": "Fournisseur Web3",
+      "subtext": "Un fournisseur Web3 est tout simplement la façon vous choisissez d'intéragir avec le blockchain. Pour la plupart des gens, MetaMask est bon."
+    },
+    "personalize": {
+      "appearance": "Apparence",
+      "darktheme_heading": "Thème Sombre",
+      "darktheme_subtext": "Utilisez un thème sombre pour une version de Vault74 plus douce sur les yeux.",
+      "permissions": "Permissions",
+      "notifications": "Notifications",
+      "notifiactions_subtext": "Cliquez pour permettre à Vault74 de faire des notifications et vous donner une meilleure expérience."
+    },
+    "storage": {
+      "label": "Stockage",
+      "lfs_heading": "Stockage de Larges Fichiers",
+      "lfs_subtext": "Cliquer pour permettre le stockage de larges fichiers. Ceci vous permet d'envoyer de très larges fichiers et de garder plus de messages dans votre cache.",
+      "lfs_request": "Demander les Permissions de Stockage",
+      "data_heading": "Effacer les Données",
+      "data_subtext": "Effacer rapidement vos données stockés localement. Ceci effacera vos fichiers stockés, votre historique de messages et plus.",
+      "data_subtext_two": "Faites cela seulement si vous connaissez les répercussions de cette action.",
+      "clear_data": "Effacer les Données"
+    },
+    "profile": {
+      "label": "Compte",
+      "heading": "Créer votre Compte",
+      "subtext": "Votre compte n'a pas encore été crée, alors faites-ça! Ça ne prend que quelques moments.",
+      "profile_pic": "Image (Facultative)",
+      "uploading_ipfs": "En train de télécharger à IPFS...",
+      "username": "Nom d'utilisateur",
+      "create_account": "Créer Compte",
+      "creating_transaction": "En train de créer la transaction...",
+      "step1": "Veuillez approuver la transaction sur votre portefeuille ou MetaMask.",
+      "sending_transaction": "En train d'envoyer la transaction...",
+      "step2": "Veuillez attendre pendant que votre transaction est envoyée...",
+      "confirming_transactoin": "En train de confirmer la transaction...",
+      "step3": "Ne partez pas! On attend la confirmation...",
+      "last_step": "Dernière Étapes!",
+      "step4": "On prend soin des derniers détails...",
+      "edit_account": "Modifier votre Compte",
+      "edit_account_subtext": "Voir vos informations et les changer.",
+      "your_account": "Votre Compte",
+      "your_account_subtext": "Voir vos informations et les changer.",
+      "display_name": "Surnom",
+      "account_address": "Adresse de Compte",
+      "id_card": "Ceci est comme votre carte d'identification, partagez-le avec vos amis pour qu'ils vous ajoutent.",
+      "dweller_address": "Adresse Dweller",
+      "dweller_owner_address": "Adresse de Propriétaire Dweller",
+      "name": "Nom",
+      "photo_hash": "Hash de Photo"
+    }
+  },
+  "payments": {
+    "send": "Envoyer {{amount}} ether",
+    "balance": "Solde",
+    "button": "Envoyer"
+  },
+  "sidebar": {
+    "find": "Trouver un vault dweller",
+    "friends": "Amis",
+    "files": "Fichiers",
+    "chats": "Conversations",
+    "groups": "Groupes",
+    "add_friends": "Heille! Ajouter plus d'amis",
+    "button": "Ajouter des Amis"
+  },
+  "footer": {
+    "p2p": "P2P",
+    "network": "Réseau",
+    "block_number": "Numéro de Bloc",
+    "account": "Compte",
+    "connecting": "En train de connecter..."
+  }
+}

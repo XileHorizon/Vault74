@@ -1,0 +1,127 @@
+<template>
+  <div :class="`modal ${connected ? '' : 'is-active'}`">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <section class="modal-card-body" style="text-align: center;">
+        <p class="head"><strong>Connecting to Network...</strong></p>
+        <b>If you do not have a Ethereum provider installed, please consider installing MetaMask. </b>
+        <br /><br>
+        <a href="https://metamask.io/" target="_blank">https://metamask.io/</a>
+      </section>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+</template>
+
+<script>
+import Web3 from 'web3';
+import Vault74Registry from '@/utils/Vault74Registry';
+import DwellerID from '@/utils/DwellerContract';
+import Ethereum from '@/classes/Ethereum';
+
+let ethereum = null;
+
+export default {
+  name: 'Web3',
+  data() {
+    return {
+      connected: false,
+    };
+  },
+  methods: {
+    // Tasks we need to run for Web3 when the application starts
+    async startupActions(acc) {
+      const [account] = acc ? [acc] : await window.web3.eth.getAccounts();
+      const dwellerContract = await Vault74Registry.getDwellerContract(account);
+      const dwellerPhoto = await DwellerID.getPhotoAsync(dwellerContract);
+      const dwellerName = await DwellerID.getDwellerName(dwellerContract);
+      if (dwellerContract !== '0x0000000000000000000000000000000000000000') {
+        this.$store.commit('dwellerAddress', dwellerContract);
+        this.$store.commit('profilePictureHash', dwellerPhoto);
+        this.$store.commit('username', window.web3.utils.hexToString(dwellerName));
+      } else {
+        this.$store.commit('dwellerAddress', '0x0000000000000000000000000000000000000000');
+      }
+    },
+    // Repeating polling tasks for Web3 stats gathering
+    web3Polling(account) {
+      const promises = [
+        ethereum.eth.getBlockNumber(),
+        ethereum.eth.net.getNetworkType(),
+      ];
+      if (!account) {
+        promises.push(window.web3.eth.getAccounts());
+      }
+      Promise.all(promises).then((stats) => {
+        this.$store.commit('web3Stats', {
+          defaultBlock: ethereum.eth.defaultBlock,
+          blockNumber: stats[0],
+          nettype: stats[1],
+        });
+        this.$store.commit('accounts', stats[2] || [account]);
+        this.$store.commit('defaultAccount');
+        ethereum.eth.getBalance(this.$store.state.activeAccount).then((bal) => {
+          this.$store.commit('balance', ethereum.utils.fromWei(bal));
+        });
+        window.Vault74.debug(
+          'Fetched Web3 Stats ->',
+          this.$store.state.web3Stats,
+        );
+      });
+    },
+  },
+  mounted() {
+    this.$store.commit('setStatus', 'Connecting to Web3');
+    const ethEnabled = () => {
+      if (window.ethereum) {
+        window.web3 = new Web3(window.ethereum);
+        ethereum = new Ethereum('user-provided');
+        window.ethereum.enable();
+        this.connected = true;
+        window.web3.eth.getAccounts().then((acc) => {
+          if (acc.length) {
+            this.startupActions();
+            this.web3Polling();
+            this.$store.commit('setStatus', 'Web3 is connected');
+            setInterval(() => {
+              this.web3Polling();
+            }, 4000);
+            return true;
+          }
+          setTimeout(() => {
+            ethEnabled();
+          }, 4000);
+          return true;
+        });
+      }
+      /*
+      else {
+        ethereum = new Ethereum('user-provided');
+        const account = ethereum.getAccount();
+        this.$store.commit('localAccount');
+        this.connected = true;
+        this.startupActions(account.address);
+        this.web3Polling(account.address);
+        this.$store.commit('setStatus', 'Web3 is connected');
+        setInterval(() => {
+          this.web3Polling(account.address);
+        }, 4000);
+        return true;
+      }
+      */
+      window.Vault74.warn('No Web3 provider found. Looking again soon.');
+      return false;
+    };
+    ethEnabled();
+  },
+};
+</script>
+
+<style scoped lang="less">
+  .head {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 20pt;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+</style>
