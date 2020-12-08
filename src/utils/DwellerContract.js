@@ -31,7 +31,7 @@ export default {
    * @argument done callback to be called when the first confirmation comes through
    */
   deploy(_username, account, tx, done) {
-    const username = ethereum.utils.fromAscii(_username);
+    const username = ethereum.fromAscii(_username);
     const contract = this.getContract();
     contract.deploy({
       arguments: [username],
@@ -53,8 +53,8 @@ export default {
   setPhoto(address, account, ipfsHash, done) {
     const contract = this.getContract(address);
     contract.methods.setPhoto([
-      ethereum.utils.fromAscii(ipfsHash.path.substring(0, 23)),
-      ethereum.utils.fromAscii(ipfsHash.path.substring(23)),
+      ethereum.fromAscii(ipfsHash.path.substring(0, 23)),
+      ethereum.fromAscii(ipfsHash.path.substring(23)),
     ])
       .send({
         from: account,
@@ -72,7 +72,7 @@ export default {
    */
   setUsername(address, account, username, done) {
     const contract = this.getContract(address);
-    contract.methods.setDwellerName(ethereum.utils.fromAscii(username))
+    contract.methods.setDwellerName(ethereum.fromAscii(username))
       .send({
         from: account,
         gas: 4700000,

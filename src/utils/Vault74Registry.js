@@ -26,7 +26,8 @@ export default {
    * @argument done callback executed on first confirmation
    */
   createDwellerId(_username, account, tx, done) {
-    const username = ethereum.utils.fromAscii(_username);
+    const username = ethereum.fromAscii(_username);
+    console.log('username', username);
     const contract = this.getContract();
     contract.methods.createDweller(username)
       .send({
