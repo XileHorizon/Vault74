@@ -4,12 +4,12 @@ export class LocalStorageInterface {
     this.prefix = prefix;
   }
 
-  _store(value) {
-    const values = this._retrive();
+  _store(value, name) {
+    const values = this._retrive(name);
     values.push(value);
 
     localStorage.setItem(
-        this._key(),
+        this._key(name),
         JSON.stringify(values),
     );
   }
@@ -23,9 +23,9 @@ export class LocalStorageInterface {
   }
 
 
-  _forceUpdate(bucket) {
+  _forceUpdate(bucket, name) {
     localStorage.setItem(
-        this._key(),
+        this._key(name),
         JSON.stringify(bucket),
     );
   }

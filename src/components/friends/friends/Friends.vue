@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       keyword: '',
-      friends: this.$store.state.friends,
+      friends: Array.from(this.$store.state.friends),
       error: false,
       success: false,
       friend: false,
