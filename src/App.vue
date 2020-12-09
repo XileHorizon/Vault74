@@ -49,6 +49,8 @@ export default {
     this.$store.commit('connectMediaStream', false);
     this.$store.commit('clearTypingUsers');
 
+    this.$store.commit('fetchFriends');
+
     // If we have an account, go ahead and mount to the account
     // else wait a bit and try again.
     const checkAccount = () => {

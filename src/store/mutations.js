@@ -1,6 +1,10 @@
 import MessageUtils from '@/utils/MessageUtils';
+import files from './mutations/files';
+import friends from './mutations/friends';
 
 export default {
+  ...friends,
+  ...files,
   clearTypingUsers(state) {
     // eslint-disable-next-line
     state.typingUsers = {};
@@ -76,27 +80,10 @@ export default {
     // eslint-disable-next-line no-param-reassign
     state.profilePictureHash = hash;
   },
-  // Add a new file to the the cache locally
-  addRecentFile(state) {
-    // eslint-disable-next-line no-param-reassign
-    state.recentFiles += 1;
-  },
   // Change the mian route of the application
   changeRoute(state, route) {
     // eslint-disable-next-line no-param-reassign
     state.mainRoute = route;
-  },
-  // Add a new friend to the local cache
-  addFriend(state, friend) {
-    const { friends } = state;
-    if (friends.filter(f => f.address === friend.address).length === 0) {
-      friends.push(friend);
-    }
-    // eslint-disable-next-line
-    friends.sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1);
-    // eslint-disable-next-line no-param-reassign
-    state.friends = friends;
-    // TODO make sure we don't already have this friend added.
   },
   // Set the audio device
   setAudioDevice(state, device) {

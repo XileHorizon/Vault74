@@ -1,3 +1,8 @@
+import Database from '@/classes/database/Database';
+
+const database = new Database('Vault74Data');
+const bucket = database.Bucket('files');
+
 // Helper methods for interacting with IPFS
 export default {
   utilsVersion: 0.0,
@@ -9,7 +14,7 @@ export default {
   appendFileCache(file) {
     const files = this.getFileCache();
     files.push(file);
-    localStorage.setItem('vault.filehistory', JSON.stringify(files));
+    bucket.add(file);
   },
   /** @function
    * this is a wrapper over our storage method so we can easily
@@ -18,17 +23,13 @@ export default {
    * @returns returns the file cache
    */
   getFileCache() {
-    return localStorage.getItem('vault.filehistory') ?
-      JSON.parse(localStorage.getItem('vault.filehistory')) :
-      [];
+    return bucket.get();
   },
   /** @function
    * @name removeFileFromCache
    * @argument file File object to remove from the cache
    */
   removeFileFromCache(file) {
-    let files = this.getFileCache();
-    files = files.filter(item => JSON.stringify(item) !== JSON.stringify(file));
-    localStorage.setItem('vault.filehistory', JSON.stringify(files));
+    bucket.remove(file);
   },
 };
