@@ -184,7 +184,6 @@ export default {
         await this.createMediaStream();
       }
       if (this.activeCall) {
-        // TODO: end previous call
         this.activeCall.close();
       }
       callingSound.play();

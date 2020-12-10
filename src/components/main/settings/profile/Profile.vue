@@ -180,7 +180,6 @@ export default {
     },
     // Get a dweler from the registry
     async getDweller() {
-      // TODO: get the deweller address from the registry instead.
       this.$store.commit('setStatus', 'Fetching dweller from chain');
       DCUtils.getDweller(
         this.$store.state.dwellerAddress,

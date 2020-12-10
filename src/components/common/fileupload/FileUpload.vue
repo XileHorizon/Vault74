@@ -2,7 +2,7 @@
 
 <script>
 import config from '@/config/config';
-import IPFSUtils from '@/utils/IPFSUtils';
+import IPFSUtils from '@/classes/IPFSUtils';
 import FileC from '@/classes/FileC';
 
 const uploadAudio = new Audio(`${config.ipfs.browser}${config.sounds.upload}`);
@@ -59,7 +59,7 @@ export default {
      * files cache stored in Localhost
      * @name sendFileMessage
      */
-    sendFileMessage() {
+    async sendFileMessage() {
       if (this.ipfsHash) {
         this.fileClass = new FileC(
           `${config.ipfs.browser}${this.ipfsHash}`,
@@ -70,8 +70,8 @@ export default {
           this.fileClass.getObject(),
           this.determineFileType(this.selectedFile.type),
         );
-        // TODO: move this to it's own localStorage object or indexedDB
-        IPFSUtils.appendFileCache(this.fileClass.getObject());
+        const ipfsUtils = new IPFSUtils(this.$database);
+        await ipfsUtils.appendFileCache(this.fileClass.getObject());
         uploadAudio.play();
         this.$store.commit('addRecentFile');
         this.close();

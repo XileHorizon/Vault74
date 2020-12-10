@@ -6,18 +6,12 @@
       Heads up, this is an alpha release. <strong>Messages are not yet encrypted</strong>. This is not a finished product and serval exploits may exist.
       Features are rapidly being added and changed. For this reason please only use this on a <strong>Testnet</strong> until the beta.
     </div>
-    <!--
-    <header>
-      <router-link :to="{ name: 'home' }">Vue.js PWA</router-link>
-      <router-link :to="{ name: 'router' }">Router</router-link>
-      <router-link :to="{ name: 'store' }">Store</router-link>
-    </header>
-    -->
-    <main id="main" class="theme">
+    <main id="main" class="theme" v-if="decrypted">
       <transition appear mode="out-in" name="slide-fade">
         <router-view></router-view>
       </transition>
     </main>
+    <Unlock class="theme" v-else :decrypted="decrypt"/>
   </div>
 </template>
 
@@ -25,35 +19,32 @@
 import config from '@/config/config';
 import Peer2Peer from '@/classes/Peer2Peer';
 import MessageBroker from '@/classes/MessageBroker';
+import Unlock from '@/components/unlock/Unlock';
 
 const newMessageSound = new Audio(`${config.ipfs.browser}${config.sounds.newMessage}`);
 
 export default {
   name: 'app',
+  components: {
+    Unlock,
+  },
   data() {
     return {
+      decrypted: false,
       showWarning: !(localStorage.getItem('alpha-warning') === 'false'),
     };
   },
   methods: {
+    decrypt() {
+      console.log('decrypted');
+      this.decrypted = true;
+      this.checkAccount();
+    },
     hideWarning() {
       localStorage.setItem('alpha-warning', false);
       this.showWarning = false;
     },
-  },
-  mounted() {
-    this.$store.commit('ICEConnected', false);
-    this.$store.commit('dwellerAddress', false);
-    this.$store.commit('activeCaller', false);
-    // Reset media call data
-    this.$store.commit('connectMediaStream', false);
-    this.$store.commit('clearTypingUsers');
-
-    this.$store.commit('fetchFriends');
-
-    // If we have an account, go ahead and mount to the account
-    // else wait a bit and try again.
-    const checkAccount = () => {
+    checkAccount() {
       if (this.$store.state.activeAccount) {
         window.Vault74.messageBroker = new MessageBroker(
           this.$store.state.activeAccount,
@@ -103,11 +94,17 @@ export default {
         this.peerInit = true;
         return;
       }
-      setTimeout(checkAccount, config.peer.timeout);
-    };
-    checkAccount();
+      setTimeout(this.checkAccount, config.peer.timeout);
+    },
+  },
+  mounted() {
+    this.$store.commit('ICEConnected', false);
+    this.$store.commit('dwellerAddress', false);
+    this.$store.commit('activeCaller', false);
+    // Reset media call data
+    this.$store.commit('connectMediaStream', false);
+    this.$store.commit('clearTypingUsers');
     // Connect when a new friend is added
-    // TODO: In the future we'll only want to ping friends
     // we have active chats with.
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'addFriend') {

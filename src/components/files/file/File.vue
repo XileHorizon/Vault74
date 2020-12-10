@@ -1,7 +1,7 @@
 <template src="./File.html"></template>
 
 <script>
-import IPFSUtils from '@/utils/IPFSUtils';
+import IPFSUtils from '@/classes/IPFSUtils';
 import FileIconMapper from '@/utils/FileIconMapper';
 
 export default {
@@ -35,8 +35,9 @@ export default {
      * Remove the file from the local cache, not IPFS
      * @name deleteFile
      */
-    deleteFile() {
-      IPFSUtils.removeFileFromCache(this.file);
+    async deleteFile() {
+      const ipfsUtils = new IPFSUtils(this.$database);
+      await ipfsUtils.removeFileFromCache(this.file);
       this.updateParent();
     },
     /** @method

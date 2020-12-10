@@ -52,6 +52,8 @@ const defaultState = {
   pendingMediaStream: false,
   activeMediaStreamPeer: false,
   activeCaller: false,
+  // Database
+  databaseEnabled: true,
 };
 
 const createState = customState => Object.assign({}, defaultState, customState);

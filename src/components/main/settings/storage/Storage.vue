@@ -1,5 +1,18 @@
 <template>
   <div>
+    <h3 class="label">Database</h3>
+    <article class="message is-dark">
+      <div class="message-body">
+        <h2>Enable Database</h2>
+        <p>
+          Enable a decentralized database to recieve offline messaging and unlock additional features.
+          <br>
+          Your data is stored on a distributed network so we don't see your data.
+        </p>
+        <br>
+        <ToggleSwitch v-model="$store.state.databaseEnabled"/>
+      </div>
+    </article>
     <h3 class="label">Storage</h3>
     <article class="message is-dark">
       <div class="message-body">
@@ -32,8 +45,13 @@
 </template>
 
 <script>
+import ToggleSwitch from '@/components/common/ToggleSwitch';
+
 export default {
   name: 'Storage',
+  components: {
+    ToggleSwitch,
+  },
   data() {
     return {
       storageSize: this.bytesToSize(new Blob(Object.values(localStorage)).size),

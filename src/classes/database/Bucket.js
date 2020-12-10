@@ -15,9 +15,10 @@ export default class Bucket {
    * @name get
    * @returns The contents of the bucket
    */
-  get() {
+  async get() {
     // Clone array to prevent mutation
-    return [...this.database.interface._retrive(this.name)];
+    const data = await this.database.interface._retrive(this.name);
+    return [...data];
   }
 
   /** @method
@@ -25,8 +26,8 @@ export default class Bucket {
    * Adds an item to the bucket
    * @argument value Data to add to the bucket storage
    */
-  add(value) {
-    this.database.interface._store(value, this.name);
+  async add(value) {
+    await this.database.interface._store(value, this.name);
   }
 
   /** @method
@@ -34,9 +35,9 @@ export default class Bucket {
    * Removes an item from the bucket
    * @argument value Data to add to remove from the bucket storage
    */
-  remove(value) {
-    let values = this.get();
+  async remove(value) {
+    let values = await this.get();
     values = values.filter(item => JSON.stringify(item) !== JSON.stringify(value));
-    this.database.interface._forceUpdate(values, this.name);
+    this.database.interface._update(values, this.name);
   }
 }

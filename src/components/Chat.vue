@@ -1,6 +1,7 @@
 <template>
   <div id="wrapper">
     <Web3 />
+    <Database v-if="$store.state.p2pOnline || $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000' || $store.state.dwellerAddress"/>
     <MediaManager v-if="windowBound && $store.state.p2pOnline && $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000'" />
     <ScreenCapture v-if="windowBound && $store.state.p2pOnline && $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000'" />
     <Loading v-if="!$store.state.p2pOnline || $store.state.dwellerAddress === '0x0000000000000000000000000000000000000000' || !$store.state.dwellerAddress" />
@@ -58,6 +59,7 @@ import Files from '@/components/files/files/Files';
 import Friends from '@/components/friends/friends/Friends';
 import Settings from '@/components/main/settings/Settings';
 import Web3 from '@/components/web3/Web3';
+import Database from '@/components/database/Database';
 import Loading from '@/components/common/Loading';
 import Calling from '@/components/main/popups/calling/Calling';
 
@@ -72,6 +74,7 @@ export default {
     Friends,
     Settings,
     Web3,
+    Database,
     Loading,
     MediaManager,
     ScreenCapture,

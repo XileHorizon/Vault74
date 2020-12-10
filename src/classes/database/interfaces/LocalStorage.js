@@ -1,70 +1,58 @@
+import crypto from '@/utils/Crypto';
+
 /* eslint-disable */
 export class LocalStorageInterface {
-  constructor(prefix) {
+  constructor(prefix, creds) {
     this.prefix = prefix;
+    this.creds = creds;
   }
 
-  _store(value, name) {
-    const values = this._retrive(name);
-    values.push(value);
+  async _store(value, name) {
+    return new Promise(async (resolve) => {
+      const values = await this._retrive(name);
+      values.push(value);
 
-    localStorage.setItem(
-        this._key(name),
+      const encrypted = await crypto.encrypt(
         JSON.stringify(values),
-    );
-  }
+        this.creds.pass,
+      );
 
-  _storeCollection(key, value, name) {
-    localStorage.setItem(
-      this._collectionKey(key, name),
-      JSON.stringify(value),
-    );
-    this._updateCollection(key);
-  }
-
-
-  _forceUpdate(bucket, name) {
-    localStorage.setItem(
+      localStorage.setItem(
         this._key(name),
+        encrypted,
+      );
+      resolve();
+    })
+  }
+
+  async _update(bucket, name) {
+    return new Promise(async (resolve) => {
+      const encrypted = await crypto.encrypt(
         JSON.stringify(bucket),
-    );
+        this.creds.pass,
+      );
+      localStorage.setItem(
+        this._key(name),
+        encrypted
+      );
+      resolve();
+    });
   }
 
-  _retrive(name) {
-    return localStorage.getItem(this._key(name)) ?
-      JSON.parse(
+  async _retrive(name) {
+    return new Promise(async (resolve) => {
+      let decrypted = localStorage.getItem(this._key(name)) ? await crypto.decrypt(
         localStorage.getItem(this._key(name)),
-      ) :
-      [];
-  }
+        this.creds.pass,
+      ) : [];
 
-  _retriveCollection(name, key) {
-    JSON.parse(
-      localStorage.getItem(this._collectionKey(name, key)),
-    );
+      if (typeof decrypted === 'string') decrypted = JSON.parse(decrypted);
+
+      resolve(decrypted);
+    });
   }
 
   _key(name) {
     return `${this.prefix}${name}`;
-  }
-
-  _collectionKey(name, key) {
-    return `${this.prefix}${name}.${key}`;
-  }
-
-  _collectionKeys(name) {
-    return JSON.parse(
-      localStorage.getItem(
-        `${this.prefix}${name}`
-      )
-    );
-  }
-
-  _updateCollection(key, name) {
-    this.values.push(key);
-    localStorage.setItem(
-      `${this.prefix}${name}`,
-      JSON.stringify(this.values),
-    );
   }
 }

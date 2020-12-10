@@ -2,7 +2,7 @@
 
 <script>
 import config from '@/config/config';
-import IPFSUtils from '@/utils/IPFSUtils';
+import IPFSUtils from '@/classes/IPFSUtils';
 import FileC from '@/classes/FileC';
 
 const uploadAudio = new Audio(`${config.ipfs.browser}${config.sounds.upload}`);
@@ -71,7 +71,8 @@ export default {
         this.selectedFile,
       );
 
-      IPFSUtils.appendFileCache(this.fileClass.getObject());
+      const ipfsUtils = new IPFSUtils(this.$database);
+      await ipfsUtils.appendFileCache(this.fileClass.getObject());
       this.uploadDone();
       uploadAudio.play();
       this.$nextTick(() => {

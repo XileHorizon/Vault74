@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="img">
     <ImagePreview v-if="showImage" :src="image" :close="hideImage" />
     <img :src="image" alt="" @load="doLoad" :class="`${loaded ? 'loaded' : ''}`" @click="showImage = true"/>
     <div class="not-loaded" v-if="!loaded">
@@ -47,6 +47,9 @@ export default {
     text-align: center;
     font-size: 30pt;
     background: rgba(0,0,0,0.15);
+  }
+  .img {
+    margin-top: 0.5rem;
   }
   img {
     border-radius: 6px;

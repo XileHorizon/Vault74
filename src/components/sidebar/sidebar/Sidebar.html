@@ -33,6 +33,7 @@
         <UserDemo name="Sophie Chain" status="Enjoying Vault74's piece of mind" online="true" icon="https://randomuser.me/api/portraits/women/43.jpg" active="true"/>
         -->
         <User
+          v-if="$store.state.friends.length"
           v-for="chat in $store.state.activeChats"
           :friend="$store.state.friends.filter(f => f.address === chat)[0]"
           :active="$store.state.activeChat === chat"

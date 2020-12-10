@@ -29,7 +29,7 @@
 
 <script>
 import File from '@/components/files/file/File';
-import IPFSUtils from '@/utils/IPFSUtils';
+import IPFSUtils from '@/classes/IPFSUtils';
 import FileUploadInline from '@/components/common/fileuploadinline/FileUploadInline';
 
 export default {
@@ -48,15 +48,15 @@ export default {
      * Updates the parent with new files
      * @name updateParent
      */
-    updateParent() {
-      this.fetchRecentFiles();
+    async updateParent() {
+      await this.fetchRecentFiles();
     },
     /** @method
      * Updates the local cache with the new files
      * @name updateCache
      */
-    updateCache() {
-      this.fetchRecentFiles();
+    async updateCache() {
+      await this.fetchRecentFiles();
     },
     /** @method
      * Close out the file manager by changing the main route
@@ -69,12 +69,14 @@ export default {
      * Fetch files from the IPFS local file cache
      * @name fetchRecentFiles
      */
-    fetchRecentFiles() {
-      this.recentFiles = IPFSUtils.getFileCache().reverse();
+    async fetchRecentFiles() {
+      const ipfsUtils = new IPFSUtils(this.$database);
+      const cache = await ipfsUtils.getFileCache();
+      this.recentFiles = cache.reverse();
     },
   },
-  mounted() {
-    this.fetchRecentFiles();
+  async mounted() {
+    await this.fetchRecentFiles();
   },
 };
 </script>

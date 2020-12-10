@@ -2,6 +2,8 @@ import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
 import VueClipboard from 'vue-clipboard2';
 import config from '@/config/config';
+import Database from '@/classes/database/Database';
+
 import App from './App';
 import router from './router';
 import store from './store';
@@ -47,6 +49,9 @@ window.Vault74 = {
 window.onerror = function error(e) {
   window.Vault74.error(e);
 };
+
+Vue.prototype.$database = new Database('Vault74Data');
+Vue.prototype.$pin = null;
 
 /* eslint-disable */
 new Vue({

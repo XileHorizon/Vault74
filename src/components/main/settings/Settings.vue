@@ -25,14 +25,14 @@
           </li>
         </ul>
         <p class="menu-label">
-          Networks &amp; Services
+          Networks &amp; Security
         </p>
         <ul class="menu-list">
           <li v-on:click="setRoute('encryption')">
-            <a :class="`${route == 'encryption' ? 'active' : ''}`">Encryption &amp; Keys</a>
+            <a :class="`${route == 'encryption' ? 'active' : ''}`">Encryption</a>
           </li>
           <li v-on:click="setRoute('storage')">
-            <a :class="`${route == 'storage' ? 'active' : ''}`">Storage &amp; History</a>
+            <a :class="`${route == 'storage' ? 'active' : ''}`">Storage</a>
           </li>
           <li v-on:click="setRoute('network')">
             <a :class="`${route == 'network' ? 'active' : ''}`">Network</a>

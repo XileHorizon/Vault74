@@ -497,6 +497,34 @@
   resolved "https://registry.yarnpkg.com/@multiformats/base-x/-/base-x-4.0.1.tgz#95ff0fa58711789d53aefb2590a8b7a4e715d121"
   integrity sha512-eMk0b9ReBbV23xXU693TAIrLyeO5iTgBZGSJfpqriG8UkYvr/hC9u9pyMlAakDNHWmbhMZCDs6KQO0jzKD8OTw==
 
+"@peculiar/asn1-schema@^2.0.12", "@peculiar/asn1-schema@^2.0.26":
+  version "2.0.27"
+  resolved "https://registry.yarnpkg.com/@peculiar/asn1-schema/-/asn1-schema-2.0.27.tgz#1ee3b2b869ff3200bcc8ec60e6c87bd5a6f03fe0"
+  integrity sha512-1tIx7iL3Ma3HtnNS93nB7nhyI0soUJypElj9owd4tpMrRDmeJ8eZubsdq1sb0KSaCs5RqZNoABCP6m5WtnlVhQ==
+  dependencies:
+    "@types/asn1js" "^2.0.0"
+    asn1js "^2.0.26"
+    pvtsutils "^1.1.1"
+    tslib "^2.0.3"
+
+"@peculiar/json-schema@^1.1.12":
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/@peculiar/json-schema/-/json-schema-1.1.12.tgz#fe61e85259e3b5ba5ad566cb62ca75b3d3cd5339"
+  integrity sha512-coUfuoMeIB7B8/NMekxaDzLhaYmp0HZNPEjYRm9goRou8UZIC3z21s0sL9AWoCw4EG876QyO3kYrc61WNF9B/w==
+  dependencies:
+    tslib "^2.0.0"
+
+"@peculiar/webcrypto@^1.1.1":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@peculiar/webcrypto/-/webcrypto-1.1.4.tgz#cbbe2195e5e6f879780bdac9a66bcbaca75c483c"
+  integrity sha512-gEVxfbseFDV0Za3AmjTrRB+wigEMOejHDzoo571e8/YWD33Ejmk0XPF3+G+VaN8+5C5IWZx4CPvxQZ7mF2dvNA==
+  dependencies:
+    "@peculiar/asn1-schema" "^2.0.26"
+    "@peculiar/json-schema" "^1.1.12"
+    pvtsutils "^1.1.1"
+    tslib "^2.0.3"
+    webcrypto-core "^1.1.8"
+
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@protobufjs/aspromise/-/aspromise-1.1.2.tgz#9b8b0cc663d669a7d8f6f5d0893a14d348f30fbf"
@@ -610,31 +638,31 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@textile/buckets-grpc@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@textile/buckets-grpc/-/buckets-grpc-2.2.0.tgz#6a5a71db2dae8ab80dd80e869261cc63df7e9569"
-  integrity sha512-nEgOM/I7HQ2zOLrY8Oo97eQPNxpxFifBt+JopdEkRZeTszqBpR6yGUo9iPR0DGWdI2b46xdZI/Zp2B+9qgXSag==
+"@textile/buckets-grpc@2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@textile/buckets-grpc/-/buckets-grpc-2.2.2.tgz#c01ba950a5f148040c111e3124d6dcbfbaba5638"
+  integrity sha512-MTc6fFx9dsFD2+HkzxPsxxiYCw2FQ8Dm0QuCx445n1eFPcPMBTMbRoc+7imLieXQGEfnEDSp1wHt+RqDQ8y0rw==
   dependencies:
     "@improbable-eng/grpc-web" "^0.13.0"
     "@types/google-protobuf" "^3.7.4"
     google-protobuf "^3.13.0"
 
-"@textile/buckets@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@textile/buckets/-/buckets-3.0.0.tgz#94979b5891b131c5711c9408b26f14756d5917c4"
-  integrity sha512-ux/TGzC0WPfeQGrv7CKm85rvs75XchJW9sEkMu9NvK5fhR/Gardji4lL9H2NBTeu/yA/DHqcZjVbG15KBoJAXw==
+"@textile/buckets@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@textile/buckets/-/buckets-4.0.0.tgz#6bc2765d031b783713fc34934ceb7c394261b7bc"
+  integrity sha512-E9aSuyjTf+px2Ho58zku8RrFlPMt4kBl0nQNjqEdMgrrumSm8YLT0JYk43pe20RwSFd73h6mpEkehCZGAzv44Q==
   dependencies:
     "@improbable-eng/grpc-web" "^0.13.0"
-    "@textile/buckets-grpc" "2.2.0"
+    "@textile/buckets-grpc" "2.2.2"
     "@textile/context" "^0.9.2"
     "@textile/crypto" "^2.0.0"
-    "@textile/grpc-authentication" "^2.0.0"
-    "@textile/grpc-connection" "^2.0.0"
-    "@textile/grpc-transport" "^0.1.0"
-    "@textile/hub-grpc" "2.2.0"
-    "@textile/hub-threads-client" "^3.0.0"
+    "@textile/grpc-authentication" "^2.1.0"
+    "@textile/grpc-connection" "^2.1.0"
+    "@textile/grpc-transport" "^0.2.1"
+    "@textile/hub-grpc" "2.2.2"
+    "@textile/hub-threads-client" "^4.0.0"
     "@textile/security" "^0.6.2"
-    "@textile/threads-id" "^0.2.0"
+    "@textile/threads-id" "^0.3.1"
     abort-controller "^3.0.0"
     cids "^1.0.2"
     event-iterator "^2.0.0"
@@ -670,45 +698,34 @@
     multibase "^3.1.0"
     tweetnacl "^1.0.3"
 
-"@textile/grpc-authentication@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@textile/grpc-authentication/-/grpc-authentication-2.0.0.tgz#e06db8b1287ac81fb8ef7167c2a0ed3edb8a49e3"
-  integrity sha512-WEsVezNa7XtJkimIO7YXaHBHg4z8Gs8LDLvMzOpUrp6zfGeyAdzIdg3MLWMMeeL41q67e2XOn9Cj0XIDaKedbQ==
+"@textile/grpc-authentication@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@textile/grpc-authentication/-/grpc-authentication-2.1.0.tgz#fa921df5e16f95154046d4735d5dd571f7c381f1"
+  integrity sha512-XzY882vqQdrD8eNn/iaaT72/2M+1ouZZG5IOANkvrzlL3VnY2Lk0E3NjbVpIAggjxYzppFY0POwIVxPwu2OuGg==
   dependencies:
     "@textile/context" "^0.9.2"
     "@textile/crypto" "^2.0.0"
-    "@textile/grpc-connection" "^2.0.0"
-    "@textile/hub-threads-client" "^3.0.0"
+    "@textile/grpc-connection" "^2.1.0"
+    "@textile/hub-threads-client" "^4.0.0"
     "@textile/security" "^0.6.2"
 
-"@textile/grpc-connection@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@textile/grpc-connection/-/grpc-connection-2.0.0.tgz#7ca017ccfa5bbef03d970618bab7dead75717322"
-  integrity sha512-X9TVM9GzBt/WxjgunF7yeCp2gAt1GUe29rSQLgBpOLLE4xg1wa8QYcchA8U8wIPt5/v+TB8wTVoY2pgEh2mAWQ==
+"@textile/grpc-connection@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@textile/grpc-connection/-/grpc-connection-2.1.0.tgz#6b1cd731f842cd107c6356ecee5ce2485e431471"
+  integrity sha512-rGDLqA6feV7DFr27eAeRcESCh1Nik1OVbkVpGUTZ0j1oE3J0OH/wR6aSw1w3Cs0gfPOTGp12aZkGGuJgQIBp7A==
   dependencies:
     "@improbable-eng/grpc-web" "^0.12.0"
     "@textile/context" "^0.9.2"
-    "@textile/grpc-transport" "^0.1.0"
+    "@textile/grpc-transport" "^0.2.1"
 
-"@textile/grpc-powergate-client@^1.2.1":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@textile/grpc-powergate-client/-/grpc-powergate-client-1.2.3.tgz#2d58c3d215416758c28848cc4e6c3a51b8dfd655"
-  integrity sha512-g+uWkgsNOa95O6xEHyX+hOZbCDkRnYXs7B1zvrOGQwroRWMh9RrL80IffpYU8nMHD+RSWVDGLv3qthNMEMWE7Q==
+"@textile/grpc-powergate-client@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@textile/grpc-powergate-client/-/grpc-powergate-client-1.2.4.tgz#b6ed90015214b900c0919f2d9509f1d947fad0e0"
+  integrity sha512-Fxt4aYkWG6/vhtxtJOD23Mu+AxuBKaPPYpTMt87i6k6aMGou8iOL5Hp2iojRbqGcaxcUHLP4vpkFQFlwE9yLOQ==
   dependencies:
     "@improbable-eng/grpc-web" "^0.13.0"
     "@types/google-protobuf" "^3.7.4"
     google-protobuf "^3.14.0"
-
-"@textile/grpc-transport@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@textile/grpc-transport/-/grpc-transport-0.1.0.tgz#0b6c33ba2df2a3228bd208cef1ea178d56036ffc"
-  integrity sha512-USe4O4aRsO5ul/Rpbpt1uSBW7UFZq+vuAQT8mPtD+tLAMrZ7sKEfaHoIs42DudhFNsuSeXksBkNlq2rPQKd0xw==
-  dependencies:
-    "@improbable-eng/grpc-web" "^0.13.0"
-    "@types/ws" "^7.2.6"
-    isomorphic-ws "^4.0.1"
-    loglevel "^1.6.6"
-    ws "^7.2.1"
 
 "@textile/grpc-transport@^0.2.1":
   version "0.2.1"
@@ -721,59 +738,59 @@
     loglevel "^1.6.6"
     ws "^7.2.1"
 
-"@textile/hub-filecoin@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@textile/hub-filecoin/-/hub-filecoin-1.0.2.tgz#101768abd15d1d03ca0cf65cc5f385a0bd2d8c62"
-  integrity sha512-UCI7kS4hYHjX2PjfmUZ6uJy4PZKASBlFRISG2Si4PRzPtL/IxNQf+AdJhpEZRB29lM6RcXRmP5EjRxwwoDrkkg==
+"@textile/hub-filecoin@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@textile/hub-filecoin/-/hub-filecoin-1.1.0.tgz#77f2fbc855d9656083ceaae4de474b23ce9efb5c"
+  integrity sha512-PfwOBA0DKckuMv6rGHWFMOWCrQcDvSGFpiURkbklfMwOktoqNeZP5v3PojtdgczsJuLH8B4xXcbssgyqOXiafw==
   dependencies:
     "@improbable-eng/grpc-web" "^0.12.0"
     "@textile/context" "^0.9.2"
     "@textile/crypto" "^2.0.0"
-    "@textile/grpc-authentication" "^2.0.0"
-    "@textile/grpc-connection" "^2.0.0"
-    "@textile/grpc-powergate-client" "^1.2.1"
-    "@textile/hub-grpc" "2.2.0"
+    "@textile/grpc-authentication" "^2.1.0"
+    "@textile/grpc-connection" "^2.1.0"
+    "@textile/grpc-powergate-client" "^1.2.4"
+    "@textile/hub-grpc" "2.2.2"
     "@textile/security" "^0.6.2"
     event-iterator "^2.0.0"
     loglevel "^1.6.8"
 
-"@textile/hub-grpc@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@textile/hub-grpc/-/hub-grpc-2.2.0.tgz#80848d577668c90a2aa0a74ecbbde7ae42a40571"
-  integrity sha512-shE77mG4bjPK/HmoRel0SgMY11VOPNsonWkhR4AXNhjgw81rhrn72fZArZy3Uu10TxJQMy8Bplv7Sj+7h0JR/g==
+"@textile/hub-grpc@2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@textile/hub-grpc/-/hub-grpc-2.2.2.tgz#ce10369fae9c9eb2c89e0b55033e2b58ca5f6187"
+  integrity sha512-N9U6ujMJLRgg/JNbRl7K072NuEWRQRiTnW2eGdz0K/rGLQhUYF4c2mi70DUVcT/SHND8KUl9lcdN9/yoiQubkw==
   dependencies:
     "@improbable-eng/grpc-web" "^0.13.0"
     "@types/google-protobuf" "^3.7.4"
     google-protobuf "^3.13.0"
 
-"@textile/hub-threads-client@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@textile/hub-threads-client/-/hub-threads-client-3.0.0.tgz#c4af427b46414cbecfa55542a83a36d81ea47d96"
-  integrity sha512-cGHSxG2SLKpD8t3LwI26fSr6lWa2VXaVxuFlRLjBmKiUU5sz6Czx+fibki7UEwHMKjXkOZi0PhoU4fBZFXUFOw==
+"@textile/hub-threads-client@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@textile/hub-threads-client/-/hub-threads-client-4.0.0.tgz#ec3387001b0c9fb239515fd3d31dc37205753136"
+  integrity sha512-YYE99H9JT36zUclQ3Pg9PZyYaz1QzMdy5dUJrdmYLoiqPqKmC/YGR+rPa6wVsMeGWN+vfrxCi8DT32VVl1U5lg==
   dependencies:
     "@improbable-eng/grpc-web" "^0.13.0"
     "@textile/context" "^0.9.2"
-    "@textile/hub-grpc" "2.2.0"
+    "@textile/hub-grpc" "2.2.2"
     "@textile/security" "^0.6.2"
     "@textile/threads-client" "^1.3.2"
-    "@textile/threads-id" "^0.2.0"
-    "@textile/users-grpc" "2.2.0"
+    "@textile/threads-id" "^0.3.1"
+    "@textile/users-grpc" "2.2.2"
     loglevel "^1.7.0"
 
-"@textile/hub@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@textile/hub/-/hub-3.0.0.tgz#9a697c53ba048e5888ab09c353180f577524db8c"
-  integrity sha512-wGn8Cdgviyoek+jP9Qoh+jP3HmZ0GjCeKJA1R1mhXmrHY9H1/AXc/DcjmHl7ycXaLfwSrBLiZOePDM2JxKhXaw==
+"@textile/hub@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@textile/hub/-/hub-4.0.0.tgz#f014a3d9e9a24e1e60cf26615b2577f09e3ca167"
+  integrity sha512-iQiCdNw/8T9P4UBMnXKUiqb/pIF5Ppy4Utsvc5xFPLuWJvdN9kXuZwzEzyBZB94ZHowKQiLO5nqJbAwcMVk3zw==
   dependencies:
-    "@textile/buckets" "^3.0.0"
+    "@textile/buckets" "^4.0.0"
     "@textile/crypto" "^2.0.0"
-    "@textile/grpc-authentication" "^2.0.0"
-    "@textile/hub-filecoin" "^1.0.2"
-    "@textile/hub-grpc" "2.2.0"
-    "@textile/hub-threads-client" "^3.0.0"
+    "@textile/grpc-authentication" "^2.1.0"
+    "@textile/hub-filecoin" "^1.1.0"
+    "@textile/hub-grpc" "2.2.2"
+    "@textile/hub-threads-client" "^4.0.0"
     "@textile/security" "^0.6.2"
-    "@textile/threads-id" "^0.2.0"
-    "@textile/users" "^3.0.0"
+    "@textile/threads-id" "^0.3.1"
+    "@textile/users" "^4.0.0"
     loglevel "^1.6.8"
     multihashes "0.4.19"
 
@@ -821,15 +838,6 @@
     "@types/to-json-schema" "^0.2.0"
     to-json-schema "^0.2.5"
 
-"@textile/threads-id@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@textile/threads-id/-/threads-id-0.2.0.tgz#4b1f26ba5015eee2657c4ba77aa2ff48bfd2c34d"
-  integrity sha512-DOY7CdCYshwQCJNVJ3Zw/tdKbJcOVCAu1wlPNHkUxGLyXVMEiTREcP+D5+U2MLeCPfeIh4APh2sKTXsXospjTg==
-  dependencies:
-    "@consento/sync-randombytes" "^1.0.4"
-    multibase "^3.1.0"
-    varint "^6.0.0"
-
 "@textile/threads-id@^0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@textile/threads-id/-/threads-id-0.3.1.tgz#0149ae7a1c520a5d8f933772e2dc00913d84712a"
@@ -839,34 +847,39 @@
     multibase "^3.1.0"
     varint "^6.0.0"
 
-"@textile/users-grpc@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@textile/users-grpc/-/users-grpc-2.2.0.tgz#616b4d9cede0827674a9860c123864baf53ab396"
-  integrity sha512-utmRZKiHCmNDDHVRVeUjQdMwM+G38BFerFDLlJ59L81M4T0AZty+VhHoXckxn1uOiWtgJCv4P2r+XjQO/N2hFg==
+"@textile/users-grpc@2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@textile/users-grpc/-/users-grpc-2.2.2.tgz#e8b1146474b3dec965761ee81cfc98a1c14c16dd"
+  integrity sha512-NC7NAb2VE34HtVAUEnSzl2R/haWgKdc/JQ1RmzdhPLU+9XYrNiq8NljIn00YQaLixo5V0T3kC8iSxsbbUIK20Q==
   dependencies:
     "@improbable-eng/grpc-web" "^0.13.0"
     "@types/google-protobuf" "^3.7.4"
     google-protobuf "^3.13.0"
 
-"@textile/users@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@textile/users/-/users-3.0.0.tgz#039e0571a2815584dd8d306b851df4e03288daf9"
-  integrity sha512-aVbmHO9Z6xmUXE+umD33EluadGJmjPBUN+50mhJ1ZOn3whdxBtCnhRXfajuK8YxfPmRVK9ejp7pphien/ydSFA==
+"@textile/users@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@textile/users/-/users-4.0.0.tgz#c428444511b3d67c9c0662826e1686842b443e8d"
+  integrity sha512-TIoK2qmVT5jbOlEKQERKy5EYDAvEnjVYXn2KlKdE0+QaHnwY+LCrXroVfFmJ/8GTZIXwJqRjWAqZ/HHKZ5hTrA==
   dependencies:
     "@improbable-eng/grpc-web" "^0.13.0"
-    "@textile/buckets-grpc" "2.2.0"
+    "@textile/buckets-grpc" "2.2.2"
     "@textile/context" "^0.9.2"
     "@textile/crypto" "^2.0.0"
-    "@textile/grpc-authentication" "^2.0.0"
-    "@textile/grpc-connection" "^2.0.0"
-    "@textile/grpc-transport" "^0.1.0"
-    "@textile/hub-grpc" "2.2.0"
-    "@textile/hub-threads-client" "^3.0.0"
+    "@textile/grpc-authentication" "^2.1.0"
+    "@textile/grpc-connection" "^2.1.0"
+    "@textile/grpc-transport" "^0.2.1"
+    "@textile/hub-grpc" "2.2.2"
+    "@textile/hub-threads-client" "^4.0.0"
     "@textile/security" "^0.6.2"
-    "@textile/threads-id" "^0.2.0"
-    "@textile/users-grpc" "2.2.0"
+    "@textile/threads-id" "^0.3.1"
+    "@textile/users-grpc" "2.2.2"
     event-iterator "^2.0.0"
     loglevel "^1.7.0"
+
+"@types/asn1js@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/asn1js/-/asn1js-2.0.0.tgz#10ca75692575744d0117098148a8dc84cbee6682"
+  integrity sha512-Jjzp5EqU0hNpADctc/UqhiFbY1y2MqIxBVa2S4dBlbnZHTLPMuggoL5q43X63LpsOIINRDirBjP56DUUKIUWIA==
 
 "@types/bl@^2.1.0":
   version "2.1.0"
@@ -922,9 +935,9 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "14.14.10"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.10.tgz#5958a82e41863cfc71f2307b3748e3491ba03785"
-  integrity sha512-J32dgx2hw8vXrSbu4ZlVhn1Nm3GbeCFNw2FWL8S5QKucHGY0cyNwjdQdO+KMBZ4wpmC7KhLCiNsdk1RFRIYUQQ==
+  version "14.14.11"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.11.tgz#fc25a4248a5e8d0837019b1d170146d07334abe0"
+  integrity sha512-BJ97wAUuU3NUiUCp44xzUFquQEvnk1wu7q4CMEUYKJWjdkr0YWYDsm4RFtAvxYsNjLsKcrFt6RvK8r+mnzMbEQ==
 
 "@types/node@^10.12.18", "@types/node@^10.14.17":
   version "10.17.48"
@@ -937,9 +950,9 @@
   integrity sha512-D4k2kNi0URNBxIRCb1khTnkWNHv8KSL1owPmS/K5e5t8B2GzMReY7AsJIY1BnP5KdlgC4rj9jk2IkDMasIE7xg==
 
 "@types/node@^13.7.0":
-  version "13.13.34"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.34.tgz#c9300a1b6560d90817fb2bba650e250116a575f9"
-  integrity sha512-g8D1HF2dMDKYSDl5+79izRwRgNPsSynmWMbj50mj7GZ0b7Lv4p8EmZjbo3h0h+6iLr6YmVz9VnF6XVZ3O6V1Ug==
+  version "13.13.35"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.35.tgz#d417b48313d691f5c8ff9c52cbc19cdecd306b5e"
+  integrity sha512-q9aeOGwv+RRou/ca4aJVUM/jD5u7LBexu+rq9PkA/NhHNn8JifcMo94soKm0b6JGSfw/PSNdqtc428OscMvEYA==
 
 "@types/pbkdf2@^3.0.0":
   version "3.1.0"
@@ -1228,6 +1241,11 @@ addressparser@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/addressparser/-/addressparser-1.0.1.tgz#47afbe1a2a9262191db6838e4fd1d39b40821746"
   integrity sha1-R6++GiqSYhkdtoOOT9HTm0CCF0Y=
+
+addressparser@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/addressparser/-/addressparser-0.3.2.tgz#59873f35e8fcf6c7361c10239261d76e15348bb2"
+  integrity sha1-WYc/Nej89sc2HBAjkmHXbhU0i7I=
 
 aes-js@3.0.0:
   version "3.0.0"
@@ -1533,6 +1551,13 @@ asn1@~0.2.3:
   integrity sha512-jxwzQpLQjSmWXgwaCZE9Nz+glAG01yF1QnWgbhGwHI5A6FRIEY6IVqtHhIepHqI7/kyEyQEagBC5mBEFlIYvdg==
   dependencies:
     safer-buffer "~2.1.0"
+
+asn1js@^2.0.26:
+  version "2.0.26"
+  resolved "https://registry.yarnpkg.com/asn1js/-/asn1js-2.0.26.tgz#0a6d435000f556a96c6012969d9704d981b71251"
+  integrity sha512-yG89F0j9B4B0MKIcFyWWxnpZPLaNTjCj4tkE3fjbAoo0qmpGw0PYYqSbX/4ebnd9Icn8ZgK4K1fvDyEtW1JYtQ==
+  dependencies:
+    pvutils latest
 
 assert-plus@1.0.0, assert-plus@^1.0.0:
   version "1.0.0"
@@ -4211,9 +4236,9 @@ electron-fetch@^1.7.2:
     encoding "^0.1.13"
 
 electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.47:
-  version "1.3.618"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.618.tgz#33b65cc7cc8d7ce2b438a36afb50efb9bfa99d3a"
-  integrity sha512-D1U1Ij3stBQIIJObhg4zdE0X9znJsztNYzvoEehzuEKSgwP2xeOau+TLOP1Gp0wTf/2ffAYn0ntZwNAGsLCIOA==
+  version "1.3.621"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.621.tgz#0bbe2100ef0b28f88d0b1101fbdf433312f69be0"
+  integrity sha512-FeIuBzArONbAmKmZIsZIFGu/Gc9AVGlVeVbhCq+G2YIl6QkT0TDn2HKN/FMf1btXEB9kEmIuQf3/lBTVAbmFOg==
 
 elliptic@6.5.3, elliptic@^6.4.0, elliptic@^6.5.2, elliptic@^6.5.3:
   version "6.5.3"
@@ -4227,6 +4252,28 @@ elliptic@6.5.3, elliptic@^6.4.0, elliptic@^6.5.2, elliptic@^6.5.3:
     inherits "^2.0.1"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
+
+emailjs-base64@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/emailjs-base64/-/emailjs-base64-1.1.4.tgz#392fa38cb6aa35dccd3af3637ffc14c1c7ce9612"
+  integrity sha512-4h0xp1jgVTnIQBHxSJWXWanNnmuc5o+k4aHEpcLXSToN8asjB5qbXAexs7+PEsUKcEyBteNYsSvXUndYT2CGGA==
+
+emailjs-mime-codec@^2.0.7:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/emailjs-mime-codec/-/emailjs-mime-codec-2.0.9.tgz#d184451b6f2e55c5868b0f0a82d18fe2b82f0c97"
+  integrity sha512-7qJo4pFGcKlWh/kCeNjmcgj34YoJWY0ekZXEHYtluWg4MVBnXqGM4CRMtZQkfYwitOhUgaKN5EQktJddi/YIDQ==
+  dependencies:
+    emailjs-base64 "^1.1.4"
+    ramda "^0.26.1"
+    text-encoding "^0.7.0"
+
+emailjs@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/emailjs/-/emailjs-2.2.0.tgz#ba5b23e4a4b0a4510f652e873b154e9407b6ca03"
+  integrity sha1-ulsj5KSwpFEPZS6HOxVOlAe2ygM=
+  dependencies:
+    addressparser "^0.3.2"
+    emailjs-mime-codec "^2.0.7"
 
 emoji-mart-vue-fast@^7.0.7:
   version "7.0.7"
@@ -5725,6 +5772,18 @@ growl@1.9.2:
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.9.2.tgz#0ea7743715db8d8de2c5ede1775e1b45ac85c02f"
   integrity sha1-Dqd0NxXbjY3ixe3hd14bRayFwC8=
 
+gun@^0.2020.520:
+  version "0.2020.520"
+  resolved "https://registry.yarnpkg.com/gun/-/gun-0.2020.520.tgz#3bf7c9c0c83ba04aee94c0157c4d4e0a64e865ad"
+  integrity sha512-hMDmj4QQnejweZEy4njbyNlll+GO7H8XIq/SdQ23kFV29B6HqA0+bQmhLCxWKLwQvfRXx9SgSXG/ImGrER/CqQ==
+  dependencies:
+    ws "^7.2.1"
+  optionalDependencies:
+    "@peculiar/webcrypto" "^1.1.1"
+    buffer "^5.4.3"
+    emailjs "^2.2.0"
+    text-encoding "^0.7.0"
+
 gzip-size@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-4.1.0.tgz#8ae096257eabe7d69c45be2b67c448124ffb517c"
@@ -6272,9 +6331,9 @@ inherits@2.0.3:
   integrity sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=
 
 ini@^1.3.4, ini@~1.3.0:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
-  integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.6.tgz#f1c46a2a93a253e7b3905115e74d527cd23061a1"
+  integrity sha512-IZUoxEjNjubzrmvzZU4lKP7OnYmX72XRl3sqkfJhBKweKi5rnGi5+IUdlj/H1M+Ip5JQ1WzaDMOBRY90Ajc5jg==
 
 inject-loader@^4.0.1:
   version "4.0.1"
@@ -8092,9 +8151,9 @@ libp2p-interfaces@^0.7.1:
     uint8arrays "^1.1.0"
 
 libp2p-kad-dht@^0.20.1:
-  version "0.20.2"
-  resolved "https://registry.yarnpkg.com/libp2p-kad-dht/-/libp2p-kad-dht-0.20.2.tgz#8ba427985c763d92f907a7608f586c72d4709152"
-  integrity sha512-O6WK43kYjKXJWy+7tLyPScWt7ulBxMzmMKtvlKIv0z8GF7GboUWYAbcbLVEeZIaKkwwfjSMwadL9qFeImGTAOg==
+  version "0.20.3"
+  resolved "https://registry.yarnpkg.com/libp2p-kad-dht/-/libp2p-kad-dht-0.20.3.tgz#8cc434358708c9c610e30b85bc0b5fcd6c42b39d"
+  integrity sha512-AHFasvp60xYRhyfSsjlP4O08MPt43TbtbtrOt7Yh9wuciYc7RL0p4mZ+bGLrU1WujFVulUQZULEpCPAz6k9Rqg==
   dependencies:
     abort-controller "^3.0.0"
     async "^2.6.2"
@@ -8219,9 +8278,9 @@ libp2p-webrtc-peer@^10.0.1:
     readable-stream "^3.4.0"
 
 libp2p-webrtc-star@^0.20.1:
-  version "0.20.2"
-  resolved "https://registry.yarnpkg.com/libp2p-webrtc-star/-/libp2p-webrtc-star-0.20.2.tgz#9979e42d02c5f42fc78785b3c325b7f0fad50a35"
-  integrity sha512-P4oZ/v/bhhR0U/dpq8QfzRyKE2l5L4KFM6yrc3j1bj+gbQLBMH2P76/N3jlHqTVBdYavOwdCEifXwfG/qGp+3Q==
+  version "0.20.3"
+  resolved "https://registry.yarnpkg.com/libp2p-webrtc-star/-/libp2p-webrtc-star-0.20.3.tgz#dc48c13334acb5d961a9d8d7f7c7529302868430"
+  integrity sha512-l8Pj8K5sYER40VxYvFM9LdahTN8HLT1SBDqwKa6ETDKaAMZkIUinOGvaZGGB3EiHunS+Gz9QU5/IMehYU+VpMg==
   dependencies:
     "@hapi/hapi" "^20.0.0"
     "@hapi/inert" "^6.0.3"
@@ -8262,9 +8321,9 @@ libp2p-websockets@^0.14.0:
     p-timeout "^3.2.0"
 
 libp2p@^0.29.3:
-  version "0.29.3"
-  resolved "https://registry.yarnpkg.com/libp2p/-/libp2p-0.29.3.tgz#9cee0f44a300a5ac22f2805e5da57d98df442664"
-  integrity sha512-voILMLwpDqe/KafqaeH7CsmMNtOagV7ln6vNl0/2Lgq4zyY+vCmlzULRaStSagU+9V0QWoSoPmIgQdZ/Ydelhw==
+  version "0.29.4"
+  resolved "https://registry.yarnpkg.com/libp2p/-/libp2p-0.29.4.tgz#95247793185badb603ef82c36f21455ec6943dfb"
+  integrity sha512-RACD3rvhgBTcLDtILwN8lE2z3GV5OCR1Se/wQ9UPYArSImsoikKjGQMvW0vZl9W3adUqmJOUs7CJWTUvdTAOpw==
   dependencies:
     abort-controller "^3.0.0"
     aggregate-error "^3.0.1"
@@ -9208,10 +9267,15 @@ ms@2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-ms@2.1.2, ms@^2.1.1:
+ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
+
+ms@^2.1.1:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
+  integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
 multiaddr-to-uri@^6.0.0:
   version "6.0.0"
@@ -10922,6 +10986,18 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
+pvtsutils@^1.0.11, pvtsutils@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/pvtsutils/-/pvtsutils-1.1.1.tgz#22c2d7689139d2c36d7ef3ac3d5e29bcd818d38a"
+  integrity sha512-Evbhe6L4Sxwu4SPLQ4LQZhgfWDQO3qa1lju9jM5cxsQp8vE10VipcSmo7hiJW48TmiHgVLgDtC2TL6/+ND+IVg==
+  dependencies:
+    tslib "^2.0.3"
+
+pvutils@latest:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/pvutils/-/pvutils-1.0.17.tgz#ade3c74dfe7178944fe44806626bd2e249d996bf"
+  integrity sha512-wLHYUQxWaXVQvKnwIDWFVKDJku9XDCvyhhxoq8dc5MFdIlRenyPI9eSfEtcvgHgD7FlvCyGAlWgOzRnZD99GZQ==
+
 q@1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.4.1.tgz#55705bcd93c5f3673530c2c2cbc0c2b3addc286e"
@@ -11000,6 +11076,11 @@ rabin-wasm@^0.1.1:
     minimist "^1.2.0"
     node-fetch "^2.6.0"
     readable-stream "^3.6.0"
+
+ramda@^0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
+  integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
 
 randomatic@^3.0.0:
   version "3.1.1"
@@ -12586,6 +12667,11 @@ test-exclude@^4.2.1:
     read-pkg-up "^1.0.1"
     require-main-filename "^1.0.1"
 
+text-encoding@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/text-encoding/-/text-encoding-0.7.0.tgz#f895e836e45990624086601798ea98e8f36ee643"
+  integrity sha512-oJQ3f1hrOnbRLOcwKz0Liq2IcrvDeZRHXhd9RgLrsT+DjWY/nty1Hi7v3dtkaEYbPYe0mUoOfzRrMwfXXwgPUA==
+
 text-table@^0.2.0, text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
@@ -12789,7 +12875,7 @@ tslib@^1.10.0, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.1:
+tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
   integrity sha512-uZtkfKblCEQtZKBF6EBXVZeQNl82yqtDQdv+eck8u7tdPxjLu2/lp5/uPW+um2tpuxINHWy3GhiccY7QgEaVHQ==
@@ -13206,9 +13292,9 @@ uuid@^3.1.0, uuid@^3.3.2:
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
 uuid@^8.3.1:
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.1.tgz#2ba2e6ca000da60fce5a196954ab241131e05a31"
-  integrity sha512-FOmRr+FmWEIG8uhZv6C2bTgEVXsHk08kE7mPlrBbEe+c3r9pjceVPgupIfNIhc4yx55H69OXANrUaSuu9eInKg==
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 uws@~9.14.0:
   version "9.14.0"
@@ -13769,6 +13855,17 @@ web3@2.0.0-alpha.1:
     web3-shh "2.0.0-alpha.1"
     web3-utils "2.0.0-alpha.1"
 
+webcrypto-core@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/webcrypto-core/-/webcrypto-core-1.1.8.tgz#91720c07f4f2edd181111b436647ea5a282af0a9"
+  integrity sha512-hKnFXsqh0VloojNeTfrwFoRM4MnaWzH6vtXcaFcGjPEu+8HmBdQZnps3/2ikOFqS8bJN1RYr6mI2P/FJzyZnXg==
+  dependencies:
+    "@peculiar/asn1-schema" "^2.0.12"
+    "@peculiar/json-schema" "^1.1.12"
+    asn1js "^2.0.26"
+    pvtsutils "^1.0.11"
+    tslib "^2.0.1"
+
 webpack-bundle-analyzer@^2.12.0:
   version "2.13.1"
   resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.13.1.tgz#07d2176c6e86c3cdce4c23e56fae2a7b6b4ad526"
@@ -13892,9 +13989,9 @@ webrtc-adapter@^7.3.0:
     sdp "^2.12.0"
 
 websocket@^1.0.32:
-  version "1.0.32"
-  resolved "https://registry.yarnpkg.com/websocket/-/websocket-1.0.32.tgz#1f16ddab3a21a2d929dec1687ab21cfdc6d3dbb1"
-  integrity sha512-i4yhcllSP4wrpoPMU2N0TQ/q0O94LRG/eUQjEAamRltjQ1oT1PFFKOG4i877OlJgCG8rw6LrrowJp+TYCEWF7Q==
+  version "1.0.33"
+  resolved "https://registry.yarnpkg.com/websocket/-/websocket-1.0.33.tgz#407f763fc58e74a3fa41ca3ae5d78d3f5e3b82a5"
+  integrity sha512-XwNqM2rN5eh3G2CUQE3OHZj+0xfdH42+OFK6LdC2yqiC0YU8e5UK0nYre220T0IyyN031V/XOvtHvXozvJYFWA==
   dependencies:
     bufferutil "^4.0.1"
     debug "^2.2.0"

@@ -3,7 +3,6 @@
       id="convorsation"
       :class="`${(mediaOpen) ? 'media-open' : 'media-closed'} ${(voice) ? 'media-voice' : ''}`"
       ref="chat">
-        <img src="https://ipfs.io/ipfs/QmSfJ9jyyFH54oHsJmVLRzfcZzXVjngSBVA3uXoEiWzkmx" width="300px" alt="">
         <hr class="divider">
         <h2 class="heading">It's awefully quiet</h2>
         <span>Say something and get the convorsation started.</span>

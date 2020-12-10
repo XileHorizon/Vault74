@@ -1,0 +1,139 @@
+<template>
+  <div id="unlock">
+    <div class="columns main">
+      <div class="column is-one-fifth">
+        <i class="fas fa-key"></i>
+      </div>
+      <div class="column is-three-fifthths">
+        <h2 class="label" v-if="storedPinHash">Decrypt Account</h2>
+        <h2 class="label" v-else>Create Encryption Pin</h2>
+        <div class="field has-addons" >
+          <div class="control" style="width: 100%;">
+            <input
+              type="password"
+              class="input is-small"
+              v-model="pin"
+              v-on:keyup.enter="decideAction"
+              placeholder="alphanumeric pin..."/>
+          </div>
+          <div class="control">
+            <a class="button is-primary is-small" v-on:click="decideAction">
+              <i class="fas fa-unlock"></i>
+            </a>
+          </div>
+        </div>
+        <p class="label sub-label">
+          Stay logged in? <input type="checkbox" v-model="storePin" />
+        </p>
+      </div>
+      <div class="column is-one-fifth">
+      </div>
+    </div>
+    <div class="subtext label">
+      Pin stored with AES encryption using Web Crypto.
+    </div>
+    <div class="error label red" v-if="error">
+      {{error}}
+    </div>
+  </div>
+</template>
+<script>
+import ToggleSwitch from '@/components/common/ToggleSwitch';
+import crypto from '@/utils/Crypto';
+
+export default {
+  name: 'unlock',
+  props: ['decrypted'],
+  components: {
+    ToggleSwitch,
+  },
+  data() {
+    return {
+      pin: '',
+      error: false,
+      storePin: false,
+      storedPinHash: localStorage.getItem('v74.pinhash') || false,
+      storedPin: localStorage.getItem('v74.pin') || false,
+    };
+  },
+  methods: {
+    decideAction() {
+      if (this.storedPinHash) {
+        this.testPin();
+      } else {
+        this.encryptAndStore();
+      }
+    },
+    async encryptAndStore() {
+      if (!this.pin || this.pin.length < 4) {
+        this.error = 'Please use at least 4 characters in your pin.';
+        return;
+      }
+      this.error = false;
+      const encryptedPin = await crypto.encrypt(this.pin, this.pin);
+      localStorage.setItem('v74.pinhash', encryptedPin);
+      if (this.storePin) localStorage.setItem('v74.pin', this.pin);
+      window.v74pin = this.pin;
+      this.decrypted();
+    },
+    async testPin() {
+      crypto.decrypt(this.storedPinHash, this.pin)
+        .then(() => {
+          this.error = false;
+          window.v74pin = this.pin;
+          if (this.storePin) localStorage.setItem('v74.pin', this.pin);
+          this.decrypted();
+        })
+        .catch(() => {
+          this.error = 'Invalid pin, try again.';
+        });
+    },
+  },
+  mounted() {
+    if (localStorage.getItem('v74.pin')) {
+      window.v74pin = this.pin;
+      this.decrypted();
+    }
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+  #unlock {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #1c1a24;
+  }
+  .main {
+    width: 500px;
+    margin: calc(33.33% - 200px) auto;
+  }
+  .label {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .sub-label {
+    opacity: 0.75;
+  }
+  .subtext, .error {
+    text-align: center;
+    opacity: 0.2;
+  }
+
+  .error {
+    opacity: 1;
+  }
+  .fa-key {
+    font-size: 20pt;
+    margin-top: 1.6rem;
+    float: right;
+    color: #b2bae1 !important
+  }
+  button {
+    margin-top: 1.5rem;
+  }
+</style>

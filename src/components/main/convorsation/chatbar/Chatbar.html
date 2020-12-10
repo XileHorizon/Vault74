@@ -2,13 +2,13 @@
   <section class="chat-group" @paste="handlePaste">
       <FileUpload v-if="showFileUpload" :file="file" :relayResult="handleNewMessage" :close="closeFileUpload" />
       <MiniPayment 
+        v-if="$store.state.friends.length && payments"
         :person="$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].name" 
         :address="$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].address"
         :photo="$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].photo"
-        v-if="payments" 
         :toggle="togglePayments" />
       <p id="typing" class="loading" v-if="$store.state.typingUsers[$store.state.activeChat]">
-        <b>
+        <b v-if="$store.state.friends.length">
           {{$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].name}}
         </b> 
         is typing
@@ -35,6 +35,7 @@
             showPreview="false"
             @select="this.selectEmoji" />
           <input 
+            v-if="$store.state.friends.length"
             class="input is-small messageuser" 
             type="text" 
             autofocus

@@ -1,5 +1,4 @@
-import Collection from './Collection';
-import UnsortedCollection from './Bucket';
+import Bucket from './Bucket';
 import { LocalStorageInterface } from './interfaces/LocalStorage';
 
 /* eslint-disable */
@@ -12,17 +11,40 @@ export default class Database {
   constructor(name) {
     this.name = name;
     this.prefix = 'vdb.';
-    this.interface = new LocalStorageInterface(this.prefix);
+    this.interface;
+    this.availableInterfaces = [
+      LocalStorageInterface,
+    ];
+
+    this.creds = false;
   }
 
   /** 
    * @method
-   * Construct a Collection
-   * A bucket stores data in a key-value structure
+   * Used to authenticate connections and encrypt data
+   * @argument id identity
+   * @argument pass password
+   */
+  authenticate(id, pass) {
+    this.creds = {
+      id,
+      pass,
+    };
+    this.interface = new LocalStorageInterface(
+      this.prefix,
+      this.creds,
+    );
+  }
+
+  /** 
+   * @method
+   * Construct a Drawer
+   * A drawer stores data in a key-value structure
    * @argument name the name of the bucket
    */
-  Collection(name) {
-    return new Collection(name, this);
+  Drawer(name) {
+    // TODO
+    return null;
   }
 
   /** 
@@ -32,6 +54,6 @@ export default class Database {
    * @argument name the name of the bucket
    */
   Bucket(name) {
-    return new UnsortedCollection(name, this);
+    return new Bucket(name, this);
   }
 }
