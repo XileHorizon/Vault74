@@ -15,7 +15,6 @@ export default class Ethereum {
       this.pollBindWeb3();
     } else {
       this.web3 = new Web3(web3Provider === 'user-provided' ? this.fetchProvider() : Web3.givenProvider);
-      console.log('provider', this.fetchProvider());
     }
     // Abstract bindings to prevent API changes breaking Vault74
     this.createBindings();

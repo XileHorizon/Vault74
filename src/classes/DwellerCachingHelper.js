@@ -1,7 +1,7 @@
 import config from '@/config/config';
 import Ethereum from '@/classes/Ethereum';
-import Vault74Registry from './Vault74Registry';
-import DwellerContract from './DwellerContract';
+import Vault74Registry from '../utils/Vault74Registry';
+import DwellerContract from '../utils/DwellerContract';
 
 
 const ethereum = new Ethereum('user-provided');

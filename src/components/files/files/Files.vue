@@ -16,6 +16,9 @@
         <h2>Your Files</h2>
         <p>Below is a list of all of the files you've uploaded.</p>
         <br>
+        <p v-if="loading" class="label">
+          <i class="fa fa-circle-notch fa-pulse"></i> &nbsp; Loading files...
+        </p>
         <p v-for="file in recentFiles" v-bind:key="file.hash">
           <File :file="file" :updateParent="updateParent"/>
         </p>
@@ -40,6 +43,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       recentFiles: [],
     };
   },
@@ -70,8 +74,10 @@ export default {
      * @name fetchRecentFiles
      */
     async fetchRecentFiles() {
+      this.loading = true;
       const ipfsUtils = new IPFSUtils(this.$database);
       const cache = await ipfsUtils.getFileCache();
+      this.loading = false;
       this.recentFiles = cache.reverse();
     },
   },

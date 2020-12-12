@@ -13,7 +13,7 @@ module.exports = {
     app: './src/main.js',
   },
   node: {
-    fs: "empty"
+    fs: 'empty',
   },
   output: {
     path: config.build.assetsRoot,
@@ -23,7 +23,7 @@ module.exports = {
       : config.dev.assetsPublicPath,
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.ts'],
     alias: {
       '@': resolve('src'),
     },
@@ -74,6 +74,11 @@ module.exports = {
         options: {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]'),
         },
+      },
+      {
+        test: /\.ts?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
     ],
   },

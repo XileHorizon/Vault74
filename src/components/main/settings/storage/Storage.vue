@@ -4,13 +4,32 @@
     <article class="message is-dark">
       <div class="message-body">
         <h2>Enable Database</h2>
+      
+        <div class="bordered margin-2">
+          <div class="columns">
+            <div class="column" style="max-width: 200px;">
+              <img src="https://textile.io/images/logo-dark.png" class="margin" alt="" />
+            </div>
+            <div class="column is-two-thirds padded">
+              <p class="padded">Vault74 utilizes Texile's ThreadDB to store your data, you can learn more about them here: <a href="https://textile.io/">https://textile.io/</a></p>
+            </div>
+          </div>
+        </div>
+
         <p>
-          Enable a decentralized database to recieve offline messaging and unlock additional features.
+          Enable <b>ThreadDB</b>, a decentralized database used to recieve offline messaging and unlock additional features.
           <br>
-          Your data is stored on a distributed network so we don't see your data.
+          Your data is stored on a distributed network and none of that data passes through us.
         </p>
         <br>
         <ToggleSwitch v-model="$store.state.databaseEnabled"/>
+        <hr class="spacer">
+        <h2>Your Data ID</h2>
+        <p>
+          Your data ID references all the data stored in the app. Save this somewhere save to transfer your data to another browser.
+          <br> <br>
+          <input v-model="dataid" readonly class="input is-small" placeholder="data..." />     
+        </p>
       </div>
     </article>
     <h3 class="label">Storage</h3>
@@ -54,6 +73,7 @@ export default {
   },
   data() {
     return {
+      dataid: localStorage.getItem('textile.threads.user-storage'),
       storageSize: this.bytesToSize(new Blob(Object.values(localStorage)).size),
     };
   },
@@ -95,4 +115,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .margin {
+    margin: 0.5rem;
+    margin-left: 25px;
+    width: 150px;
+  }
+  .margin-2 {
+    margin: 1rem 0;
+  }
+  .padded {
+    padding-top: 0.65rem;
+    padding-left: 1rem;
+  }
 </style>

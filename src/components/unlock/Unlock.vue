@@ -12,6 +12,7 @@
             <input
               type="password"
               class="input is-small"
+              autofocus
               v-model="pin"
               v-on:keyup.enter="decideAction"
               placeholder="alphanumeric pin..."/>
@@ -23,7 +24,7 @@
           </div>
         </div>
         <p class="label sub-label">
-          Stay logged in? <input type="checkbox" v-model="storePin" />
+          <input type="checkbox" v-model="storePin" /> Stay logged in?
         </p>
       </div>
       <div class="column is-one-fifth">

@@ -32,7 +32,7 @@ const defaultState = {
   recentFiles: 0,
   mainRoute: 'main',
   // Friends
-  friends: [],
+  friends: null,
   peerHealth: {},
   // Audio Video
   audioDevice: 'Default Microphone',
@@ -53,7 +53,7 @@ const defaultState = {
   activeMediaStreamPeer: false,
   activeCaller: false,
   // Database
-  databaseEnabled: true,
+  databaseEnabled: false,
 };
 
 const createState = customState => Object.assign({}, defaultState, customState);

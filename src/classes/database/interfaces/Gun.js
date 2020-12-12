@@ -23,7 +23,7 @@ export class GunInterface {
 
       gun.get(this._key(name))
         .put({
-          data: encrypted
+          data: encrypted,
         });
 
       resolve();
@@ -31,9 +31,9 @@ export class GunInterface {
   }
 
   async _retrive(name) {
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
       gun.get(this._key(name))
-        .once((node) => {
+        .once(async (node) => {
           let decrypted = node ? await crypto.decrypt(
             node.data,
             this.database.creds.pass,

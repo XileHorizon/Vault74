@@ -1,10 +1,19 @@
 <template>
   <div id="wrapper">
     <Web3 />
-    <Database v-if="$store.state.p2pOnline || $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000' || $store.state.dwellerAddress"/>
+    <Database
+      v-if="$store.state.p2pOnline ||
+            $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000' ||
+            $store.state.dwellerAddress"
+      />
     <MediaManager v-if="windowBound && $store.state.p2pOnline && $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000'" />
     <ScreenCapture v-if="windowBound && $store.state.p2pOnline && $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000'" />
-    <Loading v-if="!$store.state.p2pOnline || $store.state.dwellerAddress === '0x0000000000000000000000000000000000000000' || !$store.state.dwellerAddress" />
+    <Loading
+      v-if="!$store.state.friends ||
+            !$store.state.p2pOnline ||
+            $store.state.dwellerAddress === '0x0000000000000000000000000000000000000000' ||
+            !$store.state.dwellerAddress"
+      />
     <div v-else>
       <Calling :active="$store.state.activeCaller" :callerId="$store.state.activeCaller" />
 

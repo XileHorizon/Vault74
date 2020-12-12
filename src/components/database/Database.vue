@@ -1,12 +1,21 @@
 <template></template>
 <script>
-import { PrivateKey } from '@textile/hub';
+import {
+  Client,
+  PrivateKey,
+} from '@textile/hub';
+import config from '@/config/config';
 
 export default {
   name: 'database',
   methods: {
     startup() {
       this.$store.commit('fetchFriends');
+    },
+    makeKey() {
+      return {
+        key: config.textile.key,
+      };
     },
     async getIdentity() {
       /** Restore any cached user identity first */
@@ -23,14 +32,37 @@ export default {
       /** Return the random identity */
       return identity;
     },
+    async authorize(key, identity) {
+      const client = await Client.withKeyInfo(key);
+      await client.getToken(identity);
+      const userToken = await client.getToken(identity);
+      return {
+        client,
+        userToken,
+      };
+    },
   },
   async mounted() {
-    const identity = await this.getIdentity();
-    console.log('identity', identity);
-    console.log('pin', window.v74pin);
-    this.$database.authenticate(this.$store.state.activeAccount, window.v74pin);
-    window.Vault74.Database = this.$database;
-    this.startup();
+    if (this.$store.state.databaseEnabled) {
+      const identity = await this.getIdentity();
+      const client = await this.authorize(this.makeKey(), identity);
+      this.$database.authenticate(
+        'textile',
+        this.$store.state.activeAccount,
+        window.v74pin,
+        client,
+      );
+      window.Vault74.Database = this.$database;
+      this.startup();
+    } else {
+      this.$database.authenticate(
+        'localStorage',
+        this.$store.state.activeAccount,
+        window.v74pin,
+      );
+      window.Vault74.Database = this.$database;
+      this.startup();
+    }
   },
 };
 </script>

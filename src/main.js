@@ -2,7 +2,7 @@ import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
 import VueClipboard from 'vue-clipboard2';
 import config from '@/config/config';
-import Database from '@/classes/database/Database';
+import Database from '@/classes/database/Database.ts';
 
 import App from './App';
 import router from './router';

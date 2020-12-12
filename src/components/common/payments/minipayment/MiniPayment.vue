@@ -3,7 +3,7 @@
 <script>
 import config from '@/config/config';
 import CircleIcon from '@/components/common/CircleIcon';
-import DwellerCachingHelper from '@/utils/DwellerCachingHelper';
+import DwellerCachingHelper from '@/classes/DwellerCachingHelper';
 import MessageBroker from '@/classes/MessageBroker';
 import Ethereum from '@/classes/Ethereum';
 

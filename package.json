@@ -39,6 +39,7 @@
     "karma-firefox-launcher": "^1.1.0",
     "mousetrap": "^1.6.5",
     "peerjs": "^1.3.1",
+    "types": "^0.1.1",
     "uuid": "^8.3.1",
     "vue": "^2.5.16",
     "vue-clipboard2": "^0.3.1",
@@ -53,6 +54,7 @@
     "web3-utils": "^1.3.0"
   },
   "devDependencies": {
+    "@types/uuid": "^8.3.0",
     "autoprefixer": "^8.5.0",
     "avoriaz": "^6.3.0",
     "babel-core": "^6.26.3",
@@ -114,6 +116,8 @@
     "sinon-chai": "^3.0.0",
     "sw-precache": "^5.2.1",
     "sw-precache-webpack-plugin": "0.11.5",
+    "ts-loader": "^8.0.12",
+    "typescript": "^4.1.2",
     "uglify-es": "^3.3.10",
     "url-loader": "^1.0.1",
     "vue-loader": "^15.0.11",

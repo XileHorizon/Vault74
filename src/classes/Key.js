@@ -15,7 +15,6 @@ export default class Key {
   }
 
   getPublicKey() {
-    console.log(this);
     return this.account.address;
   }
 

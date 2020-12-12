@@ -8,10 +8,12 @@
             <div v-else-if="$store.state.dwellerAddress == '0x0000000000000000000000000000000000000000'" class="content">
                 <Profile :customFinalAction="reload" />
             </div>
+            <div v-else-if="!$store.state.friends">
+                <i class="fas fa-circle-notch fa-pulse"></i> Assembling the hive...
+            </div>
             <div v-else-if="!$store.state.ICEConnected">
                 <i class="fas fa-circle-notch fa-pulse"></i> Connecting to 0.vault74.io...
             </div>
-
             <div class="metamask" v-if="showWeb3 && $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000'">
                 <span v-if="!$store.state.dwellerAddress">
                     This is taking a bit, do you have <a href="https://metamask.io/" target="_blank">https://metamask.io/</a> installed?

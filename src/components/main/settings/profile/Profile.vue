@@ -53,7 +53,6 @@ export default {
       const pollBalance = () => {
         ethereum.eth.getBalance(this.$store.state.activeAccount).then((bal) => {
           if (bal > 0) {
-            console.log('bal', bal);
             this.funded = true;
           } else {
             setTimeout(() => {

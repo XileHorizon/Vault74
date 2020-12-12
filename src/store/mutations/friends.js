@@ -19,4 +19,8 @@ export default {
     // eslint-disable-next-line
     state.friends = friends;
   },
+  clearFriends(state) {
+    // eslint-disable-next-line
+    state.friends = null;
+  },
 };

@@ -11,7 +11,7 @@
   import Audio from '@/components/main/convorsation/message/embeds/Audio';
   import Video from '@/components/main/convorsation/message/embeds/Video';
   import Address from '@/components/main/convorsation/message/embeds/Address';
-  import DwellerCachingHelper from '@/utils/DwellerCachingHelper';
+  import DwellerCachingHelper from '@/classes/DwellerCachingHelper';
   import config from '@/config/config';
 
   import * as dayjs from 'dayjs';

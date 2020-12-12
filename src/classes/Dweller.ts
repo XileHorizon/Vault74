@@ -1,7 +1,13 @@
+//@ts-ignore
 import DwellerContract from '../utils/DwellerContract';
 
 export default class Dweller {
-  constructor(contractAddress) {
+  contractAddress: string;
+  photoHash: any;
+  owner: any;
+  name: any;
+
+  constructor(contractAddress: string) {
     this.contractAddress = contractAddress;
   }
 

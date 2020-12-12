@@ -1,5 +1,4 @@
 <template>
-
   <div id="app" :class="this.$store.state.theme">
     <div class="notification is-warning" v-if="showWarning">
       <button class="delete" v-on:click="hideWarning"></button>
@@ -36,7 +35,6 @@ export default {
   },
   methods: {
     decrypt() {
-      console.log('decrypted');
       this.decrypted = true;
       this.checkAccount();
     },
@@ -66,7 +64,7 @@ export default {
                   this.$store.commit('peerHealth', [peer, 'dead']);
                   break;
                 case 'alive':
-                  this.$store.commit('ICEConnected', data);
+                  this.$store.commit('ICEConnected', true);
                   break;
                 case 'message':
                   window.Vault74.messageBroker.recievedMessage(
@@ -101,6 +99,7 @@ export default {
     this.$store.commit('ICEConnected', false);
     this.$store.commit('dwellerAddress', false);
     this.$store.commit('activeCaller', false);
+    this.$store.commit('clearFriends');
     // Reset media call data
     this.$store.commit('connectMediaStream', false);
     this.$store.commit('clearTypingUsers');
