@@ -1,5 +1,5 @@
 <template>
-    <div class="circle-icon" >
+    <div class="circle-icon" v-on:click="actionHandler">
         <span v-if="icon">
             <i :class="icon"></i>
         </span>
@@ -24,7 +24,13 @@ export default {
     'icon',
     'diameter',
     'address',
+    'action',
   ],
+  methods: {
+    actionHandler() {
+      if (this.action) this.action();
+    },
+  },
 };
 </script>
 

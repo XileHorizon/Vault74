@@ -1,8 +1,8 @@
-//@ts-ignore
+// @ts-ignore
 import Bucket from './Bucket';
-//@ts-ignore
-import { LocalStorageInterface } from './interfaces/LocalStorage';
-import { ThreadDBInterface } from './interfaces/ThreadDB';
+import Drawer from './Drawer';
+// @ts-ignore
+import { LocalStorage, ThreadDB } from './interpreters';
 
 interface Interface {
   _retrieve: CallableFunction,
@@ -29,6 +29,7 @@ export default class Database {
   interface: any;
   availableInterfaces: any[];
   creds: Creds | undefined;
+
   /** @constructor
    * Construct a Database
    * Provides key-value and relational storage
@@ -39,7 +40,8 @@ export default class Database {
     this.prefix = 'vdb.';
     this.interface;
     this.availableInterfaces = [
-      LocalStorageInterface,
+      ThreadDB,
+      LocalStorage,
     ];
 
     this.creds = undefined;
@@ -59,20 +61,20 @@ export default class Database {
     };
     switch (intrface) {
       case 'localStorage':
-        this.interface = new LocalStorageInterface(
+        this.interface = new LocalStorage(
           this.prefix,
           this.creds,
         );
         break;
       case 'textile':
-        this.interface = new ThreadDBInterface(
+        this.interface = new ThreadDB(
           this.prefix,
           this.creds,
           extras,
         );
         break;
       default:
-        this.interface = new LocalStorageInterface(
+        this.interface = new LocalStorage(
           this.prefix,
           this.creds,
         );
@@ -88,7 +90,7 @@ export default class Database {
    */
   Drawer(name: string) {
     // TODO
-    return null;
+    return new Drawer(name, this);
   }
 
   /** 

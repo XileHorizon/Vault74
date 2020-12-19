@@ -37,6 +37,24 @@ export default {
       .once('confirmation', done);
   },
   /** @function
+   * @name createServer
+   * @argument name name to call the server
+   * @argument account account to send the transaction from
+   * @argument tx callback executed on first transaction
+   * @argument done callback executed on first confirmation
+   */
+  createServer(_name, account, tx, done) {
+    const name = ethereum.fromAscii(_name);
+    const contract = this.getContract();
+    contract.methods.createServer(name)
+      .send({
+        from: account,
+        gas: 4700000,
+      })
+      .once('transactionHash', tx)
+      .once('confirmation', done);
+  },
+  /** @function
    * @name getDwellerContract
    * @argument account account to send the transaction from
    * @return returns the dweller contract address for a specific account

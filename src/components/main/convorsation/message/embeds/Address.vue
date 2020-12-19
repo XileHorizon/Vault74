@@ -7,9 +7,9 @@
             <i class="fas fa-file-invoice logo"></i>
             <strong class="filename">{{address[0]}}</strong>
             <br>
-            <a :href="getEtherscanLink()" target="_blank">
-              <span class="label yellow"><i class="fas fa-link yellow"></i> &nbsp; Click to view on Etherscan.io</span>
-            </a>
+            <ExternalLink 
+              :link="getEtherscanLink()" 
+              text="Click to view on Etherscan.io" />
           </p>
         </div>
       </div>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import ExternalLink from '@/components/common/ExternalLink';
 import config from '@/config/config';
 
 export default {
@@ -25,6 +26,9 @@ export default {
   props: [
     'address',
   ],
+  components: {
+    ExternalLink,
+  },
   methods: {
     getEtherscanLink() {
       return `${config.network.explorer}/address/${this.address[0]}`;

@@ -100,17 +100,23 @@ export default {
     // eslint-disable-next-line no-param-reassign
     state.status = status;
   },
+  criticalError(state, err) {
+    // eslint-disable-next-line no-param-reassign
+    state.criticalError = err;
+  },
   // Update a peers status
   peerHealth(state, data) {
     const [id, status] = data;
-    const friend = state.friends.filter(f => f.address === id)[0];
-    const withoutFriend = state.friends.filter(f => f.address !== id);
-    friend.status = status;
-    withoutFriend.push(friend);
-    // eslint-disable-next-line
-    withoutFriend.sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1);
-    // eslint-disable-next-line no-param-reassign
-    state.friends = withoutFriend;
+    const friend = state.friends ? state.friends.filter(f => f.address === id)[0] : null;
+    if (friend) {
+      const withoutFriend = state.friends.filter(f => f.address !== id);
+      friend.status = status;
+      withoutFriend.push(friend);
+      // eslint-disable-next-line
+      withoutFriend.sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1);
+      // eslint-disable-next-line no-param-reassign
+      state.friends = withoutFriend;
+    }
   },
   // Update p2p handshake server status
   ICEConnected(state, status) {
@@ -160,5 +166,9 @@ export default {
   localAccount(state) {
     // eslint-disable-next-line
     state.localAccount = true;
+  },
+  clear(state) {
+    // eslint-disable-next-line no-param-reassign
+    state.criticalError = false;
   },
 };

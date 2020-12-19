@@ -16,9 +16,10 @@
             <i class="fas fa-arrow-down"></i>
             <small>{{message.data.to}}</small>
             <br>
-            <a :href="`${config.network.explorer}/tx/${message.data.tx}`" target="_blank">
-              <b class="yellow">Click to review transaction on Etherscan.</b>
-            </a>
+            <ExternalLink 
+              :link="`${config.network.explorer}/tx/${message.data.tx}`" 
+              text="Click to review transaction on Etherscan.">
+            </ExternalLink>
           </p>
         </div>
       </div>
@@ -28,9 +29,13 @@
 
 <script>
 import config from '@/config/config';
+import ExternalLink from '@/components/common/ExternalLink';
 
 export default {
   name: 'Payment',
+  components: {
+    ExternalLink,
+  },
   props: [
     'message',
   ],
@@ -39,9 +44,6 @@ export default {
       name: false,
       config,
     };
-  },
-  mounted() {
-
   },
 };
 </script>

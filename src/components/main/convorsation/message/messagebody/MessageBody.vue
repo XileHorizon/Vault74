@@ -94,7 +94,7 @@
        * @returns string value of formatted message
        */
       wrapLinks(message) {
-        return message.replace(/(?:(https?:\/\/[^\s]+))/m, '<a href="$1" target="_blank">$1</a>');
+        return decodeURI(message).replace(/(?:(https?:\/\/[^\s]+))/m, '<a href="$1" target="_blank">$1</a>');
       },
     },
     mounted() {

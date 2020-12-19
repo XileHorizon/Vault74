@@ -46,9 +46,6 @@ window.Vault74 = {
   },
   /* eslint-enable */
 };
-window.onerror = function error(e) {
-  window.Vault74.error(e);
-};
 
 Vue.prototype.$database = new Database('Vault74Data');
 Vue.prototype.$pin = null;

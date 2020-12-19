@@ -63,6 +63,23 @@
             <ToggleSwitch v-model="$store.state.noiseSuppression"/>
           </div>
         </div>
+        <div class="bordered margin-2">
+        <p v-if="love >= 20">
+          <i class="fa fa-heart red" /> Lauren my darling, I love you from now until forever.
+        </p>
+        <div class="columns">
+          <div class="column" style="max-width: 100px;">
+            <img v-on:click="love += 1" src="https://ipfs.io/ipfs/QmceqvkYRZesG7r8k9zjsxHhwTNm54ku7RqxWB69YVRN75" class="margin" alt="" />
+          </div>
+          <div class="column padded">
+            <p class="padded">
+              Vault74 uses the Opus Codec, and open source audio codec. 
+              <br>
+              <a href="https://opus-codec.org/">https://opus-codec.org/</a>
+            </p>
+          </div>
+        </div>
+      </div>
       </div>
     </article>
     <h3 class="label">Video</h3>
@@ -104,6 +121,7 @@ export default {
   },
   data() {
     return {
+      love: 0,
       devices: false,
       audioQuality: 320,
       audioDevices: [],
@@ -132,4 +150,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+ .margin {
+    margin: 0.5rem;
+    margin-left: 25px;
+    width: 150px;
+  }
+  .margin-2 {
+    margin: 1rem 0;
+  }
+  .padded {
+    padding-top: 0.65rem;
+    padding-left: 1rem;
+  }
 </style>

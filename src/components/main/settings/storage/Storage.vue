@@ -4,14 +4,15 @@
     <article class="message is-dark">
       <div class="message-body">
         <h2>Enable Database</h2>
-      
         <div class="bordered margin-2">
           <div class="columns">
             <div class="column" style="max-width: 200px;">
-              <img src="https://textile.io/images/logo-dark.png" class="margin" alt="" />
+              <img src="https://textile.io/images/logo.png" class="margin" alt="" />
             </div>
-            <div class="column is-two-thirds padded">
-              <p class="padded">Vault74 utilizes Texile's ThreadDB to store your data, you can learn more about them here: <a href="https://textile.io/">https://textile.io/</a></p>
+            <div class="column padded">
+              <p class="padded">Vault74 utilizes Texile's ThreadDB, a decentralized database, to store your data.
+                <br>
+                You can learn more about them here: <a href="https://textile.io/">https://textile.io/</a></p>
             </div>
           </div>
         </div>

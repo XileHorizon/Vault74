@@ -1,7 +1,8 @@
 <template>
   <div class="switch-button-control">
     <div class="switch-button" :class="{ enabled: isEnabled }" @click="toggle" :style="{'--color': color}">
-      <div class="sw-button"></div>
+      <div class="sw-button">
+      </div>
     </div>
     <div class="switch-button-label">
       <slot></slot>

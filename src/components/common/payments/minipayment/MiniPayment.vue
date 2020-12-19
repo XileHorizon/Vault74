@@ -87,18 +87,18 @@ export default {
         return false;
       }
       this.error = false;
-      const amountToSend = ethereum.eth.utils.toWei(this.amount, 'ether');
-      ethereum.send({
+      const amountToSend = ethereum.utils.toWei(this.amount, 'ether');
+      ethereum.eth.sendTransaction({
         from: this.$store.state.activeAccount,
         to: this.address,
         value: amountToSend,
-      }).once('transactionHash', (tx) => {
+      }, (err, hash) => {
         this.sendMessage(
           {
             amount: this.amount,
             to: this.address,
             from: this.$store.state.activeAccount,
-            tx,
+            tx: hash,
           },
           'payment',
         );

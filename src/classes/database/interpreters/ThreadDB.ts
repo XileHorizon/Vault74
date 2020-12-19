@@ -1,4 +1,4 @@
-import { Client, ThreadID } from '@textile/hub';
+import { Client, ThreadID, Where } from '@textile/hub';
 // @ts-ignore
 import crypto from '../../../utils/Crypto';
 
@@ -18,7 +18,7 @@ interface Data {
 }
 
 /* eslint-disable */
-export class ThreadDBInterface {
+export class ThreadDB {
   threadID: any;
   collectionSchema: { data: string; _id: string; };
   prefix: string;
@@ -35,6 +35,11 @@ export class ThreadDBInterface {
       data: 'encrypted-data',
       _id: '0',
     };
+  }
+
+  async checkDeps(name: string) {
+    await this.ensureThreadID();
+    await this.ensureCollection(name);
   }
 
   buildObject(data: string) {
@@ -75,11 +80,6 @@ export class ThreadDBInterface {
         },
       );
     });
-  }
-
-  async checkDeps(name: string) {
-    await this.ensureThreadID();
-    await this.ensureCollection(name);
   }
 
   async _store(value: any, name: string) : Promise<void> {

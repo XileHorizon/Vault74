@@ -29,9 +29,9 @@ module.exports = {
   },
   registry: {
     mainnet: '0x0',
-    goerli: '0x7d867225d2927da8c98f5110b6589b53895e09df',
+    goerli: '0xfA22498c3F2bc836d9347F2e8c718E7820eAb308',
   },
-  debug: false,
+  debug: true,
   cacher: {
     dwellerLifespan: 900000,
   },

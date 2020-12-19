@@ -1,0 +1,21 @@
+<div :class="`modal ${error ? 'is-active' : ''}`">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <section class="modal-card-body">
+      <h2 class="person"><i class="fas fa-spider"></i> That's a bug.</h2>
+      <p>You encountered a bug, if you'd like to report it all the info you need is below.</p>
+      <span class="label">User Agent</span>
+      <input type="text" readonly class="input is-small" :value="error.userAgent"/>
+      <span class="label">Source</span>
+      <input type="text" readonly class="input is-small" :value="error.source"/>
+      <span class="label">Line Number</span>
+      <input type="text" readonly class="input is-small" :value="error.lineno"/>
+
+      <p class="bordered">
+      <small>{{error.message}}</small>
+      </p>
+      <hr class="divider">
+      <button class="button is-danger" v-on:click="confirm"><i class="fas fa-check"></i> &nbsp; Alright</button>
+    </section>
+  </div>
+</div>

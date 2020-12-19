@@ -32,7 +32,7 @@
             title="Pick your emoji…" 
             emoji="point_up" 
             color="#00d0a1"
-            showPreview="false"
+            :showPreview="false"
             @select="this.selectEmoji" />
           <input 
             v-if="$store.state.friends.length"

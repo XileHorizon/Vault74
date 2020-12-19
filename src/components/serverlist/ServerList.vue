@@ -5,6 +5,7 @@ import CircleIcon from '@/components/common/CircleIcon';
 
 export default {
   name: 'ServerList',
+  props: ['toggleCreateServer'],
   components: {
     CircleIcon,
   },

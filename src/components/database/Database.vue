@@ -34,8 +34,9 @@ export default {
     },
     async authorize(key, identity) {
       const client = await Client.withKeyInfo(key);
-      await client.getToken(identity);
-      const userToken = await client.getToken(identity);
+      const userToken = await client.getToken(identity).catch(() => {
+        this.$store.commit('criticalError', 'Textile.io may be down...');
+      });
       return {
         client,
         userToken,

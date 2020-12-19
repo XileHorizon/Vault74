@@ -39,12 +39,12 @@
           </li>
         </ul>
         <p class="menu-label">
-          Transactions
+          Information
         </p>
         <ul class="menu-list">
-          <li><a>Payments</a></li>
-          <li><a>Transfers</a></li>
-          <li><a>Balance</a></li>
+          <li v-on:click="setRoute('contracts')">
+            <a :class="`${route == 'contracts' ? 'active' : ''}`">Contracts</a>
+          </li>
         </ul>
       </aside>
     </div>
@@ -81,6 +81,8 @@
         v-if="route == 'storage'" 
         :settings="settings"
         :setSetting="setSetting"/>
+      <Contracts 
+        v-if="route == 'contracts'"/>
     </div>
   </div>
 </template>
@@ -95,6 +97,7 @@ import Network from '@/components/main/settings/network/Network';
 import Storage from '@/components/main/settings/storage/Storage';
 import Encryption from '@/components/main/settings/encryption/Encryption';
 import AudioVideo from '@/components/main/settings/audiovideo/AudioVideo';
+import Contracts from '@/components/main/settings/contracts/Contracts';
 
 export default {
   name: 'Settings',
@@ -110,6 +113,7 @@ export default {
     Encryption,
     Storage,
     AudioVideo,
+    Contracts,
   },
   props: ['toggleSettings', 'open'],
   data() {

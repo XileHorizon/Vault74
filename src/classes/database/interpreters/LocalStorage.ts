@@ -1,13 +1,21 @@
+// @ts-ignore
 import crypto from '@/utils/Crypto';
 
+interface Creds {
+  id: string,
+  pass: string,
+}
 /* eslint-disable */
-export class LocalStorageInterface {
-  constructor(prefix, creds) {
+export class LocalStorage {
+  creds: Creds;
+  prefix: string;
+
+  constructor(prefix: string, creds: Creds) {
     this.prefix = prefix;
     this.creds = creds;
   }
 
-  async _store(value, name) {
+  async _store(value: object, name: string) : Promise<void> {
     return new Promise(async (resolve) => {
       const values = await this._retrive(name);
       values.push(value);
@@ -25,7 +33,7 @@ export class LocalStorageInterface {
     })
   }
 
-  async _update(bucket, name) {
+  async _update(bucket: any, name: string) : Promise<void> {
     return new Promise(async (resolve) => {
       const encrypted = await crypto.encrypt(
         JSON.stringify(bucket),
@@ -39,7 +47,7 @@ export class LocalStorageInterface {
     });
   }
 
-  async _retrive(name) {
+  async _retrive(name: string) : Promise<any[]>{
     return new Promise(async (resolve) => {
       let decrypted = localStorage.getItem(this._key(name)) ? await crypto.decrypt(
         localStorage.getItem(this._key(name)),
@@ -52,7 +60,7 @@ export class LocalStorageInterface {
     });
   }
 
-  _key(name) {
+  _key(name: string) {
     return `${this.prefix}${name}`;
   }
 }

@@ -58,6 +58,7 @@ export default {
             (peer, type, data) => {
               switch (type) {
                 case 'heartbeat':
+                  console.log('got heartbeat, setting peer to alive', peer);
                   this.$store.commit('peerHealth', [peer, 'alive']);
                   break;
                 case 'dead':
@@ -100,6 +101,7 @@ export default {
     this.$store.commit('dwellerAddress', false);
     this.$store.commit('activeCaller', false);
     this.$store.commit('clearFriends');
+    this.$store.commit('clear');
     // Reset media call data
     this.$store.commit('connectMediaStream', false);
     this.$store.commit('clearTypingUsers');

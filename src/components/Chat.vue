@@ -1,6 +1,7 @@
 <template>
   <div id="wrapper">
     <Web3 />
+    <Error />
     <Database
       v-if="$store.state.p2pOnline ||
             $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000' ||
@@ -15,11 +16,12 @@
             !$store.state.dwellerAddress"
       />
     <div v-else>
+      <CreateServer v-if="showCreateServer" :close="closeCreateServer"/>
       <Calling :active="$store.state.activeCaller" :callerId="$store.state.activeCaller" />
 
       <div :class="`columns wrapper ${$store.state.sidebarOpen ? '' : 'wrapper-closed'} ${settingsOpen ? 'settings-open' : ''}`">
         <div class="column is-one-third" style="max-width: 320px;" v-if="$store.state.sidebarOpen">
-          <Sidebar :toggleSettings="toggleSettings" />
+          <Sidebar :toggleSettings="toggleSettings" :toggleCreateServer="toggleCreateServer" />
         </div>
         <div class="column">
           <Main :class="$store.state.mainRoute == 'main' ? 'show' : 'hidden'" />
@@ -64,6 +66,7 @@ import MediaManager from '@/components/media/MediaManager';
 import ScreenCapture from '@/components/media/ScreenCapture';
 import Sidebar from '@/components/sidebar/sidebar/Sidebar';
 import Main from '@/components/main/main/Main';
+import Error from '@/components/main/popups/error/Error';
 import Files from '@/components/files/files/Files';
 import Friends from '@/components/friends/friends/Friends';
 import Settings from '@/components/main/settings/Settings';
@@ -71,6 +74,7 @@ import Web3 from '@/components/web3/Web3';
 import Database from '@/components/database/Database';
 import Loading from '@/components/common/Loading';
 import Calling from '@/components/main/popups/calling/Calling';
+import CreateServer from '@/components/servers/create/CreateServer';
 
 import IPFS from 'ipfs-core';
 
@@ -79,6 +83,7 @@ export default {
   components: {
     Sidebar,
     Main,
+    Error,
     Files,
     Friends,
     Settings,
@@ -88,10 +93,12 @@ export default {
     MediaManager,
     ScreenCapture,
     Calling,
+    CreateServer,
   },
   data() {
     return {
       msg: 'Chat',
+      showCreateServer: false,
       windowBound: false,
       settingsOpen: false,
       network: '',
@@ -101,6 +108,12 @@ export default {
     };
   },
   methods: {
+    closeCreateServer() {
+      this.showCreateServer = false;
+    },
+    toggleCreateServer() {
+      this.showCreateServer = !this.showCreateServer;
+    },
     toggleSettings() {
       this.settingsOpen = !this.settingsOpen;
       if (this.settingsOpen) this.$store.commit('changeRoute', 'main');

@@ -1,31 +1,37 @@
 <template>
   <div>
-    <a :href="message.data.link" target="_blank">{{message.data.link}}</a>
-    <a :href="message.data.link" target="_blank">
-      <article class="media">
-        <div class="media-content">
-            <img :src="message.data.preview">
-            <div class="content">
-            <p>
-              <strong>{{message.data.title}}</strong><br />
-              <a :href="message.data.link" target="_blank">{{message.data.link}}</a>
-              <br>
-              {{message.data.text}}
-            </p>
-          </div>
+    <ExternalLink 
+      :link="message.data.link" 
+      :text="message.data.link" />
+    <article class="media">
+      <div class="media-content">
+          <img :src="message.data.preview">
+          <div class="content">
+          <p>
+            <strong>{{message.data.title}}</strong><br />
+            <ExternalLink 
+              :link="message.data.link" 
+              :text="message.data.link" />
+            <br>
+            {{message.data.text}}
+          </p>
         </div>
-      </article>
-    </a>
+      </div>
+    </article>
   </div>
 </template>
 
 <script>
+import ExternalLink from '@/components/common/ExternalLink';
 
 export default {
   name: 'Link',
   props: [
     'message',
   ],
+  components: {
+    ExternalLink,
+  },
 };
 </script>
 

@@ -2,7 +2,11 @@
     <div id="loading">
         <div :class="`loading-dispaly ${($store.state.dwellerAddress === '0x0000000000000000000000000000000000000000') ? 'showing-content' : ''}`">
             <p id="logo">Vault74</p>
-            <div v-if="!$store.state.dwellerAddress">
+            <div class="red" v-if="$store.state.criticalError">
+                <i class="fas fa-skull"></i> Failure to load: {{$store.state.criticalError}} <br /><br />
+                <button class="button is-danger is-small" v-on:click="reload">Retry?</button>
+            </div>
+            <div v-else-if="!$store.state.dwellerAddress">
                 <i class="fas fa-circle-notch fa-pulse"></i> Connecting to the blockchain...
             </div>
             <div v-else-if="$store.state.dwellerAddress == '0x0000000000000000000000000000000000000000'" class="content">
@@ -51,7 +55,9 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.showWeb3 = true;
+      if (!this.$store.state.criticalError) {
+        this.showWeb3 = true;
+      }
     }, 8000);
   },
   methods: {

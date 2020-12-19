@@ -8,7 +8,7 @@ import Controls from '@/components/sidebar/controls/Controls';
 
 export default {
   name: 'Sidebar',
-  props: ['toggleSettings'],
+  props: ['toggleSettings', 'toggleCreateServer'],
   components: {
     ServerList,
     User,
