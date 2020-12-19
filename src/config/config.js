@@ -31,7 +31,7 @@ module.exports = {
     mainnet: '0x0',
     goerli: '0xfA22498c3F2bc836d9347F2e8c718E7820eAb308',
   },
-  debug: true,
+  debug: false,
   cacher: {
     dwellerLifespan: 900000,
   },

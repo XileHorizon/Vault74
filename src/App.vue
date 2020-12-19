@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import 'bulma/css/bulma.css';
 import config from '@/config/config';
 import Peer2Peer from '@/classes/Peer2Peer';
 import MessageBroker from '@/classes/MessageBroker';
@@ -131,7 +132,6 @@ export default {
 }
 </style>
 
-<style lang="less" src="@/assets/styles/bulma.less"></style>
 <style lang="less" src="@/assets/styles/app.less"></style>
 <style lang="less">
 .dark {
