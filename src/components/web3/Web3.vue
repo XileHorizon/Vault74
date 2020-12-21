@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import Web3 from 'web3';
 import Vault74Registry from '@/utils/Vault74Registry';
 import DwellerID from '@/utils/DwellerContract';
 import Ethereum from '@/classes/Ethereum';
@@ -31,14 +30,14 @@ export default {
   methods: {
     // Tasks we need to run for Web3 when the application starts
     async startupActions(acc) {
-      const [account] = acc ? [acc] : await window.web3.eth.getAccounts();
+      const [account] = acc ? [acc] : await ethereum.web3.eth.getAccounts();
       const dwellerContract = await Vault74Registry.getDwellerContract(account);
       const dwellerPhoto = await DwellerID.getPhotoAsync(dwellerContract);
       const dwellerName = await DwellerID.getDwellerName(dwellerContract);
       if (dwellerContract !== '0x0000000000000000000000000000000000000000') {
         this.$store.commit('dwellerAddress', dwellerContract);
         this.$store.commit('profilePictureHash', dwellerPhoto);
-        this.$store.commit('username', window.web3.utils.hexToString(dwellerName));
+        this.$store.commit('username', ethereum.web3.utils.hexToString(dwellerName));
       } else {
         this.$store.commit('dwellerAddress', '0x0000000000000000000000000000000000000000');
       }
@@ -50,7 +49,7 @@ export default {
         ethereum.eth.net.getNetworkType(),
       ];
       if (!account) {
-        promises.push(window.web3.eth.getAccounts());
+        promises.push(ethereum.web3.eth.getAccounts());
       }
       Promise.all(promises).then((stats) => {
         this.$store.commit('web3Stats', {
@@ -74,11 +73,11 @@ export default {
     this.$store.commit('setStatus', 'Connecting to Web3');
     const ethEnabled = () => {
       if (window.ethereum) {
-        window.web3 = new Web3(window.ethereum);
-        ethereum = new Ethereum('user-provided');
+        ethereum = new Ethereum('window');
+        window.v74Ethereum = ethereum.web3;
         window.ethereum.enable();
         this.connected = true;
-        window.web3.eth.getAccounts().then((acc) => {
+        ethereum.web3.eth.getAccounts().then((acc) => {
           if (acc.length) {
             this.startupActions();
             this.web3Polling();
@@ -94,21 +93,6 @@ export default {
           return true;
         });
       }
-      /*
-      else {
-        ethereum = new Ethereum('user-provided');
-        const account = ethereum.getAccount();
-        this.$store.commit('localAccount');
-        this.connected = true;
-        this.startupActions(account.address);
-        this.web3Polling(account.address);
-        this.$store.commit('setStatus', 'Web3 is connected');
-        setInterval(() => {
-          this.web3Polling(account.address);
-        }, 4000);
-        return true;
-      }
-      */
       window.Vault74.warn('No Web3 provider found. Looking again soon.');
       return false;
     };

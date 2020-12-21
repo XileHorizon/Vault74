@@ -1,7 +1,7 @@
 import * as DwellerID from '@/contracts/interfaces/DwellerID.json';
 import Ethereum from '@/classes/Ethereum';
 
-const ethereum = new Ethereum('user-provided');
+const ethereum = new Ethereum('window');
 // useful methods to interact with the DwellerID contract
 export default {
   /** @function
@@ -12,13 +12,9 @@ export default {
   getContract(address = false) {
     let contract = null;
     if (address) {
-      contract = window.web3 ?
-        new window.web3.eth.Contract(DwellerID.abi, address) :
-        ethereum.getContract(DwellerID.abi, address);
+      contract = ethereum.getContract(DwellerID.abi, address);
     } else {
-      contract = window.web3 ?
-        new window.web3.eth.Contract(DwellerID.abi) :
-        ethereum.getContract(DwellerID.abi);
+      contract = ethereum.getContract(DwellerID.abi);
     }
     contract.options.data = DwellerID.data.bytecode.object;
     return contract;

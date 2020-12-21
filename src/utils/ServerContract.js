@@ -10,16 +10,7 @@ export default {
    * @returns contract instance ready for method execution
    */
   getContract(address = false) {
-    let contract = null;
-    if (address) {
-      contract = window.web3 ?
-        new window.web3.eth.Contract(Server.abi, address) :
-        ethereum.getContract(Server.abi, address);
-    } else {
-      contract = window.web3 ?
-        new window.web3.eth.Contract(Server.abi) :
-        ethereum.getContract(Server.abi);
-    }
+    let contract = ethereum.getContract(Server.abi, address);
     contract.options.data = Server.data.bytecode.object;
     return contract;
   },

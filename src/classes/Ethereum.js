@@ -11,8 +11,8 @@ export default class Ethereum {
    */
   constructor(web3Provider) {
     this.netConfig = config.network;
-    if (window.ethereum) {
-      this.pollBindWeb3();
+    if (web3Provider === 'window') {
+      this.web3 = new Web3(window.ethereum);
     } else {
       this.web3 = new Web3(web3Provider === 'user-provided' ? this.fetchProvider() : Web3.givenProvider);
     }
@@ -26,8 +26,8 @@ export default class Ethereum {
    * @name pollBindWeb3
    */
   pollBindWeb3() {
-    if (window.web3) {
-      this.web3 = window.web3;
+    if (window.ethereum) {
+      this.web3 = new Web3(window.ethereum);
     } else {
       setTimeout(() => {
         this.pollBindWeb3();
@@ -70,8 +70,9 @@ export default class Ethereum {
    * @argument abi abstract interface for the contract
    * @argument address address of the contract on chain
    */
-  getContract(abi, address) {
-    return this.web3.eth.Contract(abi, address);
+  getContract(abi, address = null) {
+    return (address) ? new this.web3.eth.Contract(abi, address) :
+      new this.web3.eth.Contract(abi);
   }
 
   getAccount() {

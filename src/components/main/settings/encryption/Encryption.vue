@@ -28,7 +28,7 @@ export default {
   name: 'Encryption',
   data() {
     return {
-      key: new Key(window.web3),
+      key: new Key(window.v74Ethereum),
     };
   },
 };
