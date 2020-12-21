@@ -7,12 +7,13 @@
       v-model="showCropper"
       :value="showCropper"/>
     <p class="label">Change Photo</p>
-    <button class="button is-primary is-small" v-on:click="toggleCropper">Upload Profile Picture</button>
-    <br>
-    <br>
-    <button class="button is-primary is-small change-photo" :disabled="!ipfsHash" v-on:click="changePhoto">Save Changes</button>
+    <button v-if="!ipfsHash" class="button is-primary is-small" v-on:click="toggleCropper">Upload Profile Picture</button>
+    <p v-if="ipfsHash">
+      <i class="fa fa-circle-notch fa-pulse"></i> Please confirm transaction...  
+    </p>    
     <div style="clear: both;"></div>
     <br>
+
     <p v-if="error" class="red">{{error}}</p>
   </div>
 </template>
@@ -35,6 +36,9 @@ export default {
       ipfsHash: false,
       showCropper: false,
     };
+  },
+  mounted() {
+    this.toggleCropper();
   },
   methods: {
     dataURItoBlob(dataURI) {
@@ -95,6 +99,7 @@ export default {
       const ipfsResponse = await window.ipfs.add(file);
       this.$store.commit('setStatus', 'File uploaded to IPFS');
       this.ipfsHash = ipfsResponse;
+      this.changePhoto();
     },
   },
 };

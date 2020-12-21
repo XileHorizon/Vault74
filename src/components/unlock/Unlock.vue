@@ -92,7 +92,7 @@ export default {
   },
   mounted() {
     if (localStorage.getItem('v74.pin')) {
-      window.v74pin = this.pin;
+      window.v74pin = localStorage.getItem('v74.pin');
       this.decrypted();
     }
   },

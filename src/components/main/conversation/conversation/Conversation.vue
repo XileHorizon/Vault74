@@ -4,7 +4,7 @@
       <i class="fas fa-chevron-down"></i>
     </div>
     <div 
-      id="convorsation"
+      id="conversation"
       :class="`${(mediaOpen) ? 'media-open' : 'media-closed'} ${(voice) ? 'media-voice' : ''}`"
       ref="chat"
       :key="`${$store.state.activeAccount}::${$store.state.activeChat}`"
@@ -20,15 +20,15 @@
 </template>
 
 <!--
-  Convorsation.vue
-  This component houses the current active convorsation
+  conversation.vue
+  This component houses the current active conversation
 -->
 <script>
-import MessageBody from '@/components/main/convorsation/message/messagebody/MessageBody';
+import MessageBody from '@/components/main/conversation/message/messagebody/MessageBody';
 import Divider from '@/components/common/Divider';
 
 export default {
-  name: 'Convorsation',
+  name: 'Conversation',
   props: [
     'messages',
     'sendMessage',
@@ -108,7 +108,7 @@ export default {
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-    #convorsation {
+    #conversation {
       position: absolute;
       top: 3rem;
       left: 0;

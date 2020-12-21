@@ -58,7 +58,7 @@ module.exports = {
         ],
       },
     },
-    heartbeat_timeout: 5000,
+    heartbeat_timeout: 7000,
     check_heartbeat: 500,
     timeout: 500,
     reconnect: 3000,

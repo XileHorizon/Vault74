@@ -8,7 +8,7 @@
 <script>
 import debounce from 'debounce';
 
-import data from '@/components/main/convorsation/chatbar/emojidata.json';
+import data from '@/components/main/conversation/chatbar/emojidata.json';
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast';
 import MiniPayment from '@/components/common/payments/minipayment/MiniPayment';
 import 'emoji-mart-vue-fast/css/emoji-mart.css';

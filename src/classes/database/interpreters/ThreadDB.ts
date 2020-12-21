@@ -143,7 +143,6 @@ export class ThreadDB {
           data[data.length - 1].data,
           this.creds.pass,
         );
-
         const parsedData = JSON.parse(decryptedData);
         resolve(parsedData);
       } else {

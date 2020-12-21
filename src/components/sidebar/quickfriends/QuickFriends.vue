@@ -14,9 +14,12 @@
     </div>
     <div class="modal-card-body">
       <div class="friends-list">
-        <div v-if="!friends.length" style="text-align: center">
+        <div v-if="!this.$store.state.friends.length" style="text-align: center">
           <span class="label">You haven't added any friends yet.</span>
           <span>Add some friends to chat.</span>
+        </div>
+        <div v-if="this.$store.state.friends.length && !friends.length">
+          <span class="label">No results found.</span>
         </div>
         <div v-for="friend in friends" class="friend" :key="friend.address">
           <div class="columns">

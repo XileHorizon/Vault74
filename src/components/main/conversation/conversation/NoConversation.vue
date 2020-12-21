@@ -1,21 +1,21 @@
 <template>
     <div 
-      id="convorsation"
+      id="conversation"
       :class="`${(mediaOpen) ? 'media-open' : 'media-closed'} ${(voice) ? 'media-voice' : ''}`"
       ref="chat">
         <hr class="divider">
-        <h2 class="heading">It's awefully quiet</h2>
-        <span>Say something and get the convorsation started.</span>
+        <h2 class="heading">It's awfully quiet</h2>
+        <span>Say something and get the conversation started.</span>
     </div>
 </template>
 
 <!--
-  NoConvorsation.vue
+  Noconversation.vue
   This component is shown if users haven't chatted yet.
 -->
 <script>
 export default {
-  name: 'NoConvorsation',
+  name: 'NoConversation',
   props: [
     'mediaOpen',
     'voice',
@@ -25,7 +25,7 @@ export default {
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-    #convorsation {
+    #conversation {
       position: absolute;
       top: 3rem;
       left: 0;

@@ -2,15 +2,15 @@
 
 <script>
   import CircleIcon from '@/components/common/CircleIcon';
-  import Link from '@/components/main/convorsation/message/embeds/Link';
-  import YouTube from '@/components/main/convorsation/message/embeds/YouTube';
-  import Payment from '@/components/main/convorsation/message/embeds/Payment';
-  import Call from '@/components/main/convorsation/message/embeds/Call';
-  import ImageViewer from '@/components/main/convorsation/message/embeds/ImageViewer';
-  import File from '@/components/main/convorsation/message/embeds/File';
-  import Audio from '@/components/main/convorsation/message/embeds/Audio';
-  import Video from '@/components/main/convorsation/message/embeds/Video';
-  import Address from '@/components/main/convorsation/message/embeds/Address';
+  import Link from '@/components/main/conversation/message/embeds/Link';
+  import YouTube from '@/components/main/conversation/message/embeds/YouTube';
+  import Payment from '@/components/main/conversation/message/embeds/Payment';
+  import Call from '@/components/main/conversation/message/embeds/Call';
+  import ImageViewer from '@/components/main/conversation/message/embeds/ImageViewer';
+  import File from '@/components/main/conversation/message/embeds/File';
+  import Audio from '@/components/main/conversation/message/embeds/Audio';
+  import Video from '@/components/main/conversation/message/embeds/Video';
+  import Address from '@/components/main/conversation/message/embeds/Address';
   import DwellerCachingHelper from '@/classes/DwellerCachingHelper';
   import config from '@/config/config';
 

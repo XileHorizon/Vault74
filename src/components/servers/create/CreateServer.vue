@@ -93,10 +93,38 @@ export default {
         },
         (confirmationNumber, receipt) => {
           this.confirmation = confirmationNumber;
-          // this.finishProfile(receipt);
-          console.log('reciept', receipt);
+          this.finishProfile(receipt);
         },
       );
+    },
+    // Set the dweller id profile picture hash on contract
+    // after do any final tasks we need to do on chain
+    async finishProfile(receipt) {
+      if (!this.ipfsHash) {
+        return;
+      }
+
+      console.log('uploading icon', receipt);
+      /*
+      const serverContract = await Vault74Registry
+        .getServer(this.$store.state.activeAccount);
+
+      let confirms = 0;
+      this.$store.commit('setStatus', 'Transaction created, waiting for confirm');
+      DCUtils.setPhoto(
+        dwellerIDContract,
+        this.$store.state.activeAccount,
+        this.ipfsHash,
+        () => {
+          confirms += 1;
+          this.finished = true;
+          this.$store.commit('setStatus', 'Transaction confirmed');
+          if (confirms >= 2 || !this.customFinalAction) {
+            this.commitEverything(dwellerIDContract);
+          }
+        },
+      );
+      */
     },
   },
 };

@@ -4,11 +4,11 @@
       :toggleMedia="toggleMedia"
       :makeCall="makeCall"/>
     <div :class="`${($store.state.showUser) ? 'main-user-info main-user-info-open' : 'main-user-info'}`">
-      <Convorsation 
+      <Conversation 
         :mediaOpen="$store.state.activeMediaStreamPeer && $store.state.activeChat === $store.state.activeMediaStreamPeer"
         :voice="$store.state.activeMediaStreamPeer && $store.state.activeChat === $store.state.activeMediaStreamPeer && voice"
         v-if="$store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]"/>
-      <NoConvorsation v-else />
+      <NoConversation v-else />
       <VoiceVideo
         v-if="$store.state.activeMediaStreamPeer && $store.state.activeChat === $store.state.activeMediaStreamPeer"
         :mediaOpen="$store.state.activeMediaStreamPeer"

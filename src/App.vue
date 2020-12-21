@@ -59,7 +59,6 @@ export default {
             (peer, type, data) => {
               switch (type) {
                 case 'heartbeat':
-                  console.log('got heartbeat, setting peer to alive', peer);
                   this.$store.commit('peerHealth', [peer, 'alive']);
                   break;
                 case 'dead':
@@ -90,7 +89,9 @@ export default {
               }
             },
           );
-        window.Vault74.Peer2Peer.createChannels(this.$store.state.friends);
+        if (this.$store.state.friends) {
+          window.Vault74.Peer2Peer.createChannels(this.$store.state.friends);
+        }
         this.peerInit = true;
         return;
       }

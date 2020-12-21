@@ -1,21 +1,21 @@
 <template src="./Main.html"></template>
 
 <script>
-import InfoBar from '@/components/main/convorsation/infobar/InfoBar';
-import Chatbar from '@/components/main/convorsation/chatbar/Chatbar';
-import VoiceVideo from '@/components/main/convorsation/voicevideo/VoiceVideo';
-import Convorsation from '@/components/main/convorsation/convorsation/Convorsation';
-import NoConvorsation from '@/components/main/convorsation/convorsation/NoConvorsation';
-import UserInfo from '@/components/main/convorsation/userinfo/UserInfo';
+import InfoBar from '@/components/main/conversation/infobar/InfoBar';
+import Chatbar from '@/components/main/conversation/chatbar/Chatbar';
+import VoiceVideo from '@/components/main/conversation/voicevideo/VoiceVideo';
+import Conversation from '@/components/main/conversation/conversation/Conversation';
+import NoConversation from '@/components/main/conversation/conversation/NoConversation';
+import UserInfo from '@/components/main/conversation/userinfo/UserInfo';
 
 export default {
   name: 'Main',
   components: {
     InfoBar,
     Chatbar,
-    Convorsation,
+    Conversation,
     VoiceVideo,
-    NoConvorsation,
+    NoConversation,
     UserInfo,
   },
   methods: {

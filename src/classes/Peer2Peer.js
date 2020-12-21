@@ -40,19 +40,22 @@ export default class Peer2Peer {
       this.ICEEstablished = true;
       this.watcher(peerId, 'alive', true);
       window.Vault74.debug('Connected to ICE service');
-      // Connect to peers and retry connections every 3 seconds.
+      // Attempt connection to peers
       this.connectToPeers();
       // A new client has made a connection to us
       peer.on('connection', (conn) => {
         const remotePeerId = conn.peer;
-        const peerConntion = this.channels[`${this.peerId}::${remotePeerId}`];
+        // Fetch previous connection, or make a new one if
+        // we have not made a connection to this peer yet
+        const peerConnection = this.createDataChannel(remotePeerId);
+
         conn.on('open', () => {
           // We got a message from a peer, let's make sure we're
           // connected to them, this way we can return messages
-          peerConntion.ensureAlive();
+          peerConnection.ensureAlive();
           setTimeout(() => {
-            if (peerConntion) {
-              peerConntion.bindGateway(conn);
+            if (peerConnection) {
+              peerConnection.bindGateway(conn);
               this.peerTracker(remotePeerId);
             }
           }, 500);
@@ -148,13 +151,15 @@ export default class Peer2Peer {
    * @argument peerId peer ID to create the channel for
    */
   createDataChannel(peerId) {
-    this.channels[`${this.peerId}::${peerId}`] = new PeerConnection(
-      this.peer,
-      peerId,
-      (type, data) => {
-        this.internalWatcher(peerId, type, data);
-      },
-    );
+    if (!this.channels[`${this.peerId}::${peerId}`]) {
+      this.channels[`${this.peerId}::${peerId}`] = new PeerConnection(
+        this.peer,
+        peerId,
+        (type, data) => {
+          this.internalWatcher(peerId, type, data);
+        },
+      );
+    }
     return this.channels[`${this.peerId}::${peerId}`];
   }
 

@@ -14,7 +14,7 @@ export default class MessageBroker {
 
   /** @function
    * @name addToConvo
-   * Add a new message to the convorsation object
+   * Add a new message to the conversation object
    * @argument id id of the remote chatter
    * @argument message message object containing the type of message and content
    */
@@ -51,11 +51,11 @@ export default class MessageBroker {
   }
 
   /** @function
-   * @name getConvorsationGroup
-   * Get a object of the current convorsation
+   * @name getConversationGroup
+   * Get a object of the current conversation
    * @argument id id of the remote chatter to get the group from
    */
-  getConvorsationGroup(id) {
+  getConversationGroup(id) {
     return this.storage[id];
   }
 
