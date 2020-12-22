@@ -2,7 +2,6 @@ export default class PeerDataHandler {
   store: any;
   lexicon: any;
   constructor(store: any) {
-    console.log('store', store);
     this.store = store;
 
     this.lexicon = {
