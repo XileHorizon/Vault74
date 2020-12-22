@@ -6,7 +6,14 @@
     <i class="fa fa-trash"></i>
   </div>
   <div class="c-message-content">
-      <div class="c-message" v-for="message in messages">
+      <MessageContext
+        v-if="showContext"
+        :message="clickedMessage"
+        :dweller="dweller"
+        :x="contextCoordsX"
+        :y="contextCoordsY"
+        :close="hideContext" />
+      <div class="c-message" v-for="message in messages" @contextmenu="handleContext" :data-id="message.id">
           <p v-if="message.type == 'call-status'">
             <i class="fas fa-phone"></i> {{dweller.name}} started a call...
           </p>

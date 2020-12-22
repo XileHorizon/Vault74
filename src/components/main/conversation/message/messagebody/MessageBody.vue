@@ -2,6 +2,8 @@
 
 <script>
   import CircleIcon from '@/components/common/CircleIcon';
+  import MessageContext from '@/components/context/MessageContext';
+  // Embeds
   import Link from '@/components/main/conversation/message/embeds/Link';
   import YouTube from '@/components/main/conversation/message/embeds/YouTube';
   import Payment from '@/components/main/conversation/message/embeds/Payment';
@@ -24,6 +26,8 @@
     props: ['messages', 'scrollToEnd'],
     components: {
       CircleIcon,
+      MessageContext,
+      // Embeds
       Link,
       YouTube,
       Payment,
@@ -42,9 +46,26 @@
         ),
         dweller: false,
         isEditable: false,
+        showContext: false,
+        contextCoordsX: 0,
+        contextCoordsY: 0,
+        clickedMessage: null,
       };
     },
     methods: {
+      handleContext(event) {
+        event.preventDefault();
+        const msgId = event.target.parentNode.parentNode.getAttribute('data-id');
+        if (msgId) {
+          [this.clickedMessage] = this.messages.filter(m => m.id === msgId);
+          this.contextCoordsX = event.clientX;
+          this.contextCoordsY = event.clientY;
+          this.showContext = true;
+        }
+      },
+      hideContext() {
+        this.showContext = false;
+      },
       /** @method
        * Formats a date using dayjs to a human readable string
        * @name formattedDate

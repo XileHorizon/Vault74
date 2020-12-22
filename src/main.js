@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
 import VueClipboard from 'vue-clipboard2';
+import vClickOutside from 'v-click-outside';
 import config from '@/config/config';
 import Database from '@/classes/database/Database.ts';
 
@@ -9,7 +10,9 @@ import router from './router';
 import store from './store';
 
 Vue.config.productionTip = false;
+
 Vue.use(VueClipboard);
+Vue.use(vClickOutside);
 
 sync(store, router);
 

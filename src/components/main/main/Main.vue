@@ -54,7 +54,8 @@ export default {
           'message',
           {
             type: type || 'text',
-            data: encodeURI(data),
+            data: type === 'text' ?
+              encodeURI(data) : data,
           },
         );
       }
@@ -63,7 +64,8 @@ export default {
         'message',
         {
           type: type || 'text',
-          data: encodeURI(data),
+          data: type === 'text' ?
+            encodeURI(data) : data,
         },
       );
     },

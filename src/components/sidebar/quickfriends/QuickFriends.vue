@@ -162,7 +162,9 @@ export default {
     width: 300px;
     top: 13.5rem;
     right: -285px;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.1);
   }
+  
   .modal-card-body {
     padding: 0.5rem 1rem 1rem 1rem;
   }

@@ -61,6 +61,7 @@ export default {
      */
     async sendFileMessage() {
       if (this.ipfsHash) {
+        this.close();
         this.fileClass = new FileC(
           `${config.ipfs.browser}${this.ipfsHash}`,
           this.ipfsHash,
@@ -74,7 +75,6 @@ export default {
         await ipfsUtils.appendFileCache(this.fileClass.getObject());
         uploadAudio.play();
         this.$store.commit('addRecentFile');
-        this.close();
       }
     },
     /** @method

@@ -20,8 +20,10 @@ import config from '@/config/config';
 import Peer2Peer from '@/classes/Peer2Peer';
 import MessageBroker from '@/classes/MessageBroker';
 import Unlock from '@/components/unlock/Unlock';
+import PeerDataHandler from '@/classes/PeerDataHandler.ts';
 
-const newMessageSound = new Audio(`${config.ipfs.browser}${config.sounds.newMessage}`);
+// const newMessageSound = new Audio(`${config.ipfs.browser}${config.sounds.newMessage}`);
+
 
 export default {
   name: 'app',
@@ -32,6 +34,7 @@ export default {
     return {
       decrypted: false,
       showWarning: !(localStorage.getItem('alpha-warning') === 'false'),
+      peerDataHandler: null,
     };
   },
   methods: {
@@ -43,6 +46,19 @@ export default {
       localStorage.setItem('alpha-warning', false);
       this.showWarning = false;
     },
+    initP2P() {
+      window.Vault74.Peer2Peer = window.Vault74.Peer2Peer ||
+        new Peer2Peer(
+          this.$store.state.activeAccount,
+          (peer, type, data) => {
+            this.peerDataHandler.dispatch(peer, type, data);
+          },
+        );
+      if (this.$store.state.friends) {
+        window.Vault74.Peer2Peer.createChannels(this.$store.state.friends);
+      }
+      this.peerInit = true;
+    },
     checkAccount() {
       if (this.$store.state.activeAccount) {
         window.Vault74.messageBroker = new MessageBroker(
@@ -53,52 +69,14 @@ export default {
         );
         window.Vault74.warn('No account found yet, rechecking soon.');
         // Attach to peers
-        window.Vault74.Peer2Peer = window.Vault74.Peer2Peer ||
-          new Peer2Peer(
-            this.$store.state.activeAccount,
-            (peer, type, data) => {
-              switch (type) {
-                case 'heartbeat':
-                  this.$store.commit('peerHealth', [peer, 'alive']);
-                  break;
-                case 'dead':
-                  this.$store.commit('peerHealth', [peer, 'dead']);
-                  break;
-                case 'alive':
-                  this.$store.commit('ICEConnected', true);
-                  break;
-                case 'message':
-                  window.Vault74.messageBroker.recievedMessage(
-                    peer,
-                    Date.now(),
-                    type,
-                    JSON.parse(data),
-                  );
-                  newMessageSound.play();
-                  break;
-                case 'typing-notice':
-                  this.$store.commit('userTyping', [peer, JSON.parse(data).data]);
-                  break;
-                case 'call-status':
-                  if (JSON.parse(data).data === 'ended') {
-                    window.Vault74.Peer2Peer.hangup();
-                  }
-                  break;
-                default:
-                  break;
-              }
-            },
-          );
-        if (this.$store.state.friends) {
-          window.Vault74.Peer2Peer.createChannels(this.$store.state.friends);
-        }
-        this.peerInit = true;
+        this.initP2P();
         return;
       }
       setTimeout(this.checkAccount, config.peer.timeout);
     },
   },
   mounted() {
+    this.peerDataHandler = new PeerDataHandler(this.$store);
     this.$store.commit('ICEConnected', false);
     this.$store.commit('dwellerAddress', false);
     this.$store.commit('activeCaller', false);

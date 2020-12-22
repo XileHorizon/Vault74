@@ -10,7 +10,7 @@ export default {
    * @returns contract instance ready for method execution
    */
   getContract(address = false) {
-    let contract = ethereum.getContract(Server.abi, address);
+    const contract = ethereum.getContract(Server.abi, address);
     contract.options.data = Server.data.bytecode.object;
     return contract;
   },
