@@ -1,7 +1,7 @@
 {
-  "name": "VueJS Starterkit",
-  "short_name": "Vue.js PWA",
-  "description": "A webpack-based Vue.js starter-kit project for building PWAs.",
+  "name": "Vault74",
+  "short_name": "Vault74",
+  "description": "A decentralized chat & filesharing application",
   "icons": [
     {
       "src": "/static/img/icons/android-chrome-192x192.png",
@@ -16,8 +16,8 @@
   ],
   "start_url": "/?utm_source=web_app_manifest",
   "display": "standalone",
-  "background_color": "#fff",
-  "theme_color": "#4DBA87",
+  "background_color": "#16161e",
+  "theme_color": "#16161e",
   "orientation": "portrait-primary",
   "prefer_related_applications": false
 }
