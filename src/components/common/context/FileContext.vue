@@ -4,6 +4,8 @@
     <hr class="divider">
     <ul>
       <li
+        v-on:click="openFile">Open File</li>
+      <li
         v-clipboard:copy="file.url"
         v-on:click="closeSoon">Copy Link</li>
     </ul>
@@ -33,6 +35,10 @@ export default {
     };
   },
   methods: {
+    openFile() {
+      window.open(this.file.url);
+      this.closeSoon();
+    },
     closeSoon() {
       setTimeout(() => {
         this.close();
@@ -85,6 +91,7 @@ export default {
       margin: 0;
       padding: 0.25rem;
       font-size: 10pt;
+      border-radius: 2px;
     }
   }
 </style>

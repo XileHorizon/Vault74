@@ -1,32 +1,23 @@
 <template>
-  <div id="context" ref="menu" v-click-outside="close">
-    <span class="label">MESSAGE ACTIONS</span>
+  <div id="context" ref="contextMenu" v-click-outside="close">
+    <span class="label">ACTIONS</span>
     <hr class="divider">
     <ul>
       <li
-        v-clipboard:copy="message.payload.data"
-        v-on:click="closeSoon"
-        v-if="isTextMessage()">Copy Text</li>
-      <li v-if="isTextMessage()">Edit Message</li>
-      <li
-        v-if="isTextMessage()">Speak Message</li>
+        v-on:click="reload">Reload</li>
     </ul>
     <hr class="divider">
     <ul>
-      <li
-        v-on:click="closeSoon"
-        v-clipboard:copy="message.id">Copy ID</li>
+      <li>Open Devtools</li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MessageContext',
+  name: 'Context',
   props: [
-    'message',
     'close',
-    'dweller',
     'x', 'y',
   ],
   data() {
@@ -38,30 +29,29 @@ export default {
     };
   },
   methods: {
+    reload() {
+      window.location.reload();
+      this.closeSoon();
+    },
     closeSoon() {
       setTimeout(() => {
         this.close();
       }, 10);
     },
-    isTextMessage() {
-      return this.message &&
-        this.message.payload.data &&
-        typeof this.message.payload.data === 'string';
-    },
   },
   watch: {
     /* eslint-disable */
     x: function (newVal) {
-      this.$refs.menu.style.left = `${newVal}px`;
+      this.$refs.contextMenu.style.left = `${newVal}px`;
     },
     y: function (newVal) {
-      this.$refs.menu.style.top = `${newVal}px`;
+      this.$refs.contextMenu.style.top = `${newVal}px`;
     },
     /* eslint-enable */
   },
   mounted() {
-    this.$refs.menu.style.top = `${this.y}px`;
-    this.$refs.menu.style.left = `${this.x}px`;
+    this.$refs.contextMenu.style.top = `${this.y}px`;
+    this.$refs.contextMenu.style.left = `${this.x}px`;
   },
 };
 </script>
@@ -82,7 +72,7 @@ export default {
     top: 0;
     left: 0;
     background: black;
-    z-index: 100;
+    z-index: 10;
     width: 170px;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;

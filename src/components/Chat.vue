@@ -1,5 +1,11 @@
 <template>
-  <div id="wrapper">
+<!--@contextmenu="openContext"-->
+  <div id="wrapper" >
+    <Context
+      v-if="showContext"
+      :x="contextCoordsX"
+      :y="contextCoordsY"
+      :close="closeContext" />
     <Web3 />
     <Error />
     <Database
@@ -52,8 +58,6 @@
           <span v-else>
             Connecting...
           </span>
-          <span class="spacer"> </span> 
-          <i :class="`fas fa-moon ${darkmode ? 'green' : ''}`" v-on:click="toggleDarkMode"></i>
         </p>
       </div>
     </div>
@@ -75,6 +79,7 @@ import Database from '@/components/database/Database';
 import Loading from '@/components/common/Loading';
 import Calling from '@/components/main/popups/calling/Calling';
 import CreateServer from '@/components/servers/create/CreateServer';
+import Context from '@/components/common/context/Context';
 
 import IPFS from 'ipfs-core';
 
@@ -94,6 +99,7 @@ export default {
     ScreenCapture,
     Calling,
     CreateServer,
+    Context,
   },
   data() {
     return {
@@ -104,10 +110,21 @@ export default {
       network: '',
       account: 0x0,
       blockNumber: 0,
-      darkmode: localStorage.getItem('dark-theme'),
+      showContext: false,
+      contextCoordsX: 0,
+      contextCoordsY: 0,
     };
   },
   methods: {
+    openContext(event) {
+      event.preventDefault();
+      this.contextCoordsX = event.clientX;
+      this.contextCoordsY = event.clientY;
+      this.showContext = true;
+    },
+    closeContext() {
+      this.showContext = false;
+    },
     closeCreateServer() {
       this.showCreateServer = false;
     },
@@ -117,9 +134,6 @@ export default {
     toggleSettings() {
       this.settingsOpen = !this.settingsOpen;
       if (this.settingsOpen) this.$store.commit('changeRoute', 'main');
-    },
-    toggleDarkMode() {
-      this.$store.commit('toggleDarkMode');
     },
   },
   async mounted() {
