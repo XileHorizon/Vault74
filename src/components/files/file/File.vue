@@ -9,6 +9,7 @@ export default {
   props: [
     'file',
     'updateParent',
+    'index',
   ],
   data() {
     return {

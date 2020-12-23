@@ -2,7 +2,7 @@
 
 <script>
   import CircleIcon from '@/components/common/CircleIcon';
-  import MessageContext from '@/components/context/MessageContext';
+  import MessageContext from '@/components/common/context/MessageContext';
   // Embeds
   import Link from '@/components/main/conversation/message/embeds/Link';
   import YouTube from '@/components/main/conversation/message/embeds/YouTube';

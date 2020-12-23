@@ -19,9 +19,17 @@
         <p v-if="loading" class="label">
           <i class="fa fa-circle-notch fa-pulse"></i> &nbsp; Loading files...
         </p>
-        <p v-for="file in recentFiles" v-bind:key="file.hash">
-          <File :file="file" :updateParent="updateParent"/>
-        </p>
+        <FileContext
+          v-if="showContext"
+          :file="activeFile"
+          :x="contextCoordsX"
+          :y="contextCoordsY"
+          :close="hideContext" />
+        <div v-for="(file, index) in recentFiles" v-bind:key="file.hash">
+          <p @contextmenu="fileContext">
+            <File :file="file" :updateParent="updateParent" :index="index" />
+          </p>
+        </div>
         <div style="clear:both"></div>
       </div>
     </article>
@@ -33,6 +41,7 @@
 <script>
 import File from '@/components/files/file/File';
 import IPFSUtils from '@/classes/IPFSUtils';
+import FileContext from '@/components/common/context/FileContext';
 import FileUploadInline from '@/components/common/fileuploadinline/FileUploadInline';
 
 export default {
@@ -40,14 +49,33 @@ export default {
   components: {
     FileUploadInline,
     File,
+    FileContext,
   },
   data() {
     return {
       loading: false,
       recentFiles: [],
+      showContext: false,
+      contextCoordsX: 0,
+      contextCoordsY: 0,
+      activeFile: null,
     };
   },
   methods: {
+    fileContext(event) {
+      event.preventDefault();
+      const fileIndex = event.target.getAttribute('data-id');
+      if (fileIndex) {
+        this.activeFile = this.recentFiles[fileIndex];
+        this.contextCoordsX = event.clientX;
+        this.contextCoordsY = event.clientY;
+        this.showContext = true;
+      }
+    },
+    hideContext() {
+      this.showContext = false;
+      this.activeFile = null;
+    },
     /** @method
      * Updates the parent with new files
      * @name updateParent
