@@ -170,6 +170,7 @@ export default class Peer2Peer {
    * @returns returns the remote peer data channel
    */
   getDataChannel(peerId) {
+    this.createDataChannel(peerId);
     return this.channels[`${this.peerId}::${peerId}`];
   }
 
@@ -200,7 +201,7 @@ export default class Peer2Peer {
    * @argument peerId the if of the peer to ping.
    */
   ping(peerId) {
-    const peerConntion = this.channels[`${this.peerId}::${peerId}`];
+    const peerConntion = this.getDataChannel(peerId);
     peerConntion.send(messageFormatter('ping', Date.now()));
   }
 
@@ -212,7 +213,7 @@ export default class Peer2Peer {
    * @argument data the payload to send
    */
   send(peerId, type, data) {
-    const peerConntion = this.channels[`${this.peerId}::${peerId}`];
+    const peerConntion = this.getDataChannel(peerId);
     peerConntion.send(messageFormatter(type, data));
   }
 }

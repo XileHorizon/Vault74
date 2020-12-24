@@ -1,3 +1,8 @@
+// @ts-ignore
+import config from '@/config/config';
+
+const newMessageSound = new Audio(`${config.ipfs.browser}${config.sounds.newMessage}`);
+
 export default class PeerDataHandler {
   store: any;
   lexicon: any;
@@ -28,6 +33,17 @@ export default class PeerDataHandler {
       type,
       JSON.parse(data),
     );
+    newMessageSound.play();
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        new Notification(
+          peer,
+          {
+            body: JSON.parse(data).data.data,
+            icon: '@/assets/images/logo_color.png',
+          });
+      }
+    });
   }
   
   heartbeat(peer: string, _type: string, _data: string, store: any) {

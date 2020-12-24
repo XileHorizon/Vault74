@@ -1,7 +1,9 @@
 <template>
     <div id="loading">
         <div :class="`loading-dispaly ${($store.state.dwellerAddress === '0x0000000000000000000000000000000000000000') ? 'showing-content' : ''}`">
-            <p id="logo">Vault74</p>
+            <p id="logo">
+                <img src="@/assets/images/logo_color.png" width="120"/>
+            </p>
             <div class="red" v-if="$store.state.criticalError">
                 <i class="fas fa-skull"></i> Failure to load: {{$store.state.criticalError}} <br /><br />
                 <button class="button is-danger is-small" v-on:click="reload">Retry?</button>

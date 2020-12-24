@@ -4,7 +4,7 @@
     <hr class="divider">
     <ul>
       <li
-        v-clipboard:copy="message.payload.data"
+        v-clipboard:copy="getDecoded(message.payload.data)"
         v-on:click="closeSoon"
         v-if="isTextMessage()">Copy Text</li>
       <li v-if="isTextMessage()">Edit Message</li>
@@ -38,6 +38,9 @@ export default {
     };
   },
   methods: {
+    getDecoded(msg) {
+      return decodeURI(msg);
+    },
     closeSoon() {
       setTimeout(() => {
         this.close();
