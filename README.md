@@ -45,6 +45,24 @@ Example. if your theme is named `cyan.less` you'd add the following to Personali
 
 In `App.vue` make sure to add your class to the bottom of the file with the same name as the vaule of your `<select>` option.
 
+```less
+.dark {
+  @import "assets/styles/true_dark.less";
+}
+.ice {
+  @import "assets/styles/ice.less";
+}
+.tokyo {
+  @import "assets/styles/tokyo.less";
+}
+.tokyo-lights {
+  @import "assets/styles/tokyo_lights.less";
+}
+/* Your Theme */
+.cyan {
+  @import "assets/styles/cyan.less";
+}
+```
 Save your changes and select your theme under settings. Please do not set your theme to default before submitting a PR. Please be sure to check all aspects of the app for concistancy before uploading your theme. Please make sure to use the variables at the top of the theme as opposed to manually editing everything.
 
 ## Contributing Rules
