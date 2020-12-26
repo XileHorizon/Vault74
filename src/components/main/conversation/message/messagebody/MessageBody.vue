@@ -7,6 +7,7 @@
   import Link from '@/components/main/conversation/message/embeds/Link';
   import YouTube from '@/components/main/conversation/message/embeds/YouTube';
   import Spotify from '@/components/main/conversation/message/embeds/Spotify';
+  import SpotifyTrack from '@/components/main/conversation/message/embeds/SpotifyTrack';
   import Payment from '@/components/main/conversation/message/embeds/Payment';
   import Call from '@/components/main/conversation/message/embeds/Call';
   import ImageViewer from '@/components/main/conversation/message/embeds/ImageViewer';
@@ -33,6 +34,7 @@
       // Content Services
       YouTube,
       Spotify,
+      SpotifyTrack,
       // Internal
       Payment,
       Call,
@@ -101,15 +103,23 @@
         return message.match(YTRegex);
       },
       /** @method
-       * Check a message for a valid YouTube URL
-       * @name parseYoutubeLink
+       * Check a message for a valid Spotify URL
+       * @name parseSpotifyLink
        * @argument message string to check for links in
-       * @returns boolean of wether or not a YouTube link is found
+       * @returns boolean of wether or not a Spotify link is found
        */
       parseSpotifyLink(message) {
         if (typeof message !== 'string') return false;
+        // TODO: I suck at regex, this needs to be a lot more enclusive for songs, artists, etc
         // eslint-disable-next-line
         const SpotifyURL = /https:\/\/open.spotify.com\/playlist\/\S+/;
+        return message.match(SpotifyURL);
+      },
+      parseSpotifyTrack(message) {
+        if (typeof message !== 'string') return false;
+        // TODO: I suck at regex, this needs to be a lot more enclusive for songs, artists, etc
+        // eslint-disable-next-line
+        const SpotifyURL = /https:\/\/open.spotify.com\/track\/\S+/;
         return message.match(SpotifyURL);
       },
       /** @method

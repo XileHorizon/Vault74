@@ -5,7 +5,7 @@
         <div class="content">
           <p>
             <br>
-            <iframe :src="embedify(link)" width="373" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <iframe :src="embedify(link)" width="373" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
           </p>
         </div>
       </div>
@@ -16,13 +16,13 @@
 <script>
 
 export default {
-  name: 'Spotify',
+  name: 'SpotifyTrack',
   props: [
     'link',
   ],
   methods: {
     embedify(link) {
-      return link[0].replace('/playlist/', '/embed/playlist/');
+      return link[0].replace('/track/', '/embed/track/');
     },
   },
 };
