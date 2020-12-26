@@ -63,7 +63,6 @@ export default class Peer2Peer {
       });
       peer.on('disconnected', () => {
         peer.reconnect();
-        this.connectToPeers();
       });
     });
     peer.on('error', (err) => {

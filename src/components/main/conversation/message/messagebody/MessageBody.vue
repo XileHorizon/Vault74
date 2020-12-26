@@ -6,6 +6,7 @@
   // Embeds
   import Link from '@/components/main/conversation/message/embeds/Link';
   import YouTube from '@/components/main/conversation/message/embeds/YouTube';
+  import Spotify from '@/components/main/conversation/message/embeds/Spotify';
   import Payment from '@/components/main/conversation/message/embeds/Payment';
   import Call from '@/components/main/conversation/message/embeds/Call';
   import ImageViewer from '@/components/main/conversation/message/embeds/ImageViewer';
@@ -29,7 +30,10 @@
       MessageContext,
       // Embeds
       Link,
+      // Content Services
       YouTube,
+      Spotify,
+      // Internal
       Payment,
       Call,
       ImageViewer,
@@ -95,6 +99,18 @@
         // eslint-disable-next-line
         const YTRegex = /((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?/;
         return message.match(YTRegex);
+      },
+      /** @method
+       * Check a message for a valid YouTube URL
+       * @name parseYoutubeLink
+       * @argument message string to check for links in
+       * @returns boolean of wether or not a YouTube link is found
+       */
+      parseSpotifyLink(message) {
+        if (typeof message !== 'string') return false;
+        // eslint-disable-next-line
+        const SpotifyURL = /https:\/\/open.spotify.com\/playlist\/\S+/;
+        return message.match(SpotifyURL);
       },
       /** @method
        * Check a message for a valid Ethereum address

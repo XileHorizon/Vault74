@@ -26,6 +26,9 @@
           <div v-if="parseYoutubeLink(message.payload.data)">
             <YouTube :link="parseYoutubeLink(message.payload.data)"/>
           </div>
+          <div v-if="parseSpotifyLink(message.payload.data)">
+            <Spotify :link="parseSpotifyLink(message.payload.data)"/>
+          </div>
           <div v-if="parseEthAddress(message.payload.data)">
             <Address :address="parseEthAddress(message.payload.data)"/>
           </div>

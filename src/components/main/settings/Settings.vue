@@ -162,12 +162,14 @@ export default {
     }
     .settings-left {
       padding: 3rem;
+      padding-top: 1rem;
       background: #fff;
       height: 100%;
     }
     .settings-right {
       padding: 3rem;
       padding-right: 3rem;
+      padding-top: 1rem;
       height: 100%;
       overflow-y: scroll;
     }

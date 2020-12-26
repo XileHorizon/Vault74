@@ -146,6 +146,7 @@ export default {
   .friends-list {
     height: 230px;
     overflow-y: scroll;
+    overflow-x: hidden;
     scrollbar-width: thin;
   }
   .nameholder {
