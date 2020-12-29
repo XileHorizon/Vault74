@@ -3,6 +3,7 @@ import Bucket from './Bucket';
 import Drawer from './Drawer';
 // @ts-ignore
 import { LocalStorage, ThreadDB } from './interpreters';
+import { MessageManager } from './MessageManager';
 import ThreadManager from './ThreadManager';
 
 interface Interface {
@@ -31,6 +32,7 @@ export default class Database {
   availableInterfaces: any[];
   creds: Creds | undefined;
   threadManager: ThreadManager | null;
+  messageManager: MessageManager | null;
 
   /** @constructor
    * Construct a Database
@@ -46,6 +48,7 @@ export default class Database {
       LocalStorage,
     ];
     this.threadManager = null;
+    this.messageManager = null;
     this.creds = undefined;
   }
 
@@ -76,6 +79,9 @@ export default class Database {
         );
         this.threadManager = new ThreadManager(
           'LocalStorage',
+          extras.client,
+        );
+        this.messageManager = new MessageManager(
           extras.client,
         );
         break;

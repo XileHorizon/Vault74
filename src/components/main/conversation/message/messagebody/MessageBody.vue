@@ -5,6 +5,7 @@
   import MessageContext from '@/components/common/context/MessageContext';
   // Embeds
   import Link from '@/components/main/conversation/message/embeds/Link';
+  import OfflineChat from '@/components/main/conversation/message/embeds/OfflineChat';
   import YouTube from '@/components/main/conversation/message/embeds/YouTube';
   import Spotify from '@/components/main/conversation/message/embeds/Spotify';
   import SpotifyTrack from '@/components/main/conversation/message/embeds/SpotifyTrack';
@@ -36,6 +37,7 @@
       Spotify,
       SpotifyTrack,
       // Internal
+      OfflineChat,
       Payment,
       Call,
       ImageViewer,

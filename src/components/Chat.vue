@@ -8,19 +8,23 @@
       :close="closeContext" />
     <Web3 />
     <Error />
-    <Database
-      v-if="$store.state.p2pOnline ||
-            $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000' ||
-            $store.state.dwellerAddress"
-      />
-    <MediaManager v-if="windowBound && $store.state.p2pOnline && $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000'" />
-    <ScreenCapture v-if="windowBound && $store.state.p2pOnline && $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000'" />
-    <Loading
-      v-if="!$store.state.friends ||
-            !$store.state.p2pOnline ||
-            $store.state.dwellerAddress === '0x0000000000000000000000000000000000000000' ||
-            !$store.state.dwellerAddress"
-      />
+    <Database v-if="$store.state.p2pOnline ||
+      $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000' ||
+      $store.state.dwellerAddress"
+    />
+    <MediaManager v-if="windowBound &&
+      $store.state.p2pOnline &&
+      $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000'"
+    />
+    <ScreenCapture v-if="windowBound &&
+      $store.state.p2pOnline &&
+      $store.state.dwellerAddress !== '0x0000000000000000000000000000000000000000'"
+    />
+    <Loading v-if="!$store.state.friends ||
+      !$store.state.p2pOnline ||
+      $store.state.dwellerAddress === '0x0000000000000000000000000000000000000000' ||
+      !$store.state.dwellerAddress"
+    />
     <div v-else>
       <CreateServer v-if="showCreateServer" :close="closeCreateServer"/>
       <Calling :active="$store.state.activeCaller" :callerId="$store.state.activeCaller" />
@@ -41,7 +45,7 @@
       <div class="footer">
         <p>
           <i :class="`fas fa-heartbeat ${($store.state.p2pOnline) ? 'green' : 'red'}`"></i> P2P
-          <span class="spacer"> </span> 
+          <span class="spacer"></span> 
           <i class="fas fa-info-circle"></i>
           {{$store.state.status}}
           <span class="spacer"></span>

@@ -34,6 +34,7 @@ const defaultState = {
   // Friends
   friends: null,
   peerHealth: {},
+  unreads: {},
   // Audio Video
   audioDevice: 'Default Microphone',
   videoDevice: 'Default Webcam',

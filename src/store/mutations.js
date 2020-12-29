@@ -149,6 +149,12 @@ export default {
     // eslint-disable-next-line no-param-reassign
     state.messages = MessageUtils.group(messages);
   },
+  markRead(state, opts) {
+    // eslint-disable-next-line no-param-reassign
+    state.unreads = Object.assign(state.unreads, {
+      [opts.address]: opts.messageID,
+    });
+  },
   connectMediaStream(state, peer) {
     // eslint-disable-next-line no-param-reassign
     state.activeMediaStreamPeer = peer;

@@ -38,6 +38,7 @@
           :friend="$store.state.friends.filter(f => f.address === chat)[0]"
           :active="$store.state.activeChat === chat"
           :key="chat"
+          :unread="!isUnread($store.state.friends.filter(f => f.address === chat)[0].address)"
           :typing="$store.state.typingUsers[chat]"
           :clientId="chat" />
         

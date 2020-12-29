@@ -12,6 +12,13 @@ export default class MessageBroker {
     this.update = update;
   }
 
+  setConvo(id, messages) {
+    const sorted = messages.sort((a, b) => a.at - b.at);
+    this.storage[id] = [...sorted];
+    localStorage.setItem('vault74.messageHistory', JSON.stringify(this.storage));
+    this.update(this.storage);
+  }
+
   /** @function
    * @name addToConvo
    * Add a new message to the conversation object
@@ -48,6 +55,7 @@ export default class MessageBroker {
   sentMessage(to, at, type, data) {
     const message = new Message(this.peerId, at, type, data);
     this.addToConvo(`${this.peerId}::${to}`, message);
+    return message;
   }
 
   /** @function

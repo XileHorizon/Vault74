@@ -1,5 +1,18 @@
 <template>
   <div>
+    <div class="notification is-info" v-if="!doesThreadExist()">
+      Invite {{$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].name}} to message offline.
+      <button
+        v-if="$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].status !== 'alive'"
+        class="button is-small is-link"
+        disabled>{{$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].name}} must be online</button>
+      <button 
+        v-else
+        v-on:click="inviteToOffline"
+        class="button is-small is-link">
+        Invite {{$store.state.friends.filter(f => f.address === $store.state.activeChat)[0].name}}
+      </button>
+    </div>
     <div id="scrollBottom" v-if="showScrollToBottom" v-on:click="scrollToEnd">
       <i class="fas fa-chevron-down"></i>
     </div>
@@ -11,7 +24,7 @@
       v-on:scroll="onScroll">
         <div
           v-for="messageGroup in $store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]" 
-          v-bind:key="messageGroup[0].id">
+          v-bind:key="messageGroup[0].id || messageGroup[0]._id">
           <MessageBody :messages="messageGroup" :scrollToEnd="scrollToEndConditionally"/>
           <!--<Divider :text="message.text" v-if="message.type =='message-group-divider'" />-->
         </div>
@@ -41,11 +54,35 @@ export default {
   },
   data() {
     return {
+      // TODO: Remove after friend requests
+      invitedToOffline: false,
       showScrollToBottom: false,
       scrollTimeout: false,
+      subscribed: false,
     };
   },
   methods: {
+    // TODO: Remove after friend requests
+    async inviteToOffline() {
+      this.invitedToOffline = true;
+      const id = this.$database.threadManager
+        .makeIdentifier(this.$store.state.activeAccount, this.$store.state.activeChat);
+      const threadID = await this.$database.threadManager.threadAt(id);
+      this.sendMessage(
+        {
+          threadID: threadID.toString(),
+          identifier: id,
+        },
+        'thread-id',
+      );
+    },
+    doesThreadExist() {
+      const id = this.$database.threadManager
+        .makeIdentifier(this.$store.state.activeAccount, this.$store.state.activeChat);
+      const threadID = this.$database.threadManager
+        .fetchThread(id);
+      return threadID;
+    },
     /** @method
      * Rudementary scrolling to the bottom of the
      * div when a message comes in, or on other events
@@ -85,21 +122,37 @@ export default {
         this.showScrollToBottom = false;
       }
     },
+    markRead() {
+      // If we get a message update the last read messages to mark it as read
+      const groupID = `${this.$store.state.activeAccount}::${this.$store.state.activeChat}`;
+      const messages = this.$store.state.messages[groupID];
+      const messageGroup = messages[messages.length - 1];
+      const lastMessage = messageGroup[messageGroup.length - 1];
+      this.$store.commit('markRead', {
+        address: this.$store.state.activeChat,
+        // eslint-disable-next-line
+        messageID: lastMessage.id || lastMessage._id,
+      });
+    },
   },
   watch: {
     mediaOpen: 'scrollToEnd',
   },
   beforeDestroyed() {
     clearTimeout(this.scrollTimeout);
+    // Close subscription
+    this.subscribed();
   },
   mounted() {
     this.$nextTick(() => this.scrollToEnd());
     this.$store.subscribe((mutation) => {
       if (mutation.type === 'activeChat') {
         this.$nextTick(() => this.scrollToEnd());
+        this.markRead();
       }
       if (mutation.type === 'updateMessages') {
         this.scrollToEndConditionally();
+        this.markRead();
       }
     });
   },
@@ -107,7 +160,15 @@ export default {
 </script>
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="less">
+    .notification {
+      margin-top: 4rem;
+      padding: 0.6rem 0.8rem;
+      button {
+        margin: -0.15rem 0 0 0;
+        float: right;
+      }
+    }
     #conversation {
       position: absolute;
       top: 3rem;

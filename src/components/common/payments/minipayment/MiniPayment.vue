@@ -43,9 +43,9 @@ export default {
      * @argument data the data to send
      * @argument type the type of message we're broadcasting
      */
-    sendMessage(data, type) {
+    async sendMessage(data, type) {
       if (window.Vault74.messageBroker) {
-        window.Vault74.messageBroker.sentMessage(
+        const msg = window.Vault74.messageBroker.sentMessage(
           this.$store.state.activeChat,
           Date.now(),
           'message',
@@ -54,6 +54,21 @@ export default {
             data,
           },
         );
+
+        const id = this.$database.threadManager
+          .makeIdentifier(this.$store.state.activeAccount, this.$store.state.activeChat);
+        const threadExists = await this.$database.threadManager.fetchThread(id);
+        if (threadExists) {
+          const threadID = await this.$database.threadManager.threadAt(id);
+          const message = {
+            _id: msg.id,
+            sender: msg.sender,
+            at: msg.at,
+            type: msg.type,
+            payload: msg.payload,
+          };
+          this.$database.messageManager.addNewMessage(threadID, message);
+        }
       }
       window.Vault74.Peer2Peer.send(
         this.$store.state.activeChat,

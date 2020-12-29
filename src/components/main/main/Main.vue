@@ -19,6 +19,34 @@ export default {
     UserInfo,
   },
   methods: {
+    async fetchMessages(id, friend) {
+      const threadID = await this.$database.threadManager.threadAt(id);
+      const messages = await this.$database.messageManager.getMessages(threadID);
+      if (window.Vault74.messageBroker) {
+        window.Vault74.messageBroker.setConvo(
+          `${this.$store.state.activeAccount}::${friend.address}`,
+          messages,
+        );
+      }
+    },
+    async subscribeToThreads() {
+      this.$store.state.friends.forEach(async (friend) => {
+        const id = this.$database.threadManager
+          .makeIdentifier(this.$store.state.activeAccount, friend.address);
+        const existingThread = this.$database.threadManager
+          .fetchThread(id);
+        if (existingThread) {
+          this.fetchMessages(id, friend);
+          if (!this.subscribed[friend.address]) {
+            const threadID = await this.$database.threadManager.threadAt(id);
+            const closer = await this.$database.messageManager.subscribe(threadID, () => {
+              this.fetchMessages(id, friend);
+            });
+            this.subscribed[friend.address] = closer;
+          }
+        }
+      });
+    },
     // Switch from one media stream to another
     switchTo(voice = false) {
       this.mediaOpen = true;
@@ -46,9 +74,9 @@ export default {
     },
     // Send a message in the chat, this will probably
     // be rewritten when the chat is functional
-    sendMessage(data, type) {
+    async sendMessage(data, type) {
       if (window.Vault74.messageBroker) {
-        window.Vault74.messageBroker.sentMessage(
+        const msg = window.Vault74.messageBroker.sentMessage(
           this.$store.state.activeChat,
           Date.now(),
           'message',
@@ -58,16 +86,30 @@ export default {
               encodeURI(data) : data,
           },
         );
+        window.Vault74.Peer2Peer.send(
+          this.$store.state.activeChat,
+          'message',
+          {
+            type: type || 'text',
+            data: type === 'text' ?
+              encodeURI(data) : data,
+          },
+        );
+        const id = this.$database.threadManager
+          .makeIdentifier(this.$store.state.activeAccount, this.$store.state.activeChat);
+        const threadExists = await this.$database.threadManager.fetchThread(id);
+        if (threadExists) {
+          const threadID = await this.$database.threadManager.threadAt(id);
+          const message = {
+            _id: msg.id,
+            sender: msg.sender,
+            at: msg.at,
+            type: msg.type,
+            payload: msg.payload,
+          };
+          this.$database.messageManager.addNewMessage(threadID, message);
+        }
       }
-      window.Vault74.Peer2Peer.send(
-        this.$store.state.activeChat,
-        'message',
-        {
-          type: type || 'text',
-          data: type === 'text' ?
-            encodeURI(data) : data,
-        },
-      );
     },
   },
   data() {
@@ -75,6 +117,7 @@ export default {
       mediaOpen: false,
       voice: false,
       playCallSoundTimer: null,
+      subscribed: {},
     };
   },
   mounted() {
@@ -86,6 +129,7 @@ export default {
         }
       }
     });
+    this.subscribeToThreads();
   },
 };
 </script>
