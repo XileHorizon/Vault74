@@ -25,8 +25,8 @@
         <div
           v-for="messageGroup in $store.state.messages[`${$store.state.activeAccount}::${$store.state.activeChat}`]" 
           v-bind:key="messageGroup[0].id || messageGroup[0]._id">
-          <MessageBody :messages="messageGroup" :scrollToEnd="scrollToEndConditionally"/>
-          <!--<Divider :text="message.text" v-if="message.type =='message-group-divider'" />-->
+          <Divider :text="messageGroup[0].date" v-if="messageGroup[0].type =='day-break'" />
+          <MessageBody v-else :messages="messageGroup" :scrollToEnd="scrollToEndConditionally" />
         </div>
     </div>
   </div>

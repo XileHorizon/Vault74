@@ -15,7 +15,7 @@
     <ul>
       <li
         v-on:click="closeSoon"
-        v-clipboard:copy="message.id">Copy ID</li>
+        v-clipboard:copy="message.id || message._id">Copy ID</li>
     </ul>
   </div>
 </template>

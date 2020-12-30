@@ -66,6 +66,10 @@
         const msgId = event.target.parentNode.parentNode.getAttribute('data-id');
         if (msgId) {
           [this.clickedMessage] = this.messages.filter(m => m.id === msgId);
+          if (!this.clickedMessage) {
+            // eslint-disable-next-line
+            [this.clickedMessage] = this.messages.filter(m => m._id === msgId);
+          }
           this.contextCoordsX = event.clientX;
           this.contextCoordsY = event.clientY;
           this.showContext = true;

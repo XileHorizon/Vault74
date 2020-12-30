@@ -13,7 +13,7 @@
         :x="contextCoordsX"
         :y="contextCoordsY"
         :close="hideContext" />
-      <div class="c-message" v-for="message in messages" @contextmenu="handleContext" :data-id="message.id">
+      <div class="c-message" v-for="message in messages" @contextmenu="handleContext" :data-id="message.id || message._id">
           <p v-if="message.type == 'call-status'">
             <i class="fas fa-phone"></i> {{dweller.name}} started a call...
           </p>

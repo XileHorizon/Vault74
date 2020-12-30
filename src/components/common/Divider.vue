@@ -1,17 +1,31 @@
 <template>
-    <div class="separator">{{text}}</div>
+    <div class="separator">
+      <span class="text">{{getFormattedDate(text)}}</span>
+    </div>
 </template>
 
 <script>
+const monthNames = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
+
 export default {
   name: 'Divider',
   props: [
     'text',
   ],
+  methods: {
+    getFormattedDate(timestamp) {
+      const d = new Date(timestamp);
+      const dateString = `${monthNames[d.getMonth()]}, ${d.getDate()}`;
+      return dateString;
+    },
+  },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
     .divider {
       color: pink;
@@ -22,21 +36,21 @@ export default {
       text-align: center;
       font-weight: bold;
       color: #bbb;
-      margin: 1rem 0;
+      margin: 0;
       font-size: 9pt;
     }
     .separator::before, .separator::after {
       content: '';
       flex: 1;
-      padding-top: 0.2rem;
-      border-bottom: 1px solid #eee;
+      padding-top: 0rem;
+      border-bottom: 2px solid #eee;
     }
     .separator::before {
-      margin-right: .25em;
+      margin-right: .45em;
       margin-left: 3rem;
     }
     .separator::after {
-      margin-left: .25em;
+      margin-left: .45em;
       margin-right: 3rem;
     }
 </style>
