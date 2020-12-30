@@ -25,6 +25,7 @@ export default {
     isUnread(address) {
       const groupID = `${this.$store.state.activeAccount}::${address}`;
       const messages = this.$store.state.messages[groupID];
+      if (!messages || !messages.length) return false;
       const messageID = this.$store.state.unreads[address];
       const messageGroup = messages[messages.length - 1];
       const lastMessage = messageGroup[messageGroup.length - 1];
