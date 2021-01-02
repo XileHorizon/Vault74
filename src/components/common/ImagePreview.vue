@@ -4,6 +4,7 @@
       <div class="modal-content">
         <p class="image">
           <img :src="src" alt="">
+          <a :href="src" target="_blank">view full size</a>
         </p>
       </div>
       <button class="modal-close is-large" aria-label="close" v-on:click="close"></button>

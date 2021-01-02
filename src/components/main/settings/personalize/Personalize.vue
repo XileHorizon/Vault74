@@ -37,7 +37,7 @@
 <script>
 export default {
   name: 'Personalize',
-  props: ['settings', 'setSetting'],
+  props: ['settings'],
   data() {
     return {
       notificationsEnabled: Notification.permission === 'granted',

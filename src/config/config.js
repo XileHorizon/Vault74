@@ -31,6 +31,10 @@ module.exports = {
     mainnet: '0x0',
     goerli: '0xfA22498c3F2bc836d9347F2e8c718E7820eAb308',
   },
+  friends: {
+    mainnet: '0x0',
+    goerli: '0xd1d99a34Bdb6e2c3d199dd39Fe1B011Ee633D824',
+  },
   debug: false,
   cacher: {
     dwellerLifespan: 900000,

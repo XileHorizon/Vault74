@@ -26,6 +26,7 @@
       !$store.state.dwellerAddress"
     />
     <div v-else>
+      <Achievement v-if="false" achievement="addFriend" />
       <CreateServer v-if="showCreateServer" :close="closeCreateServer"/>
       <Calling :active="$store.state.activeCaller" :callerId="$store.state.activeCaller" />
 
@@ -81,6 +82,7 @@ import Settings from '@/components/main/settings/Settings';
 import Web3 from '@/components/web3/Web3';
 import Database from '@/components/database/Database';
 import Loading from '@/components/common/Loading';
+import Achievement from '@/components/common/Achievement';
 import Calling from '@/components/main/popups/calling/Calling';
 import CreateServer from '@/components/servers/create/CreateServer';
 import Context from '@/components/common/context/Context';
@@ -90,6 +92,7 @@ import IPFS from 'ipfs-core';
 export default {
   name: 'chat',
   components: {
+    Achievement,
     Sidebar,
     Main,
     Error,

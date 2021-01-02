@@ -55,32 +55,25 @@
         :setSetting="setSetting"/>
       <Keybinds 
         v-if="route == 'keybinds'" 
-        :settings="settings"
-        :setSetting="setSetting"/>
+        :settings="settings"/>
       <Profile 
         v-if="route == 'profile'" 
-        :settings="settings"
-        :setSetting="setSetting"/>
+        :settings="settings"/>
       <AudioVideo 
         v-if="route == 'audiovideo'" 
-        :settings="settings"
-        :setSetting="setSetting"/>
+        :settings="settings"/>
       <Accounts 
         v-if="route == 'accounts-devices'" 
-        :settings="settings"
-        :setSetting="setSetting"/>
+        :settings="settings"/>
       <Network 
         v-if="route == 'network'" 
-        :settings="settings"
-        :setSetting="setSetting"/>
+        :settings="settings"/>
       <Encryption 
         v-if="route == 'encryption'" 
-        :settings="settings"
-        :setSetting="setSetting"/>
+        :settings="settings"/>
       <Storage 
         v-if="route == 'storage'" 
-        :settings="settings"
-        :setSetting="setSetting"/>
+        :settings="settings"/>
       <Contracts 
         v-if="route == 'contracts'"/>
     </div>
