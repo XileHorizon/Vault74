@@ -1,8 +1,8 @@
 <template src="./File.html"></template>
 
 <script>
-import IPFSUtils from '@/classes/IPFSUtils';
-import FileIconMapper from '@/utils/FileIconMapper';
+import IPFSUtils from '@/classes/IPFSUtils.ts';
+import FileIconMapper from '@/utils/FileIconMapper.ts';
 
 export default {
   name: 'File',

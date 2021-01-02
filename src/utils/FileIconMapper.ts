@@ -1,3 +1,6 @@
+interface Mappings {
+  default: string,
+}
 // Useful methods to translate filenames into classes
 export default {
   mappings: {
@@ -20,7 +23,7 @@ export default {
    * @argument mappings mapping to check through for translation
    * @returns classname to be used for fontawesome icons describing the filetype
    */
-  translateFiletype(filetype, mappings) {
+  translateFiletype(filetype: string, mappings: Mappings) {
     let classname = mappings.default;
     // eslint-disable-next-line
     for (const [key] of Object.entries(mappings)) {

@@ -1,8 +1,11 @@
 import Web3EthAccounts from 'web3-eth-accounts';
 
 export default class Key {
-  constructor(web3) {
+  account: any;
+
+  constructor(web3: any) {
     if (!web3) {
+      // @ts-ignore
       const w3 = new Web3EthAccounts();
       this.account = w3.create();
     } else {
@@ -22,11 +25,11 @@ export default class Key {
     return this.account.privateKey;
   }
 
-  encrypt(password) {
+  encrypt(password: string) {
     return this.account.encrypt(password);
   }
 
-  decrypt(password) {
+  decrypt(password: string) {
     return this.account.decrypt(password);
   }
 }

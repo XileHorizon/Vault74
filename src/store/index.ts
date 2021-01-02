@@ -18,4 +18,4 @@ export const createStore = initialState => new Vuex.Store({
   },
 });
 
-export default createStore();
+export default createStore({});

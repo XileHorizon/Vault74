@@ -6,8 +6,8 @@ import config from '@/config/config';
 import Database from '@/classes/database/Database.ts';
 
 import App from './App';
-import router from './router';
-import store from './store';
+import router from './router/index.ts';
+import store from './store/index.ts';
 
 Vue.config.productionTip = false;
 

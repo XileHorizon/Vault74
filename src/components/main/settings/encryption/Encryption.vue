@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Key from '@/classes/Key';
+import Key from '@/classes/Key.ts';
 
 export default {
   name: 'Encryption',

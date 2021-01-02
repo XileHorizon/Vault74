@@ -1,7 +1,7 @@
 <template></template>
 
 <script>
-import MessageBroker from '@/classes/MessageBroker';
+import MessageBroker from '@/classes/MessageBroker.ts';
 import config from '@/config/config';
 import { Howl } from 'howler';
 

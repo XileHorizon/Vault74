@@ -58,6 +58,6 @@ const defaultState = {
   criticalError: false,
 };
 
-const createState = customState => Object.assign({}, defaultState, customState);
+const createState = (customState: object) => Object.assign({}, defaultState, customState);
 
 export default createState;

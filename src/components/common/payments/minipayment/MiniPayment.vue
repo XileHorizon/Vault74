@@ -3,8 +3,8 @@
 <script>
 import config from '@/config/config';
 import CircleIcon from '@/components/common/CircleIcon';
-import DwellerCachingHelper from '@/classes/DwellerCachingHelper';
-import MessageBroker from '@/classes/MessageBroker';
+import DwellerCachingHelper from '@/classes/DwellerCachingHelper.ts';
+import MessageBroker from '@/classes/MessageBroker.ts';
 import Ethereum from '@/classes/Ethereum';
 
 const ethereum = new Ethereum('user-provided');

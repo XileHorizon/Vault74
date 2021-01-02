@@ -1,5 +1,9 @@
+// @ts-ignore
 import * as DwellerID from '@/contracts/interfaces/DwellerID.json';
+// @ts-ignore
 import Ethereum from '@/classes/Ethereum';
+import IIPFSHash from '../interfaces/IIPFSHash';
+import { Contract } from "web3-eth-contract";
 
 const ethereum = new Ethereum('window');
 // useful methods to interact with the DwellerID contract
@@ -9,9 +13,9 @@ export default {
    * @argument address Address of the DwellerID contract
    * @returns contract instance ready for method execution
    */
-  getContract(address = false) {
-    let contract = null;
-    if (address) {
+  getContract(address: string) {
+    let contract: Contract;
+    if (address.length) {
       contract = ethereum.getContract(DwellerID.abi, address);
     } else {
       contract = ethereum.getContract(DwellerID.abi);
@@ -26,16 +30,19 @@ export default {
    * @argument tx callback which will be called when the transaction is made
    * @argument done callback to be called when the first confirmation comes through
    */
-  deploy(_username, account, tx, done) {
+  deploy(_username: string, account: string, tx: CallableFunction, done: CallableFunction) {
     const username = ethereum.fromAscii(_username);
-    const contract = this.getContract();
+    const contract = this.getContract('');
+    // @ts-ignore
     contract.deploy({
       arguments: [username],
     }).send({
       from: account,
       gas: 4700000,
     })
+      // @ts-ignore
       .once('transactionHash', tx)
+      // @ts-ignore
       .once('confirmation', done);
   },
   /** @function
@@ -46,7 +53,7 @@ export default {
    * @argument done callback which will be called on the first TX & confirm.
    * @returns dweller payload which contains all information about the dweller
    */
-  setPhoto(address, account, ipfsHash, done) {
+  setPhoto(address: string, account: string, ipfsHash: IIPFSHash, done: CallableFunction) {
     const contract = this.getContract(address);
     contract.methods.setPhoto([
       ethereum.fromAscii(ipfsHash.path.substring(0, 23)),
@@ -66,7 +73,7 @@ export default {
    * @argument username username to set
    * @argument done callback which will be called on the first TX & confirm.
    */
-  setUsername(address, account, username, done) {
+  setUsername(address: string, account: string, username: string, done: CallableFunction) {
     const contract = this.getContract(address);
     contract.methods.setDwellerName(ethereum.fromAscii(username))
       .send({
@@ -81,7 +88,7 @@ export default {
    * @argument address Address of the DwellerID contract
    * @argument done callback which will return the dweller info
    */
-  async getDweller(address, done) {
+  async getDweller(address: string, done: CallableFunction) {
     const contract = this.getContract(address);
     const dweller = await contract.methods.getDweller().call();
     if (!dweller) {
@@ -98,9 +105,10 @@ export default {
    * @argument address Address of the DwellerID contract
    * @returns dweller payload which contains all information about the dweller
    */
-  async getDwellerAsync(address) {
+  async getDwellerAsync(address: string) : Promise<string> {
     return new Promise((resolve) => {
-      this.getDweller(address, (dweller, onChainPhotoHash) => {
+      this.getDweller(address, (dweller: string, onChainPhotoHash: string) => {
+        // @ts-ignore
         resolve(dweller, onChainPhotoHash);
       });
     });
@@ -110,9 +118,9 @@ export default {
    * @argument address Address of the DwellerID contract
    * @returns ipfs photo hash assigned to the dweller contract
    */
-  async getPhotoAsync(address) {
+  async getPhotoAsync(address: string) {
     return new Promise((resolve) => {
-      this.getDweller(address, (_, onChainPhotoHash) => {
+      this.getDweller(address, (_: any, onChainPhotoHash: string) => {
         resolve(onChainPhotoHash);
       });
     });
@@ -122,7 +130,7 @@ export default {
    * @argument address Address of the DwellerID contract
    * @returns owner address of the dweller contract
    */
-  async getDwellerAddress(address) {
+  async getDwellerAddress(address: string) {
     const contract = this.getContract(address);
     const dweller = await contract.methods.getDwellerAddress().call();
     return dweller;
@@ -132,7 +140,7 @@ export default {
    * @argument address Address of the DwellerID contract
    * @returns name of the dweller who owns this contract
    */
-  async getDwellerName(address) {
+  async getDwellerName(address: string) {
     const contract = this.getContract(address);
     const dwellerName = await contract.methods.getDwellerName().call();
     return dwellerName;

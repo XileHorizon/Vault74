@@ -2,8 +2,8 @@
 
 <script>
 import config from '@/config/config';
-import IPFSUtils from '@/classes/IPFSUtils';
-import FileC from '@/classes/FileC';
+import IPFSUtils from '@/classes/IPFSUtils.ts';
+import FileC from '@/classes/FileC.ts';
 
 const uploadAudio = new Audio(`${config.ipfs.browser}${config.sounds.upload}`);
 

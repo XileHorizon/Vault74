@@ -40,7 +40,7 @@
 </template>
 <script>
 import ToggleSwitch from '@/components/common/ToggleSwitch';
-import crypto from '@/utils/Crypto';
+import crypto from '@/utils/Crypto.ts';
 
 export default {
   name: 'unlock',

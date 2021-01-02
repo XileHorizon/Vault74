@@ -3,7 +3,7 @@
 <script>
 import config from '@/config/config';
 import CircleIcon from '@/components/common/CircleIcon';
-import DwellerCachingHelper from '@/classes/DwellerCachingHelper';
+import DwellerCachingHelper from '@/classes/DwellerCachingHelper.ts';
 
 export default {
   name: 'User',

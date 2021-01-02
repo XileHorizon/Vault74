@@ -1,5 +1,8 @@
+// @ts-ignore
 import * as Vault74Registry from '@/contracts/interfaces/Vault74Registry.json';
+// @ts-ignore
 import config from '@/config/config';
+// @ts-ignore
 import Ethereum from '@/classes/Ethereum';
 
 const ethereum = new Ethereum('window');
@@ -23,7 +26,7 @@ export default {
    * @argument tx callback executed on first transaction
    * @argument done callback executed on first confirmation
    */
-  createDwellerId(_username, account, tx, done) {
+  createDwellerId(_username: string, account: string, tx: CallableFunction, done: CallableFunction) {
     const username = ethereum.fromAscii(_username);
     const contract = this.getContract();
     contract.methods.createDweller(username)
@@ -41,7 +44,7 @@ export default {
    * @argument tx callback executed on first transaction
    * @argument done callback executed on first confirmation
    */
-  createServer(_name, account, tx, done) {
+  createServer(_name: string, account: string, tx: CallableFunction, done: CallableFunction) {
     const name = ethereum.fromAscii(_name);
     const contract = this.getContract();
     contract.methods.createServer(name)
@@ -57,7 +60,7 @@ export default {
    * @argument account account to send the transaction from
    * @return returns the dweller contract address for a specific account
    */
-  async getDwellerContract(account) {
+  async getDwellerContract(account: string) {
     const contract = this.getContract();
     const dwellerAddress = await contract.methods.getDwellerId(account).call();
     return dwellerAddress;

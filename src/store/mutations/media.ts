@@ -1,29 +1,29 @@
 export default {
   // Set the audio device
-  setAudioDevice(state, device) {
+  setAudioDevice(state: any, device: string) {
     // eslint-disable-next-line no-param-reassign
     state.audioDevice = device;
   },
   // Set the audio device
-  setVideoDevice(state, device) {
+  setVideoDevice(state: any, device: string) {
     // eslint-disable-next-line no-param-reassign
     state.videoDevice = device;
   },
-  connectMediaStream(state, peer) {
+  connectMediaStream(state: any, peer: string) {
     // eslint-disable-next-line no-param-reassign
     state.activeMediaStreamPeer = peer;
     // eslint-disable-next-line no-param-reassign
     state.pendingMediaStream = true;
   },
-  activeCaller(state, caller) {
+  activeCaller(state: any, caller: string) {
     // eslint-disable-next-line no-param-reassign
     state.activeCaller = caller;
   },
-  muted(state, muted) {
+  muted(state: any, muted: boolean) {
     // eslint-disable-next-line no-param-reassign
     state.muted = muted;
   },
-  deafened(state, deafened) {
+  deafened(state: any, deafened: boolean) {
     // eslint-disable-next-line no-param-reassign
     state.deafened = deafened;
   },

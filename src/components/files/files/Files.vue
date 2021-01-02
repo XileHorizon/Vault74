@@ -40,7 +40,7 @@
 
 <script>
 import File from '@/components/files/file/File';
-import IPFSUtils from '@/classes/IPFSUtils';
+import IPFSUtils from '@/classes/IPFSUtils.ts';
 import FileContext from '@/components/common/context/FileContext';
 import FileUploadInline from '@/components/common/fileuploadinline/FileUploadInline';
 

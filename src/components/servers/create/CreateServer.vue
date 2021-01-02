@@ -3,7 +3,7 @@
 <script>
 import PhotoCropper from 'vue-image-crop-upload';
 import CircleIcon from '@/components/common/CircleIcon';
-import Vault74Registry from '@/utils/Vault74Registry';
+import Vault74Registry from '@/utils/Vault74Registry.ts';
 
 export default {
   name: 'CreateServer',

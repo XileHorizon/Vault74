@@ -1,18 +1,23 @@
-import Message from './Message.ts';
+import IMessage from '../interfaces/IMessaage';
+import Message from './Message';
 
 export default class MessageBroker {
+  storage: any;
+  peerId: string;
+  update: CallableFunction;
   /** @constructor
    * Construct a new Message Broker
    * @argument peerId the local peer ID
    * @argument update callback method to update our application with new messages
    */
-  constructor(peerId, update) {
-    this.storage = JSON.parse(localStorage.getItem('vault74.messageHistory')) || {};
+  constructor(peerId: string, update: CallableFunction) {
+    const storedStorage = localStorage.getItem('vault74.messageHistory');
+    this.storage = storedStorage ? JSON.parse(storedStorage) : {};
     this.peerId = peerId;
     this.update = update;
   }
 
-  setConvo(id, messages) {
+  setConvo(id: string, messages: IMessage[]) {
     const sorted = messages.sort((a, b) => a.at - b.at);
     this.storage[id] = [...sorted];
     localStorage.setItem('vault74.messageHistory', JSON.stringify(this.storage));
@@ -25,7 +30,7 @@ export default class MessageBroker {
    * @argument id id of the remote chatter
    * @argument message message object containing the type of message and content
    */
-  addToConvo(id, message) {
+  addToConvo(id: string, message: Message) {
     this.storage[id] = this.storage[id] ? [...this.storage[id], message] : [message];
     localStorage.setItem('vault74.messageHistory', JSON.stringify(this.storage));
     this.update(this.storage);
@@ -39,7 +44,7 @@ export default class MessageBroker {
    * @argument type string type of the message
    * @argument data payload recived from the message
    */
-  recievedMessage(sender, at, type, data) {
+  recievedMessage(sender: string, at: number, type: string, data: any) {
     const message = new Message(sender, at, data.type, data.data);
     this.addToConvo(`${this.peerId}::${sender}`, message);
   }
@@ -52,7 +57,7 @@ export default class MessageBroker {
    * @argument type string type of the message
    * @argument data payload sent in the message
    */
-  sentMessage(to, at, type, data) {
+  sentMessage(to: string, at: number, type: string, data: any) {
     const message = new Message(this.peerId, at, type, data);
     this.addToConvo(`${this.peerId}::${to}`, message);
     return message;
@@ -63,7 +68,7 @@ export default class MessageBroker {
    * Get a object of the current conversation
    * @argument id id of the remote chatter to get the group from
    */
-  getConversationGroup(id) {
+  getConversationGroup(id: string) {
     return this.storage[id];
   }
 
@@ -72,7 +77,7 @@ export default class MessageBroker {
    * Abstraction of stringifying the message so we can change this at will
    * @argument msg message object to stringify
    */
-  static stringify(msg) {
+  static stringify(msg: string) {
     return JSON.stringify(msg);
   }
 
@@ -81,7 +86,7 @@ export default class MessageBroker {
    * Abstraction of parsing the message so we can change this at will
    * @argument msg message object to parse
    */
-  static parse(msg) {
+  static parse(msg: string) {
     return JSON.parse(msg);
   }
 }

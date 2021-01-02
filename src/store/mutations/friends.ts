@@ -1,25 +1,29 @@
+import IFriend from "../../interfaces/IFriend";
+
 export default {
   // Add a new friend to the local cache
-  addFriend(state, friend) {
+  addFriend(state: any, friend: IFriend) {
     const { friends } = state;
-    if (friends.filter(f => f.address === friend.address).length === 0) {
+    if (friends.filter((f: IFriend) => f.address === friend.address).length === 0) {
       friends.push(friend);
     }
     // eslint-disable-next-line
-    friends.sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1);
+    friends.sort((a: IFriend, b: IFriend) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1);
     // eslint-disable-next-line no-param-reassign
     state.friends = friends;
     // storage
+    // @ts-ignore
     const bucket = window.Vault74.Database.Bucket('friends');
     bucket.add(friend);
   },
-  async fetchFriends(state) {
+  async fetchFriends(state: any) {
+    // @ts-ignore
     const bucket = window.Vault74.Database.Bucket('friends');
     const friends = await bucket.get();
     // eslint-disable-next-line
     state.friends = friends;
   },
-  clearFriends(state) {
+  clearFriends(state: any) {
     // eslint-disable-next-line
     state.friends = null;
   },
