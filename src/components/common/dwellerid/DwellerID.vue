@@ -2,7 +2,7 @@
 
 <script>
 import Badge from '@/components/common/Badge';
-import DwellerCachingHelper from '@/classes/DwellerCachingHelper';
+import DwellerCachingHelper from '@/classes/DwellerCachingHelper.ts';
 import config from '@/config/config';
 import CircleIcon from '@/components/common/CircleIcon';
 

@@ -2,7 +2,7 @@ export default {
   hasPermission() {
     return Notification.permission === 'granted';
   },
-  newNotification(title, subtext) {
+  newNotification(title: string, subtext: string) {
     const options = {
       body: subtext,
     };

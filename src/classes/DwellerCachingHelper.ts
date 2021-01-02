@@ -1,8 +1,10 @@
+// @ts-ignore
 import config from '@/config/config';
+// @ts-ignore
 import Ethereum from '@/classes/Ethereum';
 import Vault74Registry from '../utils/Vault74Registry';
 import DwellerContract from '../utils/DwellerContract';
-
+import IDweller from '../interfaces/IDweller';
 
 const ethereum = new Ethereum('user-provided');
 
@@ -13,14 +15,18 @@ const ethereum = new Ethereum('user-provided');
  * @augments expiry how long should dwellers last in the cache
  */
 export default class DwellerCachingHelper {
+  expiry: number;
+  cache: any;
+  registryAddress: string;
   /**
    * @constructs DwellerCachingHelper
    * @augments registryAddress Address to the on chain contract of the registry
    * @augments expiry how long should dwellers last in the cache
    */
-  constructor(registryAddress, expiry = 86000) {
+  constructor(registryAddress: string, expiry: number = 86000) {
     this.expiry = expiry;
-    this.cache = JSON.parse(localStorage.getItem('vault74.dwellerCache')) || {};
+    const localCache = localStorage.getItem('vault74.dwellerCache') || false;
+    this.cache = localCache ? JSON.parse(localCache) : {};
     this.registryAddress = registryAddress;
   }
 
@@ -31,7 +37,7 @@ export default class DwellerCachingHelper {
    * @argument address Address of the dweller to fetch
    * @returns the dweller from the local cache, or false if there is no valid dweller
    */
-  getDwellerFromCache(address) {
+  getDwellerFromCache(address: string) {
     const dweller = this.cache[address];
     if (!dweller) return false;
     if (dweller.expiry < Date.now()) return false;
@@ -44,7 +50,7 @@ export default class DwellerCachingHelper {
    * @argument address Address of the dweller to fetch
    * @returns the dweller from the local cache, or on chain
    */
-  async getDweller(address) {
+  async getDweller(address: string) {
     let dweller = this.getDwellerFromCache(address);
     if (dweller) {
       this.updateDweller(address);
@@ -54,10 +60,10 @@ export default class DwellerCachingHelper {
     return dweller;
   }
 
-  async updateDweller(address) {
+  async updateDweller(address: string) : Promise<IDweller | null> {
     let dweller;
     const dwellerIDAddress = await Vault74Registry.getDwellerContract(address);
-    if (dwellerIDAddress === '0x0000000000000000000000000000000000000000') return false;
+    if (dwellerIDAddress === '0x0000000000000000000000000000000000000000') return null;
     dweller = {
       name: await DwellerContract.getDwellerName(dwellerIDAddress),
       photo: await DwellerContract.getPhotoAsync(dwellerIDAddress),

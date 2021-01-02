@@ -1,7 +1,15 @@
+// @ts-ignore
 import FileIconMapper from '@/utils/FileIconMapper';
 
 export default class FileC {
-  constructor(url, hash, file) {
+  modified: number;
+  url: string;
+  hash: string;
+  filename: any;
+  size: any;
+  type: any;
+
+  constructor(url: string, hash: string, file: File) {
     this.modified = Date.now();
     this.url = url;
     this.hash = hash;

@@ -14,26 +14,26 @@ export default {
   ...messaging,
   ...peer,
   ...account,
-  screenShareRequest(state) {
+  screenShareRequest(state: any) {
     // eslint-disable-next-line
     state.screenShareRequest = Date.now();
   },
   // Used to set a specific setting in key vaule storage
   // only do this from the settings page components
-  setSetting(state, key, value) {
+  setSetting(state: any, key: string, value: string) {
     // eslint-disable-next-line no-param-reassign
     state.settings[key] = value;
   },
   // Called when web3 updates
-  web3Stats(state, stats) {
+  web3Stats(state: any, stats: object) {
     // eslint-disable-next-line no-param-reassign
     state.web3Stats = stats;
   },
-  criticalError(state, err) {
+  criticalError(state: any, err: string) {
     // eslint-disable-next-line no-param-reassign
     state.criticalError = err;
   },
-  clear(state) {
+  clear(state: any) {
     // eslint-disable-next-line no-param-reassign
     state.criticalError = false;
   },

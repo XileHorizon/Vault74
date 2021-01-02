@@ -49,14 +49,16 @@ export class LocalStorage {
 
   async _retrive(name: string) : Promise<any[]>{
     return new Promise(async (resolve) => {
-      let decrypted = localStorage.getItem(this._key(name)) ? await crypto.decrypt(
-        localStorage.getItem(this._key(name)),
+      const item = localStorage.getItem(this._key(name)) || '';
+      if (!item.length) return [];
+      let decrypted = await crypto.decrypt(
+        item,
         this.creds.pass,
-      ) : [];
+      );
 
-      if (typeof decrypted === 'string') decrypted = JSON.parse(decrypted);
+      const parsed: any[] = decrypted ? JSON.parse(decrypted) : [];
 
-      resolve(decrypted);
+      resolve(parsed);
     });
   }
 

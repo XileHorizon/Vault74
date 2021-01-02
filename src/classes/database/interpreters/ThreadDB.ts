@@ -139,11 +139,11 @@ export class ThreadDB {
       await this.checkDeps(name);
       let data = await this.getDataOrEmpty(name);
       if (data.length) {
-        const decryptedData: string = await crypto.decrypt(
-          data[data.length - 1].data,
+        const decryptedData: string | null = await crypto.decrypt(
+          data[data.length - 1].data.toString(),
           this.creds.pass,
         );
-        const parsedData = JSON.parse(decryptedData);
+        const parsedData = decryptedData ? JSON.parse(decryptedData) : [];
         resolve(parsedData);
       } else {
         resolve([]);

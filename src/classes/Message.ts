@@ -8,6 +8,7 @@ export default class Message {
   at: number;
   type: string;
   payload: Payload;
+
   /** @constructor
    * Construct a new Message
    * @argument sender remote id of the person who sent the message

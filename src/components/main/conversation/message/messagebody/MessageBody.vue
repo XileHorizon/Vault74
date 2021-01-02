@@ -16,7 +16,7 @@
   import Audio from '@/components/main/conversation/message/embeds/Audio';
   import Video from '@/components/main/conversation/message/embeds/Video';
   import Address from '@/components/main/conversation/message/embeds/Address';
-  import DwellerCachingHelper from '@/classes/DwellerCachingHelper';
+  import DwellerCachingHelper from '@/classes/DwellerCachingHelper.ts';
   import config from '@/config/config';
 
   import * as dayjs from 'dayjs';

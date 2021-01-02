@@ -18,7 +18,7 @@
 import 'bulma/css/bulma.css';
 import config from '@/config/config';
 import Peer2Peer from '@/classes/Peer2Peer';
-import MessageBroker from '@/classes/MessageBroker';
+import MessageBroker from '@/classes/MessageBroker.ts';
 import Unlock from '@/components/unlock/Unlock';
 import PeerDataHandler from '@/classes/PeerDataHandler.ts';
 
