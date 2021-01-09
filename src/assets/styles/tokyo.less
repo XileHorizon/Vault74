@@ -1,11 +1,13 @@
 // Servers & conversation & Inputs
-@less-dark-blue-gray: #101016;
+//#078
+@servers-and-convos: #101016;
 // Infobar & Sidebar
-@dark-blue-gray: #16161e;
-@darker-blue-gray: #16161e;
-@lighter-dark-blue-gray: #1a1b27;
+@info-bar: #16161e;
+// Control Box
+@dark-blue-gray: #123123;
+@control-box: #16161e;
 // Borders
-@super-dark-boi: #131319;
+@borders: #131319;
 // Friends & Containers
 @ohh-so-dark: #1a1b26;
 // Buttons
@@ -18,13 +20,13 @@
 // Hovered Text Colors
 @lighter-blue-gray: #939bbd;
 // Messages & Icons
-@nearly-white: #a0a8cc;
+@messages-and-icons: #a0a8cc;
 // Usernames
-@basically-white: #faf2f8;
+@usernames: #faf2f8;
 // Message Hovering
 @is-this-black: #0c0c11;
 // Highlights
-@minty-green: #b2bae1;
+@highlights: #b2bae1;
 // Errors
 @green: #49aebc;
 @red: #df7070;
@@ -47,7 +49,7 @@
     background: @really-blue !important;
   }
   ::selection {
-    background: @minty-green; /* WebKit/Blink Browsers */
+    background: @highlights; /* WebKit/Blink Browsers */
     color: #fff;
   }
   ::-moz-selection {
@@ -61,8 +63,8 @@
     outline: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    border: 1px solid @minty-green !important;
-    caret-color: @minty-green;
+    border: 1px solid @highlights !important;
+    caret-color: @highlights;
   }
   .yellow {
     color: @yellow !important;
@@ -70,7 +72,7 @@
   .online {
     -webkit-text-fill-color: @light-blue-gray !important;
     -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color: @super-dark-boi;
+    -webkit-text-stroke-color: @borders;
   }
   .true {
     -webkit-text-fill-color: @green !important;
@@ -80,10 +82,10 @@
   }
   #wrapper {
     background: @dark-blue-gray;
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .settings-left {
-    background: @dark-blue-gray !important;
+    background: @info-bar !important;
   }
   .menu-label {
     color: @light-blue-gray !important;
@@ -102,8 +104,8 @@
     color: @really-blue !important;
   }
   .usersubcontrols {
-    background: @dark-blue-gray !important;
-    color: @nearly-white!important;
+    background: @info-bar !important;
+    color: @messages-and-icons!important;
     border: none !important;
   }
   .friend {
@@ -113,24 +115,24 @@
     -webkit-text-stroke-color: @ohh-so-dark;
   }
   #friends {
-    background: @less-dark-blue-gray !important;
+    background: @servers-and-convos !important;
   }
   #friends p {
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   #files {
-    background: @less-dark-blue-gray !important;
+    background: @servers-and-convos !important;
   }
   #files p {
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   #file:hover .nothovered {
     display: block;
-    color: @nearly-white;
+    color: @messages-and-icons;
   }
   #action-selector {
     background-color: @is-this-black !important;
-    border-radius: 1px solid @super-dark-boi !important;
+    border-radius: 1px solid @borders !important;
     color: @light-blue-gray !important;
   }
   .modal-close {
@@ -138,22 +140,22 @@
   }
   .friends:hover, .files:hover {
     background: @ohh-so-dark !important;
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .friends.active, .files.active {
     background: @ohh-so-dark !important;
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .menu-list a {
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .close {
     background-color:transparent !important;
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .close:hover {
     background-color: transparent !important;
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   #file .close i:hover {
     color: @ohh-so-dark !important;
@@ -170,11 +172,11 @@
     color: @ohh-so-dark !important;
   }
   .menu-list a:hover {
-    color: @basically-white !important;
+    color: @usernames !important;
     background-color: #2e303d !important;
   }
   .menu-list .active {
-    color: @basically-white !important;
+    color: @usernames !important;
     background-color: #444658 !important;
   }
   .emoji-mart {
@@ -183,27 +185,27 @@
   }
   .emoji-mart-category-label span {
     background-color: transparent !important;
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   .emoji-mart-bar {
     border-bottom: none !important;
-    background-color: @dark-blue-gray !important;
+    background-color: @info-bar !important;
   }
   .emoji-mart-bar-preview {
     border: none !important;
   }
   .modal-card-head {
-    background: @dark-blue-gray !important;
+    background: @info-bar !important;
     border-bottom: none;
   }
   .modal-card-title {
-    color: @basically-white;
+    color: @usernames;
   }
   .modal-card-body {
-    background: @less-dark-blue-gray !important;
+    background: @servers-and-convos !important;
   }
   .vicp-wrap {
-    background: @less-dark-blue-gray !important;
+    background: @servers-and-convos !important;
     color: @not-as-light-blue-gray !important;
   }
   .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item img {
@@ -228,19 +230,19 @@
     background: #000 !important;
   }
   .media-container .media-controls i {
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   .media-content i {
-    color: @minty-green !important;
+    color: @highlights !important;
   }
   .media {
-    background: @dark-blue-gray !important;
-    color: @nearly-white !important;
+    background: #078 !important;//@dark-blue-gray
+    color: @messages-and-icons !important;
     border: none !important;
-    border-left: 3px solid @minty-green !important;
+    border-left: 3px solid @highlights !important;
   }
   .media strong {
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   .servers {
     background-color: @dark-blue-gray !important;
@@ -253,10 +255,10 @@
     background: @dark-blue-gray !important;
   }
   #logo {
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   #typing {
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .address {
     color: @lighter-blue-gray !important;
@@ -264,15 +266,15 @@
   .footer {
     background: @dark-blue-gray !important;
     color: @light-blue-gray !important;
-    border-top: 1px solid @super-dark-boi !important; 
+    border-top: 1px solid @borders !important; 
   }
   .controls, .user-status {
-    background: @darker-blue-gray !important;
-    border-top: 1px solid @super-dark-boi !important; 
+    background: @control-box !important;
+    border-top: 1px solid @borders !important; 
   }
   .infobar {
     background: @dark-blue-gray !important;
-    border-bottom: 1px solid @super-dark-boi !important; 
+    border-bottom: 1px solid @borders !important; 
     box-shadow: 0 2px 3px -2px rgba(0,0,0,.25);
   }
   .infobar .profile i {
@@ -280,24 +282,24 @@
     font-size: 16pt;
   }
   a {
-    color: @minty-green;
+    color: @highlights;
   }
   .infobar .profile i:hover {
-    color: @minty-green !important;
+    color: @highlights !important;
   }
   .infobar .address {
     color: #545870 !important;
   }
 
   #conversation {
-    background: @less-dark-blue-gray !important;
+    background: @servers-and-convos !important;
   }
   #context {
     background: @dark-blue-gray !important;
-    border: 1px solid @super-dark-boi !important;
+    border: 1px solid @borders !important;
     ul {
       li:hover {
-        color: @basically-white !important;
+        color: @usernames !important;
         background: @really-blue !important;
       }
     }
@@ -306,7 +308,7 @@
     color: @lighter-blue-gray !important;
   }
   .charlimit {
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .input-collection-red {
     border: 1px solid@red !important;
@@ -326,32 +328,32 @@
     background-color: @is-this-black !important;
   }
   .divider {
-    border-bottom: 1px solid @super-dark-boi !important; 
+    border-bottom: 1px solid @borders !important; 
   }
   .divider .text {
-    border-bottom: 1px solid @super-dark-boi !important;
+    border-bottom: 1px solid @borders !important;
   }
   .wrapper {
-    border-left: 1px solid @super-dark-boi !important; 
+    border-left: 1px solid @borders !important; 
   }
   .input, input, textarea {
-    background-color: @less-dark-blue-gray !important; 
+    background-color: @servers-and-convos !important; 
     border: none !important; 
     color: #ccc !important;
   }
   hr {
     border:none !important;
     background: none !important;
-    border-bottom: 1px solid @less-dark-blue-gray !important;
+    border-bottom: 1px solid @servers-and-convos !important;
   }
   .select {
     margin-top: 0.5rem !important;
   }
   .spacer {
-    border-bottom: 1px solid @super-dark-boi !important;
+    border-bottom: 1px solid @borders !important;
   }
   .select select {
-    background: @less-dark-blue-gray !important;
+    background: @servers-and-convos !important;
     border: 1px solid transparent !important;
     color: @lighter-blue-gray !important;
   }
@@ -372,10 +374,10 @@
     background-color: #292a36 !important;
   }
   #file i:hover {
-    color: @nearly-white;
+    color: @messages-and-icons;
   }
   .filename {
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .message .message-body {
     color: @lighter-blue-gray !important;
@@ -383,7 +385,7 @@
   }
   .message .message-body h2 {
     font-weight: bold;
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
     background-color: @dark-blue-gray !important;
   }
   .modal-card-body input {
@@ -391,17 +393,17 @@
   }
   .message button {
     background: @not-as-light-blue-gray-alt !important;
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .vicp-operate a {
     background: @really-blue !important;
-    color: @basically-white !important;
+    color: @usernames !important;
     padding: 0 1rem !important;
     text-decoration: none !important;
   }
   .message button:hover {
     background: @not-as-light-blue-gray !important;
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .input-collection {
     background-color: @dark-blue-gray !important; 
@@ -410,60 +412,60 @@
     background-color: @dark-blue-gray !important; 
   }
   .chat-group {
-    background-color: @less-dark-blue-gray !important; 
+    background-color: @servers-and-convos !important; 
   }
   .settings-right {
-    background-color: @less-dark-blue-gray !important;
+    background-color: @servers-and-convos !important;
   }
   .bordered {
-    border-left: 1px solid @super-dark-boi !important; 
-    background: @less-dark-blue-gray !important;
+    border-left: 1px solid @borders !important; 
+    background: @servers-and-convos !important;
   }
   .user-active {
-    color: @minty-green !important;
+    color: @highlights !important;
     background-color: @ohh-so-dark !important;
   }
   .user:hover { 
     background-color: @ohh-so-dark !important;
   }
   .tabs ul {
-    border-bottom-color: @super-dark-boi !important;
+    border-bottom-color: @borders !important;
   }
   .tabs ul li a {
-    border-bottom-color: @super-dark-boi !important;
-    color: @nearly-white !important;
+    border-bottom-color: @borders !important;
+    color: @messages-and-icons !important;
   }
   .tabs li.is-active a {
-    border-bottom-color: @minty-green !important; 
-    color: @minty-green !important;
+    border-bottom-color: @highlights !important; 
+    color: @highlights !important;
   }
   .chat-group i:hover {
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   .chat-group i {
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .infobar i {
-    color: @nearly-white;
+    color: @messages-and-icons;
   }
   .infobar i:hover {
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   .emoji-mart-anchor svg {
-    fill: @nearly-white;
+    fill: @messages-and-icons;
   }
   .emoji-mart-anchor svg:hover {
-    fill: @nearly-white;
+    fill: @messages-and-icons;
     cursor: pointer;
   }
   .controls i {
-    color: @nearly-white;
+    color: @messages-and-icons;
   }
   .controls i:hover {
-    color: @basically-white;
+    color: @usernames;
   }
   .is-dark {
-    background: @super-dark-boi !important;
+    background: @borders !important;
   }
   .is-dark:hover {
     background: @ohh-so-dark !important;
@@ -473,29 +475,29 @@
     border: none !important;
   }
   .true i {
-    color: @minty-green !important;
+    color: @highlights !important;
   }
   .head strong {
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   input {
     color: @lighter-blue-gray !important; 
     border: 1px solid transparent !important;
   }
   input:focus, input:focus{
-    border: 1px solid @minty-green !important;
+    border: 1px solid @highlights !important;
   }
   select {
     border: 1px solid transparent !important;
   }
   select:focus, select:focus{
-    border: 1px solid @minty-green !important;
+    border: 1px solid @highlights !important;
   }
   .chat-group input:focus, input:focus{
     border: 1px solid transparent !important;
   }
   .green {
-    color: @minty-green;
+    color: @highlights;
   }
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: @light-blue-gray !important;
@@ -518,7 +520,7 @@
 
   button.is-danger {
     background-color:@red !important;
-    color: @basically-white !important;
+    color: @usernames !important;
   }
 
   button.is-danger:hover {
@@ -527,34 +529,34 @@
 
   button.is-primary {
     background: @really-blue !important;
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   button.is-primary:hover {
     background: @really-blue !important;
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   .is-primary {
     background: @really-blue !important;
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   .is-primary button:hover {
     background: @really-blue !important;
-    color: @basically-white !important;
+    color: @usernames !important;
   }
 
   button.is-dark {
     background: @really-blue !important;
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   button.is-dark:hover {
     background: @really-blue !important;
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   .head {
-    color: @nearly-white !important;
+    color: @messages-and-icons !important;
   }
   .username {
-    color: @basically-white !important;
+    color: @usernames !important;
   }
   .red {
     color: @red !important;
@@ -616,7 +618,7 @@
   }
   .true {
     .fa-pulse {
-      color: @basically-white !important;
+      color: @usernames !important;
     }
   }
   .switch-button {
@@ -629,6 +631,6 @@
     color: @yellow !important;
   }
   .switch-button-control .switch-button.enabled .sw-button {
-    background-color: @basically-white !important;
+    background-color: @usernames !important;
   }
 }

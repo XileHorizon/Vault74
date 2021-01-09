@@ -1,34 +1,69 @@
 // Servers & conversation & Inputs
-@less-dark-blue-gray: #454C59;
+@less-dark-blue-gray: #101016;
 // Infobar & Sidebar
-@dark-blue-gray: #454C59;
-@darker-blue-gray: #303540;
+@dark-blue-gray: #16161e;
+@darker-blue-gray: #16161e;
+@lighter-dark-blue-gray: #1a1b27;
 // Borders
-@super-dark-boi: transparent;
+@super-dark-boi: #131319;
 // Friends & Containers
-@ohh-so-dark: #1f222b;
+@ohh-so-dark: #1a1b26;
 // Buttons
-@really-blue: #7293d0;
+@really-blue: #6183bb;
 // Lables & Accents
-@not-as-light-blue-gray: ##718295;
+@not-as-light-blue-gray: #b2bae1;
 @not-as-light-blue-gray-alt: @not-as-light-blue-gray;
 // General Text Colors
-@light-blue-gray: #779AA9;
+@light-blue-gray: #545974;
 // Hovered Text Colors
-@lighter-blue-gray: #6D8B96;
+@lighter-blue-gray: #939bbd;
 // Messages & Icons
-@nearly-white: #c9cbf3;
+@nearly-white: #a0a8cc;
 // Usernames
-@basically-white: #f0f1fc;
+@basically-white: #faf2f8;
 // Message Hovering
-@is-this-black: #2b2f3b;
+@is-this-black: #0c0c11;
 // Highlights
-@minty-green: #93BFCE;
+@minty-green: #b2bae1;
 // Errors
-@red: #ee5253;
-@yellow: #f1c40f;
+@green: #49aebc;
+@red: #df7070;
+@yellow: #fbc02d;
 
 .theme {
+  a {
+    color: @yellow !important;
+  }
+  pre {
+    background: @is-this-black !important;
+  }
+  .circle-icon {
+    background: @ohh-so-dark !important;
+  }
+  #scrollBottom {
+    background: @really-blue !important;
+  }
+  .media-voice .media-participant {
+    background: @really-blue !important;
+  }
+  ::selection {
+    background: @minty-green; /* WebKit/Blink Browsers */
+    color: #fff;
+  }
+  ::-moz-selection {
+    background: #00d0a1; /* Gecko Browsers */
+    color: #fff;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  input:focus, input:focus{
+    outline: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid @minty-green !important;
+    caret-color: @minty-green;
+  }
   .yellow {
     color: @yellow !important;
   }
@@ -38,7 +73,7 @@
     -webkit-text-stroke-color: @super-dark-boi;
   }
   .true {
-    -webkit-text-fill-color: @minty-green !important;
+    -webkit-text-fill-color: @green !important;
   }
   .metamask {
     color: @not-as-light-blue-gray !important;
@@ -64,15 +99,12 @@
     color: @not-as-light-blue-gray !important;
   }
   .context ul li:hover {
-    color: @lighter-blue-gray !important;
+    color: @really-blue !important;
   }
   .usersubcontrols {
     background: @dark-blue-gray !important;
     color: @nearly-white!important;
     border: none !important;
-  }
-  .usersubcontrols i {
-    color: @nearly-white !important;
   }
   .friend {
     background: @ohh-so-dark !important;
@@ -202,7 +234,7 @@
     color: @minty-green !important;
   }
   .media {
-    background: #1d1e27 !important;
+    background: @dark-blue-gray !important;
     color: @nearly-white !important;
     border: none !important;
     border-left: 3px solid @minty-green !important;
@@ -211,11 +243,14 @@
     color: @basically-white !important;
   }
   .servers {
-    background-color: @less-dark-blue-gray !important;
+    background-color: @dark-blue-gray !important;
     width: 4rem !important;
     top: 0;
     bottom: 0;
     left: -4rem !important;
+  }
+  #user-info {
+    background: @dark-blue-gray !important;
   }
   #logo {
     color: @basically-white !important;
@@ -231,7 +266,7 @@
     color: @light-blue-gray !important;
     border-top: 1px solid @super-dark-boi !important; 
   }
-  .controls {
+  .controls, .user-status {
     background: @darker-blue-gray !important;
     border-top: 1px solid @super-dark-boi !important; 
   }
@@ -256,6 +291,16 @@
 
   #conversation {
     background: @less-dark-blue-gray !important;
+  }
+  #context {
+    background: @dark-blue-gray !important;
+    border: 1px solid @super-dark-boi !important;
+    ul {
+      li:hover {
+        color: @basically-white !important;
+        background: @really-blue !important;
+      }
+    }
   }
   .c-message-content {
     color: @lighter-blue-gray !important;
@@ -283,10 +328,13 @@
   .divider {
     border-bottom: 1px solid @super-dark-boi !important; 
   }
+  .divider .text {
+    border-bottom: 1px solid @super-dark-boi !important;
+  }
   .wrapper {
     border-left: 1px solid @super-dark-boi !important; 
   }
-  input {
+  .input, input, textarea {
     background-color: @less-dark-blue-gray !important; 
     border: none !important; 
     color: #ccc !important;
@@ -346,8 +394,8 @@
     color: @nearly-white !important;
   }
   .vicp-operate a {
-    background: @not-as-light-blue-gray-alt !important;
-    color: @nearly-white !important;
+    background: @really-blue !important;
+    color: @basically-white !important;
     padding: 0 1rem !important;
     text-decoration: none !important;
   }
@@ -425,9 +473,6 @@
     border: none !important;
   }
   .true i {
-    color: @minty-green !important;
-  }
-  .controls .online i {
     color: @minty-green !important;
   }
   .head strong {
@@ -514,7 +559,76 @@
   .red {
     color: @red !important;
   }
-  #scrollBottom {
-    background: @minty-green !important;
+  .green {
+    color: @green !important;
+  }
+  .yellow {
+    color: @yellow !important;
+  }
+  .controls .user-active i {
+    color: @green !important;
+    -webkit-text-fill-color: @green !important;
+  }
+  .fa-user-friends {
+    color: #75b5aa !important;
+  }
+  .fa-folder {
+    color: #d28445 !important;
+  }
+  #file .fa-images {
+    color: #75b5aa !important;
+  }
+  #file .fa-file-audio {
+    color: #d28445 !important;
+  }
+  #file .fa-file-video {
+    color: #aa759f !important;
+  }
+  #file .fa-fa-markdown {
+    color: #c7a4c0 !important;
+  }
+  #file .fa-archive {
+    color: #ac4142 !important;
+  }
+  #file .fa-file-code, .fa-link i {
+    color: #90a959 !important;
+  }
+  #file .fa-file-code {
+    color: #d28445 !important;
+  }
+  #file .fa-file-archive {
+    color: #6a9fb5 !important;
+  }
+  #file .fa-js-square {
+    color: #f4bf75 !important;
+  }
+  #file .fa-java {
+    color: #6a9fb5 !important;
+  }
+  #file .fa-css3-alt {
+    color: #f4bf75 !important;
+  }
+  #file .fa-file {
+    color: #90a959 !important;
+  }
+  #file .fa-file-download {
+    color: #75bfdf !important;
+  }
+  .true {
+    .fa-pulse {
+      color: @basically-white !important;
+    }
+  }
+  .switch-button {
+    --color: @really-blue !important;
+  }
+  #loading, #unlock {
+    background: @dark-blue-gray !important;
+  }
+  .special-thanks {
+    color: @yellow !important;
+  }
+  .switch-button-control .switch-button.enabled .sw-button {
+    background-color: @basically-white !important;
   }
 }
